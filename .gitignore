@@ -1,4 +1,17 @@
 # Obidian cache and workspace layout
 
 .obsidian/cache
-.obsidian/workspace
+.obsidian/workspace.json
+
+# ───────────────────────────────
+# Virtual environment
+.notesVenv/
+
+
+# ───────────────────────────────
+# Backup and cache folders
+__pycache__/
+
+
+# discard files
+gitignore_*

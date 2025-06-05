@@ -1,7 +1,8 @@
 # Obidian cache and workspace layout
 
-.obsidian/cache
 .obsidian/workspace.json
+.obsidian/appearance.json
+.obsidian/graph.json
 
 # ───────────────────────────────
 # Virtual environment

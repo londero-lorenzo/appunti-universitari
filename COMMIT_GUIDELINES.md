@@ -1,3 +1,4 @@
+
 # Convenzione per i Messaggi di Commit
 
 Ogni messaggio di commit dovrebbe seguire la seguente struttura:
@@ -20,6 +21,7 @@ Se necessario, dopo la prima riga (titolo) seguire con una riga vuota e un corpo
 | `refactor` | Refactoring del codice o della struttura senza modificare il comportamento |
 | `style`    | Cambiamenti di formattazione o stile (spazi, indentazione, virgole, ecc.)  |
 | `test`     | Aggiunta o modifica di test                                                |
+| `perf`     | Miglioramento prestazioni senza modificare comportamento visibile          |
 
 
 ---

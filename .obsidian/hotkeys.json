@@ -1,5 +1,5 @@
 {
-  "markdown:add-alias": [
+  "templater-obsidian:templates/default.md": [
     {
       "modifiers": [
         "Mod",

@@ -12,24 +12,14 @@
   "enable_system_commands": false,
   "shell_path": "",
   "user_scripts_folder": "utils/templates",
-  "enable_folder_templates": true,
-  "folder_templates": [
-    {
-      "folder": "",
-      "template": ""
-    }
-  ],
-  "enable_file_templates": false,
-  "file_templates": [
-    {
-      "regex": ".*",
-      "template": ""
-    }
-  ],
+  "enable_folder_templates": false,
+  "folder_templates": [],
+  "enable_file_templates": true,
+  "file_templates": [],
   "syntax_highlighting": true,
   "syntax_highlighting_mobile": false,
   "enabled_templates_hotkeys": [
-    ""
+    "templates/default.md"
   ],
   "startup_templates": [
     ""

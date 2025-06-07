@@ -3,6 +3,7 @@ import sys
 import subprocess
 import venv
 import platform
+from utils.constants import PROJECT_ROOT_KEY
 
 VENV_DIR = ".notesVenv"
 REQUIREMENTS_FILE = "requirements.txt"
@@ -17,6 +18,29 @@ def create_virtualenv():
     builder = venv.EnvBuilder(with_pip=True)
     builder.create(VENV_DIR)
     
+def add_project_root_to_venv():
+    print("Adding project root path to `.env` file...")
+    
+    if not os.path.exists('.env'):
+        with open('.env', 'w') as f:
+            f.write(f"{PROJECT_ROOT_KEY}={SCRIPT_DIR}")
+    else:
+        with open('.env', 'r') as f:
+            env_variables = f.read()
+        
+        lines_post = []
+        for line in env_variables.split("\n"):
+            key, value = line.split("=")
+            if key == PROJECT_ROOT_KEY:
+                lines_post.append("=".join([key, SCRIPT_DIR]))
+            else:
+                lines_post.append("=".join([key, value]))
+        
+        env_post = "\n".join(lines_post)
+        
+        with open('.env', 'w') as f:
+            f.write(env_post)
+            
 def get_pip_path():
     if os.name == 'nt':
         return os.path.join(VENV_DIR, "Scripts", "pip.exe")
@@ -53,6 +77,7 @@ def main():
         print(f"Virtual environment already exists in {VENV_DIR}")
     else:
         create_virtualenv()
+    add_project_root_to_venv()
     install_requirements()
     print("Setup completed.")
     print(f"To activate the environment manually:\n")

@@ -5,13 +5,13 @@ import glob
 import argparse
 from datetime import datetime
 import yaml
-from utils import load_project_env
-from utils.constants import PROJECT_ROOT_KEY
+from utils import env
+from utils import constants
 
-load_project_env()
+env.load_project_env()
 
 
-VAULT_ROOT = os.getenv(PROJECT_ROOT_KEY)
+VAULT_ROOT = os.getenv(constants.PROJECT_ROOT_KEY)
 
 
 LOWERCASE_WORDS = {
@@ -19,7 +19,7 @@ LOWERCASE_WORDS = {
     "a", "con", "in", "su", "per", "tra", "fra", "e", "o"
 }
 
-DEFAULT_TAGS = ["università"]
+DEFAULT_TAGS = [] #["università"]
 
 def split_and_capitalize(string: str, delimiter: str) -> str:
     parts = string.split(delimiter)
@@ -71,7 +71,19 @@ def process_markdown_file(filepath: str, output: str):
 
     frontmatter_regex = r"^---\n(.*?\n)---\n"
     match = re.match(frontmatter_regex, content, flags=re.DOTALL)
-
+    
+    existing_created = None
+    if match:
+        old_fm_block = content[0:match.end()] ## get old initial block
+        inner = old_fm_block.strip().split('\n')[1:-1] ## exclude "---"
+        old_fm_dict = yaml.safe_load("\n".join(inner))
+        if not sum([key in old_fm_dict for key in frontmatter]) == len(frontmatter):
+            print(f"Properties loaded not match with pattern: default.md")
+            return None
+        existing_created = old_fm_dict.get("created", None)
+    
+    created_value = existing_created or datetime.now().strftime("%Y-%m-%d")
+    frontmatter["created"] = created_value
     new_fm = yaml.dump(frontmatter, default_flow_style=False, sort_keys=False, allow_unicode=True)
     new_fm_block = f"---\n{new_fm}---\n"
     

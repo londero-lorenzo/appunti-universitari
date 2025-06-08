@@ -1,23 +1,23 @@
 ---
-title: "Ricerca di Una Chiave"
-aliases: ["Ricerca di Una Chiave"]
-tags: [università, "algoritmi-e-strutture-dati", "BST", "ricerca", "ricerche-basiche", "chiave", "ricerca-di-una-chiave"]
+title: Ricerca di Una Chiave
+aliases:
+  - Ricerca di Una Chiave
+tags:
+  - BST
+  - ricerca
+  - chiave
+  - ricerca-di-una-chiave
 created: 2025-06-04
 ---
 # Ricerca in Albero Binario di Ricerca (BST)
 
-Dato un albero binario di ricerca `T` e una chiave `k`, si vuole determinare se esiste un nodo `x` in `T` tale che `x.key = k`.
+Dato un [[albero_binario_di_ricerca|Albero Binario di Ricerca]] `T` e una chiave `k`, si vuole determinare se esiste un nodo `x` in `T` tale che `x.key = k`.
 
 ## Descrizione
 
-La **ricerca** sfrutta la proprietà fondamentale del BST:
+La **ricerca** sfrutta la [[definizione|proprietà fondamentale]] del BST:
 
 > Per ogni nodo `x`, tutte le chiavi nel sottoalbero sinistro sono minori di `x.key`, tutte quelle nel sottoalbero destro sono maggiori.
-
-Questa proprietà permette di eseguire la ricerca in tempo proporzionale all'altezza dell'albero `h`:
-
-- `O(h)` nel caso generale
-- `O(log n)` se l'albero è bilanciato
 
 ---
 
@@ -47,10 +47,9 @@ BSTSearchNode(x, k){
     
 - In caso contrario, restituisce `NIL`.
 
-## Vedi anche
+---
+### Complessità
+Questa proprietà permette di eseguire la ricerca in tempo proporzionale all'altezza dell'albero `h`:
 
-- [[BST/ricerca/ricerche_basiche/Costo|Costo ricerche basiche]]
-    
-- [[visita_in-order]]
-    
-- [[ordinamento-bst|Proprietà di ordinamento del BST]]
+- `O(h)` nel caso generale
+- `O(log n)` se l'albero è bilanciato

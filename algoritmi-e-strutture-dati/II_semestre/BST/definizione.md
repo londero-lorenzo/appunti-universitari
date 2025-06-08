@@ -1,14 +1,21 @@
 ---
+title: Definizione
 aliases:
-  - Proprietà di ordinamento del BST
+  - Definizione
+tags:
+  - BST
+  - definizione
+created: 2025-06-07
 ---
-# Proprietà di ordinamento del BST
+# Definizione
+Un albero binario di ricerca è un albero binario in cui ogni nodo ha una chiave intera tale che $\forall x \in T(\forall\ y \in x.left\ y.key<x.key\ \wedge\ \forall\ y \in x.right\ y.key>x.key)$
 
-Un Albero Binario di Ricerca (BST) garantisce che, per ogni nodo `x`:
+Quindi, un Albero Binario di Ricerca (BST) garantisce che, per ogni nodo `x`:
 
 - tutte le chiavi nel sottoalbero sinistro sono **minori** di `x.key`
 - tutte le chiavi nel sottoalbero destro sono **maggiori** di `x.key`
 
+---
 ## Implicazioni
 
 - Una visita **in-order** produce le chiavi in **ordine crescente**
@@ -19,5 +26,5 @@ Un Albero Binario di Ricerca (BST) garantisce che, per ogni nodo `x`:
 
 ## Vedi anche
 
-- [[visita_in-order]]
-- [[ricerca_di_una_chiave]]
+- [[visita_in-order|Visita In-Order]]
+- [[ricerca_di_una_chiave|Ricerca di Una Chiave]]

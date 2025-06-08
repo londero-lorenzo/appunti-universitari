@@ -1,7 +1,12 @@
 ---
-title: "Algoritmi di Ordinamento"
-aliases: ["Algoritmi di Ordinamento"]
-tags: [università, "algoritmi-e-strutture-dati", "algoritmi-di-ordinamento"]
+title: Algoritmi di Ordinamento
+aliases:
+  - Algoritmi di Ordinamento
+tags:
+  - algoritmi-e-strutture-dati
+  - I-semestre
+  - algoritmi-di-ordinamento
+  - università
 created: 2025-06-04
 ---
 ## Insertion Sort

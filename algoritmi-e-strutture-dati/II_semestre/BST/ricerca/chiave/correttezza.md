@@ -1,10 +1,14 @@
 ---
-title: "Correttezza"
-aliases: ["Correttezza"]
-tags: [università, "algoritmi-e-strutture-dati", "BST", "ricerca", "ricerche-basiche", "chiave", "Correttezza"]
+title: Correttezza
+aliases:
+  - Correttezza
+tags:
+  - ricerca
+  - chiave
+  - correttezza
 created: 2025-06-04
 ---
-L'algoritmo `BSTSearchNode(x, k)` restituisce il nodo contenente la chiave `k` se esiste nel sottoalbero radicato in `x`, altrimenti restituisce `NIL`.
+L'algoritmo [[ricerca_di_una_chiave#Pseudocodice|BSTSearchNode(x, k)]] restituisce il nodo contenente la chiave `k` se esiste nel sottoalbero radicato in `x`, altrimenti restituisce `NIL`.
 
 **Struttura della dimostrazione**
 
@@ -64,7 +68,7 @@ Tre casi possibili:
 
 **Caso 3:** `x.key ≠ k`
 
-- Se `k < x.key`, per proprietà del BST, **se `k` esiste, deve essere nel sottoalbero sinistro**.
+- Se `k < x.key`, per la [[definizione|proprietà del BST]], **se `k` esiste, deve essere nel sottoalbero sinistro**.
     
     - L’algoritmo chiama `BSTSearchNode(x.left, k)`
         

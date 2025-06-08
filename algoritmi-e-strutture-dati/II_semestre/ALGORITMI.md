@@ -2,7 +2,7 @@
 
 # Alberi
 
-## [[Albero Binario di Ricerca]]
+## [[albero_binario_di_ricerca|Albero Binario di Ricerca]]
 
 
 

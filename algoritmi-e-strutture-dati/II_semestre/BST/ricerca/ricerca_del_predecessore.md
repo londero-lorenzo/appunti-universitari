@@ -20,7 +20,7 @@ Dato un nodo `x` in un albero binario di ricerca, il **predecessore** di `x` è 
 ### Pseudocodice
 
 ```
-PredecessorBST(x){
+TREE-PREDECESSOR(x){
 	if(x.left != NIL){
 		return BSTSearchMax(x.left)
 	}else{
@@ -48,4 +48,4 @@ PredecessorBST(x){
 
 ---
 ## Complessità
-La procedura [[#Pseudocodice|PredecessorBST]] ha complessità O(h), dove h è l’[[altezza]] dell’albero `T`.
+La procedura [[#Pseudocodice|TREE-PREDECESSOR]] ha complessità O(h), dove h è l’[[altezza]] dell’albero `T`.

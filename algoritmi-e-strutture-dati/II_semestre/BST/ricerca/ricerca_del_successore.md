@@ -20,7 +20,7 @@ Dato un nodo `x` in un [[albero_binario_di_ricerca|Albero Binario di Ricerca]], 
 ### Pseudocodice
 
 ```
-SuccessorBST(x){
+TREE-SUCCESSOR(x){
 	if(x.right != NIL){
 		return BSTSearchMin(x.right)
 	}else{
@@ -48,4 +48,4 @@ SuccessorBST(x){
 
 ---
 ## Complessità
-La procedura [[#Pseudocodice|SuccessorBST]] ha complessità O(h), dove h è l’[[altezza]] dell’albero `T`.
+La procedura [[#Pseudocodice|TREE-SUCCESSOR]] ha complessità O(h), dove h è l’[[altezza]] dell’albero `T`.

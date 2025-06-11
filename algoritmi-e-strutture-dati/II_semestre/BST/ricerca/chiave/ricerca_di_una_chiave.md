@@ -15,7 +15,7 @@ Dato un [[albero_binario_di_ricerca|Albero Binario di Ricerca]] `T` e una chiave
 
 ## Descrizione
 
-La **ricerca** sfrutta la [[definizione|proprietà fondamentale]] del BST:
+La **ricerca** sfrutta la [[algoritmi-e-strutture-dati/II_semestre/BST/definizione|proprietà fondamentale]] del BST:
 
 > Per ogni nodo `x`, tutte le chiavi nel sottoalbero sinistro sono minori di `x.key`, tutte quelle nel sottoalbero destro sono maggiori.
 

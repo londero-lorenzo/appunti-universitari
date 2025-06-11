@@ -68,7 +68,7 @@ Tre casi possibili:
 
 **Caso 3:** `x.key ≠ k`
 
-- Se `k < x.key`, per la [[definizione|proprietà del BST]], **se `k` esiste, deve essere nel sottoalbero sinistro**.
+- Se `k < x.key`, per la [[algoritmi-e-strutture-dati/II_semestre/BST/definizione|proprietà del BST]], **se `k` esiste, deve essere nel sottoalbero sinistro**.
     
     - L’algoritmo chiama `BSTSearchNode(x.left, k)`
         

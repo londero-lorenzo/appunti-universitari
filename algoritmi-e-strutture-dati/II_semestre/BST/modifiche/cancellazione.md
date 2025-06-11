@@ -17,7 +17,7 @@ DeleteBST(T, z){
 	if(z.left = NIL || z.right = NIL){
 		x <- z
 	}else{
-		x <- SuccessorBST(z)
+		x <- TREE-SUCCESSOR(z)
 	}
 	if (x.left != NIL){
 		v <- x.left
@@ -51,8 +51,8 @@ Due casi:
 - **`z` ha due figli:**  
     Non può essere rimosso direttamente senza rompere la struttura dell'albero.  
     Viene scelto il **successore in-order** di `z`, che è il **minimo del sottoalbero destro**.  
-    Per costruzione, questo nodo ha [[procedure_di_modifica#^L715l5hJ|al massimo un figlio destro]], quindi rimuoverlo è più semplice.
-![[algoritmi-e-strutture-dati/II_semestre/BST/modifiche/procedure_di_modifica.md#^group=KQhXaZKAthwmhfGthM7St]]
+    Per costruzione, questo nodo ha [[procedure_di_modifica_schema#^L715l5hJ|al massimo un figlio destro]], quindi rimuoverlo è più semplice.
+![[procedure_di_modifica_schema#^frame=DFhT4R1nIz4qA76LWO2Ot|100%]]
 ---
 
 ### 2. Identificazione del figlio `v` di `x` (se esiste)
@@ -66,7 +66,7 @@ Una volta determinato `x` (il nodo effettivo da rimuovere), dobbiamo trovare il 
 - Per costruzione: `x` è stato scelto in modo che abbia **al massimo un figlio**
   - Questo è sempre vero se `x = z` con ≤ 1 figlio
   - È vero anche se `x = BSTSuccessor(z)`, perché il successore in-order **non può avere figlio sinistro**
-![[procedure_di_modifica#^group=-YTdSsXDyNsMow2xqSQ-j]]
+![[procedure_di_modifica_schema#^frame=Kjs5qIOTBCEz56rdposyp|100%]]
 
 ---
 
@@ -84,7 +84,7 @@ Ora dobbiamo **rimuovere `x` dalla sua posizione nell'albero**, collegando il fi
     - `x.parent.right = v`
 
 Questo ricollega correttamente l'albero rimuovendo `x`.
-![[procedure_di_modifica#^group=g3wG5XsQtx2ceL1I2y2Gz]]
+![[procedure_di_modifica_schema#^frame=dcJN4CezPfs4oBgfPu51n|100%]]
 
 ---
 
@@ -93,7 +93,7 @@ Questo ricollega correttamente l'albero rimuovendo `x`.
 Se `v ≠ NIL` (cioè se `x` aveva un figlio), bisogna aggiornare anche il **campo `parent` di `v`**, perché ora `v` è collegato al posto di `x`.
 
 - Quindi: `v.parent = x.parent`
-![[procedure_di_modifica#^group=t0uelDD_kdlKDOOa_pNHj]]
+![[procedure_di_modifica_schema#^frame=SK0kSuAIk-TeLjGnWzgbw|100%]]
 ---
 
 ### 5. Sostituzione della chiave (se necessario)
@@ -106,8 +106,8 @@ Questo passo avviene **solo se `x ≠ z`**, cioè quando abbiamo sostituito `z` 
 
 Quindi: `z.key = x.key`
 
-![[procedure_di_modifica#^group=YIKhgB07LIkPqqboWRoNL]]
+![[procedure_di_modifica_schema#^frame=-jtM02Mov59grxczPAsxu|100%]]
 
-#### Costo Inserimento e Cancellazione
+### Costo Inserimento e Cancellazione
 + $O(h)\rightarrow O(n)$
 + $\Theta(n)$

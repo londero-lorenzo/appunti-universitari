@@ -16,7 +16,7 @@ Un **albero binario di ricerca** (BST) è una struttura dati binaria dove, per o
 - `x.left.key ≤ x.key ≤ x.right.key`
 - Entrambi i sottoalberi (sinistro e destro) sono anch’essi BST
 
-[[definizione|→ Vedi definizione formale]]
+[[algoritmi-e-strutture-dati/II_semestre/BST/definizione|→ Vedi definizione formale]]
 
 ---
 
@@ -36,8 +36,8 @@ Queste operazioni sfruttano la struttura ordinata dell'albero:
 
 Le seguenti procedure modificano la struttura del BST preservandone le proprietà:
 
-- [[Inserimento|Inserimento di una nuova chiave]]
-- [[Cancellazione|Cancellazione di una chiave esistente]]
+- [[algoritmi-e-strutture-dati/II_semestre/BST/modifiche/Inserimento|Inserimento di una nuova chiave]]
+- [[algoritmi-e-strutture-dati/II_semestre/BST/modifiche/cancellazione|Cancellazione di una chiave esistente]]
 
 ---
 
@@ -54,7 +54,5 @@ Utili per visualizzare i dati in vari ordini:
 ## ⏱️ Complessità
 
 - Altezza `h` dell’albero domina le operazioni: ricerca, inserimento, cancellazione
-- Caso peggiore (degenere): `h = n` ⇒ \( \Theta(n) \)
-- Caso ideale (bilanciato): `h = \log n` ⇒ \( \Theta(\log n) \)
-
-→ [[albero_bilanciato|Vedi alberi bilanciati per risolvere questo problema]]
+- Caso peggiore (degenere): `h = n` ⇒ ($\Theta(n)$)
+- Caso ideale (bilanciato): `h = \log n` ⇒ ($\Theta(\log n)$)

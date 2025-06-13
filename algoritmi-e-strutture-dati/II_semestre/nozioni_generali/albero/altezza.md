@@ -66,7 +66,7 @@ Se `T` è sbilanciato (es. inserimento di chiavi in ordine crescente), si degrad
     
 - Alberi **bilanciati** mantengono `h = \mathcal{O}(\log n)` anche nei casi peggiori.
     
-- Le strutture come [[red_black_tree|Red Black Tree]], [[b_tree|BTree]] sono progettate per **controllare l’altezza**.
+- Le strutture come [[red_black_tree|Red Black Tree]], [[b-tree|BTree]] sono progettate per **controllare l’altezza**.
     
 
 ---

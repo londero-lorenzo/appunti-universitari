@@ -1,7 +1,11 @@
 ---
-title: "Albero Bilanciato"
-aliases: ["Albero Bilanciato"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "nozioni-generali", "albero", "albero-bilanciato"]
+title: Albero Bilanciato
+aliases:
+  - Albero Bilanciato
+tags:
+  - nozioni-generali
+  - albero
+  - albero-bilanciato
 created: 2025-06-09
 ---
 # 📌 Definizione
@@ -32,6 +36,6 @@ Esistono più approcci:
 
 Strutture che **impongono vincoli** sui cammini o sul colore dei nodi, garantendo il bilanciamento come conseguenza logica:
 
-- [[b_tree|BTree]]:  vincola il numero di chiavi per ogni nodo interno
+- [[b-tree|BTree]]:  vincola il numero di chiavi per ogni nodo interno
     
 - [[red_black_tree|Red Black Tree]]: vincola i cammini neri e la disposizione dei nodi rossi

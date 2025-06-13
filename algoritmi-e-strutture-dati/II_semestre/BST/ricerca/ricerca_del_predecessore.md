@@ -19,7 +19,7 @@ Dato un nodo `x` in un albero binario di ricerca, il **predecessore** di `x` è 
 ---
 ### Pseudocodice
 
-```
+```c
 TREE-PREDECESSOR(x){
 	if(x.left != NIL){
 		return BSTSearchMax(x.left)

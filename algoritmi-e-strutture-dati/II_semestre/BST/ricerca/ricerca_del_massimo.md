@@ -10,7 +10,7 @@ created: 2025-06-04
 ---
 ## Pseudocodice
 
-```
+```c
 SearchMaxBST(T){
 	x <- T.root
 	while(x.right != NIL){

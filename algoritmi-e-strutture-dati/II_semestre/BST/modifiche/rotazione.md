@@ -17,7 +17,7 @@ Le rotazioni modificano la struttura locale di un albero **[[albero_binario_di_r
 > Se `T` è un [[albero_binario_di_ricerca|BST]], allora dopo `LEFT-ROTATE(T, x)` oppure `RIGHT-ROTATE(T, x)`, l’albero risultante è ancora un BST.
 ## Pseudocodici
 ### LEFT-ROTATE
-```
+```c
 LEFT-ROTATE(T, x):
     y ← x.right                          // y è il figlio destro di x
     x.right ← y.left                     // il sottoalbero sinistro di y diventa il destro di x
@@ -40,7 +40,7 @@ LEFT-ROTATE(T, x):
 
 
 ### RIGHT-ROTATE
-```
+```c
 RIGHT-ROTATE(T, x):
     y ← x.left                           // y è il figlio sinistro di x
     x.left ← y.right                     // il sottoalbero destro di y diventa il sinistro di x

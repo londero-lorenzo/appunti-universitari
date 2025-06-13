@@ -19,7 +19,7 @@ Dato un nodo `x` in un [[albero_binario_di_ricerca|Albero Binario di Ricerca]], 
 ---
 ### Pseudocodice
 
-```
+```c
 TREE-SUCCESSOR(x){
 	if(x.right != NIL){
 		return BSTSearchMin(x.right)

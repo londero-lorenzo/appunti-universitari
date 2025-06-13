@@ -10,7 +10,7 @@ created: 2025-06-04
 ---
 La procedura `PreOrder` attraversa i nodi di un [[albero_binario_di_ricerca]] partendo dalla radice, per poi visitare il sottoalbero sinistro e infine il sottoalbero destro
 
-```
+```c
 PreOrder(x){
 	if(x != NIL){
 		Print(x.key)

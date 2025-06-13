@@ -12,7 +12,7 @@ Dato un [[albero_binario_di_ricerca|albero binario di ricerca]] `T` e un nodo `z
 
 ## Pseudo codice
 
-```
+```c
 DeleteBST(T, z){
 	if(z.left = NIL || z.right = NIL){
 		x <- z

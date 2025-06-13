@@ -10,7 +10,7 @@ created: 2025-06-04
 ---
 La procedura `InOrder` attraversa i nodi di un [[albero_binario_di_ricerca|Albero binario di ricerca]] in ordine crescente.
 
-```
+```c
 InOrder(x){
 	if(x != NIL){
 		InOrder(x.left)

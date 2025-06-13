@@ -83,7 +83,7 @@ Il fratello del `double BLACK` è `RED`, ma i suoi figli sono `BLACK` → si ruo
 
 ## Pseudocodice
 
-```
+```c
 RB-DELETE(T, z)
     if z.left = T.nil or z.right = T.nil
         y ← z
@@ -115,7 +115,7 @@ RB-DELETE(T, z)
 
 ```
 
-```
+```c
 RB-DELETE-FIXUP(T, z)
     while z ≠ T.root and z.color = BLACK do
         if z = z.parent.left then

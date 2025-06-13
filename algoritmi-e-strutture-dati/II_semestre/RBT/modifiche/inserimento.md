@@ -63,7 +63,7 @@ Effettuo una ricolorazione del genitore, del nonno e dello zio di `x` e sposto i
 ---
 ## Pseudocodice
 
-```
+```c
 RB-INSERT(T, z){
     x ← T.root
     y ← T.nil     // sentinella

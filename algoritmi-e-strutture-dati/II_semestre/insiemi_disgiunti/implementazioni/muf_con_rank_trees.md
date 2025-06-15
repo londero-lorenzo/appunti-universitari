@@ -101,8 +101,8 @@ Per induzione sul numero di union:
 
 
 
- >💬 _Domanda: "È veramente possibile raggiungere il costo di $n^2$?"  
- > #TODO
+ > #TODO 💬 _Domanda: "È veramente possibile raggiungere il costo di $h*m$?"  
+ > 
  
  ---
 ## Ottimizzazione

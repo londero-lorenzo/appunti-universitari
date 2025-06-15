@@ -21,5 +21,21 @@
       ],
       "key": "Q"
     }
+  ],
+  "obsidian-excalidraw-plugin:Downloaded/Zoom to Fit Selected Elements": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "F"
+    }
+  ],
+  "obsidian-excalidraw-plugin:Downloaded/Normalize Selected Arrows": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Key226"
+    }
   ]
 }

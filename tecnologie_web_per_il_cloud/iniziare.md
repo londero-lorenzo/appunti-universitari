@@ -9,29 +9,14 @@ created: 2025-06-19
 Questa guida illustra come configurare un ambiente **PHP** completo su **Windows** tramite **WSL (Windows Subsystem for Linux),** utilizzando **Ubuntu** come distribuzione e gestendo correttamente i permessi della cartella `/var/www/html` per lo sviluppo lato server.
 
 ---
-
 ## ✅ 1. Installare WSL e Ubuntu
-
-### 1.1 Abilitare WSL
-
-Aprire **PowerShell come amministratore** ed eseguire il comando seguente per installare WSL 2 con Ubuntu di default:
+Come indicato nella guida per l'[[implementazione_wsl|Implementazione WSL]] eseguire il seguente comando per installare `Ubuntu`:
 
 ```powershell
-wsl --install
+wsl --install Ubuntu 
 ```
 
-#### ⚠️ Attenzione
->`Riavviare il sistema se richiesto.
-
-### 1.2 Installare manualmente una distribuzione specifica
-Aprire il Microsoft Store, cercare Ubuntu 22.04 LTS e installarla con il seguente comando:
-
-```powershell
-wsl --install -d Ubuntu-22.04 
-```
-
-> _Una volta completata l'installazione, inserire nuovo nome utente e password._
-
+---
 ## 🔧 2. Configurare il sistema operativo Linux
 ### 2.1 Aggiornare i pacchetti di sistema
 All’avvio della shell Ubuntu, aggiornare l’indice dei pacchetti e il sistema eseguendo:

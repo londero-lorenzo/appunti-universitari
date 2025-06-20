@@ -52,7 +52,7 @@ $bh(T)=bh(T.root)$
 In un RBT `T` con altezza nera `bh(T)`, il numero di **nodi interni** è sempre almeno:  
 $n_i \geq 2^{bh(T)} - 1$
 
-(Dimostrazione: **TODO**)
+(Dimostrazione: **#TODO**)
 
 ![[red_black_tree_schema#^frame=JJwCBGkFq3S-3kL_Av4WC|100%]]
 

@@ -16,10 +16,9 @@ Personal study notes on Machine Learning concepts, algorithms, and implementatio
 </ul>
 
 ## Notes included:
-<ul>
-  <li>Formula sheet: a collection of all the formulas for every argument in the topics list</li>
-  <li>Theory notes...work in progress</li>
-</ul>
+
+- [Formula sheet](./Formulario/Formulario.md): a collection of all the formulas for every argument in the topics list
+- Theory notes...work in progress
 
 ## Format
 All notes are writtten in Markdown ('.md') using Obsidian.

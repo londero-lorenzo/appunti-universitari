@@ -9,6 +9,7 @@ Ogni sezione rappresenta una materia specifica, organizzata per massima chiarezz
 
 - [Algoritmi e Strutture Dati](algoritmi-e-strutture-dati/README.md)
 - [Machine Learning](machine-learning/README.md)
+- [Tecnologie web per il cloud](tecnologie_web_per_il_cloud/README.md)
 
 Ogni cartella contiene un `README.md` che descrive la struttura degli appunti e l’organizzazione dei contenuti della materia.
 

@@ -17,3 +17,7 @@ __pycache__/
 
 # discard files
 gitignore_*
+
+# ───────────────────────────────
+# PDF
+**/lucidi/**/*.pdf

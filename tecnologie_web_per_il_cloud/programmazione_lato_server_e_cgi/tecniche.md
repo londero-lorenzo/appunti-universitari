@@ -9,68 +9,141 @@ created: 2025-06-20
 ---
 # 🧰 Tecniche di programmazione lato server
 
-La programmazione lato server può essere implementata attraverso diverse tecniche, che si differenziano in base a:
-
-- la **modalità di interazione** tra server web e programma eseguito,
-- il **luogo dove risiede il codice**,
-- il **meccanismo con cui viene mandato in esecuzione**.
+La programmazione lato server consiste nell’inserire codice eseguibile dal server all’interno o accanto ai documenti web, con l’obiettivo di generare contenuti dinamici da inviare al browser.
 
 ---
 
 ## ⚙️ Obiettivo comune
 
-Tutte le tecniche mirano a generare, su richiesta del client, **flussi di dati** in formati tipici del Web come:
+Tutte le tecniche mirano a generare, su richiesta del client, **flussi di dati** in formati tipici del Web:
 
-- (X)HTML
-- CSS
-- JPEG, GIF
-- *(ma in generale qualsiasi file che un browser possa interpretare)*
+- HTML, CSS
+- Immagini (JPEG, GIF, PNG)
+- File JSON, XML
+- *(e in generale qualsiasi risorsa che un browser possa interpretare)*
 
 ---
 
 ## 🔄 Interazione server ↔ programma
 
-Il **server web** è responsabile dell’attivazione del programma server-side. Il meccanismo di attivazione dipende dalla tecnologia adottata:
+Il server web (es. Apache, Nginx) è responsabile dell’attivazione dell’esecuzione server-side. Le principali modalità di attivazione sono:
 
-| Tecnologia        | Descrizione |
-|------------------|-------------|
-| **CGI (Common Gateway Interface)** | Il server esegue un nuovo processo per ogni richiesta. Codice esterno. |
-| **mod_php / mod_python / mod_perl** | Il codice è integrato nel processo del server (es. Apache), evita fork. |
-| **FastCGI** | Processo persistente riutilizzato per più richieste. Più efficiente della CGI. |
-| **Framework/Server applicativi** | L'interprete o la VM (es. Node.js, Java servlet container) gestisce direttamente le richieste. |
+| Tecnologia                          | Descrizione                                                                 |
+|------------------------------------|-----------------------------------------------------------------------------|
+| **CGI (Common Gateway Interface)**  | Esegue un **nuovo processo per ogni richiesta**. Codice esterno.           |
+| **mod_php / mod_python / mod_perl** | Codice integrato nel processo del server. Più efficiente.                  |
+| **FastCGI**                         | Processo persistente. Riutilizzabile tra più richieste.                    |
+| **Server applicativi / Framework**  | Esempi: Node.js, PHP-FPM, Flask. Gestione interna delle richieste HTTP.   |
 
-*(La sezione CGI è trattata nel dettaglio nel file [Common Gateway Interface](./cgi))*
+📎 Vedi anche: [Common Gateway Interface](./cgi.md)
 
 ---
 
-## 📍 Dove risiede il codice
+## 🧱 Dove risiede il codice
 
-- In file **esterni** al server web (es. CGI script in `/usr/lib/cgi-bin/`)
-- **Integrato nel server** tramite moduli (es. `mod_php`, `mod_wsgi`)
-- In **processi intermedi**, come middleware o server dedicati (es. Flask, Express.js)
+- In file **esterni** (es. CGI script in `/usr/lib/cgi-bin/`)
+- **All’interno dei documenti HTML**, tramite pseudo-tag (es. `<?php ... ?>`)
+- Integrato nel server tramite **moduli** (es. `mod_php`, `mod_wsgi`)
+- In **server applicativi** separati che ricevono le richieste (es. Express, Django)
 
 ---
 
 ## 🚀 Modalità di esecuzione
 
-| Modalità | Caratteristiche |
-|---------|------------------|
-| **Processo nuovo per richiesta** | → Semplice, ma inefficiente (CGI classico) |
-| **Processo persistente** | → Ottime prestazioni (FastCGI, mod_php, framework moderni) |
-| **Server applicativo dedicato** | → Gestione completa lato applicazione (es. Node.js, Python con Flask, PHP-FPM) |
+| Modalità                        | Caratteristiche                                     |
+|---------------------------------|-----------------------------------------------------|
+| **Processo nuovo per richiesta** | → Semplice ma inefficiente (CGI classico)          |
+| **Processo persistente**         | → Prestazioni superiori (FastCGI, mod_php)         |
+| **Server dedicato**              | → Architetture moderne (Node.js, Flask, PHP-FPM)   |
+
+---
+
+## 🧠 Funzionamento degli script embedded
+
+Quando il browser richiede una risorsa come `file.php`, il server:
+
+1. Identifica il file come dinamico (es. da estensione `.php`)
+2. Passa il file al modulo/interprete PHP
+3. L’interprete **esegue** lo script:
+   - individua ogni blocco `<?php ... ?>`
+   - **interpreta il contenuto**
+   - sostituisce lo pseudo-tag con l’output generato
+4. Il documento finale (HTML puro) viene inviato al client.
+
+📎 Vedi anche: [Funzionamento Apache](./apache/apache_funzionamento.md)
+
+### Esempio
+#### `file.php` (originale):
+
+```php
+<h1>Esempio con PHP</h1>
+<p><?php echo "Questo è uno script"; ?></p>
+```
+
+#### Output inviato al browser:
+
+```html
+<h1>Esempio con PHP</h1>
+<p>Questo è uno script</p>
+```
+
+---
+
+## ♻️ Script multipli e variabili
+
+Se il file contiene più blocchi `<?php ... ?>`, **ogni blocco è interpretato** in ordine, e lo stato viene mantenuto tra uno e l’altro:
+
+```php
+<?php $x = "ciao"; ?>
+...
+<?php echo $x; ?>
+```
+
+---
+
+## 🔎 Confronto con CGI
+
+- Se lo script è l’unico contenuto del file, il suo comportamento è simile a un CGI.
+    
+- Tuttavia, mentre CGI richiede un processo esterno, **moduli come `mod_php` eseguono direttamente nel contesto del server**, risultando più efficienti.
+    
+
+---
+
+## 🌐 Linguaggi di scripting lato server
+
+|Linguaggio|Descrizione|
+|---|---|
+|**PHP**|Diffusissimo. Ampio ecosistema (CMS, framework). Open source.|
+|**ASP.NET**|Tecnologia Microsoft. Integrata con IIS e .NET.|
+|**Python**|Usato via WSGI (es. Flask, Django)|
+|**JavaScript (Node.js)**|Architettura full-JS lato client/server|
 
 ---
 
 ## 📌 Considerazioni pratiche
 
-- Le tecniche più semplici (es. CGI) sono facili da configurare ma **scalano male**.
-- Le tecniche moderne (es. FastCGI, PHP-FPM, Node.js) offrono **migliori performance e controllo**.
-- La scelta della tecnica dipende da:
-  - esigenze di performance,
-  - linguaggio utilizzato,
-  - architettura dell'applicazione,
-  - supporto offerto dal server web in uso.
+- Le tecniche classiche (es. CGI) sono semplici ma **poco scalabili**.
+    
+- Le tecniche moderne (es. PHP-FPM, Node.js, FastCGI) sono **ottimizzate per le performance**.
+    
+- La scelta dipende da:
+    
+    - carico atteso e frequenza richieste,
+        
+    - linguaggio preferito,
+        
+    - supporto server.
+        
 
 ---
 
-> 📎 Approfondimento consigliato: [Common Gateway Interface](./cgi.md) per dettagli sulla tecnica CGI.
+## 📚 Fonti e riferimenti
+
+- Slide: `02-latoserver.pdf`
+    
+- Titoli: `Programmazione lato server`, `Tecniche di Programmazione Lato Server`
+
+
+
+

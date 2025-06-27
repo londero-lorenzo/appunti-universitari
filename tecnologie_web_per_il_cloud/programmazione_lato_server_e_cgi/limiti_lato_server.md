@@ -70,3 +70,10 @@ Per realizzare funzionalità anche basilari come:
 ---
 
 > 📎 Vedi anche: [Cookie](./cookie.md) per comprendere come mantenere uno stato tra richieste.
+
+---
+
+## 📚 Fonti e riferimenti
+
+- Slide: `02-latoserver.pdf`  
+- Titoli: `Limiti?`, `I cookie`

@@ -222,3 +222,11 @@ Un programma CGI può essere scritto in **qualsiasi linguaggio**, purché:
 ---
 
 >📎 Vedi anche: [Tecniche di programmazione lato server](./tecniche.md) per il confronto tra CGI, FastCGI e altri approcci.
+
+
+---
+
+## 📚 Fonti e riferimenti
+
+- Slide: `02-latoserver.pdf`  
+- Titoli: `CGI`

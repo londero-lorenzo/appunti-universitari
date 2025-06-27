@@ -1,12 +1,8 @@
 ---
-title: Programmazione Lato Server
-aliases:
-  - Programmazione Lato Server
-tags:
-  - tecnologie-web-per-il-cloud
-  - programmazione-lato-server-e-cgi
-  - programmazione-lato-server
-created: 2025-06-20
+title: "Readme"
+aliases: ["Readme"]
+tags: [università, "tecnologie-web-per-il-cloud", "programmazione-lato-server-e-cgi", "README"]
+created: 2025-06-21
 ---
 # 🌐 Programmazione lato server
 
@@ -18,4 +14,6 @@ La programmazione lato server consente la generazione dinamica di risorse web da
 - [Input dell'utente: form, GET e POST](./input_utente)
 - [Gestione dei cookie](./cookie)
 - [Limiti della sola programmazione lato server](./limiti_lato_server)
-- [CGI: Common Gateway Interface](./cgi.md) _(da completare)_
+- [CGI: Common Gateway Interface](./cgi.md)
+- [Apache HTTP Server – Appunti e guida](./apache/README.md)
+- 

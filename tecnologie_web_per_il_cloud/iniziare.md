@@ -1,7 +1,10 @@
 ---
-title: "Iniziare"
-aliases: ["Iniziare"]
-tags: [università, "tecnologie-web-per-il-cloud", "iniziare"]
+title: Iniziare
+aliases:
+  - Iniziare
+tags:
+  - tecnologie-web-per-il-cloud
+  - iniziare
 created: 2025-06-19
 ---
 # Configurare un ambiente PHP su Windows utilizzando WSL

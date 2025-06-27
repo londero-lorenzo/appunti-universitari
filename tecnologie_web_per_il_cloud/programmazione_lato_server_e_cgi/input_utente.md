@@ -132,3 +132,10 @@ $pw   = $_POST['password']; // se method="POST"`
 ---
 
 > 🧠 Approfondimento consigliato: [Cookie](./cookie.md) per comprendere come mantenere i dati tra richieste successive.
+
+---
+
+## 📚 Fonti e riferimenti
+
+- Slide: `02-latoserver.pdf`  
+- Titoli: `Input dell'utente`, `GET e POST: quale dei due?`

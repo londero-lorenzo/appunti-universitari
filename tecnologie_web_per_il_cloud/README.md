@@ -9,15 +9,15 @@ Questa repository raccoglie appunti organizzati e schemi relativi al corso unive
 
 ## 📚 Argomenti trattati
 
-- ⚙️ Introduzione al lato server e sviluppo web dinamico
-- 🐘 Programmazione in PHP: sintassi base, form, array, inclusione di file
+- ⚙️ [Introduzione al lato server](tecnologie_web_per_il_cloud/programmazione_lato_server_e_cgi/README.md) e sviluppo web dinamico
+- 🐘 [Programmazione in PHP](./programmazione_lato_server_e_cgi/php/README.md): sintassi base, form, array, inclusione di file
 - 🖼️ Gallerie di immagini e 🛡️ sessioni utente in PHP
 - 🛒 Gestione di un e-commerce minimale con carrello
 - 🧱 Programmazione a oggetti in PHP e uso di Composer
 - 🧩 Architettura orientata ai servizi (SOA)
 - 🔌 Web Services e concetti di REST/JSON
-- ☁️ Introduzione al Cloud Computing
-- 🛠️ Piattaforma Amazon Web Services (AWS)
+- ☁️ [Introduzione al Cloud Computing](tecnologie_web_per_il_cloud/cloud_computing/README.md)
+- 🛠️ [Piattaforma Amazon Web Services (AWS)](./cloud_computing/aws/README.md)
 	- 🖥️ EC2: creazione e configurazione di istanze
 	- 🗂️ S3: storage distribuito e accesso ai file
 	- 📊 DynamoDB: database NoSQL
@@ -28,6 +28,14 @@ Questa repository raccoglie appunti organizzati e schemi relativi al corso unive
 
 ---
 
+## ⚙️ Ambiente di esecuzione
+
+Per l'esecuzione dei vari codici PHP, è stato utilizzato il sottosistema Linux per Windows (WSL), che offre un ambiente compatibile e leggero per lo sviluppo server-side.
+
+Vedi: [Note per la configurazione di PHP su WSL](./iniziare.md)
+
+
+---
 ## 📌 Obiettivo
 
 Questi appunti hanno lo scopo di:

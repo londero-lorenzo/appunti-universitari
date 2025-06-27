@@ -108,3 +108,10 @@ echo $_COOKIE['utente'];
 ---
 
 >📎 Approfondimento consigliato: [limiti_lato_server](./limiti_lato_server) per capire i problemi legati all’assenza di stato.
+
+---
+
+## 📚 Fonti e riferimenti
+
+- Slide: `02-latoserver.pdf`  
+- Titoli: `I cookie`, `I cookie/2`, `Cookie: un esempio`

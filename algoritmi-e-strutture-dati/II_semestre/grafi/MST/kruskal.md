@@ -1,7 +1,11 @@
 ---
-title: "Kruskal"
-aliases: ["Kruskal"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "MST", "kruskal"]
+title: Kruskal
+aliases:
+  - Kruskal
+tags:
+  - MST
+  - kruskal
+  - grafi
 created: 2025-06-15
 ---
 

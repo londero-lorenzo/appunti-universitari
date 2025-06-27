@@ -3,9 +3,6 @@ title: BFS
 aliases:
   - BFS
 tags:
-  - università
-  - algoritmi-e-strutture-dati
-  - II-semestre
   - grafi
   - visite
   - BFS

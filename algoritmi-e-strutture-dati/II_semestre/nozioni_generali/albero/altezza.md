@@ -5,6 +5,7 @@ aliases:
 tags:
   - BST
   - altezza
+  - nozioni-generali
 created: 2025-06-08
 ---
 ## 🌲 Altezza di un albero

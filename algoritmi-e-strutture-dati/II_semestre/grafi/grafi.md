@@ -1,7 +1,10 @@
 ---
-title: "Grafi"
-aliases: ["Grafi"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "grafi", "grafi"]
+title: Grafi
+aliases:
+  - Grafi
+tags:
+  - II-semestre
+  - grafi
 created: 2025-06-14
 ---
 # Grafo
@@ -135,3 +138,13 @@ Non si riescono a distinguere questi due casi per via della disposizione degli a
 
 Ci serve una nuova visita:
 DFS, in profondità
+
+----
+
+#TODO sistemare collegamenti
+
+- [[sssp]]
+- [[apsp]]
+
+Grafi pesati:
+- [[grafi_pesati|Grafi Pesati]]

@@ -3,10 +3,8 @@ title: Algoritmi di Ordinamento
 aliases:
   - Algoritmi di Ordinamento
 tags:
-  - algoritmi-e-strutture-dati
   - I-semestre
   - algoritmi-di-ordinamento
-  - università
 created: 2025-06-04
 ---
 ## Insertion Sort

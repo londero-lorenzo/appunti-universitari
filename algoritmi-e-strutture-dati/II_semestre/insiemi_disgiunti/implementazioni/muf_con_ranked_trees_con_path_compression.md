@@ -1,7 +1,11 @@
 ---
-title: "Muf con Ranked Trees con Path Compression"
-aliases: ["Muf con Ranked Trees con Path Compression"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "insiemi-disgiunti", "implementazioni", "muf-con-ranked-trees-con-path-compression"]
+title: Muf con Ranked Trees con Path Compression
+aliases:
+  - Muf con Ranked Trees con Path Compression
+tags:
+  - insiemi-disgiunti
+  - implementazioni
+  - muf-con-ranked-trees-con-path-compression
 created: 2025-06-14
 ---
 

@@ -1,7 +1,11 @@
 ---
-title: "Dfs"
-aliases: ["Dfs"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "grafi", "visite", "DFS"]
+title: Dfs
+aliases:
+  - Dfs
+tags:
+  - grafi
+  - visite
+  - DFS
 created: 2025-06-14
 ---
 # Visita Depth-First Search (_in ampiezza_)

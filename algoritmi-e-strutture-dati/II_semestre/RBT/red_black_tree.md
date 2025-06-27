@@ -3,11 +3,9 @@ title: Red Black Tree
 aliases:
   - Red Black Tree
 tags:
-  - algoritmi-e-strutture-dati
   - II-semestre
   - RBT
   - red-black-tree
-  - università
 created: 2025-06-09
 ---
 # Red Black Tree (RBT)

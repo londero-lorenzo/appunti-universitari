@@ -1,7 +1,10 @@
 ---
-title: "Dag"
-aliases: ["Dag"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "grafi", "dag"]
+title: Dag
+aliases:
+  - Dag
+tags:
+  - grafi
+  - dag
 created: 2025-06-15
 ---
 

@@ -1,7 +1,11 @@
 ---
-title: "Muf con Alberi"
-aliases: ["Muf con Alberi"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "insiemi-disgiunti", "implementazioni", "muf-con-alberi"]
+title: Muf con Alberi
+aliases:
+  - Muf con Alberi
+tags:
+  - insiemi-disgiunti
+  - implementazioni
+  - muf-con-alberi
 created: 2025-06-14
 ---
 

@@ -1,7 +1,11 @@
 ---
-title: "Grafi Pesati"
-aliases: ["Grafi Pesati"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "MST", "grafi-pesati"]
+title: Grafi Pesati
+aliases:
+  - Grafi Pesati
+tags:
+  - MST
+  - grafi-pesati
+  - grafi
 created: 2025-06-15
 ---
 # Minimum Spanning Tree

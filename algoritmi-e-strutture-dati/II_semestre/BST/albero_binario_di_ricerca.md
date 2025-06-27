@@ -3,11 +3,9 @@ title: Albero Binario di Ricerca
 aliases:
   - Albero Binario di Ricerca
 tags:
-  - algoritmi-e-strutture-dati
   - II-semestre
   - BST
   - albero-binario-di-ricerca
-  - università
 created: 2025-06-01
 ---
 

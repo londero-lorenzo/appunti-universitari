@@ -1,7 +1,11 @@
 ---
-title: "Distanza"
-aliases: ["Distanza"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "grafi", "nozioni-generali", "distanza"]
+title: Distanza
+aliases:
+  - Distanza
+tags:
+  - grafi
+  - nozioni-generali
+  - distanza
 created: 2025-06-14
 ---
 Dato un grafo $G = (V, E)$ e $s\in V$ la distanza $\delta$ vale:

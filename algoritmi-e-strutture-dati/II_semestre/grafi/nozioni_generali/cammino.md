@@ -1,7 +1,11 @@
 ---
-title: "Cammino"
-aliases: ["Cammino"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "grafi", "nozioni-generali", "cammino"]
+title: Cammino
+aliases:
+  - Cammino
+tags:
+  - grafi
+  - nozioni-generali
+  - cammino
 created: 2025-06-14
 ---
 Dato un grafo $G = (V, E)$ e $s,v\in V$  un cammino da $s$ a $v$ è una sequenza:

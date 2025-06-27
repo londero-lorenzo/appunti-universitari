@@ -1,7 +1,11 @@
 ---
-title: "Prim"
-aliases: ["Prim"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "MST", "prim"]
+title: Prim
+aliases:
+  - Prim
+tags:
+  - MST
+  - prim
+  - grafi
 created: 2025-06-15
 ---
 Voglio sfruttare [IL TEOREMA (video lezione 19 maggio 2021; ora 1:10:30)](https://uniudamce.sharepoint.com/sites/117802-ALGORITMIESTRUTTUREDATIELABORATORIO/_layouts/15/stream.aspx?id=%2Fsites%2F117802%2DALGORITMIESTRUTTUREDATIELABORATORIO%2FDocumenti%20condivisi%2FGeneral%2FRecordings%2FASD%20lezione%2050%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E294ce901%2Db18c%2D4a20%2D9ec8%2Db36760bf3f74)

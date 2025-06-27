@@ -1,7 +1,11 @@
 ---
-title: "Sssp"
-aliases: ["Sssp"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "cammini-minimi", "sssp"]
+title: Sssp
+aliases:
+  - Sssp
+tags:
+  - cammini-minimi
+  - sssp
+  - grafi
 created: 2025-06-15
 ---
 # Single Source Shortest Paths

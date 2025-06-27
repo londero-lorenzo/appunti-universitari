@@ -1,7 +1,11 @@
 ---
-title: "Peso di Un Cammino"
-aliases: ["Peso di Un Cammino"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "cammini-minimi", "peso-di-un-cammino"]
+title: Peso di Un Cammino
+aliases:
+  - Peso di Un Cammino
+tags:
+  - cammini-minimi
+  - peso-di-un-cammino
+  - grafi
 created: 2025-06-15
 ---
 

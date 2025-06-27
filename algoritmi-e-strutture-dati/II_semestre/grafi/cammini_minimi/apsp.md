@@ -1,7 +1,11 @@
 ---
-title: "Apsp"
-aliases: ["Apsp"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "cammini-minimi", "apsp"]
+title: Apsp
+aliases:
+  - Apsp
+tags:
+  - cammini-minimi
+  - apsp
+  - grafi
 created: 2025-06-15
 ---
 # All Pairs Shortest Paths

@@ -1,7 +1,11 @@
 ---
-title: "B-Tree"
-aliases: ["B-Tree"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "B-Tree", "b-tree"]
+title: B-Tree
+aliases:
+  - B-Tree
+tags:
+  - II-semestre
+  - B-Tree
+  - b-tree
 created: 2025-06-12
 ---
 # 🌳 B-Tree — Struttura e Proprietà Generali

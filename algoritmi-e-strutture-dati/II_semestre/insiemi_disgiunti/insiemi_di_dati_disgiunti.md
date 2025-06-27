@@ -1,7 +1,11 @@
 ---
-title: "Insiemi di Dati Disgiunti"
-aliases: ["Insiemi di Dati Disgiunti"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "insiemi-disgiunti", "insiemi-di-dati-disgiunti"]
+title: Insiemi di Dati Disgiunti
+aliases:
+  - Insiemi di Dati Disgiunti
+tags:
+  - II-semestre
+  - insiemi-disgiunti
+  - insiemi-di-dati-disgiunti
 created: 2025-06-13
 ---
 Abbiamo un insieme `S`

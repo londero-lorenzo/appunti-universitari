@@ -1,7 +1,10 @@
 ---
-title: "Scc"
-aliases: ["Scc"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "grafi", "scc"]
+title: Scc
+aliases:
+  - Scc
+tags:
+  - grafi
+  - scc
 created: 2025-06-15
 ---
 # Definizione di componente fortemente connessa (strongly connected component)

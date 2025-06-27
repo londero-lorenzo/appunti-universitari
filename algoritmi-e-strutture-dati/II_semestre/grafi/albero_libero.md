@@ -1,7 +1,11 @@
 ---
-title: "Albero Libero"
-aliases: ["Albero Libero"]
-tags: [università, "algoritmi-e-strutture-dati", "II-semestre", "grafi", "nozioni-generali", "albero-libero"]
+title: Albero Libero
+aliases:
+  - Albero Libero
+tags:
+  - grafi
+  - nozioni-generali
+  - albero-libero
 created: 2025-06-15
 ---
 $G= (V, E)$ non orientato è un albero se e solo se $G$ è connesso e aciclico

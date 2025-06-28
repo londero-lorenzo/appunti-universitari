@@ -30,16 +30,18 @@ $$
 
 ## Mean Normalization
 
+
 $$
 x^{'}_{i}=\frac{x_{i}-\mu_{i}}{\sigma_{i}}
 $$
+
 
 $\mu$ e $\sigma$ sono da calcolare con i dati del **training set.**
 
 ## MinMax Normalization
 
 $$
- x^{'}_{i} = \frac{x_{i} - \min(x)}{\max(x)-\min(x)}
+x^{'}_{i}=\frac{x_{i}-\min(x)}{\max(x)-\min(x)}
 $$
 
 ## Polynomial regression
@@ -178,7 +180,9 @@ $$
 Eseguendo TF-IDF per tutte le parole del Bag of Words avrò un vettore $v$ che si deve normalizzare:
 
 $$
+\begin{align}
 v_{norm}=\frac{v}{||v||_{2}}=\frac{v}{\sqrt{v_{1}^{2}+v_{2}^{2}+...+v_{n}^{2}}}
+\end{align}
 $$
 
 # Holdout method and Regularization
@@ -480,6 +484,7 @@ $$
 $$
 
 Supponendo che otteniamo questi valori:
+
 $$
 \theta_{0}=-0.5;\;\theta_{1}=1;\;\theta_{2}=1;\;\theta_{3}=0
 $$

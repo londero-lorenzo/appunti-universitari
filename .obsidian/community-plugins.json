@@ -4,5 +4,6 @@
   "obsidian-git",
   "obsidian-front-matter-title-plugin",
   "templater-obsidian",
-  "obsidian-excalidraw-plugin"
+  "obsidian-excalidraw-plugin",
+  "print"
 ]

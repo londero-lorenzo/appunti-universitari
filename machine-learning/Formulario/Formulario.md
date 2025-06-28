@@ -2,15 +2,19 @@
 
 ## Hypothesis: 
 ### Una feature
+
 $$
 h_{\theta}(x_{1})=\theta_{0}+\theta_{1}x_{1}
 $$
+
 ### Multiple features:
+
 $$
 h_{\theta}(x^{(i)})=\theta_{0}+\theta_{1}x_{1}+...+\theta_{i}x_{i}
 $$
 
 ## Cost function
+
 $$
 J(\theta_{0}, \theta{1})=\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2
 $$
@@ -23,17 +27,21 @@ $$
 \theta_{1} := \theta_{1} - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})\cdot x_{j}^{(i)}
 \end{align}
 $$
+
 ## Mean Normalization
+
 
 $$
 x^{'}_{i}=\frac{x_{i}-\mu_{i}}{\sigma_{i}}
 $$
+
+
 $\mu$ e $\sigma$ sono da calcolare con i dati del **training set.**
 
 ## MinMax Normalization
 
 $$
- x^{'}_{i} = \frac{x_{i} - \min(x)}{\max(x)-\min(x)}
+x^{'}_{i}=\frac{x_{i}-\min(x)}{\max(x)-\min(x)}
 $$
 
 ## Polynomial regression
@@ -60,6 +68,7 @@ $$
 $$
 g(z)=\frac{1}{1+e^{-z}}
 $$
+
 La funzione $g(z)>0.5$ quando $z>0$
 
 ## Hypothesis
@@ -80,24 +89,30 @@ J(\theta)=\frac{1}{m}\sum_{i=1}{m}\textrm{Cost}(h_{\theta}(x),y)\\
 \textrm{Cost}(h_{\theta}(x),y)=-y\log(h_{\theta}(x))-(1-y)\log(1-h_{\theta(x)})
 \end{align}
 $$
+
 ## Linear Decision Boundary
 
 ### Caso 2D
+
 $$
 \begin{aligned}
 h_{\theta}(x)=g(\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2})\\
 \theta=[\theta_{0},\theta_{1},\theta_{2}]^{T}\;\;x=[1,x_{1},x_{2}]^{T}
 \end{aligned}
 $$
+
 ## No-linear Decision Boundary
 
 $$
 h_{\theta}(x)=g(\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+\theta_{3}x_{1}^{2}+\theta_{4}x_{2}^{2})
 $$
+
 $$
 \theta=[-1\;0\;0\;1\;1]
 $$
+
 Quindi il decision boundary è
+
 $$
 h_{\theta}(x)=\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+\theta_{3}x_{1}^{2}+\theta_{4}x_{2}^{2}=-1+x_{1}^{2}+x_{2}^{2}
 $$
@@ -105,7 +120,8 @@ $$
 # Metrics
 
 ## Confusion matrix
-![[Immagine 2025-06-04 075906.jpg]]
+
+![confusion_matrix](../Img/confusion_matrix.jpg)
 ## Accuracy
 
 $$
@@ -134,6 +150,7 @@ $$
 
 ## Bag of words (Example)
 ### Training Set:
+
 + The sun is shining
 + The weather is sweet
 + The sun is shining, the weather is sweet, and one and one is two
@@ -144,6 +161,7 @@ $$
 + $[0\;1\;0\;1\;1\;0\;1\;0\;0]$
 + $[0\;1\;0\;0\;0\;1\;1\;0\;1]$
 + $[2\;3\;2\;1\;1\;1\;2\;1\;1]$
+
 In questo caso la parola **'is'** occorre in tutte e tre le frasi (basta vedere le colonne dove i numeri sono tutti $> 0$)
 
 ## TF-IDF
@@ -160,8 +178,11 @@ $$
 + $tf=$ Term Frequency (numero di volte in cui $w$ appare nel documento $d$)
 
 Eseguendo TF-IDF per tutte le parole del Bag of Words avrò un vettore $v$ che si deve normalizzare:
+
 $$
+\begin{align}
 v_{norm}=\frac{v}{||v||_{2}}=\frac{v}{\sqrt{v_{1}^{2}+v_{2}^{2}+...+v_{n}^{2}}}
+\end{align}
 $$
 
 # Holdout method and Regularization
@@ -202,42 +223,58 @@ J(\theta)=\frac{1}{m}\left[\sum_{i=1}^{m}Cost(h_{\theta}(x),y)+\frac{\lambda}{2}
 $$
 
 Invece di usare $\lambda$, alcune implementazioni usano $C=\frac{1}{\lambda}$
+
 $$
 J(\theta)=\frac{1}{m}\left[C\sum_{i=1}^{m}Cost(h_{\theta}(x),y)+\frac{1}{2}\sum_{j=1}^{n}\theta_{j}^{2}\right]
 $$
 
 # Neural Networks
 
-![[Immagine 2025-06-04 103910.jpg]]
+![NN](Img/nn.jpg)
 + $a^{[j]}=$ funzione di attivazione per il **layer** $j$
 + $W^{[j]}=$ matrice dei pesi che regola la funzione di attivazione tra il layer $j-1$ e il layer $j$
 + $b^{[j]}$
 
 #### Esempio relativo all'immagine:
+
 $$
 z^{[1]}=W^{[1]}x+b^{[1]}
 $$
+
 + $z^{[1]}$ ha una dimensione $(4,1)$
+
 + $W^{[1]}$ ha dimensione $(4,3)$
+
 + $x$ ha dimensione $(3,1)$
+
 + $b^{1}$ ha dimensione $(4,1)$
+
 $$
 a^{[1]}=g(z^{[1]})
 $$
+
 + $a^{[1]}$ ha dimensione $(4,1)$
+
 + $g(z^{[1]})$ ha dimensione $(4,1)$
+
 $$
 z^{[2]}=W^{[2]}a^{[1]}+b^{[2]}
 $$
+
 + $z^{[2]}$ ha una dimensione $(1,1)$
+
 + $W^{[2]}$ ha dimensione $(1,4)$
+
 + $a^{[1]}$ ha dimensione $(4,1)$
+
 + $b^{2}$ ha dimensione $(1,1)$
 
 $$
 a^{[2]}=g(z^{[2]})
 $$
+
 + $a^{[1]}$ ha dimensione $(1,1)$
+
 + $g(z^{[2]})$ ha dimensione $(1,1)$
 
 ## ReLU
@@ -248,6 +285,7 @@ $$
 $$
 L(W,b)=\frac{1}{m}\sum_{i=1}^{m}-y^{[i]}(\log(h_{W,b}(x^{[i]})-(1-y^{[i]})\log(1-h_{W,b}(x^{[i]})))
 $$
+
 $m=$ numero di esempi nel training set
 
 #### Per la regressione si utilizza il Mean Squarred error loss
@@ -259,19 +297,25 @@ $$
 
 Di solito, nella classificazione multiclasse, l'ultimo layer di solito usa una Softmax Activation.
 Questo vuol dire che la rete darà in output la distribuzione di probabilità su tutta la classe
+
 $$
 z^{[i]}=W^{[i]}a^{[i-1]}+b^{i}
 $$
+
 Il layer Softmax risulta:
+
 $$
 a^{[i]}=\frac{e^{z^{[i]}}}{\sum_{j=1}^{N}e^{z^{[i]}}}
 $$
+
 ## Cross-Entropy Loss
 Usata per quantificare la differenza tra due distribuzioni di probabilità.
 Di solito, la distribuzione "vera" (quella che il modello di apprendimento automatico cerca di prevedere) è rappresentata come **one-hot encoding**, ovvero un vettore in cui solo la posizione corrispondente alla classe corretta ha valore 1, mentre le altre sono 0.
+
 $$
 L(W,b)=-\sum_{i=1}^{m}y^{[i]}\log(h_{W,b}(x^{[i]}))
 $$
+
 + $m$ è il numero dei campioni del **training**
 + $y^{(i)}$ è la distribuzione reale per il campione $i$, sotto forma di vettore **one-hot**
 + $h_{W,b}(x^{[i]})$ è la distribuzione di probabilità predetta dalla rete neurale per l'input $x^{(i)}$
@@ -291,9 +335,11 @@ Hai due tipi di punti su un piano (dati 2D): rossi e blu. Vuoi trovare una linea
 $$
 w^{T}x_{i}+b\geq 1\;\textrm{per}\;y_{i}=+1
 $$
+
 $$
 w^{T}x_{i}+b\leq -1\;\textrm{per}\;y_{i}=-1
 $$
+
 Equazioni combinate:
 $$
 y_{i}(w^{T}x_{i}+b)\geq 1\; \forall\:x_{i}
@@ -308,16 +354,20 @@ $$
 ### Vettore perpendicolare del Decision Boundary
 
 Prendiamo due punti $x_{1}$ e $x_{2}$ che passano sulla retta $w^{T}x+b=0$
+
 $$
 \begin{aligned}
 w^{T}x_{1}+b=0\\
 w^{T}x_{2}+b=0
 \end{aligned}
 $$
+
 Equazioni combinate:
+
 $$
 w^{T}(x_{1}-x_{2})=0
 $$
+
 ### Larghezza del margine
 
 + Sia $\mathbf{x}_1$ un punto sull'iperpiano $\mathbf{w}^T \mathbf{x} + b = -1$. Cerchiamo il punto più vicino sull'altro iperpiano, ovvero:
@@ -396,9 +446,11 @@ $$
     - **$C$ piccolo** → tollera violazioni → modello **più flessibile**.
 
 #### Vincoli:
+
 $$
 y_{i}(w^{T}x_{i}+b)\geq 1−\epsilon_{i}\;\textrm{ e }\;\epsilon_{i}\geq 0\;\;\forall\:i
 $$
+
 Quindi:
 - Ogni punto può violare il margine, ma la **somma totale** di tutte le violazioni viene **penalizzata** nella funzione obiettivo.
 
@@ -408,32 +460,44 @@ Le SVM con kernel possono computare decision boundary **non lineari**.
 ### Kernel gaussiani
 
 Data $x$ computa nuove feature che dipendono dalla vicinanza ai **landmarks** $l^{(1)},l^{(2)},l^{(3)}$.
+
 $$
 f_{1}=similarity(x,l^{1})=\exp\left(-\frac{||x-l^{(1)}||^{2}}{2\sigma^{2}}\right)
 $$
+
 $$
 f_{2}=similarity(x,l^{2})=\exp\left(-\frac{||x-l^{(2)}||^{2}}{2\sigma^{2}}\right)
 $$
+
+
 $$
 f_{3}=similarity(x,l^{3})=\exp\left(-\frac{||x-l^{(3)}||^{2}}{2\sigma^{2}}\right)
 $$
+
 Se, per esempio, $\textrm{if} \; x\approx l^{(1)}\rightarrow f_{1}\approx1\;f_{2}\approx 0 \;f_{3}\approx 0$.
 
 ### Feature space
 Con il kernel il Decision Boundary si basa sulle nuove feature $f_{1},f_{2},f_{3}$.
+
 $$
 \theta_{0}+\theta_{1}f_{1}+\theta_{2}f_{2}+\theta_{3}f_{3}\geq 0
 $$
+
 Supponendo che otteniamo questi valori:
+
 $$
 \theta_{0}=-0.5;\;\theta_{1}=1;\;\theta_{2}=1;\;\theta_{3}=0
 $$
+
 $$
 x_{1}\rightarrow f_{1}\approx 1;\; f_{2}\approx 0;\; f_{3}\approx 0\rightarrow −0.5 + 1 ∗ 1 + 1 ∗ 0 + 0 ∗ 0\geq 0\rightarrow −0.5 + 1 = 0.5 \geq 0 \rightarrow 𝒚 = 𝟏
 $$
+
 $$
 x_{2}\rightarrow f_{1}\approx 0;\; f_{2}\approx 1;\; f_{3}\approx 0\rightarrow −0.5 + 1 \geq 0 = 0.5 \geq 0 \rightarrow y = 𝟏
 $$
+
 $$
 x_{3}\rightarrow f_{1}\approx 0;\; f_{2}\approx 0;\; f_{3}\approx 0\rightarrow −0.5 < 0 \rightarrow y =0
 $$
+

@@ -2,15 +2,19 @@
 
 ## Hypothesis: 
 ### Una feature
+
 $$
 h_{\theta}(x_{1})=\theta_{0}+\theta_{1}x_{1}
 $$
+
 ### Multiple features:
+
 $$
 h_{\theta}(x^{(i)})=\theta_{0}+\theta_{1}x_{1}+...+\theta_{i}x_{i}
 $$
 
 ## Cost function
+
 $$
 J(\theta_{0}, \theta{1})=\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2
 $$
@@ -23,11 +27,13 @@ $$
 \theta_{1} := \theta_{1} - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})\cdot x_{j}^{(i)}
 \end{align}
 $$
+
 ## Mean Normalization
 
 $$
 x^{'}_{i}=\frac{x_{i}-\mu_{i}}{\sigma_{i}}
 $$
+
 $\mu$ e $\sigma$ sono da calcolare con i dati del **training set.**
 
 ## MinMax Normalization
@@ -60,6 +66,7 @@ $$
 $$
 g(z)=\frac{1}{1+e^{-z}}
 $$
+
 La funzione $g(z)>0.5$ quando $z>0$
 
 ## Hypothesis
@@ -80,24 +87,30 @@ J(\theta)=\frac{1}{m}\sum_{i=1}{m}\textrm{Cost}(h_{\theta}(x),y)\\
 \textrm{Cost}(h_{\theta}(x),y)=-y\log(h_{\theta}(x))-(1-y)\log(1-h_{\theta(x)})
 \end{align}
 $$
+
 ## Linear Decision Boundary
 
 ### Caso 2D
+
 $$
 \begin{aligned}
 h_{\theta}(x)=g(\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2})\\
 \theta=[\theta_{0},\theta_{1},\theta_{2}]^{T}\;\;x=[1,x_{1},x_{2}]^{T}
 \end{aligned}
 $$
+
 ## No-linear Decision Boundary
 
 $$
 h_{\theta}(x)=g(\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+\theta_{3}x_{1}^{2}+\theta_{4}x_{2}^{2})
 $$
+
 $$
 \theta=[-1\;0\;0\;1\;1]
 $$
+
 Quindi il decision boundary è
+
 $$
 h_{\theta}(x)=\theta_{0}+\theta_{1}x_{1}+\theta_{2}x_{2}+\theta_{3}x_{1}^{2}+\theta_{4}x_{2}^{2}=-1+x_{1}^{2}+x_{2}^{2}
 $$
@@ -135,6 +148,7 @@ $$
 
 ## Bag of words (Example)
 ### Training Set:
+
 + The sun is shining
 + The weather is sweet
 + The sun is shining, the weather is sweet, and one and one is two
@@ -162,6 +176,7 @@ $$
 + $tf=$ Term Frequency (numero di volte in cui $w$ appare nel documento $d$)
 
 Eseguendo TF-IDF per tutte le parole del Bag of Words avrò un vettore $v$ che si deve normalizzare:
+
 $$
 v_{norm}=\frac{v}{||v||_{2}}=\frac{v}{\sqrt{v_{1}^{2}+v_{2}^{2}+...+v_{n}^{2}}}
 $$
@@ -204,13 +219,14 @@ J(\theta)=\frac{1}{m}\left[\sum_{i=1}^{m}Cost(h_{\theta}(x),y)+\frac{\lambda}{2}
 $$
 
 Invece di usare $\lambda$, alcune implementazioni usano $C=\frac{1}{\lambda}$
+
 $$
 J(\theta)=\frac{1}{m}\left[C\sum_{i=1}^{m}Cost(h_{\theta}(x),y)+\frac{1}{2}\sum_{j=1}^{n}\theta_{j}^{2}\right]
 $$
 
 # Neural Networks
 
-![[Immagine 2025-06-04 103910.jpg]]
+![NN](Img/nn.jpg)
 + $a^{[j]}=$ funzione di attivazione per il **layer** $j$
 + $W^{[j]}=$ matrice dei pesi che regola la funzione di attivazione tra il layer $j-1$ e il layer $j$
 + $b^{[j]}$
@@ -277,19 +293,25 @@ $$
 
 Di solito, nella classificazione multiclasse, l'ultimo layer di solito usa una Softmax Activation.
 Questo vuol dire che la rete darà in output la distribuzione di probabilità su tutta la classe
+
 $$
 z^{[i]}=W^{[i]}a^{[i-1]}+b^{i}
 $$
+
 Il layer Softmax risulta:
+
 $$
 a^{[i]}=\frac{e^{z^{[i]}}}{\sum_{j=1}^{N}e^{z^{[i]}}}
 $$
+
 ## Cross-Entropy Loss
 Usata per quantificare la differenza tra due distribuzioni di probabilità.
 Di solito, la distribuzione "vera" (quella che il modello di apprendimento automatico cerca di prevedere) è rappresentata come **one-hot encoding**, ovvero un vettore in cui solo la posizione corrispondente alla classe corretta ha valore 1, mentre le altre sono 0.
+
 $$
 L(W,b)=-\sum_{i=1}^{m}y^{[i]}\log(h_{W,b}(x^{[i]}))
 $$
+
 + $m$ è il numero dei campioni del **training**
 + $y^{(i)}$ è la distribuzione reale per il campione $i$, sotto forma di vettore **one-hot**
 + $h_{W,b}(x^{[i]})$ è la distribuzione di probabilità predetta dalla rete neurale per l'input $x^{(i)}$

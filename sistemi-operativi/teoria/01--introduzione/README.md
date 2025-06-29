@@ -13,12 +13,12 @@ Questa sezione contiene i concetti introduttivi di base.
 
 1. [Che cosa si intende per Sistema Operativo](./cosa_si_intende_per_sistema_operativo.md)
 2. [Organizzazione di un Sistema di Calcolo](./organizzazione_di_un_sistema_di_calcolo.md)
-3. Sistemi Mono/Multi-programmati *(in arrivo)*
-4. Principali Funzionalità di un Sistema Operativo *(in arrivo)*
+3. [Sistemi Mono/Multi-programmati](./sistema_mono-multi_programmato.md)
+4. [Principali Funzionalità di un Sistema Operativo](./principi_di_funzionamento_di_un_sistema_operativo.md)
 
 
 ---
-## Fonti
+## 📚 Fonti
 
 - Slide: _[Introduzione Ai Sistemi Operativi](https://elearning.uniud.it/moodle/pluginfile.php/849180/mod_page/content/103/hand01.pdf)_
 - Autore: A. Formisano

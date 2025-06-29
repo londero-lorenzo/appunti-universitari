@@ -8,7 +8,7 @@ created: 2025-06-28
 ---
 # Cosa è un Sistema Operativo
 
-Un **Sistema Operativo** (**S.O.** o **O.S\[EN\]**) è un insieme di programmi che operano sull’hardware di un sistema di calcolo.
+Un **Sistema Operativo** (**S.O.** o **O.S\[EN\]**) è un insieme di programmi che operano sull’hardware di un sistema di calcolo. 
 
 ## Obiettivi principali
 
@@ -59,13 +59,12 @@ Il Sistema Operativo è il componente che:
 ---
 
 ## Il concetto di Kernel
-
-- Il **kernel** è il cuore del sistema operativo, **sempre in esecuzione**.
+- Il **kernel** è quel programma **sempre in esecuzione** nel sistema di calcolo, che corrisponde al cuore del sistema operativo.
 - Tutto ciò che non è kernel (es. utility, programmi di sistema, ecc.) è considerato software **di sistema** o **applicativo**.
 
 ---
 
-## Fonti
+## 📚 Fonti
 
 - Slide del corso *Sistemi Operativi e Lab. 24/25*, A. Formisano
 - File: _[Introduzione Ai Sistemi Operativi](https://elearning.uniud.it/moodle/pluginfile.php/849180/mod_page/content/103/hand01.pdf)_

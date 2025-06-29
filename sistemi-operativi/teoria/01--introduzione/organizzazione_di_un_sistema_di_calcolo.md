@@ -73,7 +73,7 @@ Il **DMA (Direct Memory Access)** è una tecnica per migliorare le prestazioni d
 
 ---
 
-## ## Fonti
+## 📚 Fonti
 
 - Contenuto: _Organizzazione di un Sistema di Calcolo_: _Gestione delle Interruzioni_ e _La Memoria_
 - Slide: _[Introduzione Ai Sistemi Operativi](https://elearning.uniud.it/moodle/pluginfile.php/849180/mod_page/content/103/hand01.pdf)_

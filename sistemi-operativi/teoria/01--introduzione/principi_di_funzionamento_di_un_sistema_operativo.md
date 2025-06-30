@@ -101,14 +101,14 @@ Il S.O. uniforma l’accesso ai dispositivi tramite **device driver**.
 
 ### Protezione e Sicurezza
 
->[!definizione]
+>[!definition]
 >**Protezione**
 >
 >Controllo dell’**accesso alle risorse** da parte di utenti e processi.
 
 
 
->[!definizione]
+>[!definition]
 >**Sicurezza**
 >
 >Difesa da **attacchi interni o esterni**

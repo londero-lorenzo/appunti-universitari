@@ -13,7 +13,7 @@ https://lucide.dev/icons
 }
 
 
-.callout[data-callout="definizione"] {
+.callout[data-callout="definition"] {
 	--callout-icon: var(--callout-definition-icon);
 	--callout-title-color: rgb(var(--callout-definition-primary-color-rgb));
 	--callout-icon-color: rgb(var(--callout-definition-primary-color-rgb));
@@ -22,7 +22,7 @@ https://lucide.dev/icons
 	background-color: var(--callout-background-color);
 }
 
-.callout[data-callout="definizione"] .callout-content > p:first-child {
+.callout[data-callout="definition"] .callout-content > p:first-child {
 	font-size: 1.6em;
 	font-weight: 600;
 	color: rgb(var(--callout-definition-title-color-rgb));
@@ -31,8 +31,8 @@ https://lucide.dev/icons
 	margin-bottom: 6px;
 }
 
-.callout[data-callout="definizione"] .callout-content > p:not(:first-of-type),
-.callout[data-callout="definizione"] .callout-content > blockquote p {
+.callout[data-callout="definition"] .callout-content > p:not(:first-of-type),
+.callout[data-callout="definition"] .callout-content > blockquote p {
 	font-family: "Inter", sans-serif;
 	font-size: 1.05em;
 	border-left: 2px solid rgba(var(--callout-definition-title-color-rgb), 0.5);
@@ -40,14 +40,14 @@ https://lucide.dev/icons
 	margin-left: 0;
 }
 
-.callout[data-callout="definizione"] .callout-content > blockquote{
+.callout[data-callout="definition"] .callout-content > blockquote{
 	border-left: none !important;
 	padding-left: 0px !important;
 	padding-inline-start: 0px !important;
 }
 
 
-.callout[data-callout="definizione"] .callout-title {
+.callout[data-callout="definition"] .callout-title {
 	font-weight: bold;
 }
 

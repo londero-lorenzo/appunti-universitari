@@ -16,7 +16,7 @@ created: 2025-07-02
 
 ### Parte I — Processi
 
-1. Nozione di Processo *(in arrivo)*  
+1. [Nozione di Processo](./processi/nozione/README.md)
 2. Operazioni sui Processi *(in arrivo)*  
 3. Comunicazione tra Processi *(in arrivo)*
 

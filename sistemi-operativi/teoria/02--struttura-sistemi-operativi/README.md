@@ -13,7 +13,7 @@ Questa sezione contiene i concetti dei servizi di base offerti dai sistemi opera
 
 1. [Servizi Offerti dal Sistema Operativo](./servizi_offerti_dal_sistema_operativo.md)
 2. [Le System Call](./system_call.md)
-3. Struttura di un Sistema Operativo *(in arrivo)*
+3. [Struttura di un Sistema Operativo](./struttura_di_un_sistema_operativo.md)
 4. Macchine Virtuali *(in arrivo)*
 
 

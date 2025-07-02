@@ -12,7 +12,7 @@ Questa sezione raccoglie gli appunti teorici del corso di Sistemi Operativi. Ogn
 
 1. [Generalità e introduzione ai sistemi operativi](./01--introduzione/README.md)  
 2. [Struttura e servizi dei sistemi operativi](./02--struttura-sistemi-operativi/README.md)  
-3. Processi e thread *(in arrivo)*
+3. [Processi e thread](./03--processi-e-thread/README.md)
 4. Scheduling della CPU *(in arrivo)*
 5. Sincronizzazione *(in arrivo)*
 6. Deadlock *(in arrivo)*

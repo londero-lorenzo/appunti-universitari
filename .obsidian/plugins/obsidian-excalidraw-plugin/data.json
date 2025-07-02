@@ -1144,6 +1144,14 @@
         "value": 8,
         "description": "The value of the gap between the connection line and the element, which must be greater than 0. If you want the connector to be next to the element, set it to 1."
       }
+    },
+    "Downloaded/Modify background color opacity": {
+      "Prompt for opacity?": true,
+      "Default opacity": {
+        "value": 0.6,
+        "description": "Element's background color transparency"
+      },
+      "Remember last opacity?": false
     }
   },
   "defaultTrayMode": true,

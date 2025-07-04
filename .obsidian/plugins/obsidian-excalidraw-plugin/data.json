@@ -3,7 +3,7 @@
   "folder": "Excalidraw",
   "cropFolder": "",
   "annotateFolder": "",
-  "embedUseExcalidrawFolder": false,
+  "embedUseExcalidrawFolder": true,
   "templateFilePath": "Excalidraw/Template.excalidraw",
   "scriptFolderPath": "Excalidraw/Scripts",
   "fontAssetsPath": "Excalidraw/CJK Fonts",
@@ -21,8 +21,10 @@
   "drawingEmbedPrefixWithFilename": true,
   "drawingFilnameEmbedPostfix": " ",
   "drawingFilenameDateTime": "YYYY-MM-DD HH.mm.ss",
-  "useExcalidrawExtension": true,
+  "useExcalidrawExtension": false,
+  "cropSuffix": "",
   "cropPrefix": "cropped_",
+  "annotateSuffix": "",
   "annotatePrefix": "annotated_",
   "annotatePreserveSize": false,
   "previewImageType": "SVGIMG",
@@ -101,7 +103,7 @@
   "library2": {
     "type": "excalidrawlib",
     "version": 2,
-    "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.12.2",
+    "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.13.0",
     "libraryItems": [
       {
         "id": "c3vPJMvpMARNBEoFWshLX",
@@ -1155,7 +1157,7 @@
     }
   },
   "defaultTrayMode": true,
-  "previousRelease": "2.12.2",
+  "previousRelease": "2.13.0",
   "showReleaseNotes": true,
   "showNewVersionNotification": true,
   "latexBoilerplate": "\\color{blue}",

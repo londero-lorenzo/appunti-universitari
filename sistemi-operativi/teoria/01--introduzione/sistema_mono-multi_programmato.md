@@ -15,7 +15,7 @@ created: 2025-06-29
 
  >[!example]-
  >Schema struttura:
-> 	![[sistemi-operativi/teoria/01--introduzione/introduzione_schema.md#^frame=vIAApZjm67VvFXv0uGVOt]]
+> 	![[introduzione.excalidraw#^frame=vIAApZjm67VvFXv0uGVOt]]
 
 ---
 
@@ -32,7 +32,7 @@ created: 2025-06-29
 
 > [!example]-
 >  Schema struttura:
-> 	![[sistemi-operativi/teoria/01--introduzione/introduzione_schema.md#^frame=uSFmpqFl4wp4WvUHvhJ7w]]
+> 	![[introduzione.excalidraw#^frame=uSFmpqFl4wp4WvUHvhJ7w]]
 
 ---
 

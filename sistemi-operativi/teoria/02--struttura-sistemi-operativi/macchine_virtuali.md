@@ -51,7 +51,7 @@ created: 2025-07-02
 - Macchina **virtuale** (b): ogni sistema operativo gira su una VM, astratta dall’hardware fisico.
 
 >[!example]
->![[sistemi-operativi/teoria/02--struttura-sistemi-operativi/struttura_sistemi_operativi_schema.md#^frame=N_wek8Fa5dY5owevrfahV|100%]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=N_wek8Fa5dY5owevrfahV|100%]]
 
 ---
 

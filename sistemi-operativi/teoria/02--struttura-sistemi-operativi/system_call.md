@@ -34,7 +34,7 @@ Le system call eseguono in **modalità kernel**, cioè con privilegi elevati.
 Esempio di system call: `open()`
 
 
->![[struttura_sistemi_operativi_schema#^frame=lXraSiAzCMQ__mZlvVYKu|100%]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=lXraSiAzCMQ__mZlvVYKu|100%]]
 
 
 ---

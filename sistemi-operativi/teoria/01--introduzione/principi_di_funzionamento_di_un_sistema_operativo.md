@@ -40,7 +40,7 @@ Il meccanismo utilizzato è quello delle **system call**:
 
 >[!example]+
 >Possiamo visualizzare una situazione tipica come segue:
->![[sistemi-operativi/teoria/01--introduzione/introduzione_schema.md#^frame=xgIFca_7YQN-dSj_bNy4V|100%]]
+>![[introduzione.excalidraw#^frame=xgIFca_7YQN-dSj_bNy4V|100%]]
 
 ---
 

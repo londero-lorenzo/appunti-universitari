@@ -25,10 +25,10 @@ created: 2025-06-30
 
 >[!example]
 >Struttura semplice nel **MS-DOS**
->![[sistemi-operativi/teoria/02--struttura-sistemi-operativi/struttura_sistemi_operativi_schema.md#^frame=rB4MQLZGd0P7l2exH8cZP]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=rB4MQLZGd0P7l2exH8cZP]]
 >------------------------
 >Struttura semplice in **UNIX**
->![[sistemi-operativi/teoria/02--struttura-sistemi-operativi/struttura_sistemi_operativi_schema.md#^frame=f4f_eavbIxgvDWcjlTBqg|100%]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=f4f_eavbIxgvDWcjlTBqg|100%]]
 
 
 
@@ -47,7 +47,7 @@ created: 2025-06-30
 
 >[!example]
 >Struttura stratificata tipica:
->![[sistemi-operativi/teoria/02--struttura-sistemi-operativi/struttura_sistemi_operativi_schema.md#^frame=O1zj-fDGaS1wC1nzZM9g2|75%]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=O1zj-fDGaS1wC1nzZM9g2|75%]]
 
 ---
 
@@ -70,7 +70,7 @@ created: 2025-06-30
 
 >[!example]
 >Struttura a microkernel tipica:
->![[sistemi-operativi/teoria/02--struttura-sistemi-operativi/struttura_sistemi_operativi_schema.md#^frame=B8N508JBRkS96QYH3nmWu|100%]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=B8N508JBRkS96QYH3nmWu|100%]]
 
 
 ---
@@ -89,11 +89,11 @@ created: 2025-06-30
 >[!example]
 >Struttura modulare per sistema Solaris:
 >
->![[sistemi-operativi/teoria/02--struttura-sistemi-operativi/struttura_sistemi_operativi_schema.md#^frame=GSFENhdWcIQyNmOU0BqNY]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=GSFENhdWcIQyNmOU0BqNY]]
 >
 >Struttura modulare per sistema Linux:
 >
->![[sistemi-operativi/teoria/02--struttura-sistemi-operativi/struttura_sistemi_operativi_schema.md#^frame=LAFa5LKgA9-toVgxh9DND|100%]]
+>![[struttura_sistemi_operativi.excalidraw#^frame=LAFa5LKgA9-toVgxh9DND|100%]]
 
 
 ---

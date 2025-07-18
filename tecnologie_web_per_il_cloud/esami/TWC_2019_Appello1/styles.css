@@ -1,0 +1,17 @@
+.books_table{
+	text-align: center;
+	border: ridge;
+}
+
+.books_table th{
+	border-bottom-style: double;
+}
+
+.books_table *{
+	border-right-style: groove;
+	padding: 0% 10px;
+}
+
+.books_table *:last-child{
+	border-right-style: unset;
+}

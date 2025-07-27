@@ -1,17 +1,25 @@
+package trasmissione;
+
+import enums.Genere;
+import enums.Lingua;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 
 /**
- * CLASSE TRASMISSIONE.
+ * CLASSE TRASMISSIONE. <br>
  * Obiettivo:
- * - fornire informazioni relative al programma:
- *     * titolo;
- *     * genere;
- *     * lingue;
- *     * sottotitoli;
- *     * orari di messa in onda
- * Sa fare: 
+ * - fornire informazioni relative al programma <br>
+ * Sa fare: restituire le informazioni relative alla trasmissione. <br>
+ * Conosce:
+ * <ul>
+ *    <li> titolo; </li>
+ *    <li> genere; </li>
+ *    <li> lingue; </li>
+ *    <li> sottotitoli; </li>
+ *    <li> orari di messa in onda <br> </li>
+ *  </ul>
  */
 public class Trasmissione {
 
@@ -24,7 +32,18 @@ public class Trasmissione {
     private final LocalDate data;
     private final LocalTime ora;
 
-
+    /***
+     * Pre-condizioni:
+     *  @param genere genere della trasmissione
+     *  @param titolo titolo della trasmissione
+     *  @param lingua_audio lingua audio della trasmissione
+     *  @param lingua_sottotitolo lingua dei sottotitoli della trasmissione
+     *  @param sottotitolo stringa per i sottotitoli della trasmissione
+     *  @param data data di trasmissione della trasmissione 
+     *  @param ora orario di trasmissione della trasmissione
+     *
+     * Post-condizioni: genera un oggetto trasmissione.
+     */
     public Trasmissione(Genere genere, String titolo, Lingua lingua_audio, Lingua lingua_sottotitolo, String sottotitolo, LocalDate data, LocalTime ora) {
         this.genere = genere;
         this.titolo = titolo;
@@ -34,7 +53,6 @@ public class Trasmissione {
         this.data = data;
         this.ora = ora;
     }
-
 
     public Genere getGenere() {
         return genere;

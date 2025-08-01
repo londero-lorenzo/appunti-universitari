@@ -1,5 +1,6 @@
 package trasmissione;
 
+import builders.TrasmissioneBuilder;
 import enums.Genere;
 import enums.Lingua;
 
@@ -28,30 +29,40 @@ public class Trasmissione {
     private final String titolo;
     private final Lingua lingua_audio;
     private final Lingua lingua_sottotitolo;
-    private final String sottotitolo;
+    private final Sottotitoli sottotitoli;
     private final LocalDate data;
     private final LocalTime ora;
+
 
     /***
      * Pre-condizioni:
      *  @param genere genere della trasmissione
      *  @param titolo titolo della trasmissione
      *  @param lingua_audio lingua audio della trasmissione
-     *  @param lingua_sottotitolo lingua dei sottotitoli della trasmissione
-     *  @param sottotitolo stringa per i sottotitoli della trasmissione
+     *  @param sottotitoli classe Sottotitoli per i sottotitoli della trasmissione
      *  @param data data di trasmissione della trasmissione 
      *  @param ora orario di trasmissione della trasmissione
      *
      * Post-condizioni: genera un oggetto trasmissione.
      */
-    public Trasmissione(Genere genere, String titolo, Lingua lingua_audio, Lingua lingua_sottotitolo, String sottotitolo, LocalDate data, LocalTime ora) {
+    public Trasmissione(Genere genere, String titolo, Lingua lingua_audio, Sottotitoli sottotitoli, LocalDate data, LocalTime ora) {
         this.genere = genere;
         this.titolo = titolo;
         this.lingua_audio = lingua_audio;
-        this.lingua_sottotitolo = lingua_sottotitolo;
-        this.sottotitolo = sottotitolo;
+        this.lingua_sottotitolo = sottotitoli.getLingua();
+        this.sottotitoli = sottotitoli;
         this.data = data;
         this.ora = ora;
+    }
+
+    public Trasmissione(TrasmissioneBuilder builder) {
+        this.genere = builder.getGenere();
+        this.titolo = builder.getTitolo();
+        this.lingua_audio = builder.getLingua_audio();
+        this.lingua_sottotitolo = builder.getLingua_sottotitolo();
+        this.sottotitoli = builder.getSottotitoli();
+        this.data = builder.getData();
+        this.ora = builder.getOra();
     }
 
     public Genere getGenere() {
@@ -70,8 +81,8 @@ public class Trasmissione {
         return lingua_sottotitolo;
     }
 
-    public String getSottotitolo() {
-        return sottotitolo;
+    public Sottotitoli getSottotitoli() {
+        return sottotitoli;
     }
 
     public LocalDate getData() {

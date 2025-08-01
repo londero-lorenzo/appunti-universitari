@@ -3,6 +3,7 @@ package builders;
 import enums.Genere;
 import enums.Lingua;
 
+import trasmissione.Sottotitoli;
 import trasmissione.Trasmissione;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,7 +17,7 @@ public class TrasmissioneBuilder {
     private String titolo;
     private Lingua lingua_audio;
     private Lingua lingua_sottotitolo;
-    private String sottotitolo;
+    private Sottotitoli sottotitoli;
     private LocalDate data;
     private LocalTime ora;
 
@@ -40,8 +41,8 @@ public class TrasmissioneBuilder {
         return this;
     }
 
-    public TrasmissioneBuilder setSottotitolo(String sottotitolo) {
-        this.sottotitolo = sottotitolo;
+    public TrasmissioneBuilder setSottotitoli(Sottotitoli sottotitoli) {
+        this.sottotitoli = sottotitoli;
         return this;
     }
 
@@ -55,10 +56,37 @@ public class TrasmissioneBuilder {
         return this;
     }
 
+    public Genere getGenere() {
+        return genere;
+    }
+
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public Lingua getLingua_audio() {
+        return lingua_audio;
+    }
+
+    public Lingua getLingua_sottotitolo() {
+        return lingua_sottotitolo;
+    }
+
+    public Sottotitoli getSottotitoli() {
+        return sottotitoli;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public LocalTime getOra() {
+        return ora;
+    }
 
 
     public Trasmissione build() {
-        return new Trasmissione(this.genere, this.titolo, this.lingua_audio, this.lingua_sottotitolo, this.sottotitolo, this.data, this.ora);
+        return new Trasmissione(this);
     }
 
 }

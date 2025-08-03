@@ -1,13 +1,16 @@
 from pdf2image import convert_from_path
 from PIL import Image
 import numpy as np
+import matplotlib.cm as matcm
 from matplotlib.colors import rgb_to_hsv
+import matplotlib.pyplot as plt
 import colorsys
 import img2pdf
 import cv2
 import os
 import argparse, sys
 import glob
+import math
 from sklearn.cluster import DBSCAN
 
 TEMP_FOLDER = "temp_images"
@@ -20,11 +23,40 @@ class BoxDetectionMode(Enum):
     CHUNK = "chunk"
     CONNECTED = "connected"
 
+    def __eq__(self, other):
+        if isinstance(other, Enum):
+            return self.value == other.value
+        if isinstance(other, str):
+            return self.value == other
+        return False
+
+    def __hash__(self):
+        return hash(self.value)
+            
+       
+
 
 class RegionMask(IntEnum):
     BACKGROUND = 0
     TEXT = 1
-    DARK_BLOCK = 2
+    INNER_BLOCK = 2
+
+    def __eq__(self, other):
+        if isinstance(other, RegionMask):
+            return self.value == other.value
+        return False
+
+    def __hash__(self):
+        return hash(self.value)
+
+    def __str__(self):
+        return self.name.capitalize()
+
+    def __repr__(self):
+        return f"RegionMask.{self.name} ({self.value})"
+
+
+    
 
 # ------------------------
 # Funzioni ausiliarie
@@ -95,8 +127,21 @@ def get_dark_bounding_boxes(dark_binary_mask, min_area=150):
     boxes = [cv2.boundingRect(cnt) for cnt in contours if cv2.contourArea(cnt) > min_area]
     return boxes
 
-def chunk_density(dark_binary_mask, chunk_size=16, density_thresh=0.6):
+def chunk_density(dark_binary_mask, chunk_size=16, density_thresh=0.6, debug = False):
     H, W = dark_binary_mask.shape
+
+    if debug:
+        print("------ Banners Density Detection Parameters ------")
+        print(f" - dark binary mask size: {H, W};")
+        print(f" - subdivision chunk size: {chunk_size};")
+        print(f" - withe threshold: {density_thresh}")
+        debug_for_output = ""
+        debug_for_counter = 0
+        debug_for_output_columns = 5
+        debug_for_output_column_splitter = "| "
+        debug_for_output_last_column_row_completed = 0
+        print(f"Banners detection...")
+    
     dense_blocks = []
     for y in range(0, H, chunk_size):
         for x in range(0, W, chunk_size):
@@ -107,8 +152,33 @@ def chunk_density(dark_binary_mask, chunk_size=16, density_thresh=0.6):
             dark_pixels = np.sum(block)
             density = dark_pixels / block.size
             if density > density_thresh:
+                if debug:
+                    debug_for_counter += 1
+                    debug_for_output += f"banner block detected in {(x, y)}\n"
+                    debug_for_output += f" - shape: {(x, y, chunk_size + x, chunk_size + y)}\n"
                 dense_blocks.append((x, y, chunk_size, chunk_size))
-
+    if debug:
+        rows = debug_for_output.split("\n")
+        max_row_length = 0
+        for r in rows:
+            if len(r) > max_row_length:
+                max_row_length = len(r)
+                
+        debug_for_output = ""
+        row_per_for = int(len(rows)/debug_for_counter)
+        for starter in range(0, int(len(rows)/(row_per_for * debug_for_output_columns)), debug_for_output_columns*row_per_for): 
+            debug_for_counter = 0
+            for row_offst in range(row_per_for):
+                for r in range(starter + row_offst, row_per_for * debug_for_output_columns + starter, row_per_for):
+                    if debug_for_counter % len(rows)//10 == 0 or len(rows) < 5:
+                        debug_for_output += rows[r] + " "*(max_row_length - len(rows[r])) + debug_for_output_column_splitter
+                        debug_for_counter += 1
+                        if debug_for_counter % debug_for_output_columns == 0:
+                            debug_for_output = debug_for_output[:-len(debug_for_output_column_splitter)]
+                            debug_for_output += "\n"
+        print(debug_for_output)
+        print(f"found {len(dense_blocks)} banner blocks")
+        print("--------------------------------------------------")
     return dense_blocks
 
     
@@ -163,51 +233,85 @@ def dilate_image(image_array, kernel_size, iterations):
     
 def obtain_inner_text_and_dark_block_masks(
     image_block,
-    
-    compute_as_gray = False,
+    compute_as_gray=False,
     dark_binary_mask=None,
-    
-    
-    use_erode_before_contours_definition = False,
-    erode_kernel_size = None,
-    erode_iterations = None,
-    use_dilate_after_contours_definition = False,
-    dilate_kernel_size = None,
-    dilate_iterations = None,
 
-    inner_text_threshold_level = None,
+    use_erode_before_contours_definition=False,
+    erode_kernel_size=None,
+    erode_iterations=None,
 
+    use_dilate_after_contours_definition=False,
+    dilate_kernel_size=None,
+    dilate_iterations=None,
+
+    inner_text_threshold_level=None,
     min_text_density=0.4,
-    
+
     debug=False
 ):
+    if dark_binary_mask is None:
+        raise ValueError("dark_binary_mask must be provided.")
 
-    inner_text_mask = obtain_binary_mask(image_block, compute_as_gray, inner_text_threshold_level)
-    
+    if debug:
+        print("Computing block inner text binary mask...")
+
+    # Step 1: calcola maschera binaria del testo
+    inner_text_mask = obtain_binary_mask(
+        image_block,
+        compute_as_gray=compute_as_gray,
+        mask_threshold_level=inner_text_threshold_level,
+        debug=debug
+    )
+
+    shape_2d = image_block.shape[:2]
+
+    # Step 2: verifica densità del testo
     text_density = np.sum(inner_text_mask) / inner_text_mask.size
+    if debug:
+        print(f"Inner text density: {text_density:.3f}")
 
     if text_density < min_text_density:
-        return np.zeros(image_block.shape, dtype=np.uint8), np.ones(image_block.shape, dtype= np.uint8)
+        if debug:
+            print("Block discarded: text density too low.")
+        return {
+            RegionMask.TEXT: np.zeros(shape_2d, dtype=np.uint8),
+            RegionMask.INNER_BLOCK:np.ones(shape_2d, dtype=np.uint8)
+        }
 
-    binary_mask = dark_binary_mask.copy()
+    # Step 3: copia e prepara la maschera binaria
+    binary_mask = dark_binary_mask.copy().astype(np.uint8)
+    assert np.all(np.isin(binary_mask, [0, 1])), "dark_binary_mask must contain only 0 and 1 values."
 
+    # Step 4: erosione (pre-contorni)
     if use_erode_before_contours_definition:
+        if debug:
+            print(f"Applying erosion: kernel={erode_kernel_size}, iterations={erode_iterations}")
         binary_mask = erode_image(binary_mask * 255, erode_kernel_size, erode_iterations)
+        binary_mask = (binary_mask > 127).astype(np.uint8)
 
-    # 4. Trova contorni
+    # Step 5: trova contorni e riempi
+    if debug:
+        print("Filling contours to define block area...")
+
     contours, _ = cv2.findContours(binary_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    binary_filled = np.zeros(binary_mask.shape, dtype=np.uint8)
+    binary_filled = np.zeros(shape_2d, dtype=np.uint8)
     cv2.drawContours(binary_filled, contours, -1, 1, thickness=-1)
 
-
+    # Step 6: dilatazione (post-contorni)
     if use_dilate_after_contours_definition:
+        if debug:
+            print(f"Applying dilation: kernel={dilate_kernel_size}, iterations={dilate_iterations}")
         expanded = dilate_image(binary_filled * 255, dilate_kernel_size, dilate_iterations)
-        expanded = (expanded > 0)
+        expanded = (expanded > 127).astype(np.uint8)
     else:
-        expanded = (binary_filled > 0)
+        expanded = binary_filled
 
-    # 5. Costruisci risultato finale
-    return  expanded & inner_text_mask, binary_mask # expanded & ~inner_text_mask
+    # Step 7: output finale
+    inner_text_inside_block = expanded & inner_text_mask
+    return {
+        RegionMask.TEXT: inner_text_inside_block,
+        RegionMask.INNER_BLOCK: expanded & ~inner_text_mask
+    }
     """
     result = np.ones_like(block) * 255
     result[final_mask] = [0, 0, 0]
@@ -273,35 +377,119 @@ class ConnectedBlockEroderParams:
 
 
 
-def compute_ternary_mask_from_blocks(array_image, binary_mask, boxes, compute_masks_fn):
-    """
-    Ritorna una maschera intera in cui:
-    - RegionMask.BACKGROUND  = background
-    - RegionMask.TEXT  = testo su blocco scuro
-    - RegionMask.DARK_BLOCK  = blocco scuro senza testo
-    """
-    ternary_mask = np.empty(array_image.shape[:2], dtype=np.uint8)
-    ternary_mask.fill(RegionMask.BACKGROUND)
+def compute_Ndimentional_mask_from_blocks(array_image, binary_mask, boxes, compute_masks_fn, mask_values, debug = False):
+    if not mask_values:
+        raise ValueError("Provide mask values.")
 
-    print(np.unique(binary_mask))
+    if isinstance(mask_values, (list, tuple)):
+        keys = range(len(mask_values))
+    elif isinstance(mask_values, (dict)):
+        keys = list(mask_values.keys())
+    else:
+        raise TypeError(f"Expected mask_values_args to be list, tuple or dict, but go {type(mask_values_args).__name__}")
 
-    for (x, y, w, h) in boxes:
+    n_dim_mask = np.full(array_image.shape[:2], RegionMask.BACKGROUND, dtype=np.uint8)
+
+    
+    if debug:
+        box_colors = matcm.get_cmap('Paired', len(mask_values) + 1)
+
+    for b_index, (x, y, w, h) in enumerate(boxes):
+        debug =  (debug and b_index % len(boxes)//10 == 0) or (debug and len(boxes) < 5)
         block = array_image[y:y+h, x:x+w]
         block_binary_mask = binary_mask[y:y+h, x:x+w]
+        if debug:
+            print(f"Computing n-dimensional mask for chunk at {((x,y), (x+w, y+h))}...")
+        local_out_masks = compute_masks_fn(block, block_binary_mask)
         
-        # Ritorna due maschere booleane locali del blocco
-        inner_text_mask, dark_block_mask = compute_masks_fn(block, block_binary_mask)
+        if isinstance(local_out_masks, (list, tuple)):
+            for local_out_mask in local_out_masks:
+                assert np.array_equal(np.unique(local_out_mask), [0]) or \
+                       np.array_equal(np.unique(local_out_mask), [1]) or \
+                       np.array_equal(np.unique(local_out_mask), [0, 1]), \
+                       f"Mask at key '{key}' is not binary. Found values: {np.unique(local_out_mask)}"
+        elif isinstance(local_out_masks, (dict)):
+            for local_out_mask_key in local_out_masks:
+                assert np.array_equal(np.unique(local_out_masks[local_out_mask_key]), [0]) or \
+                               np.array_equal(np.unique(local_out_masks[local_out_mask_key]), [1]) or \
+                               np.array_equal(np.unique(local_out_masks[local_out_mask_key]), [0, 1]), \
+                               f"Mask at key '{key}' is not binary. Found values: {np.unique(local_out_masks[local_out_mask_key])}"
 
-        # Costruisci una maschera 0/1/2 del blocco
-        local_mask = np.zeros((h, w), dtype=np.uint8)
-        local_mask.fill(RegionMask.BACKGROUND)
-        local_mask[dark_block_mask] = RegionMask.DARK_BLOCK 
-        local_mask[inner_text_mask] = RegionMask.TEXT   # sovrascrive parte del 2
+        # Controlli robusti
+        if isinstance(mask_values, (list, tuple)):
+            if not isinstance(local_out_masks, (dict)):
+                assert isinstance(local_out_masks, (list, tuple)), \
+                f"Expected local_out_masks to be list or tuple, but got {type(local_out_masks).__name__}"
+            
+                assert len(local_out_masks) == len(mask_values), \
+                    f"Length mismatch: mask_values has {len(mask_values)} elements, but local_out_masks has {len(local_out_masks)}"
+            elif isinstance(local_out_masks, (dict)):
+                mask_values_t = {}
+                for key in local_out_masks:
+                    assert key in mask_values, f"If mask_values is a list type, then must contains the same keys of the output of {compute_masks_fn.__name__} function"
 
-        # Inserisci nella maschera globale
-        ternary_mask[y:y+h, x:x+w] = local_mask
+                    mask_values_t.update({key: key})
 
-    return ternary_mask
+                mask_values = mask_values_t
+                keys = list(mask_values.keys())
+                
+            
+        elif isinstance(mask_values, dict):
+            assert isinstance(local_out_masks, dict), \
+                f"Expected local_out_masks to be dict, but got {type(local_out_masks).__name__}"
+            
+            assert mask_values.keys() == local_out_masks.keys(), \
+                f"Key mismatch: mask_values keys = {list(mask_values.keys())}, local_out_masks keys = {list(local_out_masks.keys())}"
+                
+        else:
+            raise TypeError(f"mask_values must be a list, tuple or dict, but got {type(mask_values).__name__}")
+
+
+        # Crea maschera locale
+        local_mask = np.full((h, w), RegionMask.BACKGROUND, dtype=np.uint8)
+
+        if debug:
+            n = len(keys) + 1  # +1 per la mask finale
+            if w > h:
+                nrows, ncols = n, 1  # disposti in colonna
+            elif h > w:
+                nrows, ncols = 1, n  # disposti in riga
+            else:
+                ncols = math.ceil(math.sqrt(n))
+                nrows = math.ceil(n / ncols)
+                
+        
+            fig, axs = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10, 5))
+            fig.suptitle(f'Box at {((x,y), (x+w, y+h))}')
+            fig.tight_layout()
+        
+            
+            # axs sarà un array 2D solo se nrows > 1 and ncols > 1
+            axs = np.array(axs).reshape(-1)  # flatten per indicizzare facilmente
+            
+            for i in range(n, ncols * nrows):                
+                axs[i].axis("off")
+                
+        for i, key in enumerate(keys):
+            local_mask[local_out_masks[key].astype(bool)] = mask_values[key]
+            if debug:
+                axs[i].imshow(local_out_masks[key], cmap='gray')
+                axs[i].set_title(f"mask: {key}, white filled with {mask_values[key]:.0f}")
+                print(f"    > key {key}, mask filled: {np.sum(local_out_masks[key])} pixels")
+                print(f"    > inner_text_mask shape: {local_out_masks[keys[0]].shape}, dtype: {local_out_masks[keys[0]].dtype}")
+                print(f"    > block area shape: {local_out_masks[keys[1]].shape}, dtype: {local_out_masks[keys[1]].dtype}")
+        if debug:
+            axs[i + 1].imshow(local_mask, cmap= box_colors)
+            axs[i + 1].set_title(f"Local Ndimentional mask")
+            print(f"Unique mask values in local mask: {np.unique(local_mask)}")
+
+        
+
+        # Unisci senza sovrascrivere
+        current_slice = n_dim_mask[y:y+h, x:x+w]
+        n_dim_mask[y:y+h, x:x+w] = np.where(local_mask != RegionMask.BACKGROUND, local_mask, current_slice)
+    return n_dim_mask
+
 
 
 
@@ -311,16 +499,28 @@ def detect_dark_blocks_by_chunks(
     chunk_density_threshold,
     merge_chunks_with_dbscan,
     chunk_merge_epsilon,
-    chunk_merge_min_samples):
+    chunk_merge_min_samples,
+    debug = False,
+    chunk_density_debug = False):
+
     
+    if debug:
+        print("Detecting banners using chunk density colors...")
+
     boxes = chunk_density(dark_binary_mask,
                           chunk_size= chunk_size,
-                          density_thresh = chunk_density_threshold)
-    if merge_chunks_with_dbscan:    
+                          density_thresh = chunk_density_threshold,
+                         debug = chunk_density_debug)
+    if merge_chunks_with_dbscan:
+        if debug:
+            print("Merging detected banners using dbscan algorithm...")
         boxes = cluster_blocks_dbscan(boxes, 
                                       eps= chunk_merge_epsilon,
                                       min_samples = chunk_merge_min_samples)
+    
         boxes_to_remove = []
+        if debug:
+            print("Removing internal boxes after dbscan merging...")
         for i, (x1, y1, w1, h1) in enumerate(boxes):
             for e in range(i+1, len(boxes)):
                 x2, y2, w2, h2 = boxes[e]
@@ -328,9 +528,10 @@ def detect_dark_blocks_by_chunks(
                     boxes_to_remove.append(e)
         for i in sorted(boxes_to_remove, reverse = True):
             del boxes[i]
+    print(f"Banner blocks detected: {len(boxes)}")
     return boxes
 
-def detect_dark_with_connected_components(eroded_dark_binary_mask, connected_component_min_area=150):
+def detect_dark_with_connected_components(eroded_dark_binary_mask, connected_component_min_area=150, debug = False):
     num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(eroded_dark_binary_mask, connectivity=8)
     boxes = []
     for i in range(1, num_labels):  # 0 è lo sfondo
@@ -344,45 +545,74 @@ def box_detection(binary_mask,
                   use_pre_box_detection_erode = True,
                   erode_kernel_size = (3, 3),
                   erode_iterations = 1,
+                  use_post_detection_erode_dilate = True,
+                  dilate_kernel_size = None,
+                  dilate_iterations = None,
+                  debug = False,
                   *args, **kwargs):
 
     unique = np.unique(binary_mask)
     assert len(unique) <=2, f"Box detection supported only on binary masks, found {unique} groups of level"
 
+    if dilate_kernel_size is None:
+        dilate_kernel_size = erode_kernel_size
+    if dilate_iterations is None:
+        dilate_iterations = erode_iterations
+
     if len(unique) < 2:
         return []
 
     if use_pre_box_detection_erode:
-        binary_mask = erode_image(binary_mask * 255, erode_kernel_size, erode_iterations)
-        binary_mask = (binary_mask > 0)       
+        if debug:
+            print(f"Applying image eorde to remove text: kernel = {erode_kernel_size}, iterations = {erode_iterations}")
+        binary_mask = erode_image(binary_mask * 255, erode_kernel_size, iterations= erode_iterations)
+
+    if use_post_detection_erode_dilate:
+        # NEW: Recupera i pixel persi con una dilatazione leggera
+        if debug:
+            print(f"Applying image dilation to recover border: kernel = {dilate_kernel_size}, iterations = {dilate_iterations}")
+        binary_mask = dilate_image(binary_mask * 255, dilate_kernel_size, iterations= dilate_iterations)
+    
+    binary_mask = (binary_mask > 0).astype(np.uint8)
         
     if detection_mode == BoxDetectionMode.CHUNK:
-        return detect_dark_blocks_by_chunks(binary_mask,  *args, **kwargs)
+        if debug:
+            print(f"Appling detection by chunks subdivision...")
+        return detect_dark_blocks_by_chunks(binary_mask,  *args, **kwargs, debug = debug)
 
     elif detection_mode == BoxDetectionMode.CONNECTED:
-        return detect_dark_with_connected_components(binary_mask, *args, **kwargs)
+        if debug:
+            print(f"Appling detection by connected components...")
+        return detect_dark_with_connected_components(binary_mask, *args, **kwargs, debug = debug,)
         
     else:
         raise ValueError("Unsupported detection mode.")
 
 
-def obtain_binary_mask(array_image, compute_as_gray, mask_threshold_level):
+def obtain_binary_mask(array_image, compute_as_gray, mask_threshold_level, debug = False):
     if compute_as_gray:
         assert len(array_image.shape) == 2, f"Image shape expected is (W,H), got {array_image.shape}"
         assert len(mask_threshold_level) == 2, f"Expected only two elements for luminescence level threshold, got {mask_threshold_level}"
+        if debug:
+            print(f"Computing binary image in grayscale")
+            print(f"Luminescene threshold levels: {mask_threshold_level}")
         lux_mask = np.ones_like(array_image, dtype=bool)
         l_min, l_max = mask_threshold_level
         if l_min is not None:
             lux_mask &= (array_image >= l_min)
         if l_max is not None:
             lux_mask &= (array_image <= l_max)
-        return lux_mask.astype(np.uint8)
+
+        mask = lux_mask.astype(np.uint8)
         
     else:
         assert array_image.shape[2] == 3, f"Image shape expected is (W,H,3), got {array_image.shape}"
         assert len(mask_threshold_level) == 3, f"Expected only tre elements for hsv level threshold, got {mask_threshold_level}"
         for i, channel in enumerate("HSV"):
             assert len(mask_threshold_level[i]) == 2, f"Expected only two elements for {channel} level threshold, got {mask_threshold_level}"
+        if debug:
+            print(f"Computing binary image in HSV color space")
+            print(f"HSV threshold levels: {mask_threshold_level}")
         r, g, b = array_image[..., 0], array_image[..., 1], array_image[..., 2]
         h, s, v = np.vectorize(colorsys.rgb_to_hsv)(r, g, b)
     
@@ -406,7 +636,11 @@ def obtain_binary_mask(array_image, compute_as_gray, mask_threshold_level):
         if v_max is not None:
             v_mask &= (v <= v_max)
     
-        return (h_mask & s_mask & v_mask).astype(np.uint8)
+        mask = (h_mask & s_mask & v_mask).astype(np.uint8)
+
+    if debug:
+        print(f"Unique mask values: {np.unique(mask)}")
+    return mask
         
 def select_with_fallback(option1: bool, 
                          default_value=None, 
@@ -421,7 +655,82 @@ def select_with_fallback(option1: bool,
     return default_value if selected is None else selected
 
 
-    
+"""
+Missione:
+    Fornisce un’interfaccia ad alto livello per la rilevazione e la rimozione (o ricolorazione)
+    automatica delle aree maggiormente dense (tipicamente banner) presenti in un’immagine.
+
+Funzionalità Principali:
+    1. Modalità di rilevamento dei blocchi densi:
+        - CHUNK: scansione a blocchi fissi; un blocco è considerato "denso" se la quantità di pixel
+          scuri supera una soglia. I blocchi densi possono essere uniti tramite DBSCAN.
+        - CONNECTED: utilizza cv2.connectedComponents per segmentare le regioni connesse
+          di pixel scuri.
+
+    2. Spazio colore di elaborazione:
+        - Possibilità di elaborare l'immagine in scala di grigi (compute_as_gray=True) oppure in RGB.
+        - Possibilità di restituire l'immagine modificata in scala di grigi (output_as_gray=True)
+          oppure in RGB.
+
+    3. Colori di output:
+        - Colore delle aree dense ("banner"):
+            - In scala di grigi (default: 255)
+            - In RGB (default: [255, 255, 255])
+        - Colore del testo interno alle aree dense:
+            - In scala di grigi (default: 0)
+            - In RGB (default: [0, 0, 0])
+
+    4. Soglie per la rilevazione delle aree dense:
+        - In scala di grigi (default: < 180)
+        - In HSV (default: < [*, 100, 100])
+
+    5. Pre- e post-processing per la rilevazione dei banner:
+        - Erosione pre-detection:
+            - Rimuove rumore e testo
+            - Default: True, kernel: (3, 3), iterazioni: 1
+        - Dilatazione post-detection:
+            - Compensa i pixel persi per erosione
+            - Default: True, stesso kernel e iterazioni
+
+    6. Parametri per modalità CHUNK:
+        - chunk_size: dimensione del blocco (default: 10)
+        - chunk_density_threshold: soglia per considerare il blocco "denso"
+        - merge_chunks_with_dbscan: se True, unisce blocchi vicini
+        - chunk_merge_epsilon: distanza massima per unire
+        - chunk_merge_min_samples: numero minimo di blocchi per regione
+
+    7. Parametri per modalità CONNECTED:
+        - connected_component_min_area: area minima per accettare una componente
+
+    8. Rilevamento del testo interno ai banner:
+        - use_pre_contours_definition_erode:
+            - Applica erosione prima della definizione dei contorni
+            - Default: False, kernel: (3, 3), iterazioni: 1
+        - use_post_contours_definition_dilate:
+            - Applica dilatazione dopo la definizione dei contorni
+            - Default: False, kernel: (3, 3), iterazioni: 1
+        - inner_text_threshold_level:
+            - Soglia per identificare il testo interno
+            - Default: <200 in grigio, < [*, 85, 40] in HSV
+        - minimum_inner_text_density:
+            - Soglia minima per accettare la presenza di testo (default: 0.05)
+
+    9. Debug e anteprima:
+        - show_preview_boxes:
+            - Mostra i box rilevati ma non modifica l'immagine
+        - show_boxes_number:
+            - Mostra la numerazione accanto a ogni box
+
+Cosa produce:
+    - Una nuova immagine (`PIL.Image`) con aree dense e/o testo interno ricolorati (o rimossi)
+    - Una lista di bounding box nel formato (x, y, w, h)
+
+Note:
+    - Tutte le soglie di luminosità e colore sono personalizzabili.
+    - Funzione compatibile con immagini `PIL.Image` o `np.ndarray`.
+    - Verifica automatica dei parametri colore in base allo spazio colore selezionato.
+
+"""    
 def apply_cleanup(
     image, 
     detection_mode: BoxDetectionMode, 
@@ -444,6 +753,10 @@ def apply_cleanup(
     use_pre_box_detection_erode = True, 
     pre_box_detection_erode_kernel_size = (3, 3), 
     pre_box_detection_erode_iterations = 1,
+
+    use_post_detection_erode_dilate = True, 
+    post_detection_dilate_kernel_size = None, 
+    post_detection_dilate_iterations = None,
     
     chunk_size = 10,
     chunk_density_threshold = 0.6,
@@ -457,7 +770,7 @@ def apply_cleanup(
     pre_contours_definition_erode_kernel_size = (3, 3),
     pre_contours_definition_erode_iterations = 1,
     
-    use_post_contours_definition_dilate = True,
+    use_post_contours_definition_dilate = False,
     post_contours_definition_dilate_kernel_size = (3, 3),
     post_contours_definition_dilate_iterations = 1,
     
@@ -496,10 +809,6 @@ def apply_cleanup(
 
     assert output_dark_block_color != None, f"Output dark block color not set."
 
-    print(
-        output_dark_block_inner_text_color,
-output_dark_block_inner_text_gray_color,
-output_dark_block_inner_text_rgb_color)
 
     output_dark_block_inner_text_color = select_with_fallback(
         option1 = compute_as_gray,
@@ -543,8 +852,8 @@ output_dark_block_inner_text_rgb_color)
                 output_image_array = original_array_image.copy()
         else:
             output_image_array = array_image.copy()
-    
-    dark_binary_mask = obtain_binary_mask(array_image, compute_as_gray, dark_block_threshold_level)
+    print(f"Computing block masks...")
+    dark_binary_mask = obtain_binary_mask(array_image, compute_as_gray, dark_block_threshold_level, debug = debug)
 
     
     if detection_mode == BoxDetectionMode.CHUNK:
@@ -554,24 +863,32 @@ output_dark_block_inner_text_rgb_color)
             "merge_chunks_with_dbscan": merge_chunks_with_dbscan,
             "chunk_merge_epsilon": chunk_merge_epsilon,
             "chunk_merge_min_samples": chunk_merge_min_samples,
+            "debug": debug,
+            "chunk_density_debug": False
             
         }
         
     elif detection_mode == BoxDetectionMode.CONNECTED:
         kwargs = {
-            "connected_component_min_area":  connected_component_min_area
+            "connected_component_min_area":  connected_component_min_area,
+            "debug": debug
         }
     else:
         
         raise ValueError("Unsupported detection mode.\nAvilable deteciton modes: " + 
-                         str([e.value for e in BoxDetectionMode]) + f", got {detection_mode}")
+                         str([e for e in BoxDetectionMode]) + f", got {detection_mode}")
 
     boxes = box_detection(binary_mask = dark_binary_mask, 
                           detection_mode = detection_mode,
                           use_pre_box_detection_erode = use_pre_box_detection_erode,
                           erode_kernel_size = pre_box_detection_erode_kernel_size,
                           erode_iterations = pre_box_detection_erode_iterations,
+                          use_post_detection_erode_dilate = use_post_detection_erode_dilate,
+                          dilate_kernel_size = post_detection_dilate_kernel_size,
+                          dilate_iterations = post_detection_dilate_iterations,
                           **kwargs)
+
+
 
     if show_preview_boxes:
         for i, (x, y, w, h) in enumerate(boxes):
@@ -588,7 +905,8 @@ output_dark_block_inner_text_rgb_color)
                     cv2.LINE_AA                               # tipo di linea (anti-alias)
                 )
     else:
-        ternary_image_mask = compute_ternary_mask_from_blocks(
+        print(f"Computing ternary masks for background, inner text and area block...")
+        ternary_image_mask = compute_Ndimentional_mask_from_blocks(
             output_image_array, dark_binary_mask, boxes,
             lambda block, binary_block: obtain_inner_text_and_dark_block_masks(image_block = block,
                                            compute_as_gray = compute_as_gray,
@@ -602,18 +920,22 @@ output_dark_block_inner_text_rgb_color)
          
                                            inner_text_threshold_level = inner_text_threshold_level,
                                            min_text_density = minimum_inner_text_density,
-                                           debug=debug)
+                                           debug=debug),
+            mask_values = [
+                RegionMask.TEXT,
+                RegionMask.INNER_BLOCK
+            ],
+            debug = debug
         )
     
         
         
         # Applica colori
         print("refee")
-        output_image_array[ternary_image_mask == RegionMask.DARK_BLOCK] = output_dark_block_color
         output_image_array[ternary_image_mask == RegionMask.TEXT] = output_dark_block_inner_text_color
+        output_image_array[ternary_image_mask == RegionMask.INNER_BLOCK] = output_dark_block_color
 
-
-    return Image.fromarray(ternary_image_mask == RegionMask.DARK_BLOCK), boxes
+    return Image.fromarray(output_image_array), boxes
 
 
 

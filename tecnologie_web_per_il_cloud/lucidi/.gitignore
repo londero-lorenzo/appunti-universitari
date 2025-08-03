@@ -1,0 +1,8 @@
+*.pdf
+
+temp_images/
+
+.ipynb_checkpoints
+
+__pycache__
+

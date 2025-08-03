@@ -1,0 +1,108 @@
+/* === EDITOR MODE (CodeMirror Gutter) === */
+
+.obs-code-gutter-editor {
+  width: 3.0em;
+  min-width: 0.8em;
+  text-align: right;
+  padding-right: 0px;
+  position: relative;
+  left: 12px;
+  order: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.obs-code-gutter-editor.width-1 { width: 0.8em; }
+.obs-code-gutter-editor.width-2 { width: 1.2em; }
+.obs-code-gutter-editor.width-3 { width: 1.8em; }
+.obs-code-gutter-editor.width-4 { width: 2.4em; }
+.obs-code-gutter-editor.width-5 { width: 3.0em; }
+.obs-code-gutter-editor.width-6 { width: 3.6em; }
+
+.obs-code-line-number-editor {
+  font-family: monospace;
+  color: #999;
+  opacity: 0.8;
+}
+
+
+/* === RELATIVE NUMBER PLUGIN COMPATIBILITY === */
+
+.cm-gutter:has(> .relative-line-numbers-mono){
+    position: relative !important;
+    left: 15px !important;
+    font-size: medium !important;
+    font-weight: bolder !important;
+	color: slategray;
+	width: auto;
+}
+
+.relative-line-numbers-mono{
+    font-style: italic;
+	text-align: left;
+	margin-right: 5px;
+}
+
+/* === PREVIEW MODE (Static CodeBlock Output) === */
+
+.obs-codeblock-preview {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  font-family: monospace;
+  font-size: 0.9em;
+  margin: 1em 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: auto;
+  background: #1e1e1e;
+  color: #dcdcdc;
+}
+
+.obs-code-line-preview-wrapper {
+  display: table-row;
+}
+
+.obs-code-line-preview-content {
+  display: table-cell;
+  padding-left: 0.7em;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.obs-code-line-number-preview {
+  display: table-cell;
+  width: 3em;
+  padding: 0 0.5em;
+  text-align: right;
+  vertical-align: top;
+  background: #2d2d2d;
+  white-space: nowrap;
+  user-select: none;
+}
+
+
+/* === PRINT MODE === */
+
+@media print {
+  .obs-code-gutter-editor {
+    display: block !important;
+    visibility: visible !important;
+    color: black !important;
+  }
+  
+  .obs-codeblock-preview {
+	  background: none !important;
+  }
+  
+  .obs-code-line-number-preview {
+    background-color: transparent !important;
+	background: none !important;
+    border-bottom: 1px solid #ccc !important;
+	font-weight: bolder !important;
+  }
+  
+   .obs-code-line-preview-content {
+    filter: brightness(0.6) !important;
+  }
+}

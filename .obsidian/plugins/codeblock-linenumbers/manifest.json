@@ -1,0 +1,9 @@
+{
+  "id": "codeblock-linenumbers",
+  "name": "Codeblock Line Numbers",
+  "version": "0.1.0",
+  "author": "Lorenzo",
+  "description": "Add line numbers in code blocks.",
+  "main": "main.js",
+  "minAppVersion": "1.0.0"
+}

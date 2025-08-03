@@ -1,0 +1,4 @@
+/* Applica a tutta la nota uno stile simile a un codeblock javascript */
+.code {
+	--file-line-width: 1400px !important;
+}

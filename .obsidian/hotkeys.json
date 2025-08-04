@@ -37,5 +37,13 @@
       ],
       "key": "Key226"
     }
+  ],
+  "app:reload": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "R"
+    }
   ]
 }

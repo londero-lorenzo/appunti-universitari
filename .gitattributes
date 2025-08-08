@@ -1,2 +1,2 @@
-*.md filter=wikilink
+*.md filter=markdown 
 *.excalidraw.md !filter

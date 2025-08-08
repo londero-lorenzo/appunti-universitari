@@ -6,6 +6,7 @@ PROJECT_ROOT_KEY = "PROJECT_ROOT"
 REGEX_PATTERN_WIKILINK = r'!\[\[([^\|\]]+?\.excalidraw\.md#\^frame=[^\|\]]+)(?:\|(.*))?\]\]'
 REGEX_PATTERN_SVGLINK = r'!\[([^|\]]*)(?:\|(.*))?\]\((.*)\)'
 
+REGEX_PATTERN_LATEX = r'(\$\$.*?\$\$)|(\$(?!\$).*?\$)'
 
 WIKI_MAP_JSON = ".\Excalidraw\wiki-map.json"
 

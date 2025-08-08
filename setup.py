@@ -70,6 +70,47 @@ def install_requirements():
     print(f"Installing packages from {REQUIREMENTS_FILE}...")
     subprocess.check_call([pip_path, "install", "-r", REQUIREMENTS_FILE])
    
+
+ 
+
+def install_filters():
+    def install_wikilink_filter():
+    
+
+        filter_name = "wikilink"
+        
+        wikilink_clean_name = "wikilink_clean"
+        wikilink_smudge_name = "wikilink_smudge"
+
+        script_clean_path = os.path.abspath(os.path.join("utils", f"{wikilink_clean_name}.py"))
+        script_smudge_path = os.path.abspath(os.path.join("utils", f"{wikilink_smudge_name}.py"))
+
+        if not os.path.isfile(script_clean_path) or not os.path.isfile(script_smudge_path):
+            print("ERROR: One or both filter scripts not found.")
+            sys.exit(1)
+        python_path = get_python_path()
+        clean_command = f"{python_path} -m utils.{wikilink_clean_name}"
+        smudge_command = f"{python_path} -m utils.{wikilink_smudge_name}"
+        
+        if os.name == "nt":
+            clean_command = clean_command.replace("\\", "\\\\")
+            smudge_command = smudge_command.replace("\\", "\\\\")
+
+
+        subprocess.check_call([
+            "git", "config", f"filter.{filter_name}.clean", clean_command
+        ])
+        subprocess.check_call([
+            "git", "config", f"filter.{filter_name}.smudge", clean_command
+        ])
+
+        print(f"Git filter '{filter_name}' installed.")
+    
+    
+    
+    print("Installing git filters...")
+    install_wikilink_filter()
+
    
     
 def main():
@@ -78,6 +119,7 @@ def main():
     else:
         create_virtualenv()
     add_project_root_to_venv()
+    install_filters()
     install_requirements()
     print("Setup completed.")
     print(f"To activate the environment manually:\n")

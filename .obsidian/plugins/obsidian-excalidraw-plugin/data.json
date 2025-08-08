@@ -21,7 +21,7 @@
   "drawingEmbedPrefixWithFilename": true,
   "drawingFilnameEmbedPostfix": " ",
   "drawingFilenameDateTime": "YYYY-MM-DD HH.mm.ss",
-  "useExcalidrawExtension": false,
+  "useExcalidrawExtension": true,
   "cropSuffix": "",
   "cropPrefix": "cropped_",
   "annotateSuffix": "",
@@ -1166,7 +1166,8 @@
   "taskboneAPIkey": "",
   "pinnedScripts": [
     "Excalidraw/Scripts/Downloaded/Normalize Selected Arrows.md",
-    "Excalidraw/Scripts/Downloaded/Zoom to Fit Selected Elements.md"
+    "Excalidraw/Scripts/Downloaded/Zoom to Fit Selected Elements.md",
+    "Excalidraw/Scripts/export/export_selection_to_svg.md"
   ],
   "customPens": [
     {
@@ -1518,7 +1519,7 @@
   },
   "markdownNodeOneClickEditing": false,
   "canvasImmersiveEmbed": true,
-  "startupScriptPath": "",
+  "startupScriptPath": "Excalidraw/startup",
   "aiEnabled": true,
   "openAIAPIToken": "",
   "openAIDefaultTextModel": "gpt-3.5-turbo-1106",

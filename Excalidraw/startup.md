@@ -364,7 +364,7 @@ async function exportElementsToSvg({ frame, elements, view}) {
 	const frameId = frame.id;
 	
 	const wikilink = `![[${sourcePath}#^frame=${frameId}]]`;
-	const svglink = `![${exportData.filename}](${outputPath})`;
+	const svglink = `![${exportData.filename}](/${outputPath})`;
 	
 	updateWikiMapInMemory(sourcePath, wikilink, svglink, frameId)
 	

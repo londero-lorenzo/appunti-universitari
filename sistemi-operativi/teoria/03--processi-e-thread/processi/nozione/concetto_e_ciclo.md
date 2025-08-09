@@ -41,7 +41,7 @@ Un'analogia utile è:
 La struttura di un processo include tutte le informazioni necessarie al suo stato e alla sua esecuzione.
 
 >[!example]
->![[processi_e_thread.excalidraw#^frame=WVOKEiksWwKF6FoeUtNB0|100%]]
+>![immagine_processo_small](/sistemi-operativi/teoria/03--processi-e-thread/assets/immagine_processo_small.svg)
 
 ---
 
@@ -71,7 +71,7 @@ Le transizioni principali tra stati includono:
 Il modulo del sistema operativo che gestisce l’assegnazione della CPU si chiama **dispatcher**.
 
 >[!example]
->![[processi_e_thread.excalidraw#^frame=P76cyycwaJh8u9-AeLjdE|100%]]
+>![transizione_tra_stati](/sistemi-operativi/teoria/03--processi-e-thread/assets/transizione_tra_stati.svg)
 
 ---
 

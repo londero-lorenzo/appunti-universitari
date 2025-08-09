@@ -10,5 +10,29 @@
     "svglink": "![test_conversione_con_scaling](/Excalidraw/wiki-link/assets/test_conversione_con_scaling.svg)",
     "source": "Excalidraw/wiki-link/wikilink_text.excalidraw.md",
     "frameId": "OtDxMHol"
+  },
+  {
+    "wikilink": "![[sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md#^frame=9ofSgmvxFJy6Zw8IwlTHy]]",
+    "svglink": "![immagine_processo](/sistemi-operativi/teoria/03--processi-e-thread/assets/immagine_processo.svg)",
+    "source": "sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md",
+    "frameId": "9ofSgmvxFJy6Zw8IwlTHy"
+  },
+  {
+    "wikilink": "![[sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md#^frame=WVOKEiksWwKF6FoeUtNB0]]",
+    "svglink": "![immagine_processo_small](/sistemi-operativi/teoria/03--processi-e-thread/assets/immagine_processo_small.svg)",
+    "source": "sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md",
+    "frameId": "WVOKEiksWwKF6FoeUtNB0"
+  },
+  {
+    "wikilink": "![[sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md#^frame=P76cyycwaJh8u9-AeLjdE]]",
+    "svglink": "![transizione_tra_stati](/sistemi-operativi/teoria/03--processi-e-thread/assets/transizione_tra_stati.svg)",
+    "source": "sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md",
+    "frameId": "P76cyycwaJh8u9-AeLjdE"
+  },
+  {
+    "wikilink": "![[sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md#^frame=dHOKXhznUSFu15HinFqFe]]",
+    "svglink": "![process_table](/sistemi-operativi/teoria/03--processi-e-thread/assets/process_table.svg)",
+    "source": "sistemi-operativi/teoria/03--processi-e-thread/processi_e_thread.excalidraw.md",
+    "frameId": "dHOKXhznUSFu15HinFqFe"
   }
 ]

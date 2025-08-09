@@ -4,5 +4,11 @@
     "svglink": "![test_conversione](/Excalidraw/wiki-link/assets/test_conversione.svg)",
     "source": "Excalidraw/wiki-link/wikilink_text.excalidraw.md",
     "frameId": "ND8amMaO"
+  },
+  {
+    "wikilink": "![[Excalidraw/wiki-link/wikilink_text.excalidraw.md#^frame=OtDxMHol]]",
+    "svglink": "![test_conversione_con_scaling](/Excalidraw/wiki-link/assets/test_conversione_con_scaling.svg)",
+    "source": "Excalidraw/wiki-link/wikilink_text.excalidraw.md",
+    "frameId": "OtDxMHol"
   }
 ]

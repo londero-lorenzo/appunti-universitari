@@ -1,10 +1,7 @@
 import sys
 import re
 import json
-from utils.constants import REGEX_PATTERN_WIKILINK, REGEX_PATTERN_LATEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS
-
-WIKILINK_REGEX = re.compile(REGEX_PATTERN_WIKILINK, re.MULTILINE)
-LATEX_REGEX = re.compile(REGEX_PATTERN_LATEX, re.MULTILINE | re.DOTALL)
+from utils.constants import WIKILINK_REGEX, SVGLINK_REGEX, LATEX_REGEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS
 
 def clean_wikilink(input_text, wikilink_matches):
     try:
@@ -25,19 +22,24 @@ def clean_wikilink(input_text, wikilink_matches):
         if len(match) != 2:
             continue
         internal_link_with_frame, metadata = match
+        
         wikilink = f"![[{internal_link_with_frame}]]"
+        svglink = wiki_dict.get(wikilink)
+        
         if metadata:
             wikilink_with_metadata = f"![[{internal_link_with_frame}|{metadata}]]"
+            svglink_alt_name, _, svglink_internal_link = SVGLINK_REGEX.findall(svglink)[0]
+            svglink = f"![{svglink_alt_name}|{metadata}]({svglink_internal_link})"
         else:
             wikilink_with_metadata = wikilink
             
-        svg = wiki_dict.get(wikilink)
 
-        if not svg:
+
+        if not svglink:
             print(f"[WARN] No SVG found for {wikilink_with_metadata}", file=sys.stderr)
             continue
 
-        input_text = input_text.replace(wikilink_with_metadata, svg)
+        input_text = input_text.replace(wikilink_with_metadata, svglink)
     
     return input_text
     

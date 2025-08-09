@@ -1,10 +1,7 @@
 import sys
 import re
 import json
-from utils.constants import REGEX_PATTERN_SVGLINK, REGEX_PATTERN_LATEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS
-
-SVGLINK_REGEX = re.compile(REGEX_PATTERN_SVGLINK, re.MULTILINE)
-LATEX_REGEX = re.compile(REGEX_PATTERN_LATEX, re.MULTILINE | re.DOTALL)
+from utils.constants import WIKILINK_REGEX, SVGLINK_REGEX, LATEX_REGEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS
 
 def smudge_svglink(input_text, svglink_matches):
     try:
@@ -26,12 +23,14 @@ def smudge_svglink(input_text, svglink_matches):
         alt_name, metadata, internal_link = match
 
         svglink = f"![{alt_name}]({internal_link})"
+        wikilink = wiki_dict.get(svglink)
+        
         if metadata:
             svglink_with_metadata = f"![{alt_name}|{metadata}]({internal_link})"
+            wikilink_internal_link_with_frame, _ = WIKILINK_REGEX.findall(wikilink)[0]
+            wikilink = f"![[{wikilink_internal_link_with_frame}|{metadata}]]"
         else:
             svglink_with_metadata = svglink
-
-        wikilink = wiki_dict.get(svglink)
         if not wikilink:
             print(f"[WARN] No WIKI-LINK found for alt='{alt_name}', path='{internal_link}'", file=sys.stderr)
             continue

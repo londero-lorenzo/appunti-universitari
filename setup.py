@@ -1,9 +1,12 @@
 import os
 import sys
 import subprocess
+import argparse
 import venv
 import platform
 from utils.constants import PROJECT_ROOT_KEY
+from utils.constants import WORKFLOW_SCRIPTS_LOCATION, WORKFLOW_SCRIPTS_HOME, WORKFLOW_SCRIPTS_PACKAGE, MARKDOWN_FILTER_NAME, MARKDOWN_CLEAN_FILTER_NAME, MARKDOWN_SMUDGE_FILTER_NAME
+
 
 VENV_DIR = ".notesVenv"
 REQUIREMENTS_FILE = "requirements.txt"
@@ -11,7 +14,22 @@ REQUIREMENTS_FILE = "requirements.txt"
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 VENV_DIR = os.path.join(SCRIPT_DIR, VENV_DIR)
-REQUIREMENTS_FILE = os.path.join(SCRIPT_DIR, REQUIREMENTS_FILE)
+REQUIREMENTS_FILE = os.path.join(SCRIPT_DIR, REQUIREMENTS_FILE)   
+
+def check_virtualenv(venv_dir):
+    if os.path.isdir(venv_dir):
+        print(f"Virtual environment already exists in `{venv_dir}`")
+        return True
+    return False
+    
+def print_activation_instructions(venv_dir):
+    print("\nSetup completed.")
+    print("To activate the environment manually:\n")
+    if os.name == 'nt':
+        print(f"  {venv_dir}\\Scripts\\activate.bat")
+    else:
+        print(f"  source {venv_dir}/bin/activate")
+    print()
 
 def create_virtualenv():
     print("Creating virtual environment...")
@@ -43,20 +61,20 @@ def add_project_root_to_venv():
             
 def get_pip_path():
     if os.name == 'nt':
-        return os.path.join(VENV_DIR, "Scripts", "pip.exe")
+        return os.path.join(VENV_DIR, "Scripts", "pip.exe").replace(os.sep, '/')
     else:
         return os.path.join(VENV_DIR, "bin", "pip")
 
 def get_activate_path():
     if os.name == 'nt':
-        return os.path.join(VENV_DIR, 'Scripts', 'activate.bat')
+        return os.path.join(VENV_DIR, 'Scripts', 'activate.bat').replace(os.sep, '/')
     else:
         return os.path.join(VENV_DIR, 'bin', 'activate')
     
     
 def get_python_path():
     if os.name == 'nt':
-        return os.path.join(VENV_DIR, 'Scripts', 'python.exe')
+        return os.path.join(VENV_DIR, 'Scripts', 'python.exe').replace(os.sep, '/')
     else:
         return os.path.join(VENV_DIR, 'bin', 'python')
 
@@ -74,63 +92,95 @@ def install_requirements():
  
 
 def install_filters():
-    def install_wikilink_filter():
-    
+    def install_markdown_filter():
 
-        filter_name = "markdown"
-        
-        markdown_clean_name = "markdown_clean"
-        markdown_smudge_name = "markdown_smudge"
-
-        script_clean_path = os.path.abspath(os.path.join("utils", f"{markdown_clean_name}.py"))
-        script_smudge_path = os.path.abspath(os.path.join("utils", f"{markdown_smudge_name}.py"))
+        script_clean_path = os.path.join(WORKFLOW_SCRIPTS_LOCATION, f"{MARKDOWN_CLEAN_FILTER_NAME}.py")
+        script_smudge_path = os.path.join(WORKFLOW_SCRIPTS_LOCATION, f"{MARKDOWN_SMUDGE_FILTER_NAME}.py")
 
         if not os.path.isfile(script_clean_path) or not os.path.isfile(script_smudge_path):
             print("ERROR: One or both filter scripts not found.")
             sys.exit(1)
+
         python_path = get_python_path()
-        clean_command = f"{python_path} -m utils.{markdown_clean_name}"
-        smudge_command = f"{python_path} -m utils.{markdown_smudge_name}"
-        
-        if os.name == "nt":
-            clean_command = clean_command.replace("\\", "\\\\")
-            smudge_command = smudge_command.replace("\\", "\\\\")
-
+        if os.name == 'nt':  # Windows
+            clean_command = f'export PYTHONPATH="{SCRIPT_DIR};{WORKFLOW_SCRIPTS_HOME}"; "{python_path}" -m {WORKFLOW_SCRIPTS_PACKAGE}.{MARKDOWN_CLEAN_FILTER_NAME} %f'
+            smudge_command = f'export PYTHONPATH="{SCRIPT_DIR};{WORKFLOW_SCRIPTS_HOME}"; "{python_path}" -m {WORKFLOW_SCRIPTS_PACKAGE}.{MARKDOWN_SMUDGE_FILTER_NAME} %f'
+        else: # Unix-like
+            clean_command = f'export PYTHONPATH="{SCRIPT_DIR}:{WORKFLOW_SCRIPTS_HOME}"; "{python_path}" -m {WORKFLOW_SCRIPTS_PACKAGE}.{MARKDOWN_CLEAN_FILTER_NAME} %f'
+            smudge_command = f'export PYTHONPATH="{SCRIPT_DIR}:{WORKFLOW_SCRIPTS_HOME}"; "{python_path}" -m {WORKFLOW_SCRIPTS_PACKAGE}.{MARKDOWN_SMUDGE_FILTER_NAME} %f'
 
         subprocess.check_call([
-            "git", "config", f"filter.{filter_name}.clean", clean_command
+            "git", "config", f"filter.{MARKDOWN_FILTER_NAME}.clean", clean_command
         ])
         subprocess.check_call([
-            "git", "config", f"filter.{filter_name}.smudge", clean_command
+            "git", "config", f"filter.{MARKDOWN_FILTER_NAME}.smudge", smudge_command
         ])
 
-        print(f"Git filter '{filter_name}' installed.")
-    
-    
-    
+        print(f"Git filter '{MARKDOWN_FILTER_NAME}' installed.")
+
     print("Installing git filters...")
-    install_wikilink_filter()
+    install_markdown_filter()
+    
+def disable_markdown_filter():
+    subprocess.run([
+            "git", "config", "--unset", f"filter.{MARKDOWN_FILTER_NAME}.clean"
+        ])
+    subprocess.run([
+            "git", "config", "--unset", f"filter.{MARKDOWN_FILTER_NAME}.smudge"
+        ])
+    print(f"Git filter '{MARKDOWN_FILTER_NAME}' disabled.")
+    
+def disable_filters():
+    print("Disabling git filters...")
+    disable_markdown_filter()
 
-   
     
 def main():
-    if os.path.isdir(VENV_DIR):
-        print(f"Virtual environment already exists in {VENV_DIR}")
-    else:
-        create_virtualenv()
-    add_project_root_to_venv()
-    install_filters()
-    install_requirements()
-    print("Setup completed.")
-    print(f"To activate the environment manually:\n")
-
-    if os.name == 'nt':
-        print(f" {VENV_DIR}\\Scripts\\activate.bat")
-    else:
-        print(f" source {VENV_DIR}/bin/activate")
+    parser = argparse.ArgumentParser(
+        prog='Environment Setup',
+        description='Setup virtual environment and install filters.',
+        add_help=True)
+    parser.add_argument(
+        '-r', '--reload_filters',
+        help="Reload git clean and smudge filters only.",
+        action='store_true'
+    )
+    parser.add_argument(
+        '-d', '--disable_filters',
+        help="Disable git filters.",
+        action='store_true'
+    )
     
-    print()
-    input("Press ENTER to quit.")
+    args = parser.parse_args()
+    
+    actions_to_perform = (args.reload_filters or args.disable_filters or None) != None
+    
+    try:
+        if not check_virtualenv(VENV_DIR):
+            if not actions_to_perform:
+                create_virtualenv()
+                add_project_root_to_venv()
+            else:
+                print("Unable to perform required action, install first the environment.")
+                sys.exit(1)
+        if not args.disable_filters:
+            install_filters()
+        else:
+            disable_filters()
+
+        if not actions_to_perform:
+            install_requirements()
+            print_activation_instructions(VENV_DIR)
+        elif args.reload_filters:
+            print("Filters reload completed.")
+        elif args.disable_filters:
+            print("Filters deactivation completed.")
+    except Exception as e:
+        print(f"Error during setup: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    if sys.stdin.isatty() and not actions_to_perform:
+        input("Press ENTER to quit.")
 
 if __name__ == "__main__":
     main()

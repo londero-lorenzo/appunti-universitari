@@ -1,7 +1,10 @@
 import sys
+import traceback
 import re
+import os
 import json
-from utils.constants import WIKILINK_REGEX, SVGLINK_REGEX, LATEX_REGEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS
+from datetime import datetime
+from utils.constants import WIKILINK_REGEX, SVGLINK_REGEX, LATEX_REGEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS, MARKDOWN_CLEAN_FILTER_ERROR_LOG
 
 def clean_wikilink(input_text, wikilink_matches):
     try:
@@ -26,18 +29,16 @@ def clean_wikilink(input_text, wikilink_matches):
         wikilink = f"![[{internal_link_with_frame}]]"
         svglink = wiki_dict.get(wikilink)
         
+        if not svglink:
+            print(f"[WARN] No SVG found for {wikilink}", file=sys.stderr)
+            continue
+        
         if metadata:
             wikilink_with_metadata = f"![[{internal_link_with_frame}|{metadata}]]"
             svglink_alt_name, _, svglink_internal_link = SVGLINK_REGEX.findall(svglink)[0]
             svglink = f"![{svglink_alt_name}|{metadata}]({svglink_internal_link})"
         else:
             wikilink_with_metadata = wikilink
-            
-
-
-        if not svglink:
-            print(f"[WARN] No SVG found for {wikilink_with_metadata}", file=sys.stderr)
-            continue
 
         input_text = input_text.replace(wikilink_with_metadata, svglink)
     
@@ -58,20 +59,35 @@ def clean_latex(input_text, latex_matches):
 
 
 def main():
+    filename = sys.argv[1].strip('\\').strip("'") if len(sys.argv) > 1 else "<unknown file>"
     input_text = sys.stdin.read()
     
-    wikilink_matches = WIKILINK_REGEX.findall(input_text)
-    
-    if wikilink_matches:
-        input_text = clean_wikilink(input_text, wikilink_matches)
+    try:       
+        wikilink_matches = WIKILINK_REGEX.findall(input_text)
         
-    latex_matches = LATEX_REGEX.findall(input_text)
-    
-    if latex_matches:
-        input_text = clean_latex(input_text, latex_matches)
+        if wikilink_matches:
+            input_text = clean_wikilink(input_text, wikilink_matches)
+            
+        latex_matches = LATEX_REGEX.findall(input_text)
+        
+        if latex_matches:
+            input_text = clean_latex(input_text, latex_matches)
 
 
-    sys.stdout.write(input_text)
+        sys.stdout.write(input_text)
+    except Exception as e:
+        log_file = MARKDOWN_CLEAN_FILTER_ERROR_LOG
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        error_msg = f"{now} [ERROR] Failed to apply markdown clean filter on `{filename}`: {e}\n"
+        end_msg = "\n" + "-"*len(error_msg) + "\n"
+        with open(log_file, 'a') as f:
+            f.write(error_msg)
+            print(error_msg, file= sys.stderr)
+            traceback.print_exc(file=f)
+            traceback.print_exc(file=sys.stderr)
+            f.write(end_msg)
+            print(end_msg)
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()

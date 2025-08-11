@@ -1,7 +1,9 @@
 import sys
+import traceback
 import re
 import json
-from utils.constants import WIKILINK_REGEX, SVGLINK_REGEX, LATEX_REGEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS
+from datetime import datetime
+from utils.constants import WIKILINK_REGEX, SVGLINK_REGEX, LATEX_REGEX, WIKI_MAP_JSON, WIKI_MAP_PARAMETER_KEYS, MARKDOWN_SMUDGE_FILTER_ERROR_LOG
 
 def smudge_svglink(input_text, svglink_matches):
     try:
@@ -25,15 +27,17 @@ def smudge_svglink(input_text, svglink_matches):
         svglink = f"![{alt_name}]({internal_link})"
         wikilink = wiki_dict.get(svglink)
         
+        if not wikilink:
+            print(f"[WARN] No WIKI-LINK found for alt='{alt_name}', path='{internal_link}'", file=sys.stderr)
+            continue
+        
         if metadata:
             svglink_with_metadata = f"![{alt_name}|{metadata}]({internal_link})"
             wikilink_internal_link_with_frame, _ = WIKILINK_REGEX.findall(wikilink)[0]
             wikilink = f"![[{wikilink_internal_link_with_frame}|{metadata}]]"
         else:
             svglink_with_metadata = svglink
-        if not wikilink:
-            print(f"[WARN] No WIKI-LINK found for alt='{alt_name}', path='{internal_link}'", file=sys.stderr)
-            continue
+
 
         input_text = input_text.replace(svglink_with_metadata, wikilink)
 
@@ -45,7 +49,7 @@ def smudge_latex(input_text, latex_matches):
         multiline_latex, inline_latex = match
         
         latex = multiline_latex or inline_latex
-        smudged_latex = re.sub(r'\\([_*])', '\1', latex)
+        smudged_latex = re.sub(r'\\([_*])', r'\1', latex)
         
         input_text = input_text.replace(latex, smudged_latex, 1)
 
@@ -53,20 +57,35 @@ def smudge_latex(input_text, latex_matches):
 
 
 def main():
+    filename = sys.argv[1].strip('\\').strip("'") if len(sys.argv) > 1 else "<unknown file>"
     input_text = sys.stdin.read()
+       
+    try:   
+        svglink_matches = SVGLINK_REGEX.findall(input_text)
+        
+        if svglink_matches:
+            input_text = smudge_svglink(input_text, svglink_matches)
 
-    svglink_matches = SVGLINK_REGEX.findall(input_text)
+        latex_matches = LATEX_REGEX.findall(input_text)
 
-    if svglink_matches:
-        input_text = smudge_svglink(input_text, svglink_matches)
-
-    latex_matches = LATEX_REGEX.findall(input_text)
-
-    if latex_matches:
-        input_text = smudge_latex(input_text, latex_matches)
+        if latex_matches:
+            input_text = smudge_latex(input_text, latex_matches)
 
 
-    sys.stdout.write(input_text)
+        sys.stdout.write(input_text)
+    except Exception as e:
+        log_file = MARKDOWN_SMUDGE_FILTER_ERROR_LOG
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        error_msg = f"{now} [ERROR] Failed to apply markdown clean filter on `{filename}`: {e}\n"
+        end_msg = "\n" + "-"*len(error_msg) + "\n"
+        with open(log_file, 'a') as f:
+            f.write(error_msg)
+            print(error_msg, file= sys.stderr)
+            traceback.print_exc(file=f)
+            traceback.print_exc(file=sys.stderr)
+            f.write(end_msg)
+            print(end_msg)
+        sys.exit(1)
 
 
 if __name__ == '__main__':

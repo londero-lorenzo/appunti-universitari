@@ -19,7 +19,8 @@ def get_issue_body(issue_number):
     url = f"https://api.github.com/repos/{REPO}/issues/{issue_number}"
     r = requests.get(url, headers={"Authorization": f"token {GITHUB_TOKEN}"})
     r.raise_for_status()
-    return r.json()["body"]
+    body = r.json().get("body")
+    return body or ""
 
 def update_issue_body(issue_number, body):
     url = f"https://api.github.com/repos/{REPO}/issues/{issue_number}"

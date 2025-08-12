@@ -46,3 +46,10 @@ $$
 
 $x^{'}\_{i}=\frac{x\_{i}-\min(x)}{\max(x)-\min(x)}$
 
+
+
+---
+
+# TODO TESTs
+
+<!-- TODO(filters_test): Questo è un formato TODO utilizzabile nei vari markdown -->

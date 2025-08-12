@@ -64,3 +64,12 @@ WIKI_MAP_PARAMETER_KEYS = SimpleNamespace(
     source_key="source",
     frameId_key="frameId"
 )
+
+
+# Costanti per il funzionamento del caricamento dei TODO sulle issue:
+
+TODO_ISSUE_MAPPING = {
+    "filters_test": 3314134374 # TODO - Filters Test
+}
+
+TODO_ISSUE_PATTERN = r"<!--\s*TODO\((?P<materia>.*?)\):\s*(?P<testo>.*?)\s*-->"

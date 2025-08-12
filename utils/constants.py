@@ -8,7 +8,7 @@ if os.getenv("GITHUB_ACTIONS"):
     # Costanti per il funzionamento del caricamento dei TODO sulle issue:
 
     TODO_ISSUE_MAPPING = {
-        "filters_test": 3314134374 # TODO - Filters Test
+        "filters_test": 3 # TODO - Filters Test
     }
 
     TODO_ISSUE_PATTERN = r"<!--\s*TODO\((?P<materia>.*?)\):\s*(?P<testo>.*?)\s*-->"

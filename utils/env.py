@@ -12,7 +12,7 @@ def load_project_env(filename: str = ".env") -> None | str:
         
         parent_path = os.path.dirname(current_path)
         if parent_path == current_path:
-            raise FileNotFoundError(f"{filename} non trovato a partire da {path}")
+            raise FileNotFoundError(f"{filename} non trovato a partire da {os.getcwd()}")
         
         current_path = parent_path
 

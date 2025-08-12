@@ -49,7 +49,7 @@ def build_markdown(tree, indent=0):
     for key, subtree in sorted(tree.items()):
         if key == '_todos':
             for todo_path, todo_text, todo_state, todo_row in subtree:
-                md.append('  ' * indent + f"- [{'x' if todo_state == 'closed' else ' ' }] [{todo_text}]({todo_path}?plain=1#L{todo_row})")
+                md.append('  ' * indent + f"- [{'x' if todo_state == 'closed' else ' ' }] [{todo_text}](/{todo_path}?plain=1#L{todo_row})")
         else:
             md.append('  ' * indent + f"- {key}")
             md.extend(build_markdown(subtree, indent+1))

@@ -1,6 +1,7 @@
 import os
 import re
 import requests
+import traceback
 import sys
 
 from utils.constants import TODO_ISSUE_MAPPING, TODO_ISSUE_PATTERN, EXCALIDRAW_FILE_EXTENSION
@@ -141,3 +142,5 @@ if __name__ == "__main__":
                 print(f"[NOCHANGE] No changes for {subject}")
         except Exception as e:
             print(f"[ERROR] Issue {issue_number} ({subject}) update failed: {e}", file=sys.stderr)
+            traceback.print_exc(file=sys.stderr)
+            

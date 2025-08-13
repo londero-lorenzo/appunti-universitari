@@ -27,7 +27,7 @@ def clean_wikilink(input_text, wikilink_matches):
         internal_link_with_frame, metadata = match
         
         wikilink = f"![[{internal_link_with_frame}]]"
-        svglink = wiki_dict.get(wikilink)
+        svglink = wiki_dict.get(wikilink.strip('/').strip('\\').replace('\\', '/'))
         
         if not svglink:
             print(f"[WARN] No SVG found for {wikilink}", file=sys.stderr)

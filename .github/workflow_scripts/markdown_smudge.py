@@ -25,7 +25,7 @@ def smudge_svglink(input_text, svglink_matches):
         alt_name, metadata, internal_link = match
 
         svglink = f"![{alt_name}]({internal_link})"
-        wikilink = wiki_dict.get(svglink)
+        wikilink = wiki_dict.get(svglink.strip('/').strip('\\').replace('\\', '/'))
         
         if not wikilink:
             print(f"[WARN] No WIKI-LINK found for alt='{alt_name}', path='{internal_link}'", file=sys.stderr)

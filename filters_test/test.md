@@ -4,14 +4,14 @@
 ```
 !\[[filters_test/test.excalidraw.md#^frame=ND8amMaO]]
 ```
-![test_conversione](filters_test/assets/test_conversione.svg)
+![test_conversione](/filters_test/assets/test_conversione.svg)
 
 > L'immagine di seguito è stata originariamente inserita utilizzando il seguente codie (**primo backslash escluso**): 
 ```
 !\[test_conversione](filters_test/assets/test_conversione.svg)
 ```
 
-![test_conversione](filters_test/assets/test_conversione.svg)
+![test_conversione](/filters_test/assets/test_conversione.svg)
 
 ---
 
@@ -22,14 +22,14 @@
 !\[[filters_test/test.excalidraw.md#^frame=OtDxMHol|30%]]
 ```
 
-![test_conversione_con_scaling|30%](filters_test/assets/test_conversione_con_scaling.svg)
+![test_conversione_con_scaling|30%](/filters_test/assets/test_conversione_con_scaling.svg)
 
 > L'immagine di seguito è stata originariamente inserita utilizzando il seguente codie (**primo backslash escluso**): 
 ```
 !\[test_conversione_con_scaling|200](filters_test/assets/test_conversione_con_scaling.svg)
 ```
 
-![test_conversione_con_scaling|200](filters_test/assets/test_conversione_con_scaling.svg)
+![test_conversione_con_scaling|200](/filters_test/assets/test_conversione_con_scaling.svg)
 
 ---
 

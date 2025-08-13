@@ -1,13 +1,13 @@
 [
   {
     "wikilink": "![[filters_test/test.excalidraw.md#^frame=ND8amMaO]]",
-    "svglink": "![test_conversione](filters_test/assets/test_conversione.svg)",
+    "svglink": "![test_conversione](/filters_test/assets/test_conversione.svg)",
     "source": "filters_test/text.excalidraw.md",
     "frameId": "ND8amMaO"
   },
   {
     "wikilink": "![[filters_test/test.excalidraw.md#^frame=OtDxMHol]]",
-    "svglink": "![test_conversione_con_scaling](filters_test/assets/test_conversione_con_scaling.svg)",
+    "svglink": "![test_conversione_con_scaling](/filters_test/assets/test_conversione_con_scaling.svg)",
     "source": "filters_test/text.excalidraw.md",
     "frameId": "OtDxMHol"
   },

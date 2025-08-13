@@ -6,12 +6,12 @@ EXCALIDRAW_FILE_EXTENSION = ".excalidraw.md"
 
 if os.getenv("GITHUB_ACTIONS"):
     # Costanti per il funzionamento del caricamento dei TODO sulle issue:
+    
+    GITHUB_TODO_ISSUE_PATTERN = r"TODO:\s*(?P<issue_name>.+?)\s*$"
 
-    TODO_ISSUE_MAPPING = {
-        "filters_test": 3 # TODO - Filters Test
-    }
-
-    TODO_ISSUE_PATTERN = r"<!--\s*TODO\((?P<materia>.*?)\):\s*(?P<testo>.*?)\s*-->"
+    TODO_ISSUE_PATTERN = { ".md": r"<!--\s*TODO\((?P<issue_name>.*?)\):\s*(?P<text>.*?)\s*-->"}
+    
+    TODO_ISSUE_EXCLUDED_EXTENSION = [EXCALIDRAW_FILE_EXTENSION]
 
 else:
 

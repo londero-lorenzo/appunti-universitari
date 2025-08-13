@@ -74,7 +74,7 @@ else:
     LATEX_REGEX = re.compile(REGEX_PATTERN_LATEX, re.MULTILINE | re.DOTALL)
 
 
-    WIKI_MAP_JSON = ".\Excalidraw\wiki-map.json"
+    WIKI_MAP_JSON = os.path.join(VAULT_ROOT, "Excalidraw", "wiki-map.json")
 
     WIKI_MAP_PARAMETER_KEYS = SimpleNamespace(
         wikilink_key="wikilink",

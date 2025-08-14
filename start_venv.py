@@ -38,7 +38,7 @@ def start_debug_environment(env_args):
         )
         
         command += "echo Debug parameters: && "
-        for key, value in env_args:
+        for key, value in env_args.items():
             command += f'set "{key}={value}" && echo  - \033[32m{key}\033[0m = {value} && '
         
         # NOTE: Windows 10+ supports ANSI, otherwise you will need Colorama or a workaround.
@@ -55,7 +55,7 @@ def start_debug_environment(env_args):
         )
         
         command += 'echo "Debug parameters:" && '
-        for key, value in env_args:
+        for key, value in env_args.items():
             command += f'export {key}="{value}" && echo "  - \033[32m{key}\033[0m = {value}" && '
         
         # Change the PS1 prompt to green and tag [DEBUG]
@@ -65,23 +65,46 @@ def start_debug_environment(env_args):
 
 
         
+def _print_debug_env():
+    from utils.constants import DEBUG
+    print(f"{DEBUG.MODE_KEY} = ", os.environ.get(DEBUG.MODE_KEY))
+    for key in DEBUG.PYTHON:
+        print(f"{key} = ", os.environ.get(key))
+    for key in DEBUG.GITHUB_ACTIONS:
+        print(f"{key} = ", os.environ.get(key))
+    print(f"{DEBUG.GIT.GIT_TRACE} = ", os.environ.get(DEBUG.GIT.GIT_TRACE))
+    print(f"{DEBUG.GIT.GIT_FLUSH} = ", os.environ.get(DEBUG.GIT.GIT_FLUSH))
+
+
 def handle_debug(actions):
-    env_args = [("DEBUG_MODE", '1')]
+    from utils.constants import DEBUG
+    env_args = {DEBUG.MODE_KEY: '1'}
+
+    if any(action != "show" for action, _ in actions):
+        env_args.update(DEBUG.PYTHON)
+
+    action_map = {
+        "enable_trace": lambda val: env_args.update({DEBUG.GIT.GIT_TRACE: str(val or 1)}),
+        "enable_flush": lambda val: env_args.update({DEBUG.GIT.GIT_FLUSH: str(val or 1)}),
+        "enable_github_actions_mode": lambda val: env_args.update(DEBUG.GITHUB_ACTIONS),
+    }
+
     for action, value in actions:
-        if action == "enable_trace":
-            env_args.append(("GIT_TRACE", str(value or 1)))
-        elif action == "enable_flush":
-            env_args.append(("GIT_FLUSH", str(value or 1)))
-        elif action == "show":
-            print("DEBUG_MODE = ", os.environ.get("DEBUG_MODE"))
-            print("GIT_TRACE =", os.environ.get("GIT_TRACE"))
-            print("GIT_FLUSH =", os.environ.get("GIT_FLUSH"))
+        if action == "show":
+            _print_debug_env()
             return
+        elif action in action_map:
+            action_map[action](value)
         else:
             print(f"[WARN] Unknown debug command: {action}")
             return
-    start_debug_environment(env_args)
-   
+
+    if any(action != "show" for action, _ in actions):
+        start_debug_environment(env_args)
+
+    if do_show:
+        _print_debug_env()
+
         
         
 def main():
@@ -94,7 +117,7 @@ def main():
     debug_parser = subparsers.add_parser('debug')
     debug_parser.add_argument(
         'debug_actions', nargs='+',
-        help="Debug di actions: enable_trace [lvl] enable_flush [lvl] show"
+        help="Debug di actions: enable_trace [lvl] enable_flush [lvl] enable_github_actions_mode show"
     )
     
     args = parser.parse_args()

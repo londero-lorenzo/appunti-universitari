@@ -1,22 +1,45 @@
 import os
+from types import SimpleNamespace
 
+
+DEBUG = SimpleNamespace(
+    MODE_KEY = "DEBUG_MODE",
+    PYTHON = {
+        "PYTHONPATH": ".;.github"
+    },
+    GITHUB_ACTIONS = {
+        "GITHUB_ACTIONS": "1",
+        "GITHUB_REPOSITORY": "londero-lorenzo/appunti-universitari",
+        "GITHUB_TOKEN": "fake"
+    },
+    GIT = SimpleNamespace(
+        GIT_TRACE= "GIT_TRACE",
+        GIT_FLUSH = "GIT_FLUSH"
+    )
+)
+
+DEBUG_ENABLED = not not int(os.getenv(DEBUG.MODE_KEY, 0))
+GITHUB_ACTIONS_ENABLED = not not int(os.getenv("GITHUB_ACTIONS", 0))
+
+
+def DEBUG_LOG(data, *args, **kwargs):
+    if DEBUG_ENABLED:
+        print("\033[32m[DEBUG]\033[0m " + str(data), *args, **kwargs)
+        
 
 EXCALIDRAW_FILE_EXTENSION = ".excalidraw.md"
 
 
-if os.getenv("GITHUB_ACTIONS"):
+if GITHUB_ACTIONS_ENABLED:
     # Costanti per il funzionamento del caricamento dei TODO sulle issue:
-    
-    GITHUB_TODO_ISSUE_PATTERN = r"TODO:\s*(?P<issue_name>.+?)\s*$"
-
-    TODO_ISSUE_PATTERN = { ".md": r"<!--\s*TODO\((?P<issue_name>.*?)\):\s*(?P<text>.*?)\s*-->"}
+ 
+    TODO_ISSUE_PATTERN = { ".md": r"<!--\s*TODO\((?P<issue_name>.*?)\):\s*(?P<text>.*?)-->"}
     
     TODO_ISSUE_EXCLUDED_EXTENSION = [EXCALIDRAW_FILE_EXTENSION]
 
 else:
 
     # Costanti per il funzionamento degli script locali
-    from types import SimpleNamespace
     import re
     from utils import env
 

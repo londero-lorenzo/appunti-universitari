@@ -170,8 +170,8 @@ def get_issues_map():
             break
 
         for issue in issues:
-            issue_labels = issue.get("labels", None)
-            if not issue_labels or issue_labels != "todo":
+            issue_labels = issue.get("labels", None) or []
+            if not any(label.get("name") == "todo" for label in issue_labels):
                 continue
 
             issue_name = issue.get("title", "").strip()

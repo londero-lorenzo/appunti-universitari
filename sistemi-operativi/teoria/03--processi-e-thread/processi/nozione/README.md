@@ -14,7 +14,7 @@ created: 2025-07-02
 ## Contenuti
 
 1. [Concetto e ciclo di vita del processo](./concetto_e_ciclo.md)
-2. Process Control Block e context switch *(in arrivo)*
+2. [Process Control Block e context switch](./pcb_e_context_switch.md)
 3. Code di processi e Scheduler *(in arrivo)*
 4. Stati di un processo in UNIX *(in arrivo)*
 

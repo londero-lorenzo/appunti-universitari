@@ -127,6 +127,8 @@ Durante un context switch:
 
 💡 Questo meccanismo è alla base del **time-sharing** nei sistemi multitasking.
 
+<!-- TODO(sistemi-operativi): Creare esempio grafico per PCB e Context Switch -->
+
 ---
 
 ## 📚 Fonti

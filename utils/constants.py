@@ -18,8 +18,8 @@ DEBUG = SimpleNamespace(
     )
 )
 
-DEBUG_ENABLED = not not int(os.getenv(DEBUG.MODE_KEY, 0))
-GITHUB_ACTIONS_ENABLED = not not int(os.getenv("GITHUB_ACTIONS", 0))
+DEBUG_ENABLED = str(os.getenv(DEBUG.MODE_KEY, "")).lower() in ("1", "true", "yes")
+GITHUB_ACTIONS_ENABLED = str(os.getenv("GITHUB_ACTIONS", "")).lower() in ("1", "true", "yes")
 
 
 def DEBUG_LOG(data, *args, **kwargs):

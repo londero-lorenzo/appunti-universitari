@@ -43,7 +43,7 @@ def start_debug_environment(env_args):
         
         # NOTE: Windows 10+ supports ANSI, otherwise you will need Colorama or a workaround.
         command += 'echo ==================================== && '
-        command += f"set PROMPT=({VENV_DIR.split(os.sep)[-1]}) $E[32m[DEBUG]$E[0m $P$G"
+        command += f"set PROMPT=$E[91m({VENV_DIR.split(os.sep)[-1]})$E[0m $E[30;102m[DEBUG]$E[0m $P$G"
 
     else:  # Unix-like
         command = (
@@ -59,7 +59,7 @@ def start_debug_environment(env_args):
             command += f'export {key}="{value}" && echo "  - \033[32m{key}\033[0m = {value}" && '
         
         # Change the PS1 prompt to green and tag [DEBUG]
-        command += f"export PS1=\"({VENV_DIR.split(os.sep)[-1]}) \\[\\033[32m\\][DEBUG]\\[\\033[0m\\] \\u@\\h:\\w\\$ \""
+        command += f"export PS1=\"\\[\\033[91m\\]({VENV_DIR.split(os.sep)[-1]})\\[\\033[0m\\] \\[\\033[30;102m\\][DEBUG]\\[\\033[0m\\] \\u@\\h:\\w\\$ \""
 
     open_venv_shell(command)
 

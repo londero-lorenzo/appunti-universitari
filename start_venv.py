@@ -90,10 +90,7 @@ def handle_debug(actions):
     }
 
     for action, value in actions:
-        if action == "show":
-            _print_debug_env()
-            return
-        elif action in action_map:
+        if action in action_map:
             action_map[action](value)
         else:
             print(f"[WARN] Unknown debug command: {action}")
@@ -102,8 +99,9 @@ def handle_debug(actions):
     if any(action != "show" for action, _ in actions):
         start_debug_environment(env_args)
 
-    if do_show:
+    if any(action == "show" for action, _ in actions):
         _print_debug_env()
+
 
         
         

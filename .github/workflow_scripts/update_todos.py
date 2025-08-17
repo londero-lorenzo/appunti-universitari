@@ -5,7 +5,7 @@ import traceback
 import sys
 import difflib
 
-from utils.constants import TODO_ISSUE_PATTERN, TODO_ISSUE_EXCLUDED_EXTENSION
+from utils.constants import TODO_ISSUE_PATTERN, TODO_ISSUE_EXCLUDED_EXTENSION, TODO_ISSUE_EXCLUDED_FOLDERS
 from utils.constants import DEBUG_LOG, DEBUG_ENABLED
 
 # =====================
@@ -26,10 +26,10 @@ class TodoNote:
     
     
     def __init__(self, path, text, state, start_row):
-        text_lines = text.splitlines()
+        text_lines = text.strip().splitlines()
         self.path = standardize_path(path)
         self.title = text_lines[0]
-        self.description_lines = [line for line in text_lines[1:] if line.strip()]
+        self.description_lines = "\n".join(text_lines[1:]).strip().splitlines()
         if state == 'open' or state == 'closed':
             self.state = state
         else:
@@ -74,15 +74,23 @@ class TodoNote:
     def is_closed(self):
         return self.state == 'closed'
         
+    def is_similar(self, other, threshold=0.8):
+        if not isinstance(other, TodoNote):
+            return False
+            
+        ratio = difflib.SequenceMatcher(None, self.get_compound_text(), other.get_compound_text()).ratio()
+        return ratio >= threshold, ratio
+    
+        
     def __repr__(self):
         return f"TodoNote(title={self.title}, path={self.path}{self.create_row_position_link_metadata()})"
 
    
 class RemoteTodoNote(TodoNote):
-    def __init__(self, path, text, state, raw_rows):
+    def __init__(self, path, title, state, raw_rows):
         row_splitted = raw_rows.split('-')
         start = row_splitted[0]
-        super().__init__(path, text, state, int(start))
+        super().__init__(path, " ".join([line.strip() for line in title.splitlines()]), state, int(start))
         
         if len(row_splitted) == 2:
             end = row_splitted[1]
@@ -91,15 +99,14 @@ class RemoteTodoNote(TodoNote):
             self.multiline = True
     
     def add_description_line(self, line):
-        self.description_lines.append(line)
+        self.description_lines.append(line.strip())
         if not self.is_multiline():
             self.multiline = True
         
 class LocalTodoNote(TodoNote):
-    def __init__(self, path, text, state, rows):
-        super().__init__(path, text, state, rows)
-        
-        self.rows[1] = self.rows[0] + text.count('\n')
+    def __init__(self, path, text, state, start_line, end_line):
+        super().__init__(path, text, state, start_line)
+        self.rows[1] = self.rows[0] + end_line
         if self.rows[1] > self.rows[0]:
             self.multiline = True
         
@@ -123,22 +130,34 @@ def get_current_branch():
 def get_issues_map():
     if DEBUG_ENABLED:
         issues = [{
+            "title": "Github",
+            "number": 6,
+            "labels":[
+                {"name": "todo"}
+            ]
+        },{
+            "title": "Sistemi Operativi",
+            "number": 5,
+            "labels":[
+                {"name": "todo"}
+            ]
+        },{
             "title": "Materie",
             "number": 4,
-            "labels":{
-                "name": "todo"
-            }
+            "labels":[
+                {"name": "todo"}
+            ]
         },{
             "title": "Filters Test",
             "number": 3,
-            "labels":{
-                "name": "todo"
-            }
+            "labels":[
+                {"name": "todo"}
+            ]
         }]
         issues_by_name = {}
         for issue in issues:
-            issue_labels = issue.get("labels", None)
-            if not issue_labels or issue_labels.get("name", '') != "todo":
+            issue_labels = issue.get("labels", None) or []
+            if not any(label.get("name") == "todo" for label in issue_labels):
                 continue
 
             issue_name = issue.get("title", "").strip()
@@ -187,8 +206,10 @@ def get_issues_map():
 def get_issue_body(issue_number):
     if DEBUG_ENABLED:
         data = {
-            4: "- materie\n  - README.md\n    - [ ] [spostare tutte le materie universitarie qui\n\n          Cartelle interessate:\n          - machine-learning\n          - nozioni_generali\n          - poo\n          - sistemi-operativi\n          - tecnologie_web_per_il_cloud](/londero-lorenzo/appunti-universitari/blob/main/materie/README.md?plain=1#L1)\n    - [ ] [Variante 2](/londero-lorenzo/appunti-universitari/blob/main/materie/README.md?plain=1#L44)",
-            3: "- filters_test\n  - test.md\n    - [ ] [Questo è un formato TODO utilizzabile nei vari markdown](/londero-lorenzo/appunti-universitari/blob/main/filters_test/test.md?plain=1#L55)\n\n    - [x] [Questo è un formato TODO multilinea utilizzabile nei vari markdown](/londero-lorenzo/appunti-universitari/blob/main/filters_test/test.md?plain=1#L66)\n\n          Cras in massa nec urna pharetra vehicula. Vestibulum lectus est, auctor ac nisi.\n          In pharetra ultricies neque in condimentum. Aliquam erat volutpat. Cras laoreet.\n          Quisque et nisl interdum, sodales orci quis, mattis nulla. Suspendisse molestie."
+            6: "",
+            5: "- sistemi-operativi\n  - teoria\n    - 03--processi-e-thread\n      - processi\n        - nozione\n          - pcb_e_context_switch.md\n            - [ ] [Creare esempio grafico per PCB e Context Switch](/londero-lorenzo/appunti-universitari/blob/main/sistemi-operativi/teoria/03--processi-e-thread/processi/nozione/pcb_e_context_switch.md?plain=1#L130)\n",
+            4: "- materie\n  - README.md\n    - [ ] [spostare tutte le materie universitarie qui](/londero-lorenzo/appunti-universitari/blob/main/materie/README.md?plain=1#L1-L9)\n\n          Cartelle interessate:\n          - machine-learning\n          - nozioni_generali\n          - poo\n          - sistemi-operativi\n          - tecnologie_web_per_il_cloud\n\n",
+            3: "- filters_test\n  - secondo_livello\n    - secondo_test.md\n      - [ ] [Questo è un formato TODO utilizzabile nei vari markdown](/londero-lorenzo/appunti-universitari/blob/main/filters_test/secondo_livello/secondo_test.md?plain=1#L4)\n\n  - test.md\n    - [ ] [Questo è un formato TODO utilizzabile nei vari markdown](/londero-lorenzo/appunti-universitari/blob/main/filters_test/test.md?plain=1#L57)\n\n    - [ ] [Questo è un formato TODO lungo inline utilizzabile nei vari markdown. Lorem ipsum dolor\n          sit amet, consectetur adipiscing elit. Quisque porttitor tincidunt mauris, et iaculis\n          lacus fringilla et. Integer vitae sollicitudin est. Curabitur ultricies gravida nisi at\n          pulvinar. Nulla at porttitor augue. Nulla et nisi ut turpis dignissim lobortis quis vitae\n          elit. Aenean tristique erat eget mi semper laoreet. Donec vestibulum accumsan consectetur.\n          Fusce congue purus sit amet diam semper rhoncus. Nunc non ex interdum, cursus massa a,\n          sollicitudin nunc. Nam a imperdiet elit, vel rutrum augue. Morbi sit amet feugiat ligula.\n          Sed aliquam nulla non nibh scelerisque, et consequat quam consequat. Duis sed est id ex\n          volutpat elementum nec in orci. Aenean a enim vel enim facilisis finibus. Maecenas sed\n          massa et justo aliquam ultrices vitae eget nisi. Cras cursus malesuada purus in\n          ullamcorper.](/londero-lorenzo/appunti-universitari/blob/main/filters_test/test.md?plain=1#L61)\n\n    - [ ] [Questo è un formato TODO multilinea utilizzabile nei vari markdown](/londero-lorenzo/appunti-universitari/blob/main/filters_test/test.md?plain=1#L66-L72)\n\n          Cras in massa nec urna pharetra vehicula. Vestibulum lectus est, auctor ac nisi.\n          In pharetra ultricies neque in condimentum. Aliquam erat volutpat. Cras laoreet.\n          Quisque et nisl interdum, sodales orci quis, mattis nulla. Suspendisse molestie.\n\n\n    - [ ] [Questo è un formato TODO multilinea lungo utilizzabile nei vari markdown](/londero-lorenzo/appunti-universitari/blob/main/filters_test/test.md?plain=1#L77-L92)\n\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elit nunc, vehicula sit\n          amet elit varius, sagittis sagittis lacus. Duis non nibh risus. Phasellus efficitur justo\n          vitae efficitur suscipit. Duis luctus dolor nec tellus porta cursus. Orci varius natoque\n          penatibus.\n          Vivamus posuere nunc vitae nisl sodales, ac laoreet nulla porttitor. Ut id felis ut lectus\n          porta dictum. Vestibulum et massa eu enim convallis vestibulum. Integer laoreet leo eget\n          magna pulvinar cursus. Duis in pulvinar leo. Pellentesque vehicula mauris a molestie.\n          Nulla vestibulum lectus eget dui tincidunt pellentesque. Praesent vel nibh non felis\n          pharetra lobortis. Donec odio neque, faucibus vitae mattis eu, mattis eu ex. Cras\n          venenatis lorem augue. Proin feugiat ex nec sollicitudin ullamcorper. Sed risus nibh,\n          gravida quis ligula.\n\n"
         }
         return data.get(issue_number, '')
     url = f"https://api.github.com/repos/{REPO}/issues/{issue_number}"
@@ -271,25 +292,24 @@ def parse_issue_body_to_todos(body, base_path=""):
     todo_matches = []
     for match in re.finditer(r"\s*- \[(?P<status> |x)\] \[(?P<todo>.+?)\]\((?P<path>[^\s)]+)(?:\?[^\s]+#L(?P<row>[^\s]+?)?)\)", body, flags= re.MULTILINE | re.DOTALL):
         status_char = match.group("status")
-        todo_text = match.group("todo")
+        todo_title = match.group("todo")
         path = match.group("path")
         path = path[len(f"/{REPO}/blob/{branch}/"):]
         todo_row = match.group("row")
         state = "open" if status_char == " " else "closed"
-        todos.append(RemoteTodoNote(path, todo_text, state, todo_row))
+        todos.append(RemoteTodoNote(path, todo_title, state, todo_row))
 
         todo_matches.append(match.group(0).strip())
 
 
     body_lines = body.splitlines()
     
-    indent = None
+    indent = 0
     last_todo = None
     for line in body_lines:
         if not line:
             continue
-        
-        if last_todo and len(line) - len(line.lstrip()) >= indent:        
+        if last_todo is not None and len(line) - len(line.lstrip()) >= indent:
             todos[last_todo].add_description_line(line)
             continue
         else:
@@ -297,11 +317,10 @@ def parse_issue_body_to_todos(body, base_path=""):
         
         for i, match in enumerate(todo_matches):
             if match in line:
-                indent = line.find(re.sub(r"^- \[[ |x]\] ", "", match))
+                indent = line.find(re.sub(r"- \[[ |x]\] ", "", match))
                 last_todo = i
                 break;
-        
-        
+
     return todos
     
     
@@ -319,7 +338,8 @@ def beautify_issue_name(name):
 
 def extract_todos_from_files(isses_map):
     todos_by_subject = {subj: [] for subj in isses_map}
-    for root, _, files in os.walk("."):
+    for root, dirs, files in os.walk("."):
+        dirs[:] = [d for d in dirs if d not in TODO_ISSUE_EXCLUDED_FOLDERS]
         for f in files:
             if sum([f.endswith(file_ext) for file_ext in TODO_ISSUE_PATTERN]) > 0 and \
                 sum([f.endswith(file_ext) for file_ext in TODO_ISSUE_EXCLUDED_EXTENSION]) == 0:
@@ -335,15 +355,40 @@ def extract_todos_from_files(isses_map):
                             DEBUG_LOG("TODOs found at: ", rel_path)
                         issue_name = beautify_issue_name(match.group("issue_name").strip())
                         text = match.group("text")
+                        start_line_number = content[:match.start()].count("\n") + 1
+                        end_line_number = content[match.start():match.end()].count("\n")
                         if issue_name in todos_by_subject:
-                            line_number = content[:match.start()].count("\n") + 1
-                            todos_by_subject[issue_name].append(LocalTodoNote(rel_path, text, 'open', line_number))
+                            todos_by_subject[issue_name].append(LocalTodoNote(rel_path, text, 'open', start_line_number, end_line_number))
+                        else:
+                            print(f"::warning file={rel_path},line={start_line_number}::Unable to match TODO with issue `{issue_name}`")
+
     return todos_by_subject
     
     
-def is_similar(a, b, threshold=0.8):
-    ratio = difflib.SequenceMatcher(None, a, b).ratio()
-    return ratio >= threshold, ratio
+
+"""
+TODO(github): raggiungere livello di similitudine 1.0 tra TODO locali e remoti
+
+Attualmente la similitudine viene calcolata con soglia all’80%, il che permette 
+di considerare uguali TODO con testo simile. L’obiettivo ideale è arrivare a
+1.0, cioè garantire che i TODO siano *identici* sia in locale che su GitHub
+Issues.
+
+Problema:
+- Non esiste ancora una funzione che trasformi il testo markdown in una
+  struttura dati equivalente a quella ottenuta dalla conversione dei commenti
+  nei file.
+- Il confronto quindi rimane soggetto a piccole discrepanze dovute a formattazioni
+  arbitrarie.
+
+Proposta:
+- Utilizzare direttamente, già in fase di esportazione dal file, la funzione
+  `wrap_todo_text`.
+- Questo permette di standardizzare il testo locale e renderlo già compatibile
+  con quello generato da GitHub Actions, evitando conversioni ridondanti e
+  potenziali differenze arbitrarie.
+"""
+
 
 def merge_todos_into_issue(remote_todos, local_todos):
     updated_tasks = []
@@ -357,9 +402,11 @@ def merge_todos_into_issue(remote_todos, local_todos):
             e_path = existing.get_path()
             e_text = existing.get_compound_text()
             if (standardize_path(e_path)) == (standardize_path(f_path)):
-                are_similar, ratio = is_similar(e_text, f_text)
+                are_similar, ratio = found.is_similar(existing)
                 if are_similar:
                     DEBUG_LOG(f"{found} added for similarity to {existing}, ratio level: {ratio}")
+                    #DEBUG_LOG(f"local body: {found.get_compound_text()}")
+                    #DEBUG_LOG(f"remote body: {existing.get_compound_text()}")
                     matched_existing.add(i)
                     updated_tasks.append(found)
                     matched = True
@@ -373,6 +420,26 @@ def merge_todos_into_issue(remote_todos, local_todos):
             DEBUG_LOG(f"{existing} closed because it was not found in local issues")
             existing.set_closed()
             updated_tasks.append(existing)
+            
+    duplicate_detected = False
+
+    for i, task_i in enumerate(updated_tasks):
+        for j in range(i + 1, len(updated_tasks)):
+            task_j = updated_tasks[j]
+            if (
+                task_i.get_title().strip() == task_j.get_title().strip()
+                and task_i.get_path() == task_j.get_path() and task_i.state != task_j.state
+            ):
+                duplicate_detected = True
+                print(
+                    f"::error file={task_i.get_path()},line={task_i.rows[0]}::"
+                    f"Duplicate TODO detected between entries at lines {task_i.rows[0]} and {task_j.rows[0]} "
+                    f"(title='{task_i.get_title().strip()}')."
+                )
+
+    if duplicate_detected:
+        raise Exception("Duplicate TODOs detected during issue merging operation")
+
 
     return updated_tasks
 
@@ -385,7 +452,7 @@ if __name__ == "__main__":
     try:
         issues_map = get_issues_map()
     except Exception as e:
-        print(f"[ERROR] Failed to generate issues map from GitHub Issues: {e}", file=sys.stderr)
+        print(f"::error::Failed to generate issues map from GitHub Issues: {e}")
         traceback.print_exc(file=sys.stderr)
         sys.exit(1)
         
@@ -394,7 +461,7 @@ if __name__ == "__main__":
     try:
         global_local_todos = extract_todos_from_files(issues_map)
     except Exception as e:
-        print(f"[ERROR] Failed to extract todos: {e}", file=sys.stderr)
+        print(f"::error::Failed to extract todos: {e}")
         traceback.print_exc(file=sys.stderr)
         sys.exit(1)
             
@@ -411,12 +478,12 @@ if __name__ == "__main__":
             new_body = merge_todos_into_issue(remote_todos, local_todos)
             if new_body != remote_body:
                 update_issue_body(issue_number, build_markdown_tree(new_body))
-                print(f"[OK] Issue {issue_number} updated ({subject})")
+                print(f"::notice::Issue {issue_number} updated ({subject})")
             else:
-                print(f"[NOCHANGE] No changes for {subject}")
+                print(f"::notice::No changes for {subject}")
             DEBUG_LOG("======================================== END ISSUE MERGING ========================================")
             
         except Exception as e:
-            print(f"[ERROR] Issue {issue_number} ({subject}) update failed: {e}", file=sys.stderr)
+            print(f"::error::Issue {issue_number} ({subject}) update failed: {e}")
             traceback.print_exc(file=sys.stderr)
             

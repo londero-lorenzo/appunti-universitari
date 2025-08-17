@@ -32,10 +32,22 @@ EXCALIDRAW_FILE_EXTENSION = ".excalidraw.md"
 
 if GITHUB_ACTIONS_ENABLED:
     # Costanti per il funzionamento del caricamento dei TODO sulle issue:
- 
-    TODO_ISSUE_PATTERN = { ".md": r"<!--\s*TODO\((?P<issue_name>.*?)\):\s*(?P<text>.*?)-->"}
+    
+    """
+    TODO(github): identificazione TODO
+    
+    Python:
+     - aggiungere pattern TODO inline
+    """
+    
+    TODO_ISSUE_PATTERN = { 
+        ".md": r"<!--\s*TODO\((?P<issue_name>.*?)\):\s*(?P<text>.*?)-->",
+        ".py": r'"""\s*TODO\((?P<issue_name>.*?)\):\s*(?P<text>.*?)"""'
+    }
     
     TODO_ISSUE_EXCLUDED_EXTENSION = [EXCALIDRAW_FILE_EXTENSION]
+    
+    TODO_ISSUE_EXCLUDED_FOLDERS = ['.notesVenv']
 
 else:
 

@@ -15,8 +15,8 @@ created: 2025-07-02
 
 1. [Concetto e ciclo di vita del processo](./concetto_e_ciclo.md)
 2. [Process Control Block e context switch](./pcb_e_context_switch.md)
-3. Code di processi e Scheduler *(in arrivo)*
-4. Stati di un processo in UNIX *(in arrivo)*
+3. [Code di processi e Scheduler](./code_di_processi.md)
+4. [Stati di un processo in UNIX](./transizioni_tra_stati_unix.md)
 
 
 ---

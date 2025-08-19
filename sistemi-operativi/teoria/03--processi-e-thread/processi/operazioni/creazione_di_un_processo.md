@@ -1,7 +1,7 @@
 ---
-title: Creazione di Un Processo
+title: Creazione di un Processo
 aliases:
-  - Creazione di Un Processo
+  - Creazione di un Processo
 created: 2025-08-18
 ---
 >[!abstract]

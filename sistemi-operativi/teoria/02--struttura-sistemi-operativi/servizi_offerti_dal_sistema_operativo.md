@@ -1,7 +1,7 @@
 ---
-title: Servizi Offerti Dal Sistema Operativo
+title: Servizi Offerti dal Sistema Operativo
 aliases:
-  - Servizi Offerti Dal Sistema Operativo
+  - Servizi Offerti dal Sistema Operativo
 created: 2025-06-30
 ---
 # Servizi Offerti dal Sistema Operativo

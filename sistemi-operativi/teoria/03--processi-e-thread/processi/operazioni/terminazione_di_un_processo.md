@@ -1,7 +1,7 @@
 ---
-title: Terminazione di Un Processo
+title: Terminazione di un Processo
 aliases:
-  - Terminazione di Un Processo
+  - Terminazione di un Processo
 created: 2025-08-19
 ---
 >[!abstract]

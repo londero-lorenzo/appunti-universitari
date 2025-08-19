@@ -2,7 +2,6 @@
 title: Sistema Mono-Multi Programmato
 aliases:
   - Sistema Mono-Multi Programmato
-tags: []
 created: 2025-06-29
 ---
 # Sistemi Mono/Multi-programmati

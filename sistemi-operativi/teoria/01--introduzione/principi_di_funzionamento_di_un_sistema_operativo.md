@@ -1,8 +1,7 @@
 ---
-title: Principi di Funzionamento di Un Sistema Operativo
+title: Principi di Funzionamento di un Sistema Operativo
 aliases:
-  - Principi di Funzionamento di Un Sistema Operativo
-tags: []
+  - Principi di Funzionamento di un Sistema Operativo
 created: 2025-06-29
 ---
 # Principi di Funzionamento di un Sistema Operativo

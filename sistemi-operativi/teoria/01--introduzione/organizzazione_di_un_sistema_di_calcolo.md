@@ -1,9 +1,7 @@
 ---
-title: Organizzazione di Un Sistema di Calcolo
+title: Organizzazione di un Sistema di Calcolo
 aliases:
-  - Organizzazione di Un Sistema di Calcolo
-tags:
-  - 01--introduzione
+  - Organizzazione di un Sistema di Calcolo
 created: 2025-06-28
 ---
 # Organizzazione di un Sistema di Calcolo

@@ -1,7 +1,7 @@
 ---
-title: Struttura di Un Sistema Operativo
+title: Struttura di un Sistema Operativo
 aliases:
-  - Struttura di Un Sistema Operativo
+  - Struttura di un Sistema Operativo
 created: 2025-06-30
 ---
 # Struttura di un Sistema Operativo

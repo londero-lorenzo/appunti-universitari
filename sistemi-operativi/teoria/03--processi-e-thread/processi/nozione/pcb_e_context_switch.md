@@ -1,7 +1,7 @@
 ---
-title: Pcb e Context Switch
+title: PCB e Context Switch
 aliases:
-  - Pcb e Context Switch
+  - PCB e Context Switch
 created: 2025-07-02
 ---
 # Process Control Block e Context Switch

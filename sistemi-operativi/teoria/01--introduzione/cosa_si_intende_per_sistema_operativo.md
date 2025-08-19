@@ -2,8 +2,6 @@
 title: Cosa Si Intende per Sistema Operativo
 aliases:
   - Cosa Si Intende per Sistema Operativo
-tags:
-  - 01--introduzione
 created: 2025-06-28
 ---
 # Cosa è un Sistema Operativo

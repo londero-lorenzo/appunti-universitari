@@ -14,8 +14,8 @@ created: 2025-08-19
 
 ## Contenuti
 
-1. Processi Indipendenti e Concorrenti *(in arrivo)*
-2. Modelli fondamentali per l'Inter-Process Communication *(in arrivo)*
+1. [Processi Indipendenti e Concorrenti](./processi_indipendenti_e_concorrenti.md)
+2. [Modelli fondamentali per l'Inter-Process Communication](./modelli_fondamentali_per_l'ipc.md)
 
 
 ---

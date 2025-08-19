@@ -22,7 +22,7 @@ created: 2025-07-02
 ### Contenuti tipici del PCB:
 
 - **Identificatore del processo** (PID)
-    
+	 ^effbe9
 - **Stato del processo** (es. ready, running, waiting…)
     
 - **Program counter** (istruzione successiva da eseguire)
@@ -39,6 +39,8 @@ created: 2025-07-02
 >[!note]
 > Il PCB definisce il **contesto di esecuzione** del processo.
 >Tutti i PCB sono raccolti all’interno della **process table**.
+
+^cf70d8
 
 ---
 

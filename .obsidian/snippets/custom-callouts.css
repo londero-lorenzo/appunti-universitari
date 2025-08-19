@@ -22,7 +22,7 @@ https://lucide.dev/icons
 	background-color: var(--callout-background-color);
 }
 
-.callout[data-callout="definition"] .callout-content > p:first-child {
+.callout[data-callout="definition"] > .callout-content > p:first-child {
 	font-size: 1.6em;
 	font-weight: 600;
 	color: rgb(var(--callout-definition-title-color-rgb));
@@ -31,8 +31,8 @@ https://lucide.dev/icons
 	margin-bottom: 6px;
 }
 
-.callout[data-callout="definition"] .callout-content > p:not(:first-of-type),
-.callout[data-callout="definition"] .callout-content > blockquote p {
+.callout[data-callout="definition"] > .callout-content > p:not(:first-of-type),
+.callout[data-callout="definition"] > .callout-content > blockquote > p {
 	font-family: "Inter", sans-serif;
 	font-size: 1.05em;
 	border-left: 2px solid rgba(var(--callout-definition-title-color-rgb), 0.5);
@@ -40,14 +40,14 @@ https://lucide.dev/icons
 	margin-left: 0;
 }
 
-.callout[data-callout="definition"] .callout-content > blockquote{
+.callout[data-callout="definition"] > .callout-content > blockquote{
 	border-left: none !important;
 	padding-left: 0px !important;
 	padding-inline-start: 0px !important;
 }
 
 
-.callout[data-callout="definition"] .callout-title {
+.callout[data-callout="definition"] > .callout-title {
 	font-weight: bold;
 }
 

@@ -118,7 +118,7 @@ function buildExportFileNameControls(container, state) {
 		.setName("Format")
 		.addDropdown(dropdown =>
 			dropdown
-				.addOptions(Object.fromEntries(EXPORT_FORMATS.map(f => [f, f])))
+				.addOptions(Object.fromEntries(EXPORT\_FORMATS.map(f => [f, f])))
 				.setValue(state.format)
 				.onChange(value => state.format = value)
 		);
@@ -234,7 +234,7 @@ function buildExportOptionControls(container, state) {
  * @returns {{format: string, filename: string} | null}
  */
 function parseExportFrameName(frameName) {
-	const regex = new RegExp(`^${EXPORT_FRAME_PREFIX}(${EXPORT_FORMATS.map(f => f.toUpperCase()).join('|')}):\\s*(.+)$`);
+	const regex = new RegExp(`^${EXPORT\_FRAME\_PREFIX}(${EXPORT_FORMATS.map(f => f.toUpperCase()).join('|')}):\\s*(.+)$`);
 	const match = frameName.match(regex);
 	
 	if (!match) {
@@ -480,8 +480,8 @@ function wrapElementsInFrame({selectedElements, singleFrameFullySelected, export
 				frameId: null,
 				x: minX - padding,
 				y: minY - padding,
-				width: maxX - minX + 2 * padding,
-				height: maxY - minY + 2 * padding
+				width: maxX - minX + 2 \_ padding,
+				height: maxY - minY + 2 \_ padding
 			};
 		}else{
 			frame = {...singleFrameFullySelected}
@@ -518,8 +518,8 @@ function wrapElementsInFrame({selectedElements, singleFrameFullySelected, export
 			type: "frame",
 			x: minX - padding,
 			y: minY - padding,
-			width: maxX - minX + 2 * padding,
-			height: maxY - minY + 2 * padding,
+			width: maxX - minX + 2 \_ padding,
+			height: maxY - minY + 2 \_ padding,
 			angle: 0,
 			strokeColor: "#bbb",
 			backgroundColor: "transparent",
@@ -531,9 +531,9 @@ function wrapElementsInFrame({selectedElements, singleFrameFullySelected, export
 			groupIds: [],
 			frameId: null,
 			roundness: null,
-			seed: Math.floor(Math.random() * 100000),
+			seed: Math.floor(Math.random() \_ 100000),
 			version: 1,
-			versionNonce: Math.floor(Math.random() * 1000000000),
+			versionNonce: Math.floor(Math.random() \_ 1000000000),
 			isDeleted: false,
 			boundElements: [],
 			updated: Date.now(),
@@ -567,7 +567,7 @@ function wrapElementsInFrame({selectedElements, singleFrameFullySelected, export
 	};
 }
 
-/*
+/\_
 async function getNextAvailableFilename(folderPath, fileName) {
 	const files = app.vault.getFiles();
 	const folderFiles = files.filter(f => f.path.startsWith(folderPath));

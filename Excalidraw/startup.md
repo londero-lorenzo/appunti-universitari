@@ -279,6 +279,28 @@ function updateExportTimestamp(frame) {
 	frame.customData.export.updated = Date.now();
 }
 
+function removeSourceFileFromFrame(frame){
+	const exportData = frame.customData?.export
+	
+	if (!exportData){
+		Notice("No exportation data found while attemping to remove source file from frame element");
+		return
+	}
+	
+	delete frame.customData.export.rootFolder;
+}
+
+function isNewExportFrame(frame){
+	const exportData = frame.customData?.export
+	
+	if (!exportData){
+		Notice("No exportation data found while attemping to remove source file from frame element");
+		return !1
+	}
+	
+	return exportData.rootFolder !== undefined;	
+}
+
 function buildFrameElementsMap(allElements) {
 	const frameMap = new Map();
 	
@@ -322,11 +344,23 @@ function removeInconsistentWikiFrames(currentViewFramesMap, source){
 	wikiMap = wikiMap.filter(item => currentViewFramesMap.has(item.frameId) || item.source !== source);
 }
 
-
 async function exportElementsToSvg({ frame, elements, view}) {
 	const exportData = frame.customData.export;
 	const options = exportData.options;
-	const outputPath = exportData.rootFolder + exportData.filename + '.' + exportData.format;
+	let outputPath = undefined
+	if (isNewExportFrame(frame))
+		outputPath = exportData.rootFolder + exportData.filename + '.' + exportData.format;
+	else {
+		let svglink = wikiMap.find(el => el.frameId === frame.id).svglink;
+		const match = svglink.match(/!\[[^\]]*\]\(([^)]+)\)/);
+		outputPath = match[1].replace(/^\/+/, ""); 
+	}
+		
+	if (outputPath === undefined){
+		Notice(`No output path found for ${frame.id}`)
+		return
+	}
+	
 	
 	const scene = {
 		elements,
@@ -338,7 +372,7 @@ async function exportElementsToSvg({ frame, elements, view}) {
 		files: {},
 	};
 	
-	const export_args = {
+	const export\_args = {
 		elements: scene.elements,
 		appState: {
 			...scene.appState,
@@ -352,7 +386,8 @@ async function exportElementsToSvg({ frame, elements, view}) {
 		skipInliningFonts: options.skipInliningFonts,
 	};
 	
-	const svgElement = await ExcalidrawLib.exportToSvg(export_args);
+	<!-- TODO(excalidraw): controllare che il percorso di salvataggio esista -->
+	const svgElement = await ExcalidrawLib.exportToSvg(export\_args);
 	if (!svgElement) {
 		new Notice("Error during SVG export.");
 		return;
@@ -369,6 +404,10 @@ async function exportElementsToSvg({ frame, elements, view}) {
 	updateWikiMapInMemory(sourcePath, wikilink, svglink, frameId)
 	
 	updateExportTimestamp(frame)
+	
+	if (isNewExportFrame(frame))
+		removeSourceFileFromFrame(frame)
+	
 	new Notice(`SVG saved in:\n${outputPath}`);
 }
 

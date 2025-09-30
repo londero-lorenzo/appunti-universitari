@@ -1,4 +1,4 @@
----
+/*---
 title: Export Selection To Svg
 description: Esporta gli elementi selezionati in Excalidraw come SVG e copia il link markdown negli appunti
 tags:
@@ -9,7 +9,7 @@ tags:
 created: 2025-07-04
 cssclasses:
   - code
----
+---*/
 
 /*
 ```javascript */

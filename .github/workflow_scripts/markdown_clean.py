@@ -68,6 +68,15 @@ def main():
         if wikilink_matches:
             input_text = clean_wikilink(input_text, wikilink_matches)
             
+        """
+        TODO(markdown-postprocess): ignorare pulizia latex nei file markdown che presentano codice
+        
+        Nei file markdown che presentano codice può essere triggerata l'espressione 
+        regolare che identifca diciture latex.
+        
+        
+        Bisogna trovare un modo per ignorare i file contenente codice in modo da evitare alterazioni problematiche.
+        """
         latex_matches = LATEX_REGEX.findall(input_text)
         
         if latex_matches:

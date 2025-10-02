@@ -4,6 +4,15 @@ import subprocess
 import argparse
 import venv
 import platform
+
+"""
+TODO(py-setup): rimuovere importazioni circolari
+
+
+L'importazione della variabile globale PROJECT_ROOT_KEY contenuta in utils.constants
+crea una ricerca del file `.env` che non viene creato fino a quando non sono state
+completate tutte le importazioni.
+"""
 from utils.constants import PROJECT_ROOT_KEY
 from utils.constants import WORKFLOW_SCRIPTS_LOCATION, WORKFLOW_SCRIPTS_HOME, WORKFLOW_SCRIPTS_PACKAGE, MARKDOWN_FILTER_NAME, MARKDOWN_CLEAN_FILTER_NAME, MARKDOWN_SMUDGE_FILTER_NAME
 

@@ -80,6 +80,21 @@ def main():
         latex_matches = LATEX_REGEX.findall(input_text)
         
         if latex_matches:
+            codeblocks = input_text.split("```")
+            #    0      1 !       2        3!
+            # [..., (`) ..., (`) ..., (`) ...,]
+            
+            for latex_match in latex_matches[:]:
+                if "```" in latex_match:
+                    latex_matches.remove(latex_match)
+                    continue
+                    
+                for codeblock_index in range(1, len(codeblocks), 2):
+                    if latex_match in codeblocks[codeblock_index]:
+                        latex_matches.remove(latex_match)
+                    
+            
+            
             input_text = clean_latex(input_text, latex_matches)
 
 

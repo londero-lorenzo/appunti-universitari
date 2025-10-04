@@ -44,6 +44,15 @@ def clean_wikilink(input_text, wikilink_matches):
     
     return input_text
     
+def extract_latex_outside_codeblocks(text, regex):
+    codeblocks = text.split("```")
+    # indici pari = fuori dai blocchi, dispari = dentro
+    results = []
+    for i in range(0, len(codeblocks), 2):  # solo parti fuori dai codeblock
+        segment = codeblocks[i]
+        results.extend(regex.findall(segment))
+    return results
+
     
 def clean_latex(input_text, latex_matches):
     for match in latex_matches:
@@ -51,10 +60,11 @@ def clean_latex(input_text, latex_matches):
         
         latex = multiline_latex or inline_latex
         
-        cleaned_latex = re.sub(r'(?<!\\)([_*])', r'\_', latex)
+        cleaned_latex = re.sub(r'(?<!\\)([_*])', r'\1', latex)
         input_text = input_text.replace(latex, cleaned_latex, 1) 
         
     return input_text
+
 
 
 
@@ -68,33 +78,9 @@ def main():
         if wikilink_matches:
             input_text = clean_wikilink(input_text, wikilink_matches)
             
-        """
-        TODO(markdown-postprocess): ignorare pulizia latex nei file markdown che presentano codice
-        
-        Nei file markdown che presentano codice può essere triggerata l'espressione 
-        regolare che identifca diciture latex.
-        
-        
-        Bisogna trovare un modo per ignorare i file contenente codice in modo da evitare alterazioni problematiche.
-        """
-        latex_matches = LATEX_REGEX.findall(input_text)
-        
+        latex_matches = extract_latex_outside_codeblocks(input_text, LATEX_REGEX)
+
         if latex_matches:
-            codeblocks = input_text.split("```")
-            #    0      1 !       2        3!
-            # [..., (`) ..., (`) ..., (`) ...,]
-            
-            for latex_match in latex_matches[:]:
-                if "```" in latex_match:
-                    latex_matches.remove(latex_match)
-                    continue
-                    
-                for codeblock_index in range(1, len(codeblocks), 2):
-                    if latex_match in codeblocks[codeblock_index]:
-                        latex_matches.remove(latex_match)
-                    
-            
-            
             input_text = clean_latex(input_text, latex_matches)
 
 

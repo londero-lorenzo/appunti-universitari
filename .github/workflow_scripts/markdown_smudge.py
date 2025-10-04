@@ -43,6 +43,15 @@ def smudge_svglink(input_text, svglink_matches):
 
     return input_text
 
+def extract_latex_outside_codeblocks(text, regex):
+    codeblocks = text.split("```")
+    # indici pari = fuori dai blocchi, dispari = dentro
+    results = []
+    for i in range(0, len(codeblocks), 2):  # solo parti fuori dai codeblock
+        segment = codeblocks[i]
+        results.extend(regex.findall(segment))
+    return results
+
 
 def smudge_latex(input_text, latex_matches):
     for match in latex_matches:
@@ -66,7 +75,7 @@ def main():
         if svglink_matches:
             input_text = smudge_svglink(input_text, svglink_matches)
 
-        latex_matches = LATEX_REGEX.findall(input_text)
+        latex_matches = extract_latex_outside_codeblocks(input_text, LATEX_REGEX)
 
         if latex_matches:
             input_text = smudge_latex(input_text, latex_matches)

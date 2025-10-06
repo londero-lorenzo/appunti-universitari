@@ -60,7 +60,7 @@ def clean_latex(input_text, latex_matches):
         
         latex = multiline_latex or inline_latex
         
-        cleaned_latex = re.sub(r'(?<!\\)([_*])', r'\1', latex)
+        cleaned_latex = re.sub(r'(?<!\\)([_*])', r'\\\1', latex)
         input_text = input_text.replace(latex, cleaned_latex, 1) 
         
     return input_text

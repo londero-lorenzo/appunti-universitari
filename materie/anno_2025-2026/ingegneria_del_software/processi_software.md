@@ -1,9 +1,10 @@
 ---
-title: "6-10-25"
-aliases: ["6-10-25"]
-tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "6-10-25"]
-created: 2025-10-06
+title: "Processi Software"
+aliases: ["Processi Software"]
+tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "processi-software"]
+created: 2025-10-14
 ---
+
 ### Code and Fix
 + Ha numerose limitazioni che lo rendono inadeguato per lo sviluppo di software professionale
 >[!example]
@@ -24,8 +25,19 @@ created: 2025-10-06
 
 ### No free lunch
 + Non esiste un processo software universale
-
++ non esiste un unico metodo di ingegneria del software che può essere applicato a tutti questi sistemi
++ processo utilizzato in aziende dipende:
+	+ dal tipo di software che si sta sviluppando
+	+ dalle richieste del cliente
+	+ dalle capacità delle persone che scrivono il software
 # Attività dei processi software
+
+## Attività fondamentali
++ Ciascun processo è composto da attività fondamentali
++ Tutti i processi software condividono queste attività fondamentali
++ Queste attività possono essere organizzate e realizzate in modi diversi in processi diversi
+
+## 4 attività fondamentali
 
 + **Acquisizione, analisi e specifica dei requisiti**: definire le funzionalità e i vincoli operativi del software da produrre (clienti e ingegneri)
 + **Progettazione e Sviluppo**: progettazione e programmazione del codice che realizza la funzionalità individuale
@@ -39,6 +51,14 @@ created: 2025-10-06
 + Definisce quali sono le alternative possibili e le scelte più ragionevoli, stimando le risorse necessarie per ciascuna alternativa
 
 ## Studio di fattibilità
+>[!definition]
+>>Stabilisce se lo sviluppo debba essere avviato, ossia:
+>>- Se esiste un mercato per il software
+>>- Se il software sia tecnicamente ed economicamente realistico
+
++ Quali sono le alternative possibili
++ Le scelte più ragionevoli
++ Stimare le risorse (finanziarie e umane) necessarie per ciascuna alternativa
 
 Report di fattibilità:
 + Definizione del problema
@@ -50,10 +70,11 @@ Report di fattibilità:
 >Tale studio dovrebbe essere relativamente rapido e poco costoso
 
 ## Acquisizione, analisi e specifica dei requisiti
-+ Attività per stabilire cosa il software dovrà fare (**non come**)
++ Attività per stabilire **cosa** il software dovrà fare (**non come**)
 + Specificare le funzionalità e le qualità che deve possedere, **senza vincolare** la progettazione e l'implementazione
 + Definisce tramite l'interazione con il committente funzioni, vincoli, prestazioni, interfacce e qualsiasi altra caratteristica che il sistema dovrà soddisfare
-+ Attività critica: un errore in questa fase può costare molto in seguito nelle fasi di progettazione e implementazione
+>[!warning] Attività critica: 
+>un errore in questa fase può costare molto in seguito nelle fasi di progettazione e implementazione
 ## Ingegneria dei requisiti
 + Sviluppa metodi per raccogliere, documentare, classificare e analizzare i requisiti
 	1. **Deduzione e analisi dei requisiti**: comprensione di cosa richiedono o si aspettano dal software i portatori di interesse
@@ -84,7 +105,7 @@ Controlla che i requisiti siano realistici, coerenti e completi
 ### Documento dei requisiti
 + Al termine della convalida si ha un documento che definisce l'insieme dei requisiti
 + Tale documento è più o meno dettagliato e formale a seconda del processo
-+ Esso deve essere comprensibile, preciso, completo, coerente, non ambiguo, modificabile
++ deve essere comprensibile, preciso, completo, coerente, non ambiguo, modificabile
 + Inoltre, in questa fase è predisposto un **piano di test** del sistema
 
 Quando analizziamo il software possono apparire degli elementi che non avevamo preso in considerazione o visto.
@@ -101,7 +122,68 @@ Quando analizziamo il software possono apparire degli elementi che non avevamo p
 + con quali dati deve interagire
 + si sviluppa il progetto in varie fasi, aggiungendo dettagli o correggendo difetti
 + le nuove informazioni sul progetto influenzano le precedenti scelte progettuali (revisioni)
+
+### Informazioni sulla piattaforma
 + dovrà interfacciarsi con la **piattaforma software**
++ piattaforma include altri sistemi software (SO, database e applicazioni)
+### Progettazione dell'architettura
 + **progettazione dell'architettura** consiste nell'identificazione della struttura complessiva del sistema, componenti principali e delle loro relazioni
 + Progetto di alto livello
 + output 
+### Progettazione dell'interfaccia
++ Definisce come un componente può essere usato da altri componenti senza conoscerne l'implementazione
++ specifica dell'interfaccia non deve essere ambigua
++ componenti possono essere progettati e sviluppati separatamente rispettando la specifica dell'interfaccia
+### Progettazione e scelta dei componenti
++ **scelta dei componenti:** riusati componenti esistenti
++ **progettazione dei componenti**: se non ce ne sono disponibili ne vengono progettati di nuovi
++ programmatore decide sui dettagli dell'implementazione
++ **progetto di dettaglio**
+
+### Output
+Progetto del software che descrive:
++ struttura del software che si deve implementare
++ modelli e strutture dati usati dal sistema
++ interfacce tra i componenti del sistema
+
+# Verifica e Validazione
++ **Verifica:** mostrare che un sistema è conforme alle sue specifiche. Se nella prima fase abbiamo estratto delle specifiche andiamo a vedere se dopo la fase di codice e modellazione il codice faccia quello che abbiamo progettato
++ **Validazione:** mostrare che un sistema soddisfi le aspettative del cliente
++ **Testing**: tecnica più utilizzata che consiste nell'eseguire il sistema utilizzando dati di prova ricavati dalle specifiche
+
+>[!tip]
+>Può richiedere processi di controllo:
+>- ispezioni
+>- revisioni
+
+## Test dei componenti
+Granularità può variare da progetto a progetto:
++ componenti possono essere entità semplici (funzioni, classi di oggetti, gruppi coerenti di queste entità)
+Ciascun componente è testato separatamente per appurare il corretto funzionamento in **isolamento**.
+
+## Test del sistema
++ Testare sistema **completo**
+	+ per sistemi complessi può richiedere più stadi
+	+ i componenti sono **integrati** in sottosistemi prima di arrivare al sistema completo
++ Errori potrebbero essere causati da:
+	+ interazioni impreviste tra i componenti
++ Verifica la **conformità** ai requisiti funzionali e non del sistema
+
+## Test del cliente
++ sistema testato con i dati reali del cliente
++ potrebbero essere rilevati problemi con i requisiti
+	+ se le funzionalità non soddisfano le necessità dell'utente
+	+ se le prestazioni sono inaccettabili
++ dimostra se il software soddisfa il cliente
+
+## Testing iterativo
++ i difetti scoperti possono portare la ripetizione di altri stadi del processo di test
+
+>[!example]
+>Alcuni errori nei componenti del programma possono apparire durante il test del sistema o il cliente può stimolare il sistema in modi non previsti dai dati simulati.
+
+# Evoluzione
++ Adattare a nuove funzionalità
++ software viene modificato continuamente nel corso della sua vita per adeguarlo ai cambiamenti dei requisiti
++ fase più lunga del ciclo di vita del software
++ attività può avvenire dopo il rilascio

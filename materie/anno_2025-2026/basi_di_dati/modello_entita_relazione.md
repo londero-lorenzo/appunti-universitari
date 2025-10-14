@@ -79,13 +79,13 @@ Un'occorrenza di entità non è un valore che identifica un oggetto (come il cog
 >La relazione Esame in figura non è in grado di descrivere il fatto che a uno studente ha sostenuto più volte lo stesso esame (perché produrrebbe ennuple identiche).
 >In tal caso anche Esame va rappresentato come entità collegata mediante relazioni alle entità Studente e Corso.
 
-![[materie/anno_2025-2026/basi_di_dati/basi_dei_dati.excalidraw.md#^frame=Q36H2577]]
+![esempiorelazione](/materie/anno_2025-2026/basi_di_dati/assets/esempiorelazione.svg)
 
 >[!definition]
 >Relazioni ricorsive
 >>Relazioni tra un'entità e se stessa.
 
-![[materie/anno_2025-2026/basi_di_dati/basi_dei_dati.excalidraw.md#^frame=4hXLvdXx]]
+![relazioniricorsive](/materie/anno_2025-2026/basi_di_dati/assets/relazioniricorsive.svg)
 
 Successione non è **simmetrica**: necessario stabilire i due ruoli che l'entità coinvolta gioca nella relazione.
 
@@ -93,7 +93,7 @@ Successione non è **simmetrica**: necessario stabilire i due ruoli che l'entit�
 >Relazioni n-arie
 >>Relazioni che coinvolgono più di due entità
 
-![[materie/anno_2025-2026/basi_di_dati/basi_dei_dati.excalidraw.md#^frame=LnY1hIjv]]
+![relazionin-arie](/materie/anno_2025-2026/basi_di_dati/assets/relazionin-arie.svg)
 Fornitore rifornisce un dipartimento di un certo prodotto.
 Un possibile insieme di occorrenze di questa relazione potrebbe stabilire che:
 + la ditta Pinto fornisce stampanti al dipartimento **Vendite** e calcolatori al dipartimento **Sviluppo**

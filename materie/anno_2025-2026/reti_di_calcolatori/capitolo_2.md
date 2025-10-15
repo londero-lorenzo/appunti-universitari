@@ -1,9 +1,5 @@
----
-title: "8-10-25"
-aliases: ["8-10-25"]
-tags: [università, "materie", "anno-2025-2026", "reti-di-calcolatori", "8-10-25"]
-created: 2025-10-08
----
+
+
 # Capitolo 2
 >[!question]
 >Nel primo abbiamo visto che la rete è composta da più nodi connessi tra loro, ma come si connettono diversi nodi?
@@ -263,3 +259,106 @@ Questo è quello che fa l'approccio a conteggio di byte con in campo Count che s
 #### Formato dei frame DDCMP
 ![[materie/anno_2025-2026/reti_di_calcolatori/assets/Immagine 2025-10-09 164304.png]]
 
+### HDLC (protocolli orientati ai bit)
+>[!definition]
+>>Un protocollo orientato ai bit considera il frame come una **sequenza di bit**.
+
+Contrassegna inizio e fine del frame con la sequenza 01111110:
++ viene trasmessa durante tutto il tempo in cui la connessione è inattiva
++ per mantenere sorgente e ricevitore sincronizzati
++ può comparire **ovunque** all'interno del frame
+
+>[!tip]
+I protocolli orientati ai bit usano  l'**interposizione di bit (bit stuffing)** analoga al carattere DLE.
+
+#### Interposizione di bit in HDLC
++ **Sorgente:** quando invia cinque valori **1** consecutivi nel corpo del messaggio inserisce un valore **0** prima di trasmettere il bit successivo
++ **Ricevitore**: se arrivano cinque valori **1** consecutivi si comporterà in base al bit successivo:
+	+ Se **0**: deriva dall'interposizione e viene eliminato
+	+ Se **1**: si tratta del marcatore **fine** frame oppure è stato introdotto un **errore**
+
++ Osservando il bit ancora successivo:
+	+ Se **0**: (gli ultimi 8 bit ricevuti sono stati 01111110) allora è marcatore di fine frame
+	+ Se **1**: (gli ultimi 8 bit ricevuti sono stati 01111111) allora deve essersi verificato un errore e il frame viene eliminato.
+		+ Il ricevitore dovrà attendere il successivo 01111110 prima di poter iniziare a ricevere di nuovo.
+
+#### Caratteristica dell'interposizione di bit
+>[!tip]
+>La dimensione del frame dipende dai dati che vengono inviati come carico utile del frame stesso: infatti non è possibile che tutti i frame abbiano la stessa dimensione, poiché i dati che si possono trovare in ciascun frame sono arbitrari.
+
+### PPP (Point-to-Point Protocol)
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/pppFrame.jpg]]
+
++ **Flag**: 01111110
++ **Address** e **Control**: contengono valori predefiniti (poco interessanti)
++ **Protocol**: usato per **demultiplexing** in quanto identifica il protocollo di livello superiore
++ **Payload**: dimensione può essere negoziata altrimenti è 1500 byte
++ **Checksum**: lungo 2 o 4 byte
+
+>[!tip]
+>Dimensioni dei campi negoziate tramite **LCP** (Link Control Protocol).
+
+# Error Detection
+
+>[!definition]
+>>A volte nei frame vengono introdotti bit errati a causa di interferenza elettrica o rumore termico.
+
++ **Rilevamento** di errori è una funzione fondamentale del livello di collegamento
+
+Quando il destinatario di un messaggio individua un errore:
++ avverte il mittente che il messaggio è stato corrotto in modo che ritrasmetta una copia
++ **ricostruire il messaggio corretto** usando degli algoritmi di rilevazione d'errore:
+	+ si basano su **codici a correzione d'errore**.
+
+## Esempi di errori nei bit
+
+### Almeno un errore in un pacchetto
+- Lunghezza pacchetto: $n=10,000$ bit (10 kb).
+- Probabilità di errore per **singolo bit**: $p_{E}=10^{−7}$.
+- Indipendenza tra bit.
+#### Probabilità di nessun errore in 10Kb
+$P=(1-p_{E})^{10,000}$
+#### Probabilità che ci sia almeno un errore
+$P(\geq1\textrm{ errore})=1-P(\textrm{nessun errore})=1-(1-p_{E})^{10,000}=1-(1-10^{-7})^{10,000}\approx0.0009995$
+Approssimazione (Poisson)
+$(1-p)^{n}\approx1-np\Rightarrow P(\geq1)\approx np=10^{4}\cdot10^{-7}=10^{-3}=0.001$
+Il valore approssimato si avvicina circa al valore esatto quindi la probabilità di avere **almeno un errore** in un pacchetto da 10Kb è circa **0.001** ovvero **1 errore ogni 1000 pacchetti**.
+
+### Esattamente due errori in un pacchetto
+
+Binomiale:
+$P(X=2)=\binom{n}{2}p^{2}_{E}(1-p_{E})^{n-2}$
+
+$\binom{10^{4}}{2}(10^{-7})^{2}(1-10^{-7})^{9998}\approx\frac{10^{4}\cdot(10^{4}-1)}{2}\cdot10^{-14}\cdot1\approx\frac{10^{8}}{2}\cdot10^{-14}\approx5\cdot10^{-7}$
+
+Quindi $P(2\textrm{ errori})\approx5\cdot10^{-7}=5p_{E}$
+
+### BER (Bit Error Rate)
+>[!definition]
+>>Frequenza dei bit errati: è proprio $p_{E}$ probabilità che un singolo bit sia sbagliato
+
+## Idea alla base del rilevamento di errori
+>[!definition]
+>>Aggiungere informazioni ridondanti al frame che possono essere usate per determinare se sono stati introdotti errori.
+
++ Immaginiamo di trasmettere due copie complete di dati se le due copie giunte a destinazione sono:
+	+ **identiche**: sono entrambe corrette
+	+ **diverse**: un errore è stato introdotto in una o entrambe (**eliminate**)
++ Schema di rilevazione **inefficiente**:
+	+ vengono inviati $n$ bit ridondanti per un messaggio di $n$ bit
+	+ sfuggono alla rilevazione di molti errori
+
+### Schemi migliori
+>[!tip]
+>Siamo in grado di garantire una forte capacità di rilevazione d'errore:
+> - inviando solo $k$ bit ridondanti per un messaggio di $n$ bit 
+> - con $k$ molto minore di $n$
+
+>[!example]
+>In una linea Ethernet un frame contente fino a **12000** bit (1500 byte) di dati richiede soltanto un codice CRC di 32 bit.
+
+Bit aggiuntivi inviati sono detti ridondanti perché non aggiungono alcuna informazione al messaggio:
++ calcolati elaborando direttamente il messaggio ordinario mediante **algoritmi**
++ algoritmi conosciuti sia da **mittente** che **destinatario**
++ mittente applica l'algoritmo per generare **bit ridondanti**
++ destinatario applica lo stesso algoritmo e in assenza di errori dovrebbe ottenere lo stesso risultato del mittente.

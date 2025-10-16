@@ -1,7 +1,12 @@
 ---
-title: "14-10-25"
-aliases: ["14-10-25"]
-tags: [università, "materie", "anno-2025-2026", "interazione-uomo-macchina", "14-10-25"]
+title: 2-Computer-e-le-periferiche-per-l'interazione
+aliases:
+  - 2-Computer-e-le-periferiche-per-l'interazione
+tags:
+  - università
+  - materie
+  - anno-2025-2026
+  - interazione-uomo-macchina
 created: 2025-10-14
 ---
 

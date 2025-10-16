@@ -1,12 +1,19 @@
 ---
-title: "30-09-25"
-aliases: ["30-09-25"]
-tags: [università, "materie", "anno-2025-2026", "internet-of-things", "30-09-25"]
+title: 1-Introduzione
+aliases:
+  - 1-Introduzione
+tags:
+  - università
+  - materie
+  - anno-2025-2026
+  - internet-of-things
 created: 2025-09-30
 ---
 >[!definition]
 >IoT
 >>oggetti in grado di interagire con l'ambiente reale e connessi alla stessa infrastruttura di rete
+
+
 
 >[!definition]
 >Flusso seriale: 

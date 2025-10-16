@@ -1,9 +1,17 @@
 ---
-title: "3-10-25"
-aliases: ["3-10-25"]
-tags: [università, "materie", "anno-2025-2026", "social-computing", "3-10-25"]
+title: 2-Social-media-introduzione
+aliases:
+  - 2-Social-media-introduzione
+tags:
+  - università
+  - materie
+  - anno-2025-2026
+  - social-computing
 created: 2025-10-03
 ---
+
+(La slide numero 1 presentava un'introduzione dimenticabile al corso)
+
 # Definizione di Social Media
 
 >[!definition]

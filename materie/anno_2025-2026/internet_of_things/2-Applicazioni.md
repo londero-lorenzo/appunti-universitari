@@ -1,7 +1,12 @@
 ---
-title: "2-10-25"
-aliases: ["2-10-25"]
-tags: [università, "materie", "anno-2025-2026", "internet-of-things", "2-10-25"]
+title: 2-Applicazioni
+aliases:
+  - 2-Applicazioni
+tags:
+  - università
+  - materie
+  - anno-2025-2026
+  - internet-of-things
 created: 2025-10-02
 ---
 ### Tipologie di sensori:

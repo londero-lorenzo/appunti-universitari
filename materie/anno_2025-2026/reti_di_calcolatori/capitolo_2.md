@@ -540,3 +540,135 @@ Esempio hardware per il generatore $x^{3}+x^{2}+1$
 - CRC-16: $x^{16}+x^{15}+x^{2}+1$
 - CRC-CCITT: $x^{16}+x^{12}+x^{5}+1$
 - CRC-32: $x^{32}+x^{26}+x^{23}+x^{22}+x^{16}+x^{12}+x^{11}+x^{10}+x^{8}+x^{7}+x^{5}+x^{4}+x^{2}+x+1$
+
+# Reliable Transmission (Trasmissione affidabile)
+Un protocollo del livello di linea di connessione che voglia consegnare frame in maniera affidabile deve gestire queste situazioni in cui ci sono frame scartati o perduti.
+
+>[!definition]
+>Acknowledgement
+>>È un piccolo **frame di controllo** restituito da un protocollo alla sua entità di pari livello per segnalare la ricezione di un frame precedente.
+>>Frame di controllo si intende un'**intestazione** senza dati.
+
+Il ricevimento di una conferma segnala al mittente del frame che tale frame è stato consegnato correttamente.
+
+>[!definition]
+>Timeout
+>>Se il mittente non riceve conferma entro **un intervallo di tempo ragionevole** il frame viene ritrasmesso.
+
+>[!definition]
+>ARQ (Automatic Repeat Request)
+>>Strategia che usa *acknowledgement* e *timeout* per realizzare la consegna affidabile.
+
+## Stop-and-wait
+
+>[!definition]
+>>Dopo aver trasmesso un frame il mittente aspetta un acknowledgement prima di trasmettere il frame successivo.
+
+Se l'acknowledgement non arriva entro un certo periodo di tempo, il mittente dichiara *timeout* e ritrasmette il frame.
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/stop-and-wait.jpg]]
++ a) frame ACK viene ricevuto prima che scada il tempo
++ b) e c) vengono perduti il frame originale e il frame ACK
++ d) il tempo scade troppo presto
+>[!warning]
+>Supponiamo che il mittente invii un frame e il ricevitore ne dia conferma.
+>La conferma va perduta o arriva in ritardo.
+>Come illustrato in **(c)** e **(d)** il mittente dichiara timeout e ritrasmette il frame ma il ricevente penserà che si tratti del frame successivo perché aveva ricevuto correttamente il primo frame: questo può provocare la consegna di due copie di uno stesso frame.
+
+Per ovviare al problema di copie di uno stesso frame in un protocollo stop-and-wait:
++ l'intestazione contiene un numero di sequenza di **un solo bit**
++ numero di sequenza può assumere soltanto i valori 0 e 1
++ 0 e 1 usati alternativamente per ciascun frame
++ il mittente ritrasmette il frame 0
++ il ricevitore è in grado di determinare se:
+	+ è una seconda copia del frame 0 (nel caso ignora il frame)
+	+ piuttosto che la prima copia del frame 1
+
+>[!warning] Difetto dell'algoritmo
+>Consente al mittente di avere un solo frame per volta sulla linea, in attesa di conferma, e ciò può essere molto meno di quanto consentito dalla capacità di collegamento.
+
+>[!example]
+>Una linea di collegamento a 1.5 Mbps con RTT 45 ms.
+>Ritardo x ampiezza = 67.5 Kb cioè circa 8 KB.
+>Dato che il mittente può inviare un solo frame per ciascun intervallo di tempo di durata RTT, ipotizzando una dimensione di frame di 1 KB ciò implica una **velocità massima** di invio di BitPerFrame/TempoPerFrame = $1024 \times 8/0.045= 182\textrm{ Kbps}$
+>ovvero un ottavo della capacità della linea.
+>Per sfruttare a pieno la linea dovremmo consentire al mittente di trasmettere fino a otto frame prima di metterlo in attesa di un acknowledgement.
+
+## Sliding window
+Tenendo a mente l'esempio di prima, vorremmo che il mittente fosse pronto per **trasmettere** il nono frame proprio nello **stesso momento** in cui arriva la conferma del **primo frame**.
+
+### Mittente
++ assegna a ciascun frame un **numero di sequenza** (SeqNum):
+	+ SeqNum: realizzato con un campo d'intestazione di dimensioni finite (ipotizziamo che possa diventare arbitrariamente grande)
+	+ gestisce **tre variabili**:
+		+ **dimensione della finestra di invio** SWS: il limite superiore per il numero di frame che il mittente può trasmettere sulla linea senza che questi siano confermati
+		+ **LAR** (last acknowledgement received): indica il numero di sequenza dell'**ultima conferma ricevuta**
+		+ **LFS** (last frame sent): indica il numero di sequenza dell'**ultimo frame inviato**
+		+ invariante LFS - LAR $\leq$ SWS
+	+ quando arriva una conferma sposta LAR verso **destra**
+	+ così consente l'invio di un altro frame
+	+ associa un conto alla rovescia a ciascun frame che trasmette con conseguente **ritrasmissione** se il tempo scade prima di aver ricevuto l'**ACK**
+
+### Ricevitore
++ gestisce le variabili:
+	+ **dimensione della finestra di ricezione** RWS: limite superiore per il numero di frame fuori sequenza che può accettare
+	+ **LAF** (largest acceptable frame): il numero di sequenza del **frame accettabile più elevato**
+	+ **LFR** (last frame received): il numero di sequenza dell'**ultimo frame ricevuto**
++ invariante LAF - LFR $\leq$ RWS
+ 
++ Se SeqNum $\leq$ LFP o SeqNum > LAF il frame si trova al di fuori della RWS viene **scartato**
++ Se LFR $<$ SeqNum $\leq$ LAF il frame si trova all'interno della RWS e viene **accettato**
+
++ SeqNumToAck: il più elevato numero di sequenza non ancora confermato in modo che tutti i frame con numeri di sequenza $\leq$ SeqNumToAck siano già stati ricevuti.
+
++ **Conferma cumulativa** la ricezione di SeqNumToAck anche se sono stati ricevuti pacchetti con numero più elevato 
++ LFR = SeqNumToAck
++ LAF = LFR + RWS
+
+>[!example]
+>LFR = 5 (l'ultimo ACK inviato dal ricevitore era relativo al numero di sequenza 5)
+>RWS = 4
+>Implica LAF = 9
+>- Se dovessero arrivare i frame 7 e 8 (che sono dentro RWS) verrebbero memorizzati ma senza inviare alcun ACK
+>- Perché il frame 6 non è ancora arrivato
+>- Frame 7 e 8 sono arrivati **fuori sequenza**
+>- Se dovesse arrivare il frame 6 in ritardo perché è stato perso
+>- Ora il ricevitore
+>	- confermerà il frame 8
+>	- sposta LFR a 8
+>	- sposta LAF a 12
+
+### Problemi con lo Sliding Window Protocol
++ Quando avviene un timeout:
+	+ quantità di dati in transito sulla linea diminuisce
+	+ il mittente non è in grado di far avanzare la propria finestra
+
+>[!tip]
+>Quando si verificano perdite di pacchetti questo schema non è più in grado di mantenere la conduttura piena.
+>Più tempo occorre per accorgersi che un pacchetto è andato perduto più grave diventa questo problema.
+
+#### Migliorare inviando una delle seguenti conferme:
+##### Conferma negativa (negative acknowledgement):
++ Per il frame 6 non appena fosse giunto il frame 7
++ non sarebbe necessario perché il meccanismo di **timeout** del mittente è **sufficiente** per gestire questa situazione e l'invio di conferme negative **aggiunge complessità** al ricevitore
+##### Conferme aggiuntive
++ per il frame 5 quando sono stati ricevuti i frame 7 e 8
++ in alcuni casi il mittente può utilizzare le conferme duplicate come un segnale che un frame è andato perduto
++ Usato nel TCP
+##### Conferme selettive
+Il ricevitore potrebbe confermare i singoli pacchetti ricevuti, invece di segnalare il numero di sequenza più elevato dei frame ricevuti in ordine
++ Nell'esempio di prima il ricevitore potrebbe confermare la ricezione dei frame 7 e 8
++ Mittente sa che il frame 6 è perso
++ Mittente può mantenere il canale occupato (al prezzo di una complessità maggiore)
+### Dimensione della finestra del mittente
+Scelta in base al numero di frame che vogliamo avere in transito sulla linea in un determinato istante.
+
+>[!tip]
+>Facile calcolare SWS una volta assegnato il prodotto ritardo x ampiezza di banda.
+
++ Il ricevitore può usare il valore RWS che desidera
+	+ RWS = 1: il ricevitore non memorizza alcun frame che arrivi **fuori sequenza**
+	+ RWS = SWS: il ricevitore memorizza tanti frame quanti ne può trasmettere il mittente
++ Usare un valore **RWS > SWS** non ha senso, perché è impossibile che arrivino fuori sequenza frame in **numero maggiore di SWS**.
++ Se **RWS** **> SWS** il mittente potrebbe inviare i frame che il ricevitore non riesce a mettere in buffer e quindi devono essere scartati e ritrasmessi in seguito.
+

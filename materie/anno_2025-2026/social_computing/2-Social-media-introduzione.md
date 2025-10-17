@@ -8,9 +8,9 @@ tags:
   - anno-2025-2026
   - social-computing
 created: 2025-10-03
+description: (LA SLIDE NUMERO 1 PRESENTAVA UN'INTRODUZIONE DIMENTICABILE AL CORSO)
 ---
 
-(La slide numero 1 presentava un'introduzione dimenticabile al corso)
 
 # Definizione di Social Media
 

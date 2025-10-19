@@ -597,6 +597,7 @@ Per ovviare al problema di copie di uno stesso frame in un protocollo stop-and-w
 ## Sliding window
 Tenendo a mente l'esempio di prima, vorremmo che il mittente fosse pronto per **trasmettere** il nono frame proprio nello **stesso momento** in cui arriva la conferma del **primo frame**.
 
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/slidingWindowProtocol.jpg]]
 ### Mittente
 + assegna a ciascun frame un **numero di sequenza** (SeqNum):
 	+ SeqNum: realizzato con un campo d'intestazione di dimensioni finite (ipotizziamo che possa diventare arbitrariamente grande)
@@ -672,3 +673,195 @@ Scelta in base al numero di frame che vogliamo avere in transito sulla linea in 
 + Usare un valore **RWS > SWS** non ha senso, perché è impossibile che arrivino fuori sequenza frame in **numero maggiore di SWS**.
 + Se **RWS** **> SWS** il mittente potrebbe inviare i frame che il ricevitore non riesce a mettere in buffer e quindi devono essere scartati e ritrasmessi in seguito.
 
+### Numeri di sequenza finiti
+Numero di sequenza di un frame è specificato all'interno di un **campo dell'intestazione** (dimensione finita).
+
+>[!example]
+>Un campo di 3 bit: otto possibili numeri di sequenza da 0 a 7.
+
++ riutilizzare i numeri di sequenza
++ numeri di sequenza devono tornare al loro valore iniziale
++ distinguere fra diverse **incarnazioni** degli stessi numeri di sequenza
+>[!tip]
+>I numeri di sequenza **possibili** devono essere **più del numero di frame non confermati** a cui è consentito di essere in transito sulla linea.
+
+#### Stop-and-wait
+>[!example]
+>L'algoritmo stop-and-wait consente solo un frame non confermato e ha quindi **due** numeri di sequenza (0 e 1).
+
+#### Sliding window
++ Numeri disponibili come numero di sequenza sono uno in più del numero di frame in **transito**
++ SWS $\leq$ MaxSeqNum - 1
++ MaxSeqNum: **quantità di numeri di sequenza disponibili**
+>[!question] È sufficiente?
+>Dipende da RWS:
+>- RWS = 1: MaxSeqNum $\geq$ SWS+1 **è sufficiente**
+>- RWS = SWS: MaxSeqNum maggiore della dimensione della finestra di invio soltanto per un'unità **non è sufficiente**
+>	- se abbiamo 8 numeri di sequenza 0-7
+>	- SWS = RWS = /
+>	- il mittente trasmette i frame da 0-6 
+>	- ricevuti con successo ma **perdute** le conferme
+>	- ricevitore aspetta il frame 7 seguito da frame numerati di nuovo da 0 a 5
+>	- il mittente vede scadere le temporizzazioni e invia di nuovo i frame da 0 a 6
+>	- ricevitore sta aspettando la **seconda incarnazione** dei frame da 0 a 5 ma riceve **una copi dei precedenti**
+>	- **situazione che vogliamo evitare**
+
+Nel caso RWS = SWS: la dimensione della finestra di invio non può essere maggiore della metà del numero di numeri di sequenza disponibili.
+
+$\textrm{SWS}<\frac{(\textrm{MaxSeqNum}+1)}{2}=2^{n-1}$
+$n$: sono i bit per il numero di sequenza.
+
++ solo **metà** dei numeri di sequenza possono essere sospesi in qualsiasi momento
+>[!example]
+>Dall'esempio sopra settiamo RWS = SWS = 4
+>- mittente invia i frame da 0 a 3 e aspetta per gli ACK
+>- ricevitore riceve i frame da 0 a 3 e manda i corrispettivi ACK e aspetta per i frame da 4 a 7
+>- tutti gli ACK vanno persi
+>- mittente **ritrasmette** da 0 a 3
+>- ricevitore stava aspettando da 4 a 7 ma riconosce che i frame da 0 a 3 sono copie di quelli già ricevuti quindi non li accetta e manda gli ACK di nuovo
+
+# ETHERNET (IEEE 802.3)
+
+Usa il protocollo **CSMA/CD** (Carrier Sense Multiple Access with Collision Detect, accesso multiplo a sensore di portante con rilevazione di collisione).
+
+>[!definition]
+>>Rete ad accesso multiplo: insieme di nodi inviano e ricevono frame tramite una linea di connessione condivisa.
+>Ethernet è come un **autobus** con più fermate lungo la sua linea.
+
+>[!definition]
+>Carrier sense
+>>Tutti i nodi sono in grado di distinguere una linea **inattiva** da una linea **occupata**.
+
+>[!definition]
+>Collision Detect
+>>Un nodo rimane in ascolto mentre trasmette e può quindi capire quando un frame che sta trasmettendo subisce interferenza da un frame trasmesso da un altro nodo.
+
+>[!question] Come mediare l'accesso ad un mezzo condiviso in modo equo ed efficiente?
+>Algoritmo che controlla il momento in cui ciascun nodo può trasmettere.
+
+## Proprietà fisiche - 10Base5
+
+Ethernet si realizza con cavo coassiale di lunghezza fino a 500 m.
+
++ Possono connettersi fino a **100 host** mediante prese *tap*
++ prese devono essere distanti una dall'altra almeno 2.5 m
+>[!definition]
+>Transceiver
+>>Piccolo dispositivo elettronico che rileva i momenti in cui la **linea è inattiva** e **pilota il segnale** quando l'host trasmette.
+>>Riceve i segnali in ingresso.
+>>Collegato a un **adattatore** Ethernet nell'host.
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/ethernet10base5.jpg]]
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/transceiveradaptor.jpg]]
+
++ Qualsiasi segnale inserito sulla Ethernet da un host viene pervenuto dall'intera rete
+	+ segnale si propaga in **entrambe** le direzioni
+	+ ripetitori **inoltrano** il segnale su tutti i **segmenti**
+	+ **terminatori** alla fine di ciascun segmento **assorbono** il segnale ed impediscono che rimbalzi
+
+10base5 Ethernet usa lo schema di codifica **Manchester**:
++ 0V quando non trasmette
++ $\pm0.85V$ quando trasmette
+
++ Più segmenti ethernet possono essere uniti mediante **ripetitori**
+
+>[!definition]
+>Ripetitori
+>>Dispositivi che inoltrano segnali digitali più o meno come un amplificatore è in grado di inoltrare segnali analogici.
+
+
+>[!warning]
+>Tra una coppia di Host non si possono inserire più di quattro ripetitori.
+>Una rete Ethernet ha una estensione massima di 2500 m.
+
++ segmenti possono essere connessi in ogni modo a patto che
+	+ non ci siano loop
+	+ non ci siano più di 4 ripetitori tra gli host
++ tipico collegamento era un segmento che collegasse solo i ripetitori (**backbone**)
+	+ tutte le stazioni sono su connesse ad ogni segmento
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/connessioneripetitori.jpg]]
+
+## 10Base2, 10BaseT
+
+### 10Base2
++ Cavo più sottile
++ rete opera a 10Mbps
++ Base: il cavo viene usato come sistema in **banda base**
++ 2: un segmento non può essere lungo più di 200 m
+### 10BaseT
++ T: **twisted pair** cavo doppino intrecciato
++ lunghezza massima 100 m
++ usa la decodifica 4B/5B e MLT-3 invece della Manchester
+
+## Fattori velocità minima per cavi di rete
++ Fattore velocità = velocità della luce in media / velocità della luce nel vuoto
++ più lenta è il fattore velocità, più lentamente il segnale si propaga, più grande sarà il **delay** introdotto dalla propagazione di segnale
++ Il fattore velocità è molto diverso a seconda del mezzo
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/velocityfactor.jpg]]
+
+## Ethernet 10BaseT
++ Configurazione: segmenti **punto-punto** connessi ad un ripetitore a molte vie (**hub**)
+	+ riceve un frame su una porta
+	+ lo inoltra a tutte le altre porte (store-and-forward of frames, CRC check, non bit-by-bit like repeaters)
+	+ da **non** confondere con gli switch
++ ogni doppino intrecciato può essere considerato come un **singolo segmento Ethernet** (un host trasmettitore e un host ricevitore)
+	+ un paio da hub all'host e un paio dall'host all'hub
+	+ le due coppie sono indipendenti: entrambe le parti possono trasmettere allo stesso tempo (**full duplex**)
+
+## Mixed networks
+>[!definition]
+>>Gli host sono connessi agli hub, che sono connessi tra di loro da un cavo 10base-5 o 2 (**backbone**).
+
++ La rete deve essere intesa come una **singola**: un frame inviato da un host è inviato a ogni segmento e a tutti gli host.
+## Formato del frame
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/frameformat.jpg]]
++ **Preambolo** (7 byte 10101010): su 10Base5 e 10Base2 genera un onda quadra di 10 MHz che permette al ricevitore di sincronizzarsi con il segnale
++ **Start of Frame Delimiter** (8 bit 10101011): sentinella che indica l'inizio del frame
++ **Host sorgente e destinazione**: identificati da un indirizzo a 48 bit
++ **VLAN** tag (optional, 4 byte): indica a quale Virtual LAN appartiene questo frame
++ **Packet type** (16 bit): agisce come **chiave di demux** per identificare un protocollo di livello più alto
++ **Data** (minimo 64 byte, massimo 1500 byte):
+	+ devono essere aggiunti dei byte riempitivi prima della trasmissione
+	+ esiste una dimensione minima perché deve essere sufficientemente lungo da consentire la rilevazione di una **collisione**
++ **CRC-32** (32 bit)
++ **Overall**: un 14(+4) byte in testa e 4-byte nella coda
+	+ 8 byte di preambolo e SFD che non sono parte del frame
+
+## Indirizzi
+Ogni hot ha un indirizzo Ethernet univoco composto da 48 bit.
+Limite teorico di $2^{48}=2.8\*10^{14}$
+
++ L'indirizzo è relativo all'**adattatore** non all'host:
+	+ solitamente era scritto in una ROM, ora nella **flash memory** dell'adattatore
+	+ a ciascun produttore di dispositivi Ethernet viene assegnato un diverso prefisso (**primi 3 byte**) che costruisce la parte iniziale dell'indirizzo
++ L'indirizzo è una sequenza di sei numeri separati dal carattere ":"
+	+ ciascun numero corrisponde ad uno dei **6 byte** ed è scritto come coppia di cifre esadecimali una per ciascuna delle due parti di **4 byte** eliminando eventuali zeri iniziali
+>[!example]
+>8:0:2b:e4:b1:2 corrisponde a:
+>00001000 00000000 00101011 11100100 10110001 00000010
+## Algoritmo del ricevitore
+Ciascun frame trasmesso in una rete Ethernet viene ricevuto da **tutti** gli adattatori ad essa connessi:
++ ciascun adattatore identifica i frame che sono destinati al **suo indirizzo**
++ controlla il CRC
++ passa soltanto quelli all'host
++ ignora gli altri indirizzi **unicast**
+
+>[!definition]
+>Indirizzo Broadcast
+>>Tutti i bit a 1: i frame con destinazione broadcast vengono passati da tutti gli adattatori al proprio host.
+
+>[!definition]
+>Indirizzo Multicast
+>>Primo bit ha valore 1.
+>>Sono usati per inviare messaggi a sottoinsiemi degli host di una Ethernet.
+
+Adattatore Ethernet **riceve** tutti i frame e accetta soltanto:
++ i frame destinati al **proprio indirizzo**
++ i frame destinati **all'indirizzo broadcast**
++ frame destinati ad un indirizzo multicast se ha ricevuto istruzioni per ascoltare il traffico destinato a tale indirizzo
++ tutti i frame, se è stato configurato per funzionare in modalità promiscua
+## Algoritmo del trasmettitore
+>[!definition]
+>>Il frame viene trasmesso immediatamente senz

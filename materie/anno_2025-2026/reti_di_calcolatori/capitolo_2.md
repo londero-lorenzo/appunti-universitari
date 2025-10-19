@@ -863,5 +863,263 @@ Adattatore Ethernet **riceve** tutti i frame e accetta soltanto:
 + frame destinati ad un indirizzo multicast se ha ricevuto istruzioni per ascoltare il traffico destinato a tale indirizzo
 + tutti i frame, se è stato configurato per funzionare in modalità promiscua
 ## Algoritmo del trasmettitore
+
+**Media Access Control (MAC)**
+
 >[!definition]
->>Il frame viene trasmesso immediatamente senz
+>>Il frame viene trasmesso immediatamente senza alcuna negoziazione con gli altri adattatori.
+
+>[!tip]
+>Il limite superiore di **1500 byte** per il messaggio garantisce che l'adattatore può impegnare la linea solo per un **periodo di tempo prefissato**.
+
++ Quando la linea è **impegnata** adattatore ha un frame da inviare :
+	+ aspetta finché la linea non diventa **idle**
+	+ **protocollo con persistenza**: adattatore trasmette con probabilità $0\leq p \leq 1$ dopo che una linea è diventata **idle**.
+### CSMA/CD Protocol
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/csma-cd.jpg]]
++ **Idle**: linea inattiva
++ **Contesa**: alcune stazioni vogliono trasmettere e devono aspettare che la linea sia **liberata**
+	+ Significa che non ci sarà segnale sulla linea per il tempo **IPG**: 12 byte = 96 bit 9.6$\micro s$ in 10Base-5 e 2
++ **Trasmissione**: una o più stazioni trasmettono
+>[!tip]
+>Dividere il tempo in **intervalli discreti** dove ciascun intervallo corrisponde al tempo necessario per **trasmettere un intero frame**.
+
++ un nodo ha un frame da inviare:
+	+ presenza di intervallo libero
+	+ trasmette con **probabilità** $p$
+	+ attende l'intervallo successivo con probabilità $q=1-p$
+	+ se anche il successivo è vuoto
+		+ nodo decide se trasmettere oppure no
+		+ con **stesse** probabilità $p$ e $q$
+	+ se il successivo **non è vuoto**:
+		+ il nodo **attende** il successivo intervallo inattivo
+		+ algoritmo si ripete
+
++ Poiché non esiste controllo **centralizzato**:
+	+ due o più adattatori inizino a trasmettere nello **stesso momento**
+	+ perché linea inattiva oppure hanno aspettato che lo diventasse
+	+ si dice che i due frame hanno **colliso**
+
+#### Collisioni
+Ethernet è in grado di gestire le collisioni:
++ ciascuna sorgente può stabilire che si sta verificando una collisione
+	+ comparano cosa tramettono e cosa ricevono: se la differenza non è **0** c'è collisione
++ quando un adattatore si accorge che il suo frame sta entrando in collisione con un altro
+	+ trasmette una sequenza di disturbo di **32 bit** (**jamming sequence**)
+	+ interrompe la trasmissione
+	+ **in caso di collisione** il trasmettitore invierà minimo soltanto **96 bit**: 64 bit di preambolo e 32 bit di sequenza di disturbo
+>[!definition]
+>Runt Frame
+>>Caso in cui un adattatore invierà soltanto 96 bit, quando due host che **generano collisione**, sono **adiacenti**.
+
+#### Caso peggiore
+>[!definition]
+>>I due host si trovano in posizione opposte della rete.
+
++ Il trasmettitore dovrebbe inviare fino a 512 bit:
+	+ ogni frame Ethernet ha almeno 512 bit (64 byte):
+		+ 14 byte di intestazione
+		+ 46 byte di dati
+		+ 4 byte di CRC
+>[!question] Perché proprio 512 bit ? Perché la lunghezza è limitata a soli 2500 m ?
+> Più due nodi sono distanti, **più tempo serve** al frame inviato da un nodo per raggiungere l'altro nodo, in tale intervallo di tempo la **rete è vulnerabile** al fenomeno della **collisione**.
+
+>[!example]
+>- l'host A inizia a trasmettere un frame all'istante $t$
+>	- $t_{prop}$ = latenza del collegamento (tempo di propagazione)
+>	- frame impiega un tempo $t_{prop}$ per raggiungere A
+>	- il primo bit del frame di A arriva in B all'istante $t+t_{prop}$
+>- supponiamo che un'istante prima che il frame di A arrivi in B (B vede la linea **inattiva**)
+>	- host B inizia a trasmette il suo frame
+>	- colliderà subito con il frame A
+>	- tale **collisione** sarà rilevata da B
+>	- B invierà una sequenza di disturbo di 32 bit
+>	- A non saprà della collisione finché non arriverà il frame di B
+>	- che accadrà dopo un tempo uguale **alla latenza della linea** $t+2\times t_{prop}$
+>	- per rilevare la collisione A deve continuare a trasmettere fino a tale istante: $2\times t_{prop}$
+
+Considerando che:
++ Ethernet più estesa al massimo di 2500 m
++ tra due host qualsiasi ci possono essere fino a **quattro** ripetitori
+	+ con **delay** limitato a 3.7$\micro s$
++ **ritardo round-trip** è stato quantificato in 51.2$\micro s$
+	+ in una Ethernet a 10 Mbps equivale a 512 bit
+
+>[!tip]
+>Limitare la **latenza massima** di una Ethernet ad un valore **sufficientemente piccolo** perché l'algoritmo funzioni.
+
+>[!definition]
+>Backoff esponenziale
+>> - Quando un adattatore ha rilevato una collisione e interrotto la propria trasmissione attende un certo periodo di tempo e riprova:
+>> 	- ogni volta che tenta di **trasmettere** e **fallisce:**
+>> 	- **raddoppia** il periodo di tempo di attesa prima del tentativo successivo
+
+>[!tip] Conseguenza
+>Il tempo necessario per trasmettere il frame non è **deterministico**: dipende da **quante collisioni avvengono**, cioè da quanti **adattatori stanno tentando di trasmettere** e quindi **del carico complessivo della rete**.
+
+>[!example]
+> - SlotTime = 51.2$\micro s$
+> 	- primo tentativo: adattatore prova a trasmettere immediatamente **dopo aver atteso l' IPG**. (Se non sono rilevate collisioni durante lo SlotTime).
+> 	- altrimenti l'adattatore:
+> 		- manda un *runt frame*
+> 		- aspetta l'IPG e riprova
+> 		- ma con un **delay** di 0 o SlotTime (scelta random)
+> 	- se fallisce (collisione) prova ancora ma sta volta
+> 		- tempo di attesa: $k\times \textrm{SlotTime}$ per $k=0...3$ random
+> 	- nel caso di altra collisione aspetta $k\times \textrm{SlotTime}$ con $k=0...2^{3}-1$
+
++ In generale dopo $n$ collisioni l'algoritmo seleziona random $k=0 ... 2^{n}-1$:
+	+ Se $10<n<16$ l'esponente è fissato a 10
++ $n$ è limitato a 15
+	+ dopo 16 collisioni consecutive il pacchetto viene scartato e segnala un errore
+	+ **praticamente impossibile**: solo se il cavo ha un difetto hardware
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/transmitteralgorithm.jpg]]
+
+## Efficienza
+- L’efficienza è la **frazione a lungo termine delle trasmissioni riuscite**, cioè la **frazione a lungo termine del canale effettivamente usata per i dati**.
+
+- L’efficienza è data dal **rapporto tra il tempo di trasmissione** e il **tempo effettivo necessario per trasmettere un frame**.
+
+- Il protocollo **CSMA/CD** non è semplice da analizzare, a causa della sua natura **non deterministica** e del fatto che **non tutte le stazioni si comportano nello stesso modo**.
+
+- Consideriamo alcune situazioni semplificate:
+    - Quando **una sola stazione trasmette**.
+    - Quando **tutte le stazioni si comportano nello stesso modo**.
+
+### Stazione trasmittente singola
+
+- Caso molto semplice: **una singola stazione trasmette** sul canale e tutte le altre **ricevono soltanto**.
+    
+- Questa è la situazione tipica di una **LAN basata su hub o switch**: ogni doppino (coppia di fili) rappresenta un **dominio di collisione**, con **1 trasmettitore** e **1 ricevitore**.
+    
+- In questo scenario **non si verificano collisioni**: un frame viene inviato con successo **immediatamente dopo l’intervallo IPG**.
+
+**Parametri:**
+- $IPG = 9.6\ \mu s = 96\ bit = 12\ byte$
+- Preambolo + SFD = 8 byte
+- $P$ = lunghezza del payload (fino a 1500 byte)
+- Header + CRC = 18 byte
+
+**Efficienza teorica:**
+$$
+η= \frac{P}{12 + 8 + P + 18} = \frac{P}{P + 38} = \frac{1}{1 + \frac{38}{P}}​
+$$
+
+$$
+η=\frac{1}{1+\frac{38}{P}​}​
+$$
+- Più grande è $P$, **più efficiente** è il protocollo.
+- **Caso peggiore con padding:** $P = 1$ ma in realtà $P = 46$ (a causa del padding)
+$$
+    η=\frac{1}{46 + 38} = \frac{1}{84} \approx 1.2\%
+    $$
+- **Caso peggiore senza padding:** $P = 46$
+$$
+η=\frac{46}{46 + 38} = 0.54 = 54\%
+$$
+- **Caso migliore:** $P = 1500$
+$$
+η=\frac{1500}{1500 + 38} \approx 0.97 = 97\%
+$$
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/ethernetefficiency.jpg]]
+
+### N stazioni uguali in competizione
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/stationscompeting.jpg]]
+- $N$ stazioni identiche **competono** per l’uso di un mezzo condiviso (cavo, hub, ecc.).
+- A ogni _slot_, ogni stazione vuole trasmettere un frame (nuovo o ritrasmesso dopo una collisione) con **probabilità $p$**.
+- Il valore medio di stazioni che vogliono trasmettere in ogni slot è **$N \cdot p$**, che rappresenta il **carico complessivo della rete**.
+- Una trasmissione ha **successo** se, per l’intera durata dello slot, **una sola stazione** trasmette e **non si verificano collisioni** (tutte le altre restano silenti).  
+    In tal caso, **l’intero frame viene trasmesso**, anche se la durata supera un singolo slot.
+- Se invece si verifica **un errore** (slot vuoto o collisione), la stazione **ritenta nello slot successivo** (_1-persistence_).
+
+- Qual è la **probabilità che uno slot venga usato con successo** per la trasmissione di un frame?
+$$P(\text{successo}) = P(\text{esattamente una delle N stazioni trasmette}) = Np(1 - p)^{N - 1}
+$$
+- La **probabilità massima** si ha quando $p = 1/N$, cioè $Np = 1$.
+- Di conseguenza, per **evitare collisioni** e **massimizzare il throughput complessivo** (cioè l’uso utile del mezzo condiviso), **più stazioni ci sono, minore deve essere la loro probabilità di trasmissione**.
+
+Nel caso $N$ grande:
+
+$$
+P(\text{successo}) = (1 - \frac{1}{N})^{N - 1} \approx \frac{1}{e} \approx 0.37
+$$
+
+- Al massimo, **solo il 37% degli slot** è utilizzato da trasmissioni riuscite (per $N$ grande).
+- Numero medio di tentativi per inviare un frame:  
+    $\frac{1}{(1/e)} = e \approx 2.7$
+
+#### Grafico
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/efficiencygraph.jpg]]
+
+Il grafico mostra la **frazione di slot occupati con successo** (cioè **senza collisioni**) in funzione della probabilità $p$ che ogni stazione trasmetta in un dato slot.
+>[!example] 
+>$N = 10$.
+>L’efficienza cresce inizialmente con $p$, ma oltre un certo punto diminuisce a causa dell’aumento delle collisioni.
+
+Definizioni:
+- $t_{trans}$ = tempo per trasmettere il payload  
+    $t_{trans} = \frac{\text{payload}}{\text{bitrate}}$
+- Tempo di slot = $2t_{prop}$
+- $t_{oh}$ = overhead del frame  
+    $(\text{preambolo} + \text{header} + \text{CRC}) / \text{bitrate}$
+    
+**Tempo medio di trasmissione** (massimizzando il throughput, cioè $Np = 1$):  
+$$t_{avg} = IPG + e \cdot 2t_{prop} + t_{trans} + t_{oh}
+$$  
+(dato che, in media, servono $e$ tentativi)
+
+**Efficienza:**  
+$$
+\eta = \frac{t_{trans}}{t_{trans} + IPG + t_{oh} + 2e t_{prop}} = \frac{1}{1 + \frac{IPG + t_{oh} + 2e t_{prop}}{t_{trans}}}
+$$
+
+**Per aumentare l’efficienza:**
+- Ridurre $t_{prop}$: se il ritardo di propagazione tende a zero, i nodi in collisione interrompono immediatamente la trasmissione senza sprecare il canale.
+- Aumentare $t_{trans}$: quando una stazione ottiene il canale, lo mantiene a lungo, rendendo il canale produttivo per la maggior parte del tempo.
+
+### Caso 10Base-5
+Nel caso dell’Ethernet 10Base-5 (10 Mbps), esprimendo i tempi in byte:
+- $IPG = 9.6,\mu s = 96,bit = 12,byte$
+- $t_{prop} = 25.6,\mu s = 256,bit = 32,byte$
+- $t_{oh} = 8 + 14 + 4 = 26,byte$
+- $P$ = payload (in byte)
+
+**Efficienza:**  
+$$
+\eta = \frac{1}{1 + \frac{38 + 64e}{P}} = \frac{1}{1 + \frac{212}{P}}
+$$
+
+>[!example]
+> - Se $P = 1500$ byte → $\eta = 87.6\%$
+> - Se $P = 46$ byte → $\eta = 17.8 \%$
+>Una rete Ethernet classica a 10 Mbps, condivisa tra molte stazioni equivalenti, offre in pratica solo 8.7–8.8 Mbps complessivi, da dividere tra tutti i nodi.
+>- L’efficienza $\eta \to 1$ quando $t_{prop} \to 0$ oppure $P \to \infty$.  
+>	- → Reti piccole e/o frame grandi migliorano l’efficienza.
+>- Per questo motivo, gli standard Ethernet più recenti prevedono:
+>	- Distanze massime più brevi (fino a <35 m)
+>	- Frame più grandi (_Jumbo Frames_, fino a 8 KB o più)
+
+**Tuttavia:**
+- Frame più grandi implicano che le altre stazioni debbano attendere più a lungo, aumentando il ritardo medio.
+- Ethernet funziona al meglio sotto **condizioni di carico leggero**: quando il traffico è intenso, una parte significativa della capacità viene sprecata in collisioni.
+- Per questo motivo, la maggior parte delle reti Ethernet:
+    - Ha meno di 200 host, ben al di sotto del massimo teorico di 1024.
+    - È molto più corta di 2500 m, con un ritardo di andata e ritorno di circa 5 μs, molto inferiore al limite di 51.2 μs.
+
+## Esperienza con Ethernet
+- Le **Ethernet classiche** sono **facili da amministrare e mantenere**.
+- È semplice **aggiungere un nuovo host** alla rete: basta collegarlo al cavo.
+- È una tecnologia **economica**: il cavo è poco costoso, e l’unico altro costo è quello dell’adattatore di rete su ciascun host (che comunque è necessario).  
+    _(Nota: ciò non è più vero nelle Ethernet commutate, dove servono switch.)_
+- **Non ci sono switch** che possono guastarsi né tabelle di instradamento o configurazione da mantenere aggiornate.  
+    _(Anche questo non è più valido per le Ethernet commutate.)_
+- Ethernet è riuscita a **tenere il passo con l’evoluzione tecnologica**.
+- Per queste ragioni, Ethernet è stata **enormemente di successo**, mentre i protocolli concorrenti — come **IEEE 802.4 (Token Bus)**, **802.5 (Token Ring)** o **HYPERchannel** — sono scomparsi.
+- Sono state sviluppate **molte varianti**, tra cui versioni per:
+    - **Industria**,
+    - **Avionica**,
+    - **Ferrovia**,
+    - e persino versioni **deterministiche**.
+- Ethernet ha **ispirato altri protocolli**, in particolare **IEEE 802.11 (Wi-Fi)**.
+- La maggior parte delle considerazioni fatte per l’Ethernet classica **vale anche per il Wi-Fi**.
+

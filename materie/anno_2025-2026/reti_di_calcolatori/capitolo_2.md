@@ -392,6 +392,12 @@ Imposta a 1 l'**ottavo bit** se ciò è necessario per rendere pari il numero di
 >Non sono individuabili se sono allineati sulla stessa riga e stessa colonna
 
 In questo esempio abbiamo aggiunto 14 bit di informazioni ridondanti ad un messaggio di 42 bit.
+
+**Schema esplicativo dell'esempio**:
+
+![esempio_bit_parita_bidimensionale|700](/materie/anno_2025-2026/reti_di_calcolatori/assets/esempio_bit_parita_bidimensionale.svg)
+
+
 ## Algoritmo di checksum di Internet
 
 Sommare tutte le parole che trasmettiamo:
@@ -926,17 +932,17 @@ Ethernet è in grado di gestire le collisioni:
 
 >[!example]
 >- l'host A inizia a trasmettere un frame all'istante $t$
->	- $t_{prop}$ = latenza del collegamento (tempo di propagazione)
->	- frame impiega un tempo $t_{prop}$ per raggiungere A
->	- il primo bit del frame di A arriva in B all'istante $t+t_{prop}$
+>	- $t\_{prop}$ = latenza del collegamento (tempo di propagazione)
+>	- frame impiega un tempo $t\_{prop}$ per raggiungere A
+>	- il primo bit del frame di A arriva in B all'istante $t+t\_{prop}$
 >- supponiamo che un'istante prima che il frame di A arrivi in B (B vede la linea **inattiva**)
 >	- host B inizia a trasmette il suo frame
 >	- colliderà subito con il frame A
 >	- tale **collisione** sarà rilevata da B
 >	- B invierà una sequenza di disturbo di 32 bit
 >	- A non saprà della collisione finché non arriverà il frame di B
->	- che accadrà dopo un tempo uguale **alla latenza della linea** $t+2\times t_{prop}$
->	- per rilevare la collisione A deve continuare a trasmettere fino a tale istante: $2\times t_{prop}$
+>	- che accadrà dopo un tempo uguale **alla latenza della linea** $t+2\times t\_{prop}$
+>	- per rilevare la collisione A deve continuare a trasmettere fino a tale istante: $2\times t\_{prop}$
 
 Considerando che:
 + Ethernet più estesa al massimo di 2500 m
@@ -1057,31 +1063,31 @@ Il grafico mostra la **frazione di slot occupati con successo** (cioè **senza c
 >L’efficienza cresce inizialmente con $p$, ma oltre un certo punto diminuisce a causa dell’aumento delle collisioni.
 
 Definizioni:
-- $t_{trans}$ = tempo per trasmettere il payload  
-    $t_{trans} = \frac{\text{payload}}{\text{bitrate}}$
-- Tempo di slot = $2t_{prop}$
-- $t_{oh}$ = overhead del frame  
+- $t\_{trans}$ = tempo per trasmettere il payload  
+    $t\_{trans} = \frac{\text{payload}}{\text{bitrate}}$
+- Tempo di slot = $2t\_{prop}$
+- $t\_{oh}$ = overhead del frame  
     $(\text{preambolo} + \text{header} + \text{CRC}) / \text{bitrate}$
     
 **Tempo medio di trasmissione** (massimizzando il throughput, cioè $Np = 1$):  
-$$t_{avg} = IPG + e \cdot 2t_{prop} + t_{trans} + t_{oh}
+$$t\_{avg} = IPG + e \cdot 2t\_{prop} + t\_{trans} + t\_{oh}
 $$  
 (dato che, in media, servono $e$ tentativi)
 
 **Efficienza:**  
 $$
-\eta = \frac{t_{trans}}{t_{trans} + IPG + t_{oh} + 2e t_{prop}} = \frac{1}{1 + \frac{IPG + t_{oh} + 2e t_{prop}}{t_{trans}}}
+\eta = \frac{t\_{trans}}{t\_{trans} + IPG + t\_{oh} + 2e t\_{prop}} = \frac{1}{1 + \frac{IPG + t\_{oh} + 2e t\_{prop}}{t\_{trans}}}
 $$
 
 **Per aumentare l’efficienza:**
-- Ridurre $t_{prop}$: se il ritardo di propagazione tende a zero, i nodi in collisione interrompono immediatamente la trasmissione senza sprecare il canale.
-- Aumentare $t_{trans}$: quando una stazione ottiene il canale, lo mantiene a lungo, rendendo il canale produttivo per la maggior parte del tempo.
+- Ridurre $t\_{prop}$: se il ritardo di propagazione tende a zero, i nodi in collisione interrompono immediatamente la trasmissione senza sprecare il canale.
+- Aumentare $t\_{trans}$: quando una stazione ottiene il canale, lo mantiene a lungo, rendendo il canale produttivo per la maggior parte del tempo.
 
 ### Caso 10Base-5
 Nel caso dell’Ethernet 10Base-5 (10 Mbps), esprimendo i tempi in byte:
 - $IPG = 9.6,\mu s = 96,bit = 12,byte$
-- $t_{prop} = 25.6,\mu s = 256,bit = 32,byte$
-- $t_{oh} = 8 + 14 + 4 = 26,byte$
+- $t\_{prop} = 25.6,\mu s = 256,bit = 32,byte$
+- $t\_{oh} = 8 + 14 + 4 = 26,byte$
 - $P$ = payload (in byte)
 
 **Efficienza:**  
@@ -1093,7 +1099,7 @@ $$
 > - Se $P = 1500$ byte → $\eta = 87.6\%$
 > - Se $P = 46$ byte → $\eta = 17.8 \%$
 >Una rete Ethernet classica a 10 Mbps, condivisa tra molte stazioni equivalenti, offre in pratica solo 8.7–8.8 Mbps complessivi, da dividere tra tutti i nodi.
->- L’efficienza $\eta \to 1$ quando $t_{prop} \to 0$ oppure $P \to \infty$.  
+>- L’efficienza $\eta \to 1$ quando $t\_{prop} \to 0$ oppure $P \to \infty$.  
 >	- → Reti piccole e/o frame grandi migliorano l’efficienza.
 >- Per questo motivo, gli standard Ethernet più recenti prevedono:
 >	- Distanze massime più brevi (fino a <35 m)

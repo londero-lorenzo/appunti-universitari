@@ -1,8 +1,8 @@
 ---
-title: "Modelli Evolutivi"
-aliases: ["Modelli Evolutivi"]
-tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "modelli-evolutivi"]
-created: 2025-10-13
+title: "Modelli 2 Evolutivi"
+aliases: ["Modelli 2 Evolutivi"]
+tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "3-modelli-processi-sw", "modelli-2-evolutivi"]
+created: 2025-10-20
 ---
 # Modelli Evolutivi
 Modelli adatti a contesti in cui i requisiti non sono chiari fin dall'inizio del processo:
@@ -162,4 +162,5 @@ Attività di specifica, sviluppo e convalida sono intrecciate anziché separate 
 
 ![backtobacktesting](/materie/anno_2025-2026/ingegneria_del_software/assets/backtobacktesting.svg)
 
-Prototipo può essere utilizzato nella fase di **Validazione** per controllare che il sistema sviluppato si comporti come modellato nel prototipo nella fasi iniziali del progetto.
+Prototipo può essere utilizzato nella fase di **Validazione** per:
++ controllare che il sistema sviluppato si **comporti come modellato** nel prototipo nella fasi iniziali del progetto.

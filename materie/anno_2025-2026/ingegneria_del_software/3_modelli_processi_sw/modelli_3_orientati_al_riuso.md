@@ -1,8 +1,8 @@
 ---
-title: "Modelli Orientati Al Riuso"
-aliases: ["Modelli Orientati Al Riuso"]
-tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "modelli-orientati-al-riuso"]
-created: 2025-10-13
+title: "Modelli 3 Orientati Al Riuso"
+aliases: ["Modelli 3 Orientati Al Riuso"]
+tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "modelli-3-orientati-al-riuso"]
+created: 2025-10-20
 ---
 # Modelli orientati al riuso
 

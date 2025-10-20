@@ -1,10 +1,9 @@
 ---
-title: "Processi Software"
-aliases: ["Processi Software"]
-tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "processi-software"]
-created: 2025-10-14
+title: "2 Processi Software"
+aliases: ["2 Processi Software"]
+tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "2-processi-software"]
+created: 2025-10-20
 ---
-
 ### Code and Fix
 + Ha numerose limitazioni che lo rendono inadeguato per lo sviluppo di software professionale
 >[!example]

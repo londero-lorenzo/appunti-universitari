@@ -1,10 +1,9 @@
 ---
-title: "Concetti Fondamentali"
-aliases: ["Concetti Fondamentali"]
-tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "concetti-fondamentali"]
-created: 2025-10-13
+title: "1 Concetti Fondamentali"
+aliases: ["1 Concetti Fondamentali"]
+tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "1-concetti-fondamentali"]
+created: 2025-10-20
 ---
-
 
 >[!definition]
 >Software

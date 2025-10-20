@@ -1,8 +1,8 @@
 ---
-title: "Modello Trasformazionale"
-aliases: ["Modello Trasformazionale"]
-tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "modello-trasformazionale"]
-created: 2025-10-13
+title: "Modelli 4 Trasformazionali"
+aliases: ["Modelli 4 Trasformazionali"]
+tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "modelli-4-trasformazionali"]
+created: 2025-10-20
 ---
 # Modelli trasformazionali
 + Le specifiche sono definite attraverso linguaggi formali

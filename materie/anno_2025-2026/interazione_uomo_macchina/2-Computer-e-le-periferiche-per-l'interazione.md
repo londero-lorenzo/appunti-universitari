@@ -112,7 +112,7 @@ ___
 #### Periferiche per la rilevazione dei movimenti del corpo o di parti di esso
 
 + **Data glove**: Guanti che permettono di indirizzare una la visione o velocizzare un'azione con i movimenti della mano (come i bambini che quando vogliono qualcosa la indicano)
-+ **Data suit**: la versione per tutto il corpo dei data glove, che presentano dei sensori in tutto che ne tracciano i minimi movimenti (possono costare tranquillamente 8000 euro)
++ **Data suit**: la versione per tutto il corpo dei data glove, che presentano dei sensori in tutto che ne tracciano i minimi movimenti (possono costare tranquillamente 80000 euro)
 + **Tute motion capture**: Alternativa alle data suit, sono delle tute che presentano dei pallini che contrastano con la tuta stessa e che rappresentano dei punti del corpo che vengono poi mappati in un esoscheletro (mocap).
 + **Kinect**: progetto Microsoft per la rilevazione di movimenti di tutto il corpo (basilari e non precisi) con il solo utilizzo di una telecamera che inquadra tutto il corpo dellìutilizzatore
 + **Sistemi di tracciamento oculare**

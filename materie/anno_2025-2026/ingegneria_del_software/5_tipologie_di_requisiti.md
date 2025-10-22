@@ -120,3 +120,56 @@ created: 2025-10-20
 	+ **vincoli del suo processo di sviluppo**: uso di particolari standard per la documentazione, linguaggi di programmazione specifici,...
 
 
+## Verificabilità dei requisiti
++ requisiti non funzionali possono essere difficili da definire/verfiicare
++ cliente specifica come **obiettivi generici/vari**:
+	+ facilità d'uso, rapida risposta
+	+ questi obiettivi causano problemi agli sviluppatori----->libera interpretazione
++ requisiti **verficabili**
+
+>[!example]
+>**Obiettivo generico**
+>Il sistema deve essere facile da usare per il personale medico e deve essere organizzato in modo tale che gli errori commessi dall'utente siano ridotti al minimo.
+
+>[!example]
+>**Requisito verificabile:**
+>Il personale medico dovrà essere in grado di usare tutte le funzioni del sistema **dopo due ore di addestramento**; dopodiché il numero medio di errori commessi dagli utenti esperti non dovrà **maggiore di due, per ogni ora di utilizzo del sistema**.
+
++ i requisiti non funzionali possono essere in conflitto
+>[!example]
+>- **R1**: un lettore magnetico deve essere installato in ogni computer che si collega al sistema per permettere l'accesso tramite carta d'identità elettronica.
+>- **R2**: Il personale medico deve avere la possibilità di accedere al sistema tramite tablet o smartphone, che non sono dotati di lettori magnetici.
+
+## Requisiti di dominio
++ requisiti funzionali/ non funzionali e vincoli derivano dal **dominio applicativo del sistema** (non dalle esigenze degli utenti)
+>[!example]
+>norme e standard del dominio medico, avionico, ferroviario, ecc...
+
++ Talvolta le informazioni di dominio sono **ovvie per gli esperti** e quindi vengono tralasciate
++ ingegnere del software potrebbe non conoscere il dominio
+	+ quindi potrebbe non capire le caratteristiche dell'ambiente in cui opera il sistema
+
+### Problemi di requisiti di dominio
+**Comprensibilità**:
++ espressi nel linguaggio estremamente specializzato del dominio
++ fanno riferimento a concetti specifici del dominio
++ potrebbe non essere immediatamente chiaro
+**Esplicitazione**:
++ specialisti del dominio conoscono così bene il dominio stesso, da lasciare fuori dai requisiti informazioni che sembrano ovvie
+
+# Ingegneria dei requisiti
+
+## Tre attività chiave
++ **Deduzione e analisi dei requisiti**
++ **Specifica dei requisiti**
++ **Convalida dei requisiti**
+
+## Modello sequenziale
+
+## Modello a spirale
+cresce la conoscenza si abbassa il rischio e cresce il valore del nostro software
+
+Deduzione, specifica e convalida fatti in maniera iterativa
+
+>[!warning]
+

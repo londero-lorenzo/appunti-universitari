@@ -1129,3 +1129,228 @@ $$
 - Ethernet ha **ispirato altri protocolli**, in particolare **IEEE 802.11 (Wi-Fi)**.
 - La maggior parte delle considerazioni fatte per l’Ethernet classica **vale anche per il Wi-Fi**.
 
+# Wireless Communication
+Range di segnali elettromagnetici
++ Mezzo: etere
+	+ è un mezzo condiviso
+	+ si ripropongono tutte le problematiche dei mezzi condivisi (come Ethernet)
++ Cercare di rendere **efficiente** questo mezzo
++ range di frequenze **suddiviso in bande**
++ **ISM**: esistono frequenze liberalizzate (esenti da licenza)
+
+## ISM 2.4 GHz
++ Va da i 2400 MHz ai 2480 MHz
++ dove vivono gran parte delle comunicazioni di uso normale
+>[!question] Perché è stata scelta questa frequenza ?
+>Semplice per lavorarci
+>Frequenza di vibrazione della molecola dell'acqua
+
++ suddivisa in tanti canali ciascuno di una banda di 20 MHz
+
+## ISM 5 GHz
++ parte dai 5070 MHz e termina a 5835 MHz
++ suddivisi in canali da 20 MHz
++ si possono aggregare i canali da 20 in canali più grandi
++ più soggetta a disturbi
+## Regole
+* Liberalizzate non significa deregolamentate
+* **Potenza**: sulla 2.4 GHz possiamo trasmettere al massimo 100 mW
+	* limitare la portata del segnale (qualche centinaio di metri)
+* **Non occupare una frequenza in maniera fissa**: 
+	* **Spread Spectrum**: cercare di occupare il canale il più possibile
+	* sparpagliando il segnale su tutta la banda diminuiamo la possibilità di interferenza
+* **Frequency hopping**: prendere un range di frequenze e saltellare da una all'altra (Hedy Lamarr)
+	* ordine dei salti **pseudocasuale**
+	* chi riceve deve seguire la stessa sequenza dei salti
+	* evitare conflitti tra trasmissioni diverse
+* **Direct sequence spread spectrum**: 
+	* se abbiamo una sequenza di bit da trasmettere, trasmettiamo il risultato dello XOR tra questa sequenza e un'altra sequenza di bit (**chipping sequence**) casuali (ogni bit dura 1$\micro s$)
+	* facendo lo XOR tra i due segnali otteniamo un segnale
+	* chi riceve per avere il segnale originale rifà una XOR sul segnale che riceve utilizzando la stessa chipping sequence
+
++ tecnologie wireless differiscono in varie cose:
+	+ quanta banda usano
+	+ quanto lontani possono essere i nodi che devono comunicare
++ Quattro tecnologie principali:
+	+ Wi-Fi 802.11
+	+ Bluetooth
+	+ WiMAX 802.16 (eolo)
+	+ 3G/4G/5G
++ ognuna di queste tecnologie ha un ambito di utilizzo
+	+ bluetooth: distanza di lavoro **bassa** (decina di metri)
+	+ Wi-Fi: analogo della ethernet solo wireless
+		+ distanza di lavoro sui 100 m
+		+ Bitrate: dai 54 ai 320 Mbps
+	+ Cellulare: rete di accesso a lunga distanza
+		+ Bitrate: centinaia di Kbps
+
++ Reti wireless sono **asimmetriche**:
+	+ due end-point sono due tipi di nodi diversi
+	+ il segnale non è diretto ma è trasmesso in maniera **sferica**
+	+ potenza del segnale scende con il quadrato della distanza
++ wireless supporta una comunicazione punto-multipunto:
+	+ diretta (Wi-Fi)
+	+ attraverso routing (cellulari e bluetooth)
++ mobilità:
+	+ No mobilità: il ricevitore deve essere in una location fissa per ricevere il segnale (tipo eolo)
+	+ Mobilità all'interno del range (Bluetooth)
+	+ Mobilità tra stazioni: mi muovo e cambio cella (cellulari e Wi-Fi)
++ Reti Mesh o ad-hoc
+	+ nodi si organizzano tra loro senza avere un access point
+	+ utile quando non ci sono stazioni base fisse (nell'IoT) per raggiungere aree che non sono coperte
+
+# Wi-Fi
+
+Pensato per creare reti locali (decine/centinaia di metri).
+
+## Standard
++ utilizzare il frequency hopping su 79 canali (1 usato per controllo)
++ direct sequence usando una sequenz chipping sequence da 11 bit
++ migliorata con la 802.11b
+	+ usando una variante della direct sequence arrivando fino a 11 Mbps
++ infine la 802.11a che arriva fino a 54 Mbps usando OFDM
+	+ 5 GHz
+	+ velocità possibile si aggira attorno ai 20 Mbps
++ 802.11ac
+	+ usata per la 5GHz e arriva fino a 1300 Mbps
++ Il rapporto segnale rumore può essere molto variabile
++ 802.11n 
+	+ si può andare da i 6.5 Mbps ai 600 Mbps
++ si adatta in base alla quantità di rumore del canale
+
+## Evitare collisioni
++ CTS sa quanto tempo serve alla comunicazione
++ se un nodo vede l'RTS di A ma non il CTS di B potrebbe anche comunicare perché tanto B è fuori range e non lo sente
++ collisione avviene quando un nodo manda un RTS ma non riceve un CTS
+
++ Esempio
+	+ S1 e S2 vogliono trasmettere
+		+ stanno in ascolto e vedono che c'è segnale
+		+ aspettano un certo tempo fisso
+		+ S1 aspetta 5 volte
+		+ S2 aspetta 9 volte 
+		+ S1 manda l'RTS a R
+		+ S2 è in ascolto (sente l'RTS di S1) quindi alloca sul NAV
+		+ R risponde con un CTS dopo il SIFS
+		+ nel CTS c'è scritto quanto manca alla fine della comunicazione
+		+ S1 ricevuto il CTS, switcha e trasmette il vero frame di dati
+		+ R riceve il frame di dati poi switcha e manda un frame di ACK
+	+ questo costa 
+
++ SIFS: spazio di silenzio minimo che c'è tra due frame all'interno di una stessa trasmissione
+	+ tempo usato per processare e rispondere un frame 
++ PIFS: tempo minimo che deve aspettare una stazione per trasmettere i suoi dati
+	+ PIFS = SIFS + Slot time tempo che deve aspettare l'access point
+	+ PIFS ha la priorità perché è minore
++ DIFS: 
+
+## Formato del frame
++ BEACON: serve agli access point a segnalare la presenza
++ Intestazione 802.11:
+	+ 30 byte
++ FCS: sarebbe un CRC 32
++ 34 byte fissi
++ Address 1,2,3 sono indirizzi di 802 e sono univoci
+	+ cambia a seconda della modalità di trasmissione
++ Dati di network: sono quelli che vengono dai livelli superiori
+	+ da 0 a 2312 Byte
+	+ non c'è bisogno di un valore minimo perché non abbiamo collisioni da gestire
++ Frame protocol:
+	+ Type: scrive se è un RTS, CTS, ACK, ecc...
+	+ Power Mgmt: abilitare e disabilitare la scheda di rete
+	+ WEP: serve a verificare se il PAYLOAD è cifrato o no
++ RTS:
+	+ bit di controllo che serve di riconoscimento
+	+ duration serve per il NAV
++ CTS:
+	+ duration di prima - RTS - SIFS
+	+ Receiver address è quello di A
+
+30 Byte di intestazione + 4 Byte di CRC del Data + 14 Byte + 20 Byte + 14 Byte = 82 Byte più gli intervalli
+
+## Efficienza
+Modellare bene il CSMA/CA è difficile
++ andiamo a 54 Mbps
++ abbiamo un ricevitore e trasmettitore
+	+ 1 DIFS + 3 SIFS = 4 SIFS + 2 Slot time = 4 * 10+2 * 9 = 58 $\micro s$
+	+ 58$\micro s$ * 54 Mbps = 3132 bit = 391.5 byte
+	+ intestazione, CRCs e altri frame = 82 byte
+	+ Totale = 473.5 byte per ogni trasmissione
++ se il payload è di 1500 byte l'efficienza non è più di $1500/(1500+473.5)=76\%$
+	+ la larghezza di banda è $\leq 41Mbps$ non 54 Mbps
+	+ comparando all'ethernet in condizioni simili: efficienza pari al 97%
+## Frame fragmentation
+
+## Distribution
++ mobilità tra le celle: cambio da un access point all'altro man mano che mi sposto
++ abbiamo tanti access point con un loro range collegati ad una rete ethernet
+	+ se A deve mandare un frame a qualche nodo deve solo sapere il MAC Address di quel nodo
+		+ se deve mandarlo ad E (lontanissimo in un'altra cella) il frame avendo quattro indirizzi che corrispondo ai MAC address degli Access Point intermedi 
+		+ passo da AP-1 che lo passa ad AP-3 che lo passa ad E
+
+# IEEE 802.15
+
++ Sostituire i cavi a breve distanza.
++ lavora in frequenza 2.4 GHz con il frequency hopping
++ range di 10-50m con basso consumo di potenza
+
++ preso una decina di gruppi di persone perché era da applicare a diverse applicazioni (venuto un disastro)
++ Due tipi di connessioni:
+	+ SCO: sincrono a circuito
+		+ tempi di risposta e delay sono determinati
+		+ telefonia/ real time
+		+ poca banda ma molto costante piuttosto che avere tanta banda che però non è stabile
+	+ ACL: sistema a pacchetti
+		+ per trasferimento dati normali
+
+## Stack
++ Logical Link Control e Link manager protocol = nostro livello 2 della rete
++ Baseband: audio
++ RFCOMM implementa una seriale
++ AT commands: comandi per gestire i modem analogici
++ PPP: per implementare pacchetti 
+	+ sopra PPP possiamo mettere lo stack TCP
+
+## Piconet
+
+Cella bluetooth:
++ dispositvo master
++ 7 dispositivi slave
++ Comunicazione avviene per TDM (Time Division Multiplexing)
++ comunicazione avviene sempre tra master e slave (a stella)
++ possono esserci anche 8 slave che dormono (a bassa energia)
+
+## Livello fisico
++ Usa tutti i 79 canali della band 2.4 GHz
++ Salta random tra questi canali 
++ trasmissione avviene dentro uno slot di tempo **hopping time** = 625 $\micro s$
++ banda effettiva 1 MHz
++ bluetooth molto arrogante: se dice che deve usare una certa stazione per trasmettere, trasmette e basta
++ crea problemi al Wi-Fi quando incontra una frequenza usata dal Wi-Fi
+
+## Piconet MAC
+
++ supponiamo ci sia due master e due slave
+	+ Master comunica sempre nello slot pari
+	+ se uno slave ha ricevuto poi switcha e trasmette al master
+	+ cambia slave 
+	+ e così via
+	+ se slave 2 non ha niente da dire non succede niente (slot perso)
++ parte nera: tempo morto dell'hopping time
+
+## Formato dei pacchetti
++ Header: MAC address, CRC
++ Payload: può essere di 483 bit con singolo slot fino a 1124 bit per tre slot e fino a 2745 bit per 5 slot
+
+## Efficienza
++ Piconet con $n$ slave
++ ogni round prende 625 * 2 * n $\micro s$ = 1.25 * n $ms$
++ massimo delay che un nodo deve aspettare per trasmettere nel caso peggiore è 1.25 * 7=8.75 ms 
+	+ Jitter = 0
++ **throughput** da ogni slave al master e viceversa è 483 / 1.25n = 386.4/n kbps
+	+ caso peggiore 386.4/7 = 55.2 kbps
++ efficienza:
+	+ ogni slot di dati occupa 483 $\micro s$
+	+ 483/625 = 77.3%
+
+

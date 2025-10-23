@@ -229,18 +229,18 @@ Pratiche plan-driven e agili possono coesistere nello stesso processo:
 	+ **facilita le modifiche future**
 
 >[!example]
->Refractoring
+>Refactoring
 >- rimozione **codice duplicato**
 >- **rinominare** classi, attributi e metodi
 >- creazione di **librerie** con **codice utile** a più classi o progetti
 ## Pro
 + sviluppo incrementale: porta al **deterioramento** del codice
-+ **refractoring continuo** mitiga il deterioramento
-+ tool per **automatizzare** alcune operazioni di refractoring
++ **refactoring continuo** mitiga il deterioramento
++ tool per **automatizzare** alcune operazioni di refactoring
 ## Contro
-+ refractoring a livello di codice **non basta per supportare un cambiamento**
++ refactoring a livello di codice **non basta per supportare un cambiamento**
 + necessaria una modifica dell'**intera architettura** (più costosa)
-+ trovare un **compromesso** tra tempo dedicato allo sviluppo di nuove funzionalità e refractoring
++ trovare un **compromesso** tra tempo dedicato allo sviluppo di nuove funzionalità e refactoring
 
 # Sviluppo preceduto dai test
 >[!definition]
@@ -287,10 +287,10 @@ Pratiche plan-driven e agili possono coesistere nello stesso processo:
 + Programmatori lavorano in **coppie**:
 	+ stessa postazione
 	+ coppie variano continuamente
-+ refractoring viene incoraggiato
++ refactoring viene incoraggiato
 	+ più facile che il team ne benefici
 + software di proprietà **dell'intero team**:
-	+ **singoli** ritenuti responsabili dei problemi nel codice (**egoless programming**)
+	+ **singoli** non sono ritenuti responsabili dei problemi nel codice (**egoless programming**)
 	+ team ha la **responsabilità collettiva** della risoluzione di questi problemi
 
 >[!question] Programmando a coppie si dimezza la produttività ?

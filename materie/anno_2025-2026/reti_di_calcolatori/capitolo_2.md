@@ -1156,17 +1156,22 @@ Range di segnali elettromagnetici
 * Liberalizzate non significa deregolamentate
 * **Potenza**: sulla 2.4 GHz possiamo trasmettere al massimo 100 mW
 	* limitare la portata del segnale (qualche centinaio di metri)
-* **Non occupare una frequenza in maniera fissa**: 
-	* **Spread Spectrum**: cercare di occupare il canale il più possibile
-	* sparpagliando il segnale su tutta la banda diminuiamo la possibilità di interferenza
-* **Frequency hopping**: prendere un range di frequenze e saltellare da una all'altra (Hedy Lamarr)
-	* ordine dei salti **pseudocasuale**
-	* chi riceve deve seguire la stessa sequenza dei salti
-	* evitare conflitti tra trasmissioni diverse
-* **Direct sequence spread spectrum**: 
-	* se abbiamo una sequenza di bit da trasmettere, trasmettiamo il risultato dello XOR tra questa sequenza e un'altra sequenza di bit (**chipping sequence**) casuali (ogni bit dura 1$\micro s$)
-	* facendo lo XOR tra i due segnali otteniamo un segnale
-	* chi riceve per avere il segnale originale rifà una XOR sul segnale che riceve utilizzando la stessa chipping sequence
+### Spread Spectrum (spettro disperso)
+>[!definition]
+>>Non occupare una frequenza in maniera fissa, cercare di occupare il canale il più possibile
++ **sparpagliando il segnale** su tutta la banda diminuiamo la possibilità di interferenza
+#### Frequency hopping
+>[!definition]
+>>prendere un range di frequenze e saltellare da una all'altra (Hedy Lamarr)
+>>
+- ordine dei salti **pseudocasuale**
+- chi riceve deve seguire la stessa sequenza dei salti
+- evitare conflitti tra trasmissioni diverse
+
+#### Direct sequence (sequenza diretta): 
+* se abbiamo una sequenza di bit da trasmettere, trasmettiamo il risultato dello XOR tra questa sequenza e un'altra sequenza di bit (**chipping sequence**) casuali (ogni bit dura 1$\micro s$)
+* facendo lo XOR tra i due segnali otteniamo un segnale
+* chi riceve per avere il segnale originale rifà una XOR sul segnale che riceve utilizzando la stessa chipping sequence
 
 + tecnologie wireless differiscono in varie cose:
 	+ quanta banda usano
@@ -1205,7 +1210,7 @@ Pensato per creare reti locali (decine/centinaia di metri).
 
 ## Standard
 + utilizzare il frequency hopping su 79 canali (1 usato per controllo)
-+ direct sequence usando una sequenz chipping sequence da 11 bit
++ direct sequence usando una sequenza chipping sequence da 11 bit
 + migliorata con la 802.11b
 	+ usando una variante della direct sequence arrivando fino a 11 Mbps
 + infine la 802.11a che arriva fino a 54 Mbps usando OFDM
@@ -1219,30 +1224,80 @@ Pensato per creare reti locali (decine/centinaia di metri).
 + si adatta in base alla quantità di rumore del canale
 
 ## Evitare collisioni
-+ CTS sa quanto tempo serve alla comunicazione
-+ se un nodo vede l'RTS di A ma non il CTS di B potrebbe anche comunicare perché tanto B è fuori range e non lo sente
-+ collisione avviene quando un nodo manda un RTS ma non riceve un CTS
+>[!tip]
+>In una rete wireless il problema è ulteriormente complicato, perché non tutti i nodi sono sempre raggiungibili da tutti gli altri.
 
-+ Esempio
-	+ S1 e S2 vogliono trasmettere
-		+ stanno in ascolto e vedono che c'è segnale
-		+ aspettano un certo tempo fisso
-		+ S1 aspetta 5 volte
-		+ S2 aspetta 9 volte 
-		+ S1 manda l'RTS a R
-		+ S2 è in ascolto (sente l'RTS di S1) quindi alloca sul NAV
-		+ R risponde con un CTS dopo il SIFS
-		+ nel CTS c'è scritto quanto manca alla fine della comunicazione
-		+ S1 ricevuto il CTS, switcha e trasmette il vero frame di dati
-		+ R riceve il frame di dati poi switcha e manda un frame di ACK
-	+ questo costa 
+>[!example]
+>![[materie/anno_2025-2026/reti_di_calcolatori/assets/reti_wifi.jpg]]
+>- B può scambiare frame con A e con C ma non può raggiungere D
+>- C può raggiungere B e D ma non A
+>- supponiamo che sia A sia C vogliono comunicare con B
+>	- entrambi trasmettono un frame
+>	- A e C non sono consapevoli della reciproca presenza
+>- questi due frame **collidono** l'uno con l'altro in B
+>- ma né A né C si accorgono di questa collisione
+>- A e C sono **nodi nascosti** l'uno all'altro
 
-+ SIFS: spazio di silenzio minimo che c'è tra due frame all'interno di una stessa trasmissione
+#### Problema del nodo esposto
++ supponiamo che B stia trasmettendo verso A
++ il nodo C e consapevole di tale comunicazione (ascolta la trasmissione di B)
+	+ sarebbe un errore per C decidere di non trasmettere a nessuno solo perché sta assistendo alla trasmissione di B
+	+ C potrebbe trasmettere a D
+	+ interferirebbe se la trasmissione fosse da A a B
+### MACA o CSMA/CA (Multiple Access with Collision Avoidance)
+>[!definition]
+>>La sorgente e la destinazione si scambiano frame di controllo l'un l'altro **prime che la sorgente trasmetta** realmente i dati.
+>>Questo scambio informa **tutti i nodi vicini** che sta per iniziare una trasmissione.
+
++ Sorgente trasmette un frame **richiesta di invio** RTS:
+	+ indica per quanto tempo la sorgente intende impegnare il mezzo 
++ Ricevitore risponde con un frame di tipo **libero di inviare CTS**
+	+ dove viene ricopiata la lunghezza dichiarata dalla sorgente
++ un nodo che veda frame CTS sa di essere vicino al ricevitore quindi non potrà trasmettere per il tempo del RTS
+	+ questo tempo è chiamato **NAV (Network Allocation Vector)**
+	+ questo risolve il problema del **nodo nascosto**
++ un nodo che veda l'RTS ma non il CTS non è abbastanza vicino al ricevitore per interferire (può trasmettere liberamente)
+	+ questo risolve il problema del nodo esposto
+
++ Il ricevitore invia un ACK alla sorgente dopo aver ricevuto con successo un frame
+	+ tutti i nodi devono attendere tale ACK prima di provare a trasmettere
++ se due o più nodi dovessero trovare il mezzo inattivo e provassero a trasmettere un frame RTS nello stesso istante
+	+ ci sarebbe **collisione**
+
+802.11 non consente la rilevazione di collisione: 
++ le sorgenti capiscono che è avvenuta una collisione quando non ricevono il frame CTS dopo un certo periodo
++ ciascuna di esse aspetta un intervallo casuale prima di riprovare
++ durata dell'attesa definita dall'**algoritmo di backoff esponenziale** usato da Ethernet
+
+>[!example]
+>![[materie/anno_2025-2026/reti_di_calcolatori/assets/dstributed_coordination.jpg]]
+>![[materie/anno_2025-2026/reti_di_calcolatori/assets/dstributed_coordination_2.jpg]]
+>- S1 e S2 vogliono trasmettere
+>	- stanno in ascolto e vedono che c'è segnale
+>	- aspettano un certo tempo fisso
+>	- S1 aspetta 5 volte
+>	- S2 aspetta 9 volte 
+>	- S1 manda l'RTS a R
+>	- S2 è in ascolto (sente l'RTS di S1) quindi alloca sul NAV
+>	- R risponde con un CTS dopo il SIFS
+>		- nel CTS c'è scritto quanto manca alla fine della comunicazione
+>		- S1 ricevuto il CTS, switcha e trasmette il vero frame di dati
+>		- R riceve il frame di dati poi switcha e manda un frame di ACK
+>- questo costa 
+#### Intervalli
+Sempre definiti come: SIFS < PIFS < DIFS
++ **Slot time**: intervallo minimo usato nel **backoff esponenziale**
++ **SIFS (Short Inter Frame Space)**: spazio di silenzio minimo che c'è tra due frame all'interno di una stessa trasmissione
 	+ tempo usato per processare e rispondere un frame 
-+ PIFS: tempo minimo che deve aspettare una stazione per trasmettere i suoi dati
++ **PIFS (Point Control Function Interframe Space)**: tempo minimo che deve aspettare una stazione per trasmettere i suoi dati
 	+ PIFS = SIFS + Slot time tempo che deve aspettare l'access point
 	+ PIFS ha la priorità perché è minore
-+ DIFS: 
++ **DIFS (Distributed Control Function Interframe Space)**: tempo che la stazione deve aspettare prima di mandare un RTS
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/intervalli.jpg]]
+
++ PIFS = SIFS + Slot time
++ DIFS = SIFS + 2 * Slot time
 
 ## Formato del frame
 + BEACON: serve agli access point a segnalare la presenza

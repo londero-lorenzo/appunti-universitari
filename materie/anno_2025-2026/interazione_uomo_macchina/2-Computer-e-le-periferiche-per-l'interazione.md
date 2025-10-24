@@ -211,3 +211,64 @@ Percepibili tramite i canali sensoriali quali vista, udito, gusto, olfatto.
 + **Display per immagini 3D**
 	+ Head Mounted Displays: Prototipi del passato che hanno portato ai moderni visori a realtà aumentata
 	+ Visori: oggigiorno i visori (nati originariamente per scopi 'seri' quali militari, ecc...) sono diventati di uso domestico, mobile e ludico.
+
+
+(scrivere anaglifi, shutter glasses, display stereoscopici)
+
+#### Sistemi di Proiezione 3D
+##### Sistemi CAVE (Cave automatic virtual environment)
+Proietta le immagini in una stanza cubica e da l'impressione di essere avvolti da sto mondo tridimensionale. Difficile farlo vedere a più persone contemporaneamente dovendo tenere presente la posizione di entrambi e dove guardano. 
+>[!tip] Curiosity
+>Nei primi anni dei device proiezionali il CAVE veniva considerato un sistema immersivo perché circondava completamente, mentre il visore era considerato semi-immersivo. Adesso invece le due definizioni si stanno praticamente scambiando.
+
+##### AR Headsets
++ **Microsoft Hololens 1**: sistema di visore olografico con promessa di unire il virtuale (olografico) con la realtà e fondere anche le due cose (ad esempio potendo proiettare dei pezzi appena modellati in 3D su una moto vera, come mostrato nel video di lancio del prodotto). 
+  **Problema**: Le lenti sono trasparenti quindi vedo effettivamente tutto il mondo intorno a me, ma il sistema olografico è visibile solo per 34 gradi quindi poco spazio per vedere gli ologrammi che di conseguenza non riesco a vedere per interi.
++ **Microsoft Hololens 2**: evoluzione del precedente fa un po' più roba e basta.
++ **Meta Quest**: reso più abbordabile per tutti ma togliendo le funzionalità più costose, quindi ad esempio eye tracking e così via.
+
+##### Definizioni riguardo alla 'reality-virtuality'
++ **Continuum reality-virtuality**: un continuo tra il mondo reale e quello virtuale.
++ **Mixed reality**: questo continuum dice che è ciò che è un po' dentro il mondo reale e un po' dentro il mondo virtuale.
+	+ **Augmented reality**: mondo reale prevalente al mondo virtuale
+	 **Augmented virtuality:** mondo virtuale prevalente al mondo reale
+	+ **Extended reality** **(XR)**: tutto ciò che ha almeno un po' di virtuale (comprende quindi augmented reality e virtuality e anche la total virtuality)
+
+>[!example]
+>Esempio di augmented virtuality: Sono in un mondo virtuale con degli amici avatar, ma magari sopra le loro teste c'è una finestra che mi fa vedere le loro facce reali attraverso le loro webcam. Ho quindi un collegamento seppur minimo al reale.
+
+
+#### Altre periferiche di output:
+
++ Stampante (a inchiostro, laser, B/N, colori, 2D, 3D)
+
+___
+
+### Udito
+#### Periferiche sonore (generazione di suoni, linguaggio naturale)
+
+>[!tip] tip del cazzo
+>Il suono si propaga attraverso onde sonore.
+
+##### Generazione di suoni
++ Suoni MIDI tramite sintetizzatori presenti già molti decenni fa
++ Sintesi del linguaggio naturale fatta bene invece è molto più recente con le nuove AI che riescono a dare anche una carica emozionale simile alle persone reali e non solo riproduzione meccanica dei suoni.
++ Altoparlanti: sistemi di diffusione del suono in base al budget sempre di qualità più alta. Di diverse categorie:
+	+ Casse / Soundbar
+	+ Cuffie / Auricolari
+	+ Sistemi di diffusione 3D (audio spaziale)
+
+___
+### Tatto
+
+#### Periferiche per la restituzione tattile
+
++ **Controller** (dualshock ad esempio): già il secondo controller della PS1 si chiamava così perché presentava dei motorini che vibravano ai colpi, come quelli attuali, sebbene migliorati.
++ **Sense Glove**: tipo esoscheletro che blocca la presa quando ad esempio si afferra un oggetto virtuale, o tira indietro le dita attraverso dei fili collegati a dei motorini se appoggio la mano in qualcosa di virtuale, eventualmente anche con risposta diversa in base ai materiali dell'oggetto virtuale. (Non sono comunque così incredibili. Non sembra effettivamente reale).
++ Altra versione dei guanti che al posto di tirare con i fili stringe sui polpastrelli quando si 'tocca' un oggetto e il cervello inconsciamente smette di stringere quando sente il tocco sui polpastrelli.
+  Altre implementazioni sono l'aumento o diminuzione di temperatura nelle zone di contatto virtuale in base agli oggetti toccati. Anche questo in maniera comunque approssimativa.
++ Control knob (BMW iDrive ad esempio): rotellona per cambiare delle impostazioni con degli scatti percepibili dalla mano da un'impostazione ad un'altra permettendo di percepire il cambio di impostazione anche se sto guidando e non posso guardare lo schermo.
+
+>[!example]
+>Problema esempio: Voglio comprare dei lego ma voglio capire prima l'ingombro dei prodotti. Come faccio?
+>- La soluzione adottata da un negozio è stato mettere uno schermo con una webcam che sembra uno specchio di fronte ai consumatori che fanno vedere la scatola, che viene riconosciuta dal sistema e proietta successivamente a schermo il modello finito sopra la scatola, in modo che l'acquirente possa capire l'ingombro.

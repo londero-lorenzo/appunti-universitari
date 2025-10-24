@@ -1303,30 +1303,38 @@ Sempre definiti come: SIFS < PIFS < DIFS
 + BEACON: serve agli access point a segnalare la presenza
 + Intestazione 802.11:
 	+ 30 byte
-+ FCS: sarebbe un CRC 32
-+ 34 byte fissi
-+ Address 1,2,3 sono indirizzi di 802 e sono univoci
++ **Control**: 2 byte (16 bit)
+	+ contiene un campo **Type** 6 bit che indice se il frame:
+		+ trasporta dati
+		+ se è un frame RTS o CTS:
+			+ RTS:
+				+ bit di controllo che serve di riconoscimento
+				+ duration serve per il NAV
+			+ CTS:
+				+ duration di prima - RTS - SIFS
+				+ Receiver address è quello di A
+		+ se è usato dall'algoritmo di scansione
+		+ 2 bit chiamati ToDS e FromDS
+	+ **Power Mgmt**: abilitare e disabilitare la scheda di rete
+	+ **WEP**: serve a verificare se il PAYLOAD è **cifrato** o no
++ **Duration/ID** 2 byte: indica per quanto tempo il frame e il suo ACK occuperanno il canale 
++ **Address 1-2-3-4** 6 byte: sono indirizzi in formato IEEE 802 e sono univoci
+	+ due identificano sorgente e destinazione
+	+ gli altri due identificano la **stazione di base e di arrivo** del traffico tra celle
 	+ cambia a seconda della modalità di trasmissione
-+ Dati di network: sono quelli che vengono dai livelli superiori
++ **Sequence** 2 byte: permette di **numerare** i frammenti 
++ **Dati di network**: sono quelli che vengono dai livelli superiori
 	+ da 0 a 2312 Byte
 	+ non c'è bisogno di un valore minimo perché non abbiamo collisioni da gestire
-+ Frame protocol:
-	+ Type: scrive se è un RTS, CTS, ACK, ecc...
-	+ Power Mgmt: abilitare e disabilitare la scheda di rete
-	+ WEP: serve a verificare se il PAYLOAD è cifrato o no
-+ RTS:
-	+ bit di controllo che serve di riconoscimento
-	+ duration serve per il NAV
-+ CTS:
-	+ duration di prima - RTS - SIFS
-	+ Receiver address è quello di A
++ **FCS** 32 bit: sarebbe un CRC 32
++ 34 byte fissi per l'intestazione
 
 30 Byte di intestazione + 4 Byte di CRC del Data + 14 Byte + 20 Byte + 14 Byte = 82 Byte più gli intervalli
 
 ## Efficienza
 Modellare bene il CSMA/CA è difficile
-+ andiamo a 54 Mbps
-+ abbiamo un ricevitore e trasmettitore
++ andiamo a 54 Mbps con solo una stazione trasmittente e le altre in ricezione
++ in questa situazione abbiamo che CSMA/CA aggiunge:
 	+ 1 DIFS + 3 SIFS = 4 SIFS + 2 Slot time = 4 * 10+2 * 9 = 58 $\micro s$
 	+ 58$\micro s$ * 54 Mbps = 3132 bit = 391.5 byte
 	+ intestazione, CRCs e altri frame = 82 byte
@@ -1335,13 +1343,33 @@ Modellare bene il CSMA/CA è difficile
 	+ la larghezza di banda è $\leq 41Mbps$ non 54 Mbps
 	+ comparando all'ethernet in condizioni simili: efficienza pari al 97%
 ## Frame fragmentation
+Per risolvere il problema dei canali rumorosi, 802.11, ammette la frammentazione dei frame in parti più piccole, **ognuna dotata del proprio checksum**.
 
++ frammenti sono numerati
++ ricevono l'ACK individualmente 
+>[!example]
+>Il trasmittente non può inviare il frammento $k+1$ fino a quando non ha ricevuto l'ACK per il frammento $k$. 
+
++ il delay SIFS tra un ACK e il frammento successivo proibisce l'inizio di una nuova finestra contesa finché l'ultimo frammento non è stato inviato
 ## Distribution
++ il frame contiene 4 indirizzi
+	+ come vengono interpretati dipende dai bit:
+		+ ToDS
+		+ FromDS
+	+ possibilità che il frame debba essere spedito attraverso un sistema distribuito formato da vari access point
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/distribution.jpg]]
+		+ **Caso semplice:** un nodo spedisce direttamente ad un altro nodo (da A a C)
+			+ entrambi i bit DS sono a 0
+			+ Addr1 identifica il ricevitore C
+			+ Addr2 identifica il nodo sorgente A
+		+ **Caso complesso:** entrambi i bit DS sono a 1
+			+ A deve mandare un frame ad E (**fuori dal range di AP-1**)
+			+ Addr1 identifica la destinazione ovvero E
+			+ Addr2 identifica **AP-3** il mittente intermedio
+			+ Addr3 identifica **AP-1** quello che accetta il frame da un nodo wireless e lo inoltra nel sistema distribuito
+			+ Addr4 identifica **A**
 + mobilità tra le celle: cambio da un access point all'altro man mano che mi sposto
 + abbiamo tanti access point con un loro range collegati ad una rete ethernet
-	+ se A deve mandare un frame a qualche nodo deve solo sapere il MAC Address di quel nodo
-		+ se deve mandarlo ad E (lontanissimo in un'altra cella) il frame avendo quattro indirizzi che corrispondo ai MAC address degli Access Point intermedi 
-		+ passo da AP-1 che lo passa ad AP-3 che lo passa ad E
 
 # IEEE 802.15
 

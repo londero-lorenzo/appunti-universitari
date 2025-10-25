@@ -77,7 +77,7 @@ created: 2025-10-20
 	+ vincoli sul processo di sviluppo
 	+ **requisiti di qualità**
 >[!tip]
->Requisiti sono indipendenti tra loro (possono generare o limitare altri requisiti)
+>Requisiti non sono indipendenti tra loro (possono generare o limitare altri requisiti)
 
 >[!example]
 >"Limitare l'accesso agli utenti autorizzati", è un requisito non funzionale ma introduce requisiti funzionali come le funzioni di autenticazione e recupero password.
@@ -165,11 +165,14 @@ created: 2025-10-20
 + **Convalida dei requisiti**
 
 ## Modello sequenziale
-
+Sequenzialità sia in avanti che indietro delle tre attività chiave.
+![[materie/anno_2025-2026/ingegneria_del_software/assets/Immagine 2025-10-25 171812.png|400]]
 ## Modello a spirale
-cresce la conoscenza si abbassa il rischio e cresce il valore del nostro software
+Nella pratica il processo è spesso iterativo con fasi interallacciate e non sequenziale, ripetendo le tre fasi iterativamente in maniera sempre più approfondita come una spirale fino ad arrivare alla stipulazione del documento dei requisiti di sistema..
+Cresce la conoscenza, si abbassa il rischio e cresce il valore del nostro software.
 
-Deduzione, specifica e convalida fatti in maniera iterativa
 
 >[!warning]
+>Le definizioni di questo file per i requisiti riguardano per lo più la descrizione classica dei requisiti.
+>I requisiti dei processo agili, descritti nel precedente file, potrebbero essere considerati uno spreco di tempo se troppo dettagliati. Inoltre nei metodi agili la specifica dei requisiti non è un'attività separata, ma è considerata come parte dello sviluppo, in base alle priorità dell'utente.
 

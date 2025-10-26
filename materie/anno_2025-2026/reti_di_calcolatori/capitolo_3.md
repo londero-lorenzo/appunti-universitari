@@ -178,35 +178,231 @@ Ogni host ha un indirizzo **univoco**:
 	+ invia allo Switch 1 un messaggio di chiusura e lo switch elimina dalla tabella la riga corrispondente 
 	+ uguale per gli altri switch
 
+##### Caratteristiche del VC
++ dato che host A deve **attendere** che la richiesta di connessione arrivi dall'altra parte della rete e torni indietro: **c'è un ritardo almeno uguale a RTT**
++ Rispetto al modello datagram **il valore di overhead dell'intestazione** in ciascun pacchetto è ridotto perché ciascun pacchetto dati contiene solo **un piccolo identificatore univoco** solo su una linea
++ In caso di **malfunzionamento**:
+	+ **interrompere** la connessione e instaurarne una **nuova**
+	+ **chiudere** quella vecchia per liberare **spazio di memorizzazione** nelle tabelle degli switch
+>[!question] Come fa uno switch a decidere verso quale linea inoltrare la richiesta di connessione ?
+>**Algoritmi di instradamento**
 
 #### Vantaggi
 + intestazione nei pacchetti molto più bassa
 + posso verificare che le proprietà che scelgo siano garantite
++ quando l'host riceve il permesso di trasferire i dati **conosce già abbastanza com'è fatta la rete**
+	+ sa che c'è veramente un percorso verso il ricevitore ed è pronto per ricevere i dati
++ si può **assegnare risorse** al circuito virtuale al momento della connessione:
+	+ una rete X.25 buffer sono assegnati a ciascun VC quando è inizializzato e il circuito può essere rifiutato da un nodo se non ha abbastanza buffer **disponibili**
 #### Svantaggi
 + sensibili ai guasti
 + si deve rifare il circuito
 
+#### Datagram VS Virtual Circuit
+
++ Datagram:
+	+ non ha fase di instaurazione connessione
+	+ ogni switch elabora ogni pacchetto in modo **indipendente**
+	+ ogni pacchetto in arrivo **compete con tutti gli altri** per lo spazio all'interno del buffer
+	+ se non c'è spazio il pacchetto in arrivo viene **eliminato**
++ VC:
+	+ fornire a ciascun circuito una diversa **qualità di servizio** (QoS)
+	+ rete fornisce qualche **forma di garanzia** relativa alle prestazioni
+		+ switch riservano risorse necessarie per soddisfare la garanzia
+			+ switch attraversati da un circuito virtuale potrebbero assegnargli una **percentuale dell'ampiezza di banda** delle linee uscenti
+			+ potrebbero stabilire una certa tolleranza del **delay**
+
+### Source routing
+>[!definition]
+>>L'host sorgente fornisce **tutte le informazioni** relative alla topologia della rete necessarie per inoltrare un pacchetto all'interno della rete.
+
+#### Implementazione
++ **Assegnare un numero** a ciascuna uscita di ciascuno switch:
+	+ inserirlo nell'intestazione del pacchetto
+![[materie/anno_2025-2026/reti_di_calcolatori/reti_di_calcolatori.excalidraw.md#^frame=4aU4JFfp]]
+>[!tip] Dato che ci sono più switch lungo il percorso:
+>intestazione deve contenere informazioni per permettere a **ciascun switch** di determinare la giusta uscita.
+
++ inserire nell'intestazione **elenco ordinato di numeri di porta**
++ far ruotare l'elenco in modo che il successivo switch lungo il percorso sia sempre il primo
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/source_routing_example.jpg]]
+
++ host A deve avere conoscenze sufficienti relative alla topologia della rete per comporre l'intestazione
++ **dimensione variabile** dell'intestazione: dipende da quanti switch ci sono
+
 # Bridges e LAN Switches
 
-legge i frame verifica i CRC e li inoltra
+>[!definition]
+>>Categoria di commutatori usata per inoltrare pacchetti fra reti locali a mezzo fisico condiviso.
 
-pacchetto non arriva perché la configurazione interna degli switch non è aggiornata rispetto alla topologia della rete
+>[!example]
+>Vogliamo interconnettere due reti Ethernet:
+>1. Ripetitore: non funzionerebbe se si eccedessero i limiti fisici di Ethernet
+>2. Bridge: inoltra i frame da una rete all'altra
+>	- opererebbe in **modalità promiscua**
+>	- accetta tutti i frame trasmessi su **entrambe le reti** in modo da inoltrarli
 
-se il bridge riceve un frame che ha indirizzo broadcast (tutti uno)
+>[!definition]
+> Flooding
+>>I bridge accettano i frame delle reti locali che arrivano ai propri ingressi e li inoltrano verso tutte le uscite.
 
-B3 inoltra sul ramo C e B5 sul ramo D e B1 lo inoltra su tutte le porte
 
+## Bridge ad apprendimento (learning bridge)
+
+>[!warning]
+>Non c'è bisogno che il bridge inoltri tutti i frame che riceve.
+
+Ogni frame può essere inoltrato solo **al relativo host**.
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/learning_bridge.jpg]]
++ ogni volta che un frame da A indirizzato a B arriva sulla porta 1
++ non serve che il bridge lo inoltri sulla porta 2
+
+>[!question] Come può un bridge apprendere su quale porta risiedono i vari host ?
+> Caricare una tabelle di inoltro nel bridge.
+
+| Host | Port |
+| ---- | ---- |
+| A    | 1    |
+| B    | 1    |
+| C    | 1    |
+| X    | 2    |
+| Y    | 2    |
+| Z    | 2    |
+
++ se A deve spedire un frame a B
++ il bridge non lo inoltra sulla porta 2 perché A e B sono nella stessa rete locale
+
+#### Ricavare la tabella automaticamente
+>[!tip]
+>Ogni bridge ispeziona anche **l'indirizzo sorgente** di tutti i frame che riceve.
+
++ l'host A invia un frame a un host su qualsiasi lato del bridge
++ bridge memorizza l'host mittente e da quale porta proviene ovvero la 1
++ a ciascuna info nella tabella è associato un temporizzatore:
+	+ scaduto quello il bridge elimina l'info
+	+ per gestire spostamento di un host da una rete all'altra
+>[!warning]
+>Se il bridge riceve un frame indirizzato ad un host che non è presente nella tabella, il frame viene inoltrato verso tutte le porte di uscita.
+
++ se bridge riceve un frame con indirizzo:
+	+ **Broadcast**: lo inoltra su tutte le porte a parte quella di provenienza
+	+ **Multicast**: 
+		 1. come il broadcast ma lascia decidere agli host se siano interessati o meno
+			+ può generare **traffico** sulle interfacce
+		2. Impara quando non ci sono membri del gruppo associati alla porta
 ## Spanning Tree Algorithm
 
-+ **Rapid Spanning Tree:** protocollo usato da tutti gli switch
-+ switch fra di loro si parlano
-	+ scambiano messaggi (frame ethernet specifici) relativi alla rete
-+ ogni bridge deve capire quali sono le porte su cui vuole fowardare i frame
-+ eleggere un bridge come la root di un albero (quello con ID più basso)
-+ bridge si scambiano messaggi (BPDU)
-	+ ogni messaggio è una tripla (X, d, Y)
-		+ **Y**: ID del bridge che genera il messaggio
-		+ **X** ID del bridge root secondo Y
-		+ **d** distanza tra X e Y in base a quante LAN deve attraversare
-	+ ID bridge è composto dall'indirizzo MAC e 16 bit di priorità (di cui solo i primi 4 sono la priorità reale)
+>[!warning]
+>Strategia precedente funziona bene solo se non ci sono **loop** nella rete locale.
 
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/lan_loop.jpg]]
+
+>[!question] Com'è possibile che una rete abbia un loop ?
+>1. Un bridge che chiude ad anello potrebbe essere stato aggiunto inconsapevolmente
+>2. Anelli sono inseriti di proposito per garantire **ridondanza** in caso di guasto
+
++ Immaginare la LAN estesa come un grafo che possa avere dei cicli
+>[!definition]
+>Spanning Tree
+>>Sottografo di tale grafo che ne copre tutti i vertici senza avere cicli.
+
+### Idea principale
++ Sono i bridge a scegliere le porte verso le quali inoltreranno i frame:
+	+ ciascun bridge ha un **identificatore univoco**
+	+ viene nominata la **radice** (bridge con ID più basso)
+	+ bridge radice inoltre sempre su tutte le porte
+	+ ciascun bridge calcola il **percorso più breve verso la radice** e prende nota di tali porte
+	+ viene selezionata una porta come percorso preferito dal bridge
+	+ tutti i bridge connessi ad una LAN nominano un unico bridge **designato**:
+		+ lui inoltrerà i frame verso la radice
+		+ è quello **più prossimo alla radice**
+>[!tip]
+>Dato che ogni Bridge è connesso a più di una LAN:
+>- partecipa alla nomina del bridge designato in ogni LAN di cui fa parte
+>- ciascun bridge decide se essere o meno il bridge designato
+>- inoltra il frame solo verso le porte per le quali è il bridge designato.
+
+### Messaggi di configurazione
+>[!definition]
+>BPDU
+>>I bridge devono scambiarsi messaggi di configurazione per decidere sono la radice o bridge designato per una certa rete.
+
+BPDU contendono tre informazioni (X,d,Y)
+- Y: identificatore del bridge che invia il messaggio
+- X: identificatore del bridge radice secondo Y
+- d: distanza misurata in **hop** (segmenti), fra il bridge radice e il bridge che invia il messaggio
+#### Y
+- ID del bridge = indirizzo MAC + 16-bit (primi 4 sono la priorità, gli altri indicano la VLAN)
+- Priorità di default è 32769 = 1000 000000000001
+- può essere cambiato dall'admin se volesse che un bridge specifico diventi la radice
+
+- all'inizio ciascun bridge pensa di essere la radice
+	- invia un messaggio di configurazione su ciascuna delle sue porte (X, 0, Y)
+	- identificandosi come radice (segnando distanza pari a 0 da essa)
+- bridge verifica che il BPDU ricevuto sia migliore di quello memorizzato come migliore per quella porta
+	- viene considerato migliore se:
+		- identifica una radice con un **identificatore minore**
+		- identifica una radice con lo **stesso ID ma con distanza minore**
+		- l'ID della radice e la distanza dalla radice sono uguali ma il bridge che ha inviato il messaggio ha identificatore minore
+- se è migliore il bridge:
+	- aggiunge 1 al campo **d** 
+	- **elimina** la vecchia informazione e **memorizza** quella nuova
+
+#### Quando un bridge riceve un BPDU da cui deduce di non essere la radice:
++ aggiunge 1 al campo distanza dalla radice
++ **smette** di generare **propri messaggi** di configurazione
++ inoltra solo quelli **ricevuti da altri**
+#### Quando un bridge riceve un BPDU che indica che non è il bridge designato:
+>[!example]
+>Messaggio proviene da:
+>- bridge più vicino alla radice
+>- oppure con stessa distanza ma ID minore
++ smette di inviare messaggi di configurazione da quella porta
+#### Sistema stabilizzato
+- soltanto il **bridge radice** che continua a generare messaggi di configurazione
+- resto dei bridge inoltrano messaggi solo verso le porte dei bridge **designati**
+#### Esempio
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/spanning_tree_ex.jpg]]
+- è appena tornata l'alimentazione nell'edificio che ospita la rete
+- tutti i bridge dichiarano di essere la radice
+- consideriamo dal nodo **B3**
+- B3 riceve (B2, 0, B2)
+- poiché 2 < 3 ----> B3 accetta come radice B2
+- B3 aggiunge 1 alla distanza da B2 (0)
+	- invia (B2, 1, B3) verso B5
+- B2 accetta B1 come radice
+	- invia (B1, 1, B2) a B3
+- B5 accetta B1 come radice
+	- invia (B1, 1, B5) verso B3
+- B3 accetta B1 come radice
+	- nota che B2 e B5 sono più vicini alla radice
+	- B3 smette di inoltrare messaggi verso entrambe le proprie interfacce
+	- B3 lascia le due porte **non selezionate**
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/spanning_tree_ex_2.jpg]]
+#### Dopo la stabilizzazione
+- Bridge continua ad **inviare periodicamente** messaggi di configurazione
+- Gli altri continuano ad inoltrare tali messaggi come prima
+
+#### Guasto
+Se un bridge dovesse guastarsi:
+- bridge a valle non riceverebbero più messaggi di config
+- ripartirebbero per ristabilire chi è la radice e tutto il resto
+
+#### Limitazione
+>[!warning]
+>- L'algoritmo è in grado di riconfigurare lo spanning tree in caso di guasto
+>- Non è in grado di inoltrare frame lungo percorsi alternativi per aggirare il guasto
+
+### Limiti dei bridge
+
+**Non scalano bene**
+- Gli algoritmi di spanning tree non scalano: hanno **complessità lineare** e **non sfruttano una struttura gerarchica**.
+- Il **broadcast non scala**: genera **troppo traffico** su reti di grandi dimensioni (e in realtà non è nemmeno sempre necessario).
+
+**Non supportano l’eterogeneità**
+- Tutte le parti della rete devono usare lo **stesso tipo di indirizzo** e avere **caratteristiche simili** (ad esempio il supporto al broadcast).
+- Ma cosa succede se due segmenti della rete ammettono diverse **MTU (Maximum Transmission Unit)**?
+    - Ad esempio: Ethernet (802.3) → 1500 byte; WiFi (802.11) → 2346 byte.
+    - In una direzione, il bridge deve frammentare un frame in due o più frame, che devono poi essere ricomposti al livello datalink dal ricevitore (frammentazione PAF).

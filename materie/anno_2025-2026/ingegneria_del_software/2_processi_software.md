@@ -32,8 +32,8 @@ created: 2025-10-20
 # Attività dei processi software
 
 ## Attività fondamentali
-+ Ciascun processo è composto da attività fondamentali
-+ Tutti i processi software condividono queste attività fondamentali
++ Ciascun processo è composto da **attività fondamentali**
++ Tutti i processi software **condividono** queste attività fondamentali
 + Queste attività possono essere organizzate e realizzate in modi diversi in processi diversi
 
 ## 4 attività fondamentali
@@ -46,7 +46,7 @@ created: 2025-10-20
 ## Studio di affidabilità
 + Stabilisce se lo sviluppo debba essere avviato:
 	+ Se esiste un mercato per il software
-	+ Se il software sia tecnicamente ed economicamente realistico
+	+ Se il software sia tecnicamente ed economicamente **realistico**
 + Definisce quali sono le alternative possibili e le scelte più ragionevoli, stimando le risorse necessarie per ciascuna alternativa
 
 ## Studio di fattibilità
@@ -70,7 +70,7 @@ Report di fattibilità:
 
 ## Acquisizione, analisi e specifica dei requisiti
 + Attività per stabilire **cosa** il software dovrà fare (**non come**)
-+ Specificare le funzionalità e le qualità che deve possedere, **senza vincolare** la progettazione e l'implementazione
++ Specificare le **funzionalità** e le **qualità** che deve possedere, **senza vincolare** la progettazione e l'implementazione
 + Definisce tramite l'interazione con il committente funzioni, vincoli, prestazioni, interfacce e qualsiasi altra caratteristica che il sistema dovrà soddisfare
 >[!warning] Attività critica: 
 >un errore in questa fase può costare molto in seguito nelle fasi di progettazione e implementazione
@@ -84,7 +84,7 @@ Report di fattibilità:
 + Deduzione richiede spirito critico e può coinvolgere
 	+ osservazione di sistemi già esistenti
 	+ discussione con i possibili utenti
-+ Durante l'**analisi** può avvenire lo sviluppo di uno o più modelli e prototipi, che aiutano gli analisti a capire il sistema da specificare
++ Durante l'**analisi** può avvenire lo sviluppo di **uno o più modelli** e prototipi, che aiutano gli analisti a capire il sistema da specificare
 
 ### Specifica
 + Traduce le informazioni dedotte in un insieme di requisiti
@@ -98,7 +98,7 @@ Report di fattibilità:
 
 ### Convalida
 Controlla che i requisiti siano realistici, coerenti e completi
-+ Durante possono essere rilevati errori nel documento dei requisiti
++ possono essere rilevati errori nel documento dei requisiti
 + Il documento dei requisiti dovrà essere modificato in presenza di errori, in modo da correggerli
 
 ### Documento dei requisiti
@@ -146,7 +146,7 @@ Progetto del software che descrive:
 + interfacce tra i componenti del sistema
 
 # Verifica e Validazione
-+ **Verifica:** mostrare che un sistema è conforme alle sue specifiche. Se nella prima fase abbiamo estratto delle specifiche andiamo a vedere se dopo la fase di codice e modellazione il codice faccia quello che abbiamo progettato
++ **Verifica:** mostrare che un sistema è **conforme alle sue specifiche**. Se nella prima fase abbiamo estratto delle specifiche andiamo a vedere se dopo la fase di codice e modellazione il codice faccia quello che abbiamo progettato
 + **Validazione:** mostrare che un sistema soddisfi le aspettative del cliente
 + **Testing**: tecnica più utilizzata che consiste nell'eseguire il sistema utilizzando dati di prova ricavati dalle specifiche
 
@@ -156,7 +156,7 @@ Progetto del software che descrive:
 >- revisioni
 
 ## Test dei componenti
-Granularità può variare da progetto a progetto:
+**Granularità** può variare da progetto a progetto:
 + componenti possono essere entità semplici (funzioni, classi di oggetti, gruppi coerenti di queste entità)
 Ciascun componente è testato separatamente per appurare il corretto funzionamento in **isolamento**.
 
@@ -176,7 +176,7 @@ Ciascun componente è testato separatamente per appurare il corretto funzionamen
 + dimostra se il software soddisfa il cliente
 
 ## Testing iterativo
-+ i difetti scoperti possono portare la ripetizione di altri stadi del processo di test
++ i difetti scoperti possono portare la **ripetizione di altri stadi** del processo di test
 
 >[!example]
 >Alcuni errori nei componenti del programma possono apparire durante il test del sistema o il cliente può stimolare il sistema in modi non previsti dai dati simulati.

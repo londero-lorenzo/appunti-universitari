@@ -40,3 +40,50 @@ Coni e bastoncelli fanno cose diverse:
 + Percezione del movimento funziona per entrambi
 + Coni: sono bravi a riconoscere i colori e di conseguenza i pattern, ma meno bravi a riconoscere la luce
 + Bastoncelli: più bravi nel percepire la luce
+
+___
+
+(riascoltare l'esempio iniziale)
+
+#### Visione centrale e periferica
+Troppi banner lampeggianti nelle pagine web può portare a fastidio perché attirano l'attenzione della vista.
+
+>[!tip]
+>Talvolta alcune icone sono usate per informazione, come il cerchietto che continua a roteare finché la pagina non è completamente caricata avvisa che si sta guardando una versione della pagina che non è quella finale.
+
+Con l'**eye tracking** posso distinguere le zone dello schermo in cui l'utente sta guardando e posso fare in modo che in quella zona di visione centrale ho una risoluzione maggiore e invece nella visione periferica ho una risoluzione più basilare. Questo a solo scopo di **migliorare le prestazioni** e guadagnare dal punto di vista di refresh.
+
+#### Percezione del colore
+Ci sono diversi sistemi di distinzione del colore come RGB e HSV.
+
+Da soggetto a soggetto cambia come una persona percepisce il colore.
+Teorie del colore:
++ **Teoria tricromatica**: noi percepiamo i colori a partire dai tre fondamentali: rosso, verde, blu. Tuttavia questa teoria non spiega tutto del colore.
++ **Teoria dell'opponenza cromatica**: opposizione di colori tra loro complementari (blu-giallo, rosso-verde)
+
+
+**Limitazioni delle distinzioni di colore**
++ Riguardo l'hardware, colori diversi su monitor diversi e browser diversi
++ Daltonismo: circa 4% delle persone ne sono affette
+	+ Protanopia: problema con il rosso
+	+ Tritanopia: problema con il giallo
+Queste limitazioni si ripercuotono anche nel modo in cui vengono svolte le interfacce, in modo da non confondere i colori ad esempio nelle icone delle diverse applicazioni di google.
+
+>[!example]
+>In una lavatrice una luce adibita all'alimentazione se verde è convenzionalmente accesa e pronta all'uso, mentre un'altra spia anch'essa verde si accende quando manca il sale, e ciò non mantiene una coerenza con l'altra spia, avendo lo stesso colore ma che vuole dire due cose opposte ('tutto apposto' il primo/'problema' il secondo).
+
+#### Aspetti della scelta di colori:
++ Troppi colori diversi utilizzati confondono e non veicolano messaggi come dovrebbero
++ Scelta di più colori che può essere palette di colori analoghi e palette di colori complementari. Tale scelta dipende dall'obiettivo. 
++ Problema dell'accostamento di colori. L'essere umano non percepisce il colore con il valore assoluto, ma in modo relativo, in base al contesto cromatico in cui è posto. Colori troppo simili per raffigurazioni diverse possono essere difficili da distinguere. 
++ Cromostereopsi: certe scritte in certi colori sembrano più in profondità di altre scritte (blu sembra più in profondità rispetto al rosso). Ciò può anche dare fastidio agli occhi nelle griglie ad esempio, questo perché il cristallino cerca di mettere a fuoco i diversi colori e così facendo affatica i muscoli utilizzati
++ La capacità di distinguere il contrasto dei colori si attenua con l'aumentare degli anni, in quanto si perde la sensibilità alla luminosità nel corso del tempo. Inoltre ad esempio il colore bianco con l'aumentare dell'età tenderà sempre di più al giallo.
+
+>[!example] Esempio di interfaccia cromaticamente problematica
+>![[materie/anno_2025-2026/interazione_uomo_macchina/assets/Immagine 2025-10-28 184753.png]]
+>Nell'immagine superiore:
+>- Le due scritte laterali che invitano ad iscriversi ai corsi sono uguali ma di colori diversi e anche il (presunto) link alla mail.
+>- Inoltre le ondine di fondo formano un colore di background non uniforme che rendono difficoltoso distinguere le scritte.
+>- Le gif NEW che spinnano due centrali e due laterali distruggono la visione periferica e continuano a prendere l'attenzione dell'occhio.
+>- La scelta del colore rosso per le scritte su sfondo blu non rafforza il contrasto tra i due colori e rende difficile la comprensione.
+

@@ -144,3 +144,51 @@ Risposta:
 + Probabilità di due frame senza errori: $1-(P\_{err})^2=0,8913$
 
 ___
+
+## Esercizi  capitolo 2
+
+### Es 1
+
+Testo:
+Un host è collegato ad uno switch Gigabit Ethernet, e trasmette frame con un payload medio di 500 byte. Tenendo conto di IPG e preambolo, qual è la banda netta massima (in Mbps) ottenibile?
+
+Risposta:
++ $\frac{500}{500+8+44+4+12}=92,9$% (senza unità di misura è numero puro) 
+
+___
+### Es 10
+
+Testo:
++ Un certo dispositivo di rete utilizza il CRC FOP-4, il cui polinomio generatore è 10111. Riceve la sequenza di bit 110101101010. E' corretto (e in tal caso, qual è la parte dati) o contiene degli errori?
+
+Risposta:
++ Dividiamo la sequenza ricevuta per il generatore (divisione binaria modulo 2).
++ Se il resto è uguale a 0, allora non c'è nessuno errore, se è $\neq$ 0 allora c'è un errore.
++ Il resto ottenuto dalla divisione è 0010 (penso che il CRC sia sempre lungo un bit in meno rispetto al generatore, essendo un resto dell'intero)
++ La parte i dati senza i 4 bit di CRC è quindi 110101100000.
+
+___
+### Es 11
+
+Testo:
++ Una certa linea viene utilizzata con il protocollo sliding window. Le finestre di ricezione e invio hanno dimensione RWS=SWS=8 frame. Quanti bit bisogna utilizzare per l'etichetta di ogni frame.
+
+Risposta:
++ In un protocollo sliding con acknowledgment cumulativo, i numeri di sequenza vengono usati in modo circolare, ovvero vengono riutilizzati dopo un certo numero: infatti la spazio dei numeri di sequenza per una sequenza di n bit, è $2^n$ bit.
++ Per evitare ambiguità si sottrae uno: $SWS\leq2^n-1$   $\rightarrow$   $8\leq2^n-1$   $\rightarrow$    $2^n\geq9$    $\rightarrow$   $n=4$ bit.
+
+___
+### Es 12
+
+Testo:
++ Le strategie di accesso condiviso al mezzo si dividono in TDM, FDM e STDM. Si dica quali di queste NON sono indicate, nelle seguenti situazioni: 
+
+(a) Stazioni che trasmettono pochi dati e raramente. 
++ TDM, FDM non vanno bene perché occupano banda inutilmente, in quanto allocano risorse fisse anche se un utente non sta trasmettendo
++ STDM va bene perché assegna i slot temporali dinamicamente in base al traffico effettivo.
+(b) Stazioni che non hanno modo di tenere un clock sincronizzato.
++ FDM e STDM non vanno bene perché devono sincronizzarsi
++ TDM va bene, divide il canale in slot temporali fissi, uno per ogni utente
+(c) Comunicazioni con vincoli real time.
++ STDM non va bene, la variabilità del tempo di assegnazione degli slot può introdurre jitter
++ FDM e TDM vanno bene

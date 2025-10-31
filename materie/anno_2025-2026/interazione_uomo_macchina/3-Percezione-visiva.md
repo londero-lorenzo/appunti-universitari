@@ -87,3 +87,64 @@ Queste limitazioni si ripercuotono anche nel modo in cui vengono svolte le inter
 >- Le gif NEW che spinnano due centrali e due laterali distruggono la visione periferica e continuano a prendere l'attenzione dell'occhio.
 >- La scelta del colore rosso per le scritte su sfondo blu non rafforza il contrasto tra i due colori e rende difficile la comprensione.
 
+___
+
+(scrivere robe fino a slide 32)
+
+
+## Reperimento visivo
+
+### Icone
+Le icone servono a notificare l'utilizzo di un determinato oggetto, o i suoi limiti o le sue caratteristiche.
+La scelta dell'icona giusta può derivare dal contesto culturale dell'oggetto.
+>[!example]
+>Donna in tailleur globalmente riconosciuta come donna business pronta a fare business correndo perché è sempre impegnata.
+>Un'azienda che doveva portare sta pubblicità in Africa ha preferito cercare nel loro contesto culturale e decise di rimpiazzare la donna in tailleur con una donna con un abito africano. il problema è che il vestito che la tipa dell'immagine che avevano trovato indossava era un abito da sposa e quindi gli utenti africani non capivano perché la sposa correva. 
+
+>[!example] Altro esempio:
+> Magari in Italia se c'è un app di orientamento geografico per rappresentare i vari punti cardinali si possono usare ad esempio il duomo di Milano (nord) l'Etna (sud) Colosseo (est) ecc..., mentre se l'applicazione viene esportata all'estero non capirebbero niente.
+
+L'icona quindi devono essere abbastanza riconoscibile dalla maggior parte del pubblico che si vuole raggiungere.
+
+#### **Icone** 
+(Si dovrebbe cercare di scegliere il tipo di icona favorendo l'ordine con cui sono di seguito elencati):
++ **Rassomiglianti**: è l'oggetto stesso (sole, nuvola)
++ **Esemplari**: Prendo altri oggetti per rappresentare l'oggetto (forchetta e coltello per rappresentare un ristorante)
+>[!tip]
+>Può provocare problemi culturali ad esempio se in asia non si usano forchetta e coltello ma le bacchette o le mani
++ **Simboliche**: Simbolo da associare all'oggetto, non è un oggetto vero e proprio (ad esempio simbolo della luminosità o brillantezza per rappresentare il brillantante di una lavatrice, oppure un bicchiere rotto crepato che simboleggia trasporto fragile, oppure S di sale)
++ **Arbitrarie**: mi arrendo e invento una cosa diversa che sarà da apprendere. Icone con forme inventate o fondendo più immagini insieme.
+
+>[!example] Altri esempi di icone:
++ **Nelle scatole** 
+	+ Ombrello che rappresenta che l'oggetto teme la pioggia o l'acqua (esemplare)
+	+ Freccia indica che va tenuto in una certa posizione (simbolica)
+	+ Termometro con temperatura max e min che rappresenta le temperature di utilizzo dell'oggetto (esemplare)
+	+ Calamita sbarrata per dire che l'oggetto non va esposto a campo magnetico (due icone la barra è simbolica, magnete esemplare)
+	+ Elefante che rappresenta che l'oggetto è pesante (simbolica)
+	+ Divieto di tacchino per dire che non si possono mettere animali vivi nella scatola poiché non sufficientemente areata (divieto simbolico e tacchino esemplare)
++ **Servizio di riparazione Playstation**:
+	+ Non lasciare dentro il cd o il controller (rassomigliante)
+	+ Non lasciare dentro cavi (esemplare in quanto è rappresentato un cavo HDMI che però rappresenta tutti i cavi)
+	+ Non lasciare insetti dentro al packaging (più precisamente la blatta americana, che fa il nido nei prodotti elettronici. Quindi l'icona è rassomigliante perché è proprio la sagoma della blatta americana specifica)
++ **Oggetti da ufficio**:
+	+ Icona del calendario
+	+ Icona della data
+	+ icona del salvataggio (archivio conversazione) (culturale in quanto nel passato le persone salvavano le cose nelle cartelle, tipo pubblica amministrazione)
+	+ Icona del salvataggio digitale che è rassomigliante al floppy disk, e nel tempo è passato da rassomigliante a esemplare a simbolica in quanto il floppy si è usato sempre meno e con altri metodi di salvataggio (chiavetta, disco fisico)
+	+ Invia mail: non è rappresentata solo la busta ma anche l'atto di imbucare la mail nella cassetta delle lettere
+	+ Icona del criptaggio (non è rassomigliante perché non uso una chiave vera e propria)
+
+
+##### Problemi controintuitivi con le icone:
++ Superstizione della gente ('problema' culturale)
+>[!example]
+>Compagnia aerea Brussels:
+>-  Presenta una serie di pallini che formano quella che sembra una B e che richiama il nome.
+>- Ha avuto problemi di impatto economico in quanto i pallini che formavano la B erano 13, cosa che porta le persone superstiziose a non comprare il biglietto per paura di sfiga. Hanno risolto aggiungendo un pallino e portando il totale a 14.
+
++ Ricerca di identità di una società (problema di distinzione delle diverse icone)
+>[!example] 
+>Icone funzionalità Google:
+>- Prima c'erano icone esemplari per la maggior parte, successivamente per motivi di identità aziendale le icone sono state trasformate utilizzando gli stessi colori e le stesse forme e trasformando alcune icone in simboliche (Gmail, Calendar, Meet) e altre in arbitrarie (Drive, Document).
+

@@ -406,3 +406,75 @@ Se un bridge dovesse guastarsi:
 - Ma cosa succede se due segmenti della rete ammettono diverse **MTU (Maximum Transmission Unit)**?
     - Ad esempio: Ethernet (802.3) → 1500 byte; WiFi (802.11) → 2346 byte.
     - In una direzione, il bridge deve frammentare un frame in due o più frame, che devono poi essere ricomposti al livello datalink dal ricevitore (frammentazione PAF).
+
+# Interconnessione
+
+>[!definition]
+>>Gli utenti di una rete di un certo tipo vogliono essere in grado di comunicare con utenti di reti diverse.
+
+- Costruire una rete interconnessa **eterogenea** e **scalabile**
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/protocolli_interconnessione.jpg]]
+*Schema di un internetwork, con gli strati di protocolli usati per connettere H1 a H8*
+## TCP/IP stack
+
+>[!tip] Strato IP
+>Inoltra anche i **pacchetti**.
+
+Datagramma può arrivare all'IP in due modi:
+- quando uno strato superiore (TCP o UDP) richiede di spedire dati a un altro host:
+	1. payload **incapsulato** in un datagramma IP
+	2. datagramma è spedito al prossimo nodo usando un appropriato protocollo datalink
+	- un'applicazione può mandare/trasmettere dati attraverso un'interfaccia sottostante senza saperlo
+- Un pacchetto è ricevuto da un livello inferiore
+	- **indirizzato all'host locale**: l'intestazione IP è rimossa e il payload consegnato allo strato di trasporto
+	- **indirizzato a un altro host**: può essere inoltrato usando un'interfaccia
+		- usando uno strato inferiore 
+## Router
+>[!definition]
+>> È un host con molte interfacce dalle quali il relativo strato IP inoltra pacchetti da un'interfaccia all'altra.
+
+- operano con strategia **store-and-forward** ma in maniera diversa rispetto agli switch
+	- ogni link può usare diverse tecnologie
+	- IP datagramma è incapsulato/decapsulato e incapsulato ancora
+	- L'inoltro è deciso tramite l'indirizzo IP
+
+## Modello del servizio IP
+
+>[!warning] Problema principale nella definizione di modello di servizio per una internetworking
+>Si può fornire un certo servizio tra host solo se tale servizio può essere fornito a tutte le sottostanti reti fisiche.
+
+>[!tip] Definizione del modello IP
+>Renderlo **poco esigente** in modo che **qualsiasi** tecnologia di rete all'interno di una internetworking sia in grado di fornire il servizio necessario.
+
+IP diviso in due parti:
+- **schema di indirizzamento**: fornisce il modo di identificare tutti gli host nella rete interconnessa
+- **modello datagram**: per la consegna dei dati
+
+>[!tip] Modello **best effort**
+>IP non fornisce alcuna garanzia sulla consegna dei datagrammi.
+
+I pacchetti possono essere:
+- smarriti
+- consegnati nell'ordine sbagliato
+- un pacchetto può essere consegnato più volte
+
+Schema di **indirizzamento globale**:
++ prevede un modo per identificare tutti gli host nell'internetwork
++ astrae dagli indirizzi (MAC) del livello 2 sottostante
+
+## Formato del pacchetto
+
+
+| Campo                 | Lunghezza | Scopo                                                                                             |
+| --------------------- | --------- | ------------------------------------------------------------------------------------------------- |
+| HLen                  | 32 bit    | lunghezza dell'intestazione                                                                       |
+| TOS (type of service) | 8 bit     | consente il trattamento differenziato dei pacchetti in base alle **necessità** delle applicazioni |
+| Length                | 16 bit    | lunghezza del datagramma                                                                          |
+| Ident                 | 16 bit    | usata dalla frammentazione                                                                        |
+|                       |           |                                                                                                   |
+
+- **HLen** 32 bit:  lunghezza dell'intestazione
+- **TOS (type of service)** 8 bit: consente il trattamento differenziato dei pacchetti in base alle **necessità** delle applicazioni
+- **Length** 16 bit: lunghezza del datagramma
+- 

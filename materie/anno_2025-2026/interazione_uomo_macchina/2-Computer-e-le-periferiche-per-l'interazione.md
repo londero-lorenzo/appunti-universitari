@@ -66,7 +66,31 @@ Importante quindi garantire una addestramento dato da applicazioni di machine le
 
 ___
 
+#### Acquisizione di immagini
++ Immagini bitmap: classiche con griglia  cui associare ad ogni pixel un colore
++ Immagini tridimensionali: 
+	+ Tecnica di fotogrammetria: diverse foto dello stesso paesaggio in diverse posizioni per poi crearne una versione 3D. (Ad esempio ci sono anche scanner 3D per scannerizzare una stanza).
+	+ LiDAR: Tramite drone utilizzo del laser e calcola l'immagine in base al tempo di ritorno del laser.
+
+___
+
 #### Periferiche per il posizionamento, il puntamento e il tracciamento
+
++ Mouse: 
+	+ Usato mappando i movimenti orizzontali e verticali come di un piano cartesiano. Esso permette il movimento relativo in quanto alzando la mano con il mouse e poi riappoggiando il cursore si può continuare il movimento interrotto prima.
+	+ Mouse 3D: oltre ai due assi X e Y si può muovere il mouse anche nell'asse Z
+
+>[!definition]
+>Pitch, Yaw, Roll
+>>**Pitch:** Rotazione sull'asse delle X
+>>**Yaw**: Rotazione sull'asse delle Y
+>>**Roll**: Rotazione sull'asse delle Z
+
+>[!tip]
+>I pitch, yaw, roll permettono di passare dai 3 gradi di libertà dati dai tre asse ai 6 gradi di libertà grazie alle rotazioni lungo i 3 assi.
+
+>[!example]
+>Esempio di dispositivo a 6 gradi di libertà è il 3D Systems Touch (Shadow) che presenta un pennino vincolato ad un braccio meccanico che permette però di muoversi nei 6 gradi di libertà, di cui farò un esempio più avanti
 
 + Joystick:
 	+ **digitale**: rileva solo se una direzione è attivata oppure no, come ad esempio la croce direzionale nel nintendo ds o nei cabinati arcade
@@ -76,7 +100,7 @@ ___
 
 ___
 #### Emulazione della fisica reale
-Alcuni derivati dei joystick o cursori possono applicare una certa resistenza:
+Alcuni derivati dei joystick o cursori possono applicare una certa resistenza (force feedback):
 >[!example]
 >- Il volante per i simulatori di guida
 >- Il yoke per gli aerei

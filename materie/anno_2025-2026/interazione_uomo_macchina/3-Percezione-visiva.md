@@ -41,11 +41,16 @@ Coni e bastoncelli fanno cose diverse:
 + Coni: sono bravi a riconoscere i colori e di conseguenza i pattern, ma meno bravi a riconoscere la luce
 + Bastoncelli: più bravi nel percepire la luce
 
+>[!example]
+>Una tipa ha studiato come gli utenti notavano dei potenziali pericoli in dei bidoni visivamente diversi in un'ambientazione desertica bellica.
+>Utilizzando però quel visore che fa vedere a più di 180 gradi non portava gli utenti a vedere più bidoni, nonostante l'aumentato raggio visivo.
+>Una delle spiegazioni che è stata data è che è stata aumentata la parte visiva con i bastoncelli, con cui vedo peggio i colori e anche i pattern, oltre ad avere meno risoluzione. Per questo se finiscono dei barili nel field of view (area dei bastoncelli) non vengono notati.
+
+
 ___
 
-(riascoltare l'esempio iniziale)
-
 #### Visione centrale e periferica
+Posizionamento corretto degli elementi grafici.
 Troppi banner lampeggianti nelle pagine web può portare a fastidio perché attirano l'attenzione della vista.
 
 >[!tip]
@@ -87,11 +92,23 @@ Queste limitazioni si ripercuotono anche nel modo in cui vengono svolte le inter
 >- Le gif NEW che spinnano due centrali e due laterali distruggono la visione periferica e continuano a prendere l'attenzione dell'occhio.
 >- La scelta del colore rosso per le scritte su sfondo blu non rafforza il contrasto tra i due colori e rende difficile la comprensione.
 
+Altro esempio di interfaccia problematica:
++ Il tastierino del pannello per la selezione dei piani in un ascensore è dello stesso colore dello sfondo bianco e illuminato.
+  Problemi:
+	+ Magari si vede meglio di notte, ma decisamente non di giorno.
+	+ Non c'è feedback della selezione del numero.
+	+ Nessuna logica nel posizionamento dei numeri dei piani.
+	+ Il bottone dell'allarme è troppo vicino agli altri e in caso di difficoltà dovrebbe invece essere facilmente e immediatamente raggiungibile.
+
+##### Scelta dei colori
+La correttezza della scelta della palette di colori dipende dall'uso che si deve fare e da che tipo di informazione si deve rappresentare:
++ Una palette di colori pastello va bene per colorazioni volumetriche, quindi ad esempio sedevo colorare dei quadrati i colori si distinguono effettivamente bene. La situazione cambia se bisogna colorare grafici  a punti o a linee in cui i colori diventano sempre più indistinguibili
++ Una palette di colori più saturi invece permettono di distinguere maggiormente le linee di un grafico.
+
+>[!tip]
+>Per un singolo oggetto la scelta di colori analoghi è un po' più riposante, mentre la scelta di colori complementari introduce più **dinamismo**.
+
 ___
-
-(scrivere robe fino a slide 32)
-
-
 ## Reperimento visivo
 
 ### Icone

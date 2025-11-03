@@ -246,51 +246,112 @@ Descrivere molteplici scenari.
 ## Descrizione di un caso d'uso
 
 + Per ogni caso d'uso è opportuno documentare gli scenari (con una scheda strutturata per ciascun scenario)
-
+>[!example]
+>**Pre-condizioni**: Un utente ha effettuato il login
+>**Flusso di eventi**:
+>- **Percorso normale**:
+>	1. Il cliente sceglie di effettuare l'ordine
+>	2. Il cliente inserisce nome ed indirizzo
+>	3. Il cliente inserisce i codici dei prodotti da ordinare
+>	4. Il sistema calcola il totale dell'ordine man mano che i prodotti sono inseriti
+>	5. Il cliente finalizza l'ordine
+>	6. Il sistema mostra il totale e chiede il pagamento
+>	7. Il cliente inserisce i dati della carta di credito
+>	8. Il cliente conferma l'ordine
+>	9. Il sistema verifica le informazioni, salva l'ordine tra gli ordini pendenti, ed invia le informazioni per il pagamento al sistema dei pagamenti
+>	10. Quando il pagamento viene confermato, l'ordine viene contrassegnato come "Confermato", il codice ordine viene inviato al cliente e il caso d'uso termina
+>**Post-condizioni**: l'ordine è stato salvato nel sistema ed etichettato come Confermato
+>- **Percorsi alternativi**:
+>	9.a
+>	- **Condizione**: il Codice della carta di credito risulta non valido
+>	- **Gestione**:
+>		1. Il sistema segnala l'errore e chiede di ripetere il pagamento, ritorna al passo 7 dello scenario principale
 ### IF, WHILE e FOR
 Usati per racchiudere gruppi di passi che devono essere ripetuti.
+>[!example]
+>Passo 4 dell'esempio precedente:
+>4. **FOR** ciascun codice prodotto inserito
+>	1. il sistema fornirà la descrizione ed il prezzo
+>	2. il sistema aggiungerà il prezzo al totale
+>**END**
 
+### Linee  guida per la descrizione degli scenari
+- Scrivere in stile essenziale, senza riferimenti all'implementazione
+- Descrivere **casi d'uso concisi e completi**
+- Descrivere casi d'uso a scatola nera
+	- Concentrarsi sulle responsabilità del sistema e non anticipare scelte implementative
 - non devono essere indicati dettagli che rivelino le scelte di progetto del software
 - essere il più astratti possibile
+## Relazioni fra attori e fra casi d'uso
 
-# Relazioni fra attori e fra casi d'uso
+### Generalizzazione di attori
 - attore specializzato conserva le proprietà del generale 
 - freccia parte dall'attore specializzato e punta all'attore generale
 
-## Generalizzazione di attori
+![[materie/anno_2025-2026/ingegneria_del_software/assets/generalizzazione_attori.jpg]]
 - permette di astrarre ruoli comuni a più attori
 - permette di semplificare i diagrammi
+
+![[materie/anno_2025-2026/ingegneria_del_software/assets/generalizzazione_attori_2.jpg]]
 
 ## Relazioni fra casi d'uso
 - **Generalizzazione**
 - **Inclusione**
+	- comportamenti comuni tra casi d'uso: **inclusi** in più casi d'uso
 - **Estensione**
+	- distinguere comportamenti alternativi rispetto al caso base: **estraendo** il caso base con un caso alternativo
+>[!definition]
+>>Usate per strutturare ulteriormente un diagramma dei casi d'uso
 
 - simile alla generalizzazione fra classi nella programmazione OO
 - caso d'uso generale = diversi casi d'uso simili
 - caso d'uso specializzato:
 	- eredita comportamento e significato dal generale
 	- può aggiungere passi o modificare il comportamento del generale
+![[materie/anno_2025-2026/ingegneria_del_software/assets/relazioni_caso_d_uso.jpg]]
+>[!tip]
+>Talvolta il caso d'uso generale è astratto, ossia non ha una sequenza di eventi completamente specificata.
+
 ### Inclusione fra casi d'uso
 - formalizza i casi in cui più casi **includono** una serie di azioni comuni
 - **comportamento comune a più casi d'uso**
 	- diventa caso d'uso incluso nei casi d'uso di partenza
 	- caso d'uso base è **incompleto** senza il caso incluso
 - Graficamente: dipendenza stereotipata << include >> che parte dal caso base e arriva al caso incluso
+![[materie/anno_2025-2026/ingegneria_del_software/assets/include.jpg]]
+>[!example]
+>**Traccia Ordine**
+>**Sequenza di eventi**
+>1. Cliente inserisce numero ordine
+>2. Include (Valida Utente)
+>3. Per ogni oggetto, il Sistema interroga lo stato e lo riporta all'utente
 - inclusione non contiene info sull'ordine dei casi d'uso
 - caso incluso = sequenza di azioni che è eseguita una o più volte dai casi d'uso includenti
+![[materie/anno_2025-2026/ingegneria_del_software/assets/include_2.jpg]]
 >[!tip]
-Se un caso d'uso **generale** include un altro caso d'uso le sue **specializzazioni ereditano** tale inclusione
+>Se un caso d'uso **generale** include un altro caso d'uso le sue **specializzazioni ereditano** tale inclusione
+>![[materie/anno_2025-2026/ingegneria_del_software/assets/include_3.jpg]]
 
 ## Estensione
 
-- modella una sequenza opzionale di eventi oppure casi eccezionali
+- modella una **sequenza opzionale** di eventi oppure casi eccezionali
 - definisce un nuovo caso che **estende** quello di partenza e varia il comportamento **normale**
+- Nel caso d'uso esteso (base) si agganciano uno o più punti d'estensione 
 - rappresentato con << extend >> che parte dall'estensione e arriva al caso base
 
 + non contiene informazioni sull'ordine dei casi d'uso
 + estensioni potrebbero essere accessibili **direttamente** da un attore
 + comunicazione tra attore e caso d'uso esteso
+![[materie/anno_2025-2026/ingegneria_del_software/assets/extend.jpg]]
+- casi d'uso di estensione aggiungono un comportamento in corrispondenza dei punti di estensione
+- caso d'uso base si può svolgere anche senza i casi d'uso d'estensione
+- creando estensioni separate, la descrizione del caso base rimane semplice
+![[materie/anno_2025-2026/ingegneria_del_software/assets/extend_2.jpg]]
+>[!example]
+>**Effettua ordine** può rappresentare un comportamento aggiuntivo in due casi:
+>1. Quando il cliente sceglie articoli in promozione, tali articoli saranno opportunamente scontati
+>2. Quando il cliente è abituale, viene applicato uno sconto sul totale
+
 
 # Tutorial Diagrammi
 ## 1. Definisci confini

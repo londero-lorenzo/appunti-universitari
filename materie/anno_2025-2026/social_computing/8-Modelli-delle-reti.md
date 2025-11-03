@@ -27,7 +27,7 @@ Utilità dei modelli che generano grafi:
 4 modelli classici:
 + **Regolari**
 + **Reti casuali**
-+ **Piccolo mondo**
++ **Piccolo mondo (WSSW)**
 + **Scale-free**
 
 ## Regolare
@@ -166,3 +166,86 @@ Riassuntino efficace dei GC nei grafi casuali:
 ![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-10-24 225246.png|300]]
 
 ___
+#### Diametro
+Quando circa tutti i nodi sono raggiunti, il diametro sarà $l=\frac{ln(n)}{ln(c)}$ , quindi cresce con $n$ e cala al crescere di $c$. Nella rete reale se ad esempio tutti conoscono 100 persone il diametri è di 4,9; numero molto vicino a quello di milgram. 
+Alla comparsa della componente gigante (c=1) si ha il picco del diametro, che forma una cuspide per poi riscendere con l'aumentare di c.
+
+---
+
+>[!question]
+>E' possibile usare i grafi casuali per modellare le reti reali?
+
+Non per il coefficiente di **clustering** (sottostimato) e la **degree distribution** (a campana e non a power law come nelle reali), in quanto non rappresentativo. 
+Per rappresentare invece la **lunghezza media** dei cammini vanno bene.
+
+___
+
+## Small world (WSSW)
+
+Una delle proprietà che mancano alle reti casuali sono quelle con coefficiente di clustering $c$ basso, diversamente dalle reti regolari.
+
+L'idea è quindi di partire da delle reti regolari e da esse staccare un arco da un nodo e riattaccarlo in qualche altro nodo, con una probabilità $p$. Se $p=1$ la rete diventa casuale, quindi è interessante vedere come si comportano le reti con $0<p<1$.
+
+>[!question]
+>Cosa succede nella rete per valori di $p$ compresi tra 0 e 1?
+
+##### Proprietà delle reti:
++ n = numero di nodi
++ c = numero medio di archi per vertice
+	+ $nc/2$ è il numero di archi totale
++ Relazione tra n e c: $n >> c >> log(n) >> 1$.
+
+##### Osservazione della variazione di due misure:
++ L = lunghezza media del cammino minimo fra 2 nodi della rete
+  (Misura per quanti amici devo passare per raggiungere una persona)
+>[!question] Come varia L al variare di p?
+>- Per p=0, L è ragionevolmente grande
+>- Per p=1, L è ragionevolmente piccolo
+
++ C = coefficiente di clustering
+  (Misura quanto gli amici di una persona sono amici fra loro)
+>[!question] Cosa succede al coefficiente di clustering al variare di $p$?
+>- Per p=0, C alto
+>- Per p=1, C basso
+
+>[!tip]
+>Sia L che C per $p$ basso sono vicini a 1 e per $p$ alto sono vicini a 0, tuttavia i valori intermedi formano due 'parabole' opposte.
+
+![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-02 193210.png|400]]
+
+>[!example]
+>+ Se $p=0,001$ (redirigo un arco su mille) le distanze rappresentate da L dimezzano, infatti L=0,5 circa, quindi L decresce molto velocemente. Questo perché se attacco un arco ad un gruppo lontano di nodi automaticamente avvicino i due gruppi di nodi diminuendo molto le loro distanze.
+>+ C invece fino a $p=0,1$ non decresce di un valore oltre al 35% del suo  valore massimo. Questo perché se rompo dei triangoli solo quel triangolo viene separato e quindi il coefficiente rimane quasi intoccato per parecchi valori di $p$.
+
+>[!tip]
+>Reti regolari e casuali non vanno bene a rappresentare le reti reali:
+>Prendenso in esame tutte le persone ($O(10^9)$) e i vicini per ogni nodo (c=$O(10^3)$):
+>+ Regolare: $L(0) = O(10^6)$ (irrealistico); ma con C ci saremmo.
+>+ Casuale: $L(1) = 9/3 = 3$ (andrebbe bene); ma C sarebbe quasi 0 che non va bene.
+
+##### Distribuzione dei gradi
+Nelle reti WSSW la distribuzione dei gradi è circa a campana ed è privo della coda lunga. 
+
+>[!warning]
+>Le reti WSSW sono quindi un interessante mix delle reti regolari e delle reti casuali:
+>+ Spiegano il coefficiente di clustering alto
+>+ Non spiegano la distribuzione dei gradi che si trova nelle reti naturali (no power-law, no coda lunga, no hub)
+
+##### Riassunto delle prime tre reti
+![[Immagine 2025-11-03 111637.png]]
+
+___
+
+## Scale-free
+
+Idea: 
++ 'rich-get-richer': i ricchi diventano più ricchi e i poveri restano poveri.
++ 'vantaggio cumulativo': a partire da un articolo con il passare del tempo ci saranno sempre più articoli che citano l'articolo iniziale, e un articolo più citato sarà sempre più citato rispetto ad un articolo citato pochissimo.
+
+>[!question]
+>+ Ci sono altre reti in natura oltre al web che hanno una distribuzione a power-law?
+>+ Quale processo stocastico riesce a generare una rete con distribuzione power-law e piccolo mondo (distanze brevi)?, in quanto tutte le reti che abbiamo visto finora non andavano bene
+
+Due stronzi propongono un nuovo modello stocastico, detto '**Preferential attachment**':
++ Crescita della rete: la rete parte con pochi nodi e ad ogni istante temporale aggiungono un nodo
++ Probabilità non uniforme: la probabilità di connettersi a un nodo esistente è proporzionale al grado del nodo esistente.

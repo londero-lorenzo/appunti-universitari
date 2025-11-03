@@ -195,4 +195,3 @@ created: 2025-10-22
 >>Definise ciò che gli sviluppatori dovrebbero implementare
 
 + include sia requisiti utente e requisiti di sistema
-+ 

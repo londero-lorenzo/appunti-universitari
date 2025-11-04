@@ -269,3 +269,59 @@ In certi casi un'entità può non avere un valore adatto per un attributo.
 + **Sconosciuto**: se non è noto il valore di un attributo
 	+ **mancante**: quando è noto che il valore per quell'attributo esiste
 	+ **non è noto**: se il valore dell'attributo esista
+
+# Generalizzazione
+## Generalizzazioni totali vs parziali
+
+### Totali
+- **Entità generale** E: STUDENTE
+- $E\_{1}$: STUDENTE IMMATRICOLATO
+- $E\_{2}$: STUDENTE NON IMMATRICOLATO
+![generalizzazioni_totali](/materie/anno_2025-2026/basi_di_dati/assets/generalizzazioni_totali.svg)
+Tutte le entità sotto STUDENTE ereditano i suoi attributi e possono avere anche dei loro attributi specifici (es. NUMERO_MATRICOLA per STUDENTE IMMATRICOLATO)
+
+>[!tip]
+>Ogni istanza dell'entità padre (E) è anche istanza di almeno un entità figlia.
+
+### Parziali
+- **Entità generale** E: PROFESSIONISTA
+- $E\_{1}$: AVVOCATO
+- $E\_{2}$: INGEGNERE
+- $E\_{3}$: DOTTORE
+![generalizzazione_parziale|100%](/materie/anno_2025-2026/basi_di_dati/assets/generalizzazione_parziale.svg)
+
+>[!warning]
+>Può accadere che esista un'istanza del creatore che **non** è istanza di nessuna dei figli.
+
+## Generalizzazioni disgiunte vs sovrapposte
+
+### Disgiunta
+- **Entità generale**: VEICOLO
+- $E\_{1}$: AUTO
+- $E\_{2}$: MOTO
+- $E\_{3}$: CAMION
+![generalizzazione_disgiunta|100%](/materie/anno_2025-2026/basi_di_dati/assets/generalizzazione_disgiunta.svg)
+>[!tip]
+>Ogni istanza del genitore appartiene al massimo a 1 dei figli.
+
+### Sovrapposta
+- **Entità generale**: PERSONA
+- $E\_{1}$: STUDENTE
+- $E\_{2}$: LAVORATORE
+![generalizzazione_sovrapposta|100%](/materie/anno_2025-2026/basi_di_dati/assets/generalizzazione_sovrapposta.svg)
+![esempio_generalizzazione|100%](/materie/anno_2025-2026/basi_di_dati/assets/esempio_generalizzazione.svg)
+
+![eredita_selettiva|100%](/materie/anno_2025-2026/basi_di_dati/assets/eredita_selettiva.svg)
+
+ISTANZE (PROPRIETARIO) $\subseteq$ ISTANZE (PERSONA) $\cup$ ISTANZE (AZIENDA) $\cup$ ISTANZE (BANCA)
+
+Congiunzione PROPRIETARIO è sia una PERSONA, sia una BANCA, sia un'AZIENDA
+
+- Non esiste una chiave comune: la eredita selettivamente
+
+>[!definition]
+>Ereditarietà selettiva
+>>Ogni proprietario eredita gli attributi dalla categoria di appartenenza.
+
+### Da non fare
+![generalizzazione_sbagliata|100%](/materie/anno_2025-2026/basi_di_dati/assets/generalizzazione_sbagliata.svg)

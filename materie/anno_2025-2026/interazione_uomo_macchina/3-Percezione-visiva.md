@@ -165,3 +165,54 @@ L'icona quindi devono essere abbastanza riconoscibile dalla maggior parte del pu
 >Icone funzionalità Google:
 >- Prima c'erano icone esemplari per la maggior parte, successivamente per motivi di identità aziendale le icone sono state trasformate utilizzando gli stessi colori e le stesse forme e trasformando alcune icone in simboliche (Gmail, Calendar, Meet) e altre in arbitrarie (Drive, Document).
 
+___
+(scrivere bottom up e top down)
+### Reperimento visivo
++ **Attenzione visiva**: 
+	+ Bottom-up
+	+ Top-down
+	+ Selettiva (se guardo pacman non mi accorgo che il labirinto attorno cambia)
+
+>[!example] Caratteristiche visive
+>In un sito di aggregazione di informazione le informazioni stesse sono divise per diverse caratteristiche:
+>+ Per **colore** in base all'argomento (mondo, sport, cronaca,...), e addirittura un'ulteriore classificazione con l'ombreggiatura del colore: le notizie nuove più accese e le notizie più vecchie più scure.
+>+ Per **dimensione** in base all'importanza calcolata dal sistema in base ai link della notizia stessa, che viene rappresentata quindi più in grande.
+>
+>Altro esempio:
+>Anche per dei segni che rappresentano i diversi nomi di persone (tipo per sordi o cose così), si usano dei cambi di forma per trattini più spessi e meno spessi, l'orientamento dei trattini che può variare e anche il loro colore e la loro forma che piò essere più ondeggiante
+
+>[!tip]
+>I tempi di ricerca visiva di un oggetto non cambia se l'oggetto varia solo in una caratteristica rispetto a tutti gli altri (ad esempio un quadrato rosso in mezzo a pochi o molti quadrati blu non cambia i tempi di reperimento), ma aumenta se le caratteristiche diverse sono più di una (ad esempio ricerca di un quadrato rosso in mezzo a cerchi rossi e quadrati blu: cambia sia il colore sia la forma).
+
+___
+#### Layout dell'interfaccia e organizzazione percettiva
+
+##### Leggi Gestalt:
++ **Prossimità**: le cose che stanno vicine vengono considerate dall'occhio umano collegate, mentre quelle distanti sono considerate separate.
+>[!tip]
+>Cosiddetto 'spazio vuoto' trae in errore l'associamento tra diversi oggetti, come tasto per comprare di un oggetto che è troppo distante nel layout.
+
++ **Somiglianza**: Componenti simili tra loro saranno ritenuti simili anche nel funzionamento
+>[!example]
+>Tasti o bottoni simili in uno stereo o una radio, in cui coppie di bottoni che funzionano in coppia sono separati (spazio vuoto) dalle altre coppie di bottoni che sono però simili tra loro e si presume quindi che il funzionamento sia lo stesso per somiglianza.
+
++ **Chiusura**: Il cervello automaticamente 'chiude' i spazi piccoli e aggrega più elementi separati da tali spazietti.
+>[!example]
+>Un rettangolo un po' aperto viene letto dal cervello come un rettangolo o un bottone, e ad esempio le lettere fatte in qualche carattere strano che presentano dei spazietti vengono tranquillamente lette dal cervello come le lettere che rappresentano.
+
++ **Simmetria**: Separazione degli elementi in base alla loro posizione geografica nel layout
+
+>[!tip]
+>Talvolta anche l'uso di elementi geometrici e decorativi come dei contenitori per aiutare la suddivisione degli elementi, come le azioni possibili da fare in un file word che sono separate da 'contenitori' rettangolari in base al loro scopo.
+
+___
+
+### Presentation Problem
+Metodi per mitigare dei problemi di presentazione del layout:
++ **Barre di scorrimento** verticali e orizzontali
++ **Zoom**-in e zoom-out
++ **Focus+Context**: Se si ha solo il focus s un situazione è bene avere elementi che ne visualizzano il contesto generale, per ridurre anche i tempi di apprendimento di quello che vedo
+>[!tip]
+>Sostanzialmente si tratta di uno zoom in una determinata parte dell'oggetto che sto osservando che ne rappresenterà il contesto.
+
++ **Overview+Detail**: In schede separate o l'overview della situazione (mappa di Udine) e in un altro riquadro ho lo streetview del punto che sto asservando nella mappa.

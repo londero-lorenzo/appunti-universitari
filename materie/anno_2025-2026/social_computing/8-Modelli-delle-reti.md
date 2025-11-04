@@ -224,7 +224,9 @@ L'idea è quindi di partire da delle reti regolari e da esse staccare un arco da
 >+ Casuale: $L(1) = 9/3 = 3$ (andrebbe bene); ma C sarebbe quasi 0 che non va bene.
 
 ##### Distribuzione dei gradi
-Nelle reti WSSW la distribuzione dei gradi è circa a campana ed è privo della coda lunga. 
+Nelle reti WSSW la distribuzione dei gradi è circa a campana ed è priva della coda lunga e di hub, no power-law. 
+Formula della probabilità del grado di un nodo:
+$$p\_k=e^{cp}\frac{(cp)^{k-c}}{(k-c)!}$$
 
 >[!warning]
 >Le reti WSSW sono quindi un interessante mix delle reti regolari e delle reti casuali:
@@ -232,7 +234,14 @@ Nelle reti WSSW la distribuzione dei gradi è circa a campana ed è privo della 
 >+ Non spiegano la distribuzione dei gradi che si trova nelle reti naturali (no power-law, no coda lunga, no hub)
 
 ##### Riassunto delle prime tre reti
-![[Immagine 2025-11-03 111637.png]]
+![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-03 111637.png]]
+
+**Degree distribution**:
++ Reti regolari: di solito tutti i nodi hanno grado simile
++ Reti casuali: distribuzione di Poisson
++ Reti WSSW: distribuzione di Poisson circa
+>[!warning]
+>Nessuno di questi modelli crea reti uguali a quelle del mondo reale.
 
 ___
 
@@ -244,8 +253,63 @@ Idea:
 
 >[!question]
 >+ Ci sono altre reti in natura oltre al web che hanno una distribuzione a power-law?
->+ Quale processo stocastico riesce a generare una rete con distribuzione power-law e piccolo mondo (distanze brevi)?, in quanto tutte le reti che abbiamo visto finora non andavano bene
+>+ Quale processo stocastico riesce a generare una rete con distribuzione power-law e piccolo mondo (distanze brevi)? in quanto tutte le reti che abbiamo visto finora non andavano bene
 
 Due stronzi propongono un nuovo modello stocastico, detto '**Preferential attachment**':
 + Crescita della rete: la rete parte con pochi nodi e ad ogni istante temporale aggiungono un nodo
 + Probabilità non uniforme: la probabilità di connettersi a un nodo esistente è proporzionale al grado del nodo esistente.
+
+___
+#### Attaccamento preferenziale
+
++ Per il nuovo nodo $v$ collego $v$ ad un nodo casuale $v\_i$ con probabilità $P(v\_i)=\frac{d\_i}{\sum\_j{d\_j}}$ 
+
+>[!tip]
+>Con generazione di grafi ad attaccamento preferenziale possiamo simulare reti del mondo reale.
+
+>[!example]
+>![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-04 190719.png|400]]
+
+**Simulazioni**:
+![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-04 191326.png]]
++ Nel primo grafico si può vedere come la distribuzione dei gradi non dipende dalla grandezza della rete, avendo una power law.
+  Invarianza rispetto ala scala, stazionario rispetto al tempo / dimensione.
++ Il secondo grafico invece fa vedere come la distribuzione cambia all'aumentare della scala.
+  Varia a seconda del numero di archi a ogni passaggio; non c'è power law e neanche stazionarietà.
++ Nel terzo grafico si vede la distribuzione di due nodi che sembrano costanti ma in realtà all'aumentate del tempo aumenta molto di più il primo nodo (verso sinistra) rispetto al secondo (verso destra) (ricchi diventano sempre più ricchi).
+
+
+**Reti scale-free**: reti che hanno una distribuzione dei gradi di tipo power-law: $f(k)=\frac{C}{k^\alpha}$
++ Molti nodi (la gran maggioranza) hanno grado k basso.
++ Ci sono nodi, pochi ma in percentuale non trascurabile, che hanno grado molto alto: gli **Hub**.
++ Grazie agli hub si ha un effetto small world (cammini brevi)
++ Alcune reti del mondo reale sono proprio così (aeroporti, Web,...)
+
+>[!definition]
+>Hub
+>>Nodi con grado eccezionalmente alto, tramite loro i cammini diventano più brevi
+
+___
+Riassunto dei 4 modelli:
+![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-03 151924.png]]
+
+Scale-free ha finalmente la degree distribution corretta ma non il coefficiente di clustering.
+
+Ricerca di una soluzione a questo, Rispetto alla formula originale della probabilità di collegare un nuovo nodo $v$ ad un vecchio nodo casuale $v\_i$ $P(v\_i)=\frac{d\_i}{\sum\_jd\_j}$:
++ **Attaccamento preferenziale non lineare**: $P(v\_i)=\frac{d\_i^\alpha}{\sum\_j{d\_j^\alpha}}$ 
+	+ $\alpha$ = 1  $\rightarrow$ attaccamento preferenziale originale
+	+ $\alpha<1   \rightarrow$no longtail, no hubs
+	+ $\alpha>1   \rightarrow$ winner takes all, un singolo nodo connesso a tutti
++ **Attrattività: $P(v\_i)=\frac{A+d\_i}{\sum\_j{(A+d\_j)}}$ **
+	+ A=0 $\rightarrow$ attaccamento preferenziale originale
+	+ Definire la probabilità $P(v\_i)=\frac{A+d\_i}{\sum\_j{A+d\_j}}$ 
+	+ Si ottiene sempre una power law con una pendenza che varia con A
++ **Fitness: $P(v\_i)=\frac{𝜂\_i\*d\_i}{\sum\_j{(𝜂\_i\*d\_j)}}$**
+	+ $𝜂\_i$ rappresenta la fitness del nodo $i$
+	+ Si ottiene sempre una power law
++ **Modello 'Random Walk**':
+	+ Ad ogni passo si aggiunge un nuovo nodo $i$, con m>1 archi attaccati, di cui un arco è collegato ad un vecchio nodo $j$ scelto a caso, con probabilità uniforme.
+	+ Ogni altro arco degli m-1 restanti viene collegato con probabilità $p$ a un vicino di $j$ scelto a caso, e con una probabilità 1-$p$ a un nodo vecchio qualsiasi scelto a caso. ($p$ probabilità che si formi un triangolo).
+	+ Con nodi con tanti archi è più probabile privilegiare (attaccarsi) a nodi con un grado a loro volta maggiore (i ricchi diventano più ricchi).
+
+Questo ultimo modello random walk finalmente funziona: prendendo a martellate il modello scale free trasformandolo in random walks si ha quindi una degree distribution con power law, cammini brevi e C alto (alta presenza di triangoli).

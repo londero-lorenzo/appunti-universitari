@@ -219,7 +219,7 @@ Ogni host ha un indirizzo **univoco**:
 #### Implementazione
 + **Assegnare un numero** a ciascuna uscita di ciascuno switch:
 	+ inserirlo nell'intestazione del pacchetto
-![[materie/anno_2025-2026/reti_di_calcolatori/reti_di_calcolatori.excalidraw.md#^frame=4aU4JFfp]]
+![source_routing](/materie/anno_2025-2026/reti_di_calcolatori/assets/source_routing.svg)
 >[!tip] Dato che ci sono più switch lungo il percorso:
 >intestazione deve contenere informazioni per permettere a **ciascun switch** di determinare la giusta uscita.
 
@@ -465,16 +465,238 @@ Schema di **indirizzamento globale**:
 
 ## Formato del pacchetto
 
+| Campo                                             | Lunghezza      | Scopo                                                                                                                                               |
+| ------------------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| HLen                                              | 32 bit         | lunghezza dell'intestazione                                                                                                                         |
+| TOS (type of service)                             | 8 bit          | consente il trattamento differenziato dei pacchetti in base alle **necessità** delle applicazioni                                                   |
+| Length                                            | 16 bit         | lunghezza del datagramma                                                                                                                            |
+| Ident                                             | 16 bit         | usata dalla frammentazione                                                                                                                          |
+| Flags + Offset                                    | 3 bit + 13 bit | usata dalla frammentazione e ricostruzione<br>- Flag bit 0: deve essere 0<br>- Flag bit 1: Non frammentare (DF)<br>- Flag bit 2: Più frammenti (MF) |
+| TTL (time to live)                                | 8 bit          | catturare quei pacchetti che continuano a viaggiare nei cicli ed eliminarli                                                                         |
+| Protocol                                          | 8 bit          | chiave per **demultiplexing**: identifica il protocollo di livello superiore a cui va consegnato il pacchetto                                       |
+| Checksum                                          | 16 bit         | algoritmo per il controllo di integrità del pacchetto                                                                                               |
+| - Indirizzo mittente <br>- indirizzo destinazione | 32 bit a testa |                                                                                                                                                     |
+### TOS
+- Priorità in caso di congestione:
+	- in congestione i pacchetti con **precedence** più alta vengono serviti prima (o scartati per ultimi)
+	- di solito i **datagrammi di controllo di rete** hanno la precedenza massima per mantenere la rete stabile
 
-| Campo                 | Lunghezza | Scopo                                                                                             |
-| --------------------- | --------- | ------------------------------------------------------------------------------------------------- |
-| HLen                  | 32 bit    | lunghezza dell'intestazione                                                                       |
-| TOS (type of service) | 8 bit     | consente il trattamento differenziato dei pacchetti in base alle **necessità** delle applicazioni |
-| Length                | 16 bit    | lunghezza del datagramma                                                                          |
-| Ident                 | 16 bit    | usata dalla frammentazione                                                                        |
-|                       |           |                                                                                                   |
+| Bit | Codice | Significato                 | Cosa fa un router                               |
+| --- | ------ | --------------------------- | ----------------------------------------------- |
+| /   | 0000   | servizio normale (default)  |                                                 |
+| D   | 1000   | Minimizzare il delay        | Code brevi/veloci, link a bassa latenza         |
+| T   | 0100   | Massimizzare il throughput  | Link ad alta capacità                           |
+| R   | 0010   | Massimizzare l'affidabilità | Evitare link lossy/instabili                    |
+| C   | 0001   | Minimizzare il costo        | Usare percorsi più economici anche se più lenti |
 
-- **HLen** 32 bit:  lunghezza dell'intestazione
-- **TOS (type of service)** 8 bit: consente il trattamento differenziato dei pacchetti in base alle **necessità** delle applicazioni
-- **Length** 16 bit: lunghezza del datagramma
-- 
+### DSCP
+Oggi i campi del TOS sono stati rimpiazzati da **DSCP/ECN** (DiffServ), ma il significato concettuale è lo stesso: la rete può fare scelte diverse di instradamento/accodamento a seconda di ciò che l’applicazione chiede.
+
+>[!definition]
+>>L'host marca i pacchetti con un **codepoint** (DSCP) e i router applicano un certo **PHB** (Per-Hop Behavior): code a priorità, limiti di banda, ecc...
+
+- se i **3 bit meno significativi del DSCP** sono 000 (xxx000):
+	- i 3 bit più alti (xxx) sono interpretati come nel TOS
+- se i **3 bit meno significativi del DSCP** sono diversi da 0:
+	- i **6 bit più a sinistra** definiscono 64 servizi:
+		- xxxxx0: servizio standard IETF
+		- xxxx11: servizi definiti dalle autorità locali
+		- xxxx01: uso temporaneo
+## Frammentazione e ricostruzione
+
+>[!warning]
+>Ogni tecnologia di rete ha una propria opinione relativamente a quella che deve essere la **dimensione** di un pacchetto.
+
+>[!definition]
+>MTU unità massima trasmissibile
+>>Il più grande datagramma IP che può trasportare all'interno di un proprio frame.
+
+- un host può scegliere la dimensione che preferisce
+- il valore di **MTU** della rete è un scelta ragionevole
+- la frammentazione sarà necessaria solo se il percorso verso la destinazione attraversa una rete con un valore di **MTU inferiore**
+- se il protocollo di trasporto fornisce al protocollo IP un frame di dimensione maggiore al MTU allora l'host lo **frammenta**
+
+| Network/protocol | MTU (bytes) |
+| ---------------- | ----------- |
+| Hyperchannel     | 65535       |
+| Token Ring       | 17914       |
+| FDDI             | 4352        |
+| WiFi             | 2346        |
+| Ethernet         | 1500        |
+| X.25             | 576         |
+| PPP              | Negotiated  |
+
+>[!question] Cosa dovrebbe fare un router se dovesse inoltrare un datagramma di dimensione maggiore all'MTU ?
+>- Se il Flag *Non frammentare* (DF) è 1: elimina il datagramma e notifica il mittente (con un ICMP)
+>	- forse il mittente può ridurre la dimensione
+>- Se DF = 0 il router può procedere con la **frammentazione**
+
+>[!tip]
+>Tipicamente la frammentazione avviene in un **router** quando riceve un datagramma da inoltrare verso una rete con MTU inferiore alla dimensione del datagramma.
+
+- per far ricostruire i frammenti dall'host ricevente
+- frammenti devono avere tutti lo **stesso identificatore** nel campo *Ident*
+	- scelto dall'host sorgente
+	- univoco fra tutti i datagrammi
+- host ricevente riconosce quei frammenti e li assembla 
+	- se manca qualcuno abbandona il processo ed **elimina** i frammenti arrivati
+>[!warning]
+>Protocollo IP non tenta di recuperare i frammenti mancanti.
+
+### Dimensione di ogni frammento
+La dimensione di ogni frammento è scelta dal router in modo che **header+payload $\leq$ MTU**.
+- La dimensione del payload è il più grande multiplo di 8 più **piccolo di MTU - lunghezza dell'header**
+>[!example]
+>- MTU = 536
+>- Header = 20 byte
+>Allora 536 - 20 = 516 e il multiplo più grande di 8 minore di 516 è 512
+>Quindi ogni pacchetto è lungo 512 + 20 byte
+### Ricostruzione
+- Host ricevente esegue la ricostruzione:
+	- arriva un frammento con un nuovo identificatore
+	- viene allocato un **buffer** associato a quell'identificatore
+	- ogni **payload** di questi frammenti è allocato nel buffer in base al suo **offset**
+		- se un frammento arriva due volte, l'ultimo sovrascrive il precedente
+	- Arrivati tutti i frammenti
+	- Buffer contente il payload ricostruito è passato al livello superiore
+### Esempio di frammentazione
+- (a) Pacchetto non frammentato
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/pacchetto_non_frammentato.jpg]]
+
+- (b) pacchetto frammentato
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/pacchetto_frammentato.jpg]]
+>[!tip]
+>Notare che:
+>- offset = offset reale / 8 (64 = 512 / 8)
+>- quindi in ogni frammento (tranne l'ultimo) la lunghezza del payload è multiplo di 8
+
+## Indirizzi globali
+- Non devono esistere due host con lo stesso indirizzo
+- indirizzi IP sono **gerarchici**
+	- Prima parte: identifica la rete
+	- Seconda parte: identifica l'host all'interno della propria rete
+### Classi degli indirizzi
+#### Classe A
+- indirizzo inizia con **0**
+- i **7 bit** successivi identificano la **rete**
+- rimangono **24 bit** che sono il **numero di host** nella rete
+![ip_classe_a|100%](/materie/anno_2025-2026/reti_di_calcolatori/assets/ip_classe_a.svg)
+##### Numero di host
+$2^{7}$ = 128 reti possibili
+##### Numero di host
+$2^{24}-2$ = 16777214
+#### Classe B
+- indirizzo inizia con **10**
+- i successivi **14 bit** identificano la rete
+- restanti **16 bit** sono il numero di host nella rete
+![ip_classe_b|100%](/materie/anno_2025-2026/reti_di_calcolatori/assets/ip_classe_b.svg)
+##### Numero di host
+$2^{14}$ = 16384 reti possibili
+##### Numero di host
+$2^{16}-2$ = 65534
+#### Classe C
+- indirizzo inizia con **110**
+- successivi **21 bit** identificano la rete
+- restanti **8 bit** identificano il numero di host nella rete
+![ip_classe_c|100%](/materie/anno_2025-2026/reti_di_calcolatori/assets/ip_classe_c.svg)
+##### Numero di host
+$2^{21}$ = 2097152 reti possibili
+##### Numero di host
+$2^{8}-2$ = 254
+#### Altri indirizzi
+- Indirizzo che inizia con **111** non sono usati per indirizzare gli host
+- Classe D (1110) è per il **multicast**
+- Classe E (1111) non è usata
+
+>[!question] Perché per contare gli host si escludono 2 indirizzi ?
+>1. Tutti 0 nella parte dell'host 158.110.0.0 identifica la **rete**
+>2. Tutti 1 nella parte dell'host 158.110.255.255 è usato per il **broadcast** della rete
+
+## Inoltro di datagrammi IP
+
+Non può basarsi su indirizzo di destinazione come negli switch nel livello 2.
+- Troppi indirizzi (nell'ordine di $10^{9}$)
+- Tabelle richiederebbero **troppa memoria**, troppo lento
+
+Inoltrare tramite la **rete di destinazione** ovvero la rete a cui appartiene l'indirizzo di destinazione
+
+Tabelle di inoltro mappano il numero della rete fino al prossimo nodo
+
+### Strategia adottata
+
+- ogni datagramma contiene l'indirizzo di destinazione da cui si può risalire all'**indirizzo di rete di destinazione**
+- un nodo verifica se il destinatario è connesso alla propria rete
+	- nel caso **inoltra** il pacchetto
+- se non è connesso alla rete inoltra il pacchetto a un router che sa come gestirlo
+- ogni host ha un router **gateway** con una tabella di inoltro
+	- tramite un algoritmo vengono inoltrati i pacchetti
+
+### Esempio di tabella di routing per il router R2
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/esempio_rete_inoltro.jpg]]
+- In tabelle reali, la destinazione è l'indirizzo di rete
+	- 158.110.0.0, 158.111.0.0
+- Quindi ogni rete locale deve essere assegnata a un indirizzo di rete diverso
+	- Gli host in reti LAN differenti hanno indirizzi di rete differenti
+
+### Algoritmo
+```
+Se (NetworkNum della destinazione = NetworkNum di una delle mie interfacce)
+	consegna il pacchetto alla destinazione mediante tale interfaccia
+else if (NetworkNum della destinazione è presente nella mia tabella di inoltro)
+	consegna il pacchetto al router NextHop
+else
+	consegna il pacchetto al router di default
+```
+
+Per un host
+```
+Se (NetworkNum della destinazione = Mio NetworkNum)
+	consegna il pacchetto direttamente alla destinazione
+else
+	Consegna il pacchetto al router di default
+```
+## Subnetting
+
+- Le reti di classe A e B potrebbero essere troppo grandi per una singola rete fisica
+- **Subnet**: aggiunge un altro livello alla gerarchia degli indirizzi
+- **Subnet masks** definiscono partizioni degli host 
+
+![subnet_mask|100%](/materie/anno_2025-2026/reti_di_calcolatori/assets/subnet_mask.svg)
+### Esempio
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/esempio_subnet.jpg]]
+
+Tabella di inoltro del router R1
+
+| SubnetNumber  | SubnetMask      | NextHop     |
+| ------------- | --------------- | ----------- |
+| 128.96.34.0   | 255.255.255.128 | Interface 0 |
+| 128.96.34.128 | 255.255.255.128 | Interface 1 |
+| 128.96.33.0   | 255.255.255.0   | R2          |
+
+Subnet Mask 255.255.255.128 = 111111111.11111111.11111111.10000000
+-  **7 bit** per gli indirizzi degli host
++ ogni sottorete creata avrà a disposizione $2^{7}-2 = 126$ indirizzi per gli host
+
+### Algoritmo di inoltro
+
+```
+\\ D = indirizzo IP di destinazione
+for each (SubnetNum, SubnetMask, NextHop)
+	D1 = SubnetMask & D
+	if D1 = SubnetNum
+		if NextHop è un'interfaccia
+			manda il datagramma direttamente alla destinazione
+		else
+			manda il datagramma al NextHop (un router)
+		break
+if (nessuna entry combacia)
+	elimina il datagramma
+```
+
+- se nessuna entry combacia usa un router di default
+- non è necessario che tutti gli 1 della subnetmask siano continui
+	- possono essere create subnet strane
+- Possono essere create diverse subnet su una rete fisica
+- Subnet sono decise internamente da un amministratore di rete
+	- non sono visibili dal resto dell'Internet
+	- di solito assegnate per separazioni logiche (diversi uffici, dipartimenti, ecc...) o separazioni fisiche (diverse reti)

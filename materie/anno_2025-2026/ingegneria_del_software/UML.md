@@ -352,7 +352,39 @@ Usati per racchiudere gruppi di passi che devono essere ripetuti.
 >1. Quando il cliente sceglie articoli in promozione, tali articoli saranno opportunamente scontati
 >2. Quando il cliente è abituale, viene applicato uno sconto sul totale
 
+### Punti di estensione negli scenari
 
+![[materie/anno_2025-2026/ingegneria_del_software/assets/punti_estensione_negli_scenari.jpg]]
+
+### Esempio: Gestione biblioteca
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_relazioni.jpg]]
+
+## Errori tipici con i casi d'uso
+- Diagrammi troppo complessi con molti casi d'uso
+- Ripetere il nome dello stesso caso d'uso più volte 
+- Frecce delle relazioni di estensione o inclusione non sono tratteggiate , etichettate o nel verso sbagliato
+	- << extend >>: freccia va dal caso che descrive l'evento alternativo al caso base
+	- << include >> la freccia va dal caso base al caso che descrive le azioni incluse
+## Requisiti funzionali e casi d'uso
+- **Requisito funzionale:** funzionalità richiesta dal committente
+- **Caso d'uso**: modalità di utilizzo del sistema da parte di un utente (attore)
+
+>[!tip]
+>Requisiti funzionali sono pensati dal punto di vista del sistema.
+>Casi d'uso sono pensati dal punto di vista dell'utente.
+
+## Tracciabilità tra requisiti e casi d'uso
+- importante incrociare i requisiti funzionali e i casi d'uso per verificare la reciproca copertura: 
+	- ogni caso d'uso deve essere coperto da almeno un caso d'uso e viceversa
+### Matrice di tracciabilità
+![[materie/anno_2025-2026/ingegneria_del_software/assets/matrice_tracciabilita.jpg]]
+## Prodotto finale
+- Analisi dei casi d'uso produce:
+	- Un **diagramma** dei casi d'uso
+	- Le descrizioni di tutti gli **scenari** di tutti i casi d'uso
+- Nel diagramma è contenuto solo un piccolo sottoinsieme delle informazioni contenute nelle descrizioni degli scenari
+- Tutte le informazioni contenute nel diagramma sono contenute anche nelle descrizioni degli scenari
+- Pertanto, il diagramma dei casi d’uso non dovrebbe mai essere considerato separatamente dalle descrizioni degli scenari
 # Tutorial Diagrammi
 ## 1. Definisci confini
 - Quali responsabilità rientrano nei confini del sistema che stiamo modellando ?

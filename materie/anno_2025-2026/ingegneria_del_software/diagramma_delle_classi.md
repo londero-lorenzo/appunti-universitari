@@ -1,8 +1,8 @@
 ---
-title: "5-11-25"
-aliases: ["5-11-25"]
-tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "5-11-25"]
-created: 2025-11-05
+title: "Diagramma delle Classi"
+aliases: ["Diagramma delle Classi"]
+tags: [università, "materie", "anno-2025-2026", "ingegneria-del-software", "diagramma-delle-classi"]
+created: 2025-11-08
 ---
 # Diagramma UML delle classi
 - Diagramma **strutturale**
@@ -147,13 +147,28 @@ Responsabilità = metodi
 >[!definition]
 >>Vincola il numero di oggetti di una classe che possono partecipare ad una associazione in ogni istante.
 
+Sono riportate sull'estremità dell'associazione prossima alla classe nella forma: **minimo..massimo**
+
+| **0..1** | Zero (partecipazione opzionale) o uno   |
+| -------- | --------------------------------------- |
+| **1**    | Esattamente 1                           |
+| **0..*** | Zero o più (non c'è limite superiore)   |
+| **1..*** | Uno (partecipazione obbligatoria) o più |
+| **1..6** | Da 1 a 6                                |
+
 #### Esempi
 >[!example]
 >Ciascun badge è utilizzato per identificare uno e un solo studente.
 
+- uno studente ha molteplicità 1 nell'associazione
+- Non è specificato ciascuno studente quanti badge può possedere. Se ipotizziamo 1, abbiamo un'associazione 1 a 1
+- **Uno a uno**: uno studente può possedere un solo badge in un dato istante. Un badge è posseduto da un solo studente.
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=Pjkr08EX|70%]]
 - Se ad esempio vogliamo modellare il caso di smarrimento o di attesa di rilascio dopo la prima iscrizione 
 - **Uno ad al più uno (0..1)**: uno studente può possedere nessuno o al massimo un solo badge in un dato istante.
 	- Un badge è posseduto da un solo studente.
+
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=HtHekQU5|70%]]
 
 >[!example]
 >Una persona possiede almeno un'Automobile.
@@ -162,7 +177,7 @@ Responsabilità = metodi
 - Le persone che non possiedono Automobile non fanno parte del problema
 - Non è nel problema in oggetto il mantenimento di info riguardo i proprietari di automobili di seconda, terza mano, ecc...
 **Associazione uno a molti**: una persona, una o più automobili
-
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=UzLxSixW|70%]]
 
 >[!example]
 >Uno Studente può conseguire più Esami. Ciascun Esame può essere conseguito da più Studenti.
@@ -170,9 +185,12 @@ Responsabilità = metodi
 - uno studente può conseguire potenzialmente illimitati esami
 - un esame può essere conseguito da un numero non limitato di studenti
 - possono esserci studenti che non hanno conseguito esami
+- possono esserci esami non conseguiti da alcuno studente
 **Associazione molti a molti**: molti studenti, molti esami
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=24LAooXk|70%]]
 
 - se in alternativa avessimo voluto considerare il caso in cui uno studente era considerato dal sistema soltanto dal momento del conseguimento del primo esame avremmo avuto che la molteplicità di Esame 1..* poiché lo studente deve aver conseguito almeno un esame:
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=qHYEwyyd|70%]]
 
 >[!example]
 >Una prenotazione si riferisce sempre ad uno e un solo passeggero. 
@@ -182,13 +200,72 @@ Responsabilità = metodi
 
 - prima di creare una prenotazione **devono esistere** passeggero e volo
 - il passeggero può essere memorizzato nel sistema anche prima di effettuare una prenotazione: ci possono essere passeggeri senza prenotazione
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=FfDaFLbq|100%]]
 #### Molteplicità discontinue
 
-
+- UML 1 consentiva molteplicità discontinue come 2,4
+- UML 2 ha eliminato le molteplicità discontinue
 #### Molteplicità predefinita
-
+- La molteplicità predefinita di un attributo è [1] nel meta-modello
+- in un diagramma UML un attributo senza molteplicità non indica automaticamente [1] poiché la molteplicità potrebbe essere nascosta
+- se la molteplicità [1] è importante, indicala esplicitamente per evitare ambiguità
 ### Verso di navigazione
-- Se non ha verso di percorrenza: se A è legato a B, B è legato ad A
+- Se un'associazione non ha verso di percorrenza: se A è legato a B, B è legato ad A
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=s4vimkmC|100%]]
 - Se specificata con una **freccia**:
 	- direzionalità attribuisce alla classe origine del verso di percorrenza la responsabilità di tenere traccia dell'associazione
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=IC5521g7|100%]]
 
+- in questo diagramma, da una persona è possibile sapere quali sono le auto che possiede
+- considerata un'istanza di automobile non è possibile conoscere il possessore
+>[!tip]
+>Tale informazione è utile soprattutto nel **progetto di dettaglio**, rispecchiando una scelta di progetto. Non è presente nei **progetti concettuali**.
+
+![[materie/anno_2025-2026/ingegneria_del_software/assets/verso_navigazione_uml2.jpg]]
+>[!warning]
+>Usare i nomi dell'associazione **oppure** i ruoli. Usarli insieme sarebbe ridondante e appesantirebbe il diagramma.
+
+## Associazioni VS attributi
+- Caratteristiche strutturali di una classe possono essere rappresentate come:
+	- associazioni di una classe
+	- attributi di una classe
+- associazioni possono riportare anche le **molteplicità di entrambe le classi** ma sono **meno compatte**
+- progettista deve scegliere le entità che hanno maggiore importanza e rappresentarle come classi per dar loro più enfasi
+- non appesantire il diagramma con troppe **associazioni 1 a 1**
+- si possono usare **attributi** per concetti secondari
+- usare **associazioni** per classi più significative
+- scelta dipende da cosa si vuole enfatizzare nel diagramma
+![[materie/anno_2025-2026/ingegneria_del_software/assets/associazioni_vs_attributi.jpg]]
+## Implementazione delle associazioni
+- Nei linguaggi Object-Oriented associazione o attributo di un'entità corrispondono a un attributo di una classe (o getter o setter)
+- Se definito verso di navigazione, la classe origine ha un attributo con:
+	- Nome: il ruolo della destinazione
+	- Tipo: la classe destinazione
+	- Molteplicità: la molteplicità della destinazione
+```
+public Class Ordine{
+	private LineaDOrdine[] elementiLinea;
+}
+```
+
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=VkvKvJ6P]]
+### Implementazione delle associazioni uno a molti
+- Classe Persona ha un attributo vettore di Automobili
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=IC5521g7|100%]]
+- La classe Automobile ha un attributo Persona
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=5iZrX81P|100%]]
+- Entrambe: tutte e due le classi permettono di navigare l'altra classe dell'associazione
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=s4vimkmC|100%]]
+- Persona ha un attributo automobili di tipo Automobile con molteplicità [1..*]
+- Automobile ha un attributo proprietario di tipo Persona con molteplicità[1]
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=DYTvOgc9|100%]]
+## Esempi codifica in Java
+
+### Associazione bidirez. Uno a Uno
+![[materie/anno_2025-2026/ingegneria_del_software/assets/java_uno_a_uno.jpg]]
+### Uno a uno caso generico
+![[materie/anno_2025-2026/ingegneria_del_software/assets/java_uno_a_uno_generico.jpg]]
+### Uno a molti
+![[materie/anno_2025-2026/ingegneria_del_software/assets/java_uno_a_molti.jpg]]
+### Uno a molti generico
+![[materie/anno_2025-2026/ingegneria_del_software/assets/java_uno_a_molti_generico.jpg]]

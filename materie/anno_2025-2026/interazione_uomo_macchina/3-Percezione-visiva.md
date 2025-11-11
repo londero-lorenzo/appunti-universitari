@@ -216,3 +216,23 @@ Metodi per mitigare dei problemi di presentazione del layout:
 >Sostanzialmente si tratta di uno zoom in una determinata parte dell'oggetto che sto osservando che ne rappresenterà il contesto.
 
 + **Overview+Detail**: In schede separate o l'overview della situazione (mappa di Udine) e in un altro riquadro ho lo streetview del punto che sto asservando nella mappa.
+
+___
+
+### Percezione della profondità
++ Uso della grafica 3D nelle interfacce
++ Mondi virtuali
++ visualizzazione dati 3D
+
+>[!example]
+>+ Desktop 3D che rassomiglia una scrivania in cui posso spostare e impilare le diverse icone o documenti come se fossero fogli di una scrivania reale.
+>+ Apple Vision Pro con cui posso interagire con le pagine aperte nel mondo reale. Ad esempio le finestre aperte fanno anche ombra sul pavimento.
+
+Per elementi veramente tridimensionali serve un **motore di rendering**.
+A causa della necessita di rendering si usano anche delle scappatoie giocando con effetti visivi e sensazioni ottiche che emulano il 3D per un **aspetto 3D**.
+
+#### Profondità monoculari (li percepisco anche se vedo con un occhio solo)
++ 
+
+
+

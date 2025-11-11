@@ -232,7 +232,22 @@ Per elementi veramente tridimensionali serve un **motore di rendering**.
 A causa della necessita di rendering si usano anche delle scappatoie giocando con effetti visivi e sensazioni ottiche che emulano il 3D per un **aspetto 3D**.
 
 #### Profondità monoculari (li percepisco anche se vedo con un occhio solo)
-+ 
++ Prospettiva (lineare o aerea)
++ Occlusione (si capisce la distanza di un oggetto vedendo che una cosa copre un'altra)
++ Tessitura (dovuto alle texture che danno indizio di profondità, in quanto più mi avvicino e più noto i dettagli della texture)
++ Ombre (le ombre permettono di vedere a che altezza sono gli oggetti e pongono sullo stesso piano (quello terreno) gli oggetti stessi)
++ Dimensione (associo la dimensione i un oggetto alla profondità a cui si trova)
++ Parallasse (dinamico; più un oggetto è vicino e più passerà veloce, più è lontano e più passerà lentamente)
 
+#### Profondità binoculari
++ Disparità binoculare
++ Convergenza (convergenza degli occhi pe sforzarsi di tenere entramb gli occhi sull'oggetto; quando vedo cose lontane gli occhi sono praticamente paralleli, più è vicino l'oggetto e più gli occhi convergeranno)
 
+>[!example]
+>Esempio di utilizzo di illusione ottica della profondità. Utilizzo di ombre finte sulle strisce pedonali per far rallentare le macchine che pensano ci si a un ostacolo.
 
+#### Aspetti da valutare per la scelta di 2D o 3D
+
+Ad esempio per i grafici esplicativi bisogna valutare bene tra l'utilizzo di grafica 2D e 3D, in quanto per esempio nei grafici a barre non si capisce un cazzo se è in 3D, o anche i grafici a torta, perché la percezione delle dimensione diventano relative e devo svolgere un'elaborazione mentale per capire.
+Per grafici che utilizzano tutti e tre gli assi (ad esempio grafici a barre che però vengono svolte in diversi luoghi di una mappa utilizza sia x e y per la posizione delle barre e z per l'altezza delle barre). Se si andasse ad eliminare un'asse si perderebbe informazione e avrei occlusione e perderei anche l'orientamento dei punti cardinali e due posti apparirebbero vicini nonostante sono molto lontani tra loro.
+Devo inoltre vedere se ho del valore aggiunto con la rappresentazione 3D

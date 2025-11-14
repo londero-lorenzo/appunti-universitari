@@ -166,11 +166,11 @@ L'icona quindi devono essere abbastanza riconoscibile dalla maggior parte del pu
 >- Prima c'erano icone esemplari per la maggior parte, successivamente per motivi di identità aziendale le icone sono state trasformate utilizzando gli stessi colori e le stesse forme e trasformando alcune icone in simboliche (Gmail, Calendar, Meet) e altre in arbitrarie (Drive, Document).
 
 ___
-(scrivere bottom up e top down)
+
 ### Reperimento visivo
 + **Attenzione visiva**: 
-	+ Bottom-up
-	+ Top-down
+	+ Bottom-up (qualcosa che emerge innata e automaticamente reagisco. Ad esempio se sento un'esplosione mi giro di scatto da quella parte automaticamente)
+	+ Top-down (io consapevolmente cerco di ascoltare qualcosa, come i discorsi di qualcuno)
 	+ Selettiva (se guardo pacman non mi accorgo che il labirinto attorno cambia)
 
 >[!example] Caratteristiche visive
@@ -216,6 +216,7 @@ Metodi per mitigare dei problemi di presentazione del layout:
 >Sostanzialmente si tratta di uno zoom in una determinata parte dell'oggetto che sto osservando che ne rappresenterà il contesto.
 
 + **Overview+Detail**: In schede separate o l'overview della situazione (mappa di Udine) e in un altro riquadro ho lo streetview del punto che sto asservando nella mappa.
++ **Contextual cues**: Vedo solo il dettaglio ma offro all'utente degli indizi, come delle frecce che indicano verso la posizione in cui devo andare, anche se il luogo specifico non è nella mappa. Si può anche giocare sulle dimensioni delle frecce per capire quanto sono vicino ad un determinato posto. (anche in alcuni videogiochi fanno così).
 
 ___
 
@@ -228,26 +229,33 @@ ___
 >+ Desktop 3D che rassomiglia una scrivania in cui posso spostare e impilare le diverse icone o documenti come se fossero fogli di una scrivania reale.
 >+ Apple Vision Pro con cui posso interagire con le pagine aperte nel mondo reale. Ad esempio le finestre aperte fanno anche ombra sul pavimento.
 
-Per elementi veramente tridimensionali serve un **motore di rendering**.
-A causa della necessita di rendering si usano anche delle scappatoie giocando con effetti visivi e sensazioni ottiche che emulano il 3D per un **aspetto 3D**.
+>[!tip]
+>Per elementi veramente tridimensionali serve un **motore di rendering**.
+>A causa della necessità di rendering si usano anche delle scappatoie giocando con effetti visivi e sensazioni ottiche che emulano il 3D a favore di un **aspetto 3D**.
 
 #### Profondità monoculari (li percepisco anche se vedo con un occhio solo)
-+ Prospettiva (lineare o aerea)
++ Prospettiva (lineare (data dalla geometria degli oggetti) o aerea (data dagli effetti dell'atmosfera interposta tra gli occhi e l'oggetto))
 + Occlusione (si capisce la distanza di un oggetto vedendo che una cosa copre un'altra)
 + Tessitura (dovuto alle texture che danno indizio di profondità, in quanto più mi avvicino e più noto i dettagli della texture)
 + Ombre (le ombre permettono di vedere a che altezza sono gli oggetti e pongono sullo stesso piano (quello terreno) gli oggetti stessi)
-+ Dimensione (associo la dimensione i un oggetto alla profondità a cui si trova)
++ Dimensione (associo la dimensione di un oggetto alla profondità a cui si trova)
 + Parallasse (dinamico; più un oggetto è vicino e più passerà veloce, più è lontano e più passerà lentamente)
 
 #### Profondità binoculari
-+ Disparità binoculare
-+ Convergenza (convergenza degli occhi pe sforzarsi di tenere entramb gli occhi sull'oggetto; quando vedo cose lontane gli occhi sono praticamente paralleli, più è vicino l'oggetto e più gli occhi convergeranno)
++ Disparità binoculare (differenza di circa 6 cm nella prospettiva con cui ogni occhio vede un'immagine rispetto all'altro)
++ Convergenza (convergenza degli occhi pe sforzarsi di tenere entrambi gli occhi a fuoco sull'oggetto che si avvicina; quando vedo cose lontane gli occhi sono praticamente paralleli, più è vicino l'oggetto e più gli occhi convergeranno)
 
 >[!example]
->Esempio di utilizzo di illusione ottica della profondità. Utilizzo di ombre finte sulle strisce pedonali per far rallentare le macchine che pensano ci si a un ostacolo.
+>Esempio di utilizzo di illusione ottica della profondità. Utilizzo di ombre finte sulle strisce pedonali per far rallentare le macchine che pensano ci sia un ostacolo.
 
 #### Aspetti da valutare per la scelta di 2D o 3D
 
-Ad esempio per i grafici esplicativi bisogna valutare bene tra l'utilizzo di grafica 2D e 3D, in quanto per esempio nei grafici a barre non si capisce un cazzo se è in 3D, o anche i grafici a torta, perché la percezione delle dimensione diventano relative e devo svolgere un'elaborazione mentale per capire.
-Per grafici che utilizzano tutti e tre gli assi (ad esempio grafici a barre che però vengono svolte in diversi luoghi di una mappa utilizza sia x e y per la posizione delle barre e z per l'altezza delle barre). Se si andasse ad eliminare un'asse si perderebbe informazione e avrei occlusione e perderei anche l'orientamento dei punti cardinali e due posti apparirebbero vicini nonostante sono molto lontani tra loro.
-Devo inoltre vedere se ho del valore aggiunto con la rappresentazione 3D
++ Per i grafici esplicativi bisogna valutare bene tra l'utilizzo di grafica 2D e 3D, in quanto per esempio nei grafici a barre non si capisce un cazzo se è in 3D, o anche i grafici a torta, perché la percezione delle dimensione diventano relative e devo svolgere un'elaborazione mentale per capire cosa mi sta dicendo i grafico.
++ Per i grafici che utilizzano tutti e tre gli assi (ad esempio i grafici a barre che però vengono svolte in diversi luoghi di una mappa utilizzano sia x e y per la posizione delle barre sulla mappa e z per l'altezza delle barre) se si andasse ad eliminare un'asse si perderebbe informazione e avrei occlusione e perderei anche l'orientamento dei punti cardinali (nel caso della mappa) e due luoghi apparirebbero vicini nonostante siano molto lontani tra loro.
+
+>[!tip]
+>Per capire se conviene svolgere una rappresentazione in 3D devo vedere se ho del **valore aggiunto** con la rappresentazione 3D.
+
+___
+
+

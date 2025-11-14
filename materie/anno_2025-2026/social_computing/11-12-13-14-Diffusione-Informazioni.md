@@ -199,7 +199,7 @@ I metodi assumono che:
 **Equazioni**:
 + Ad ogni time step la variazione del numero di individui in S e I è di $\beta IS$ :
   $$\frac{dS}{dt}= -\beta IS$$$$\frac{dI}{dt}=\beta IS$$ 
-(S + I = N)  --->  $\frac{dI}{dt} = \beta I(N-I)$  --->  $I(t)=\frac{N\*I\_0\*e^{\beta tN}}{N+I\_0\*(e^{\beta tN}-1)}$   con I_0 numero degli individui infettati al tempo 0. Questa è la curva di crescita logistica:
+(S + I = N)  --->  $\frac{dI}{dt} = \beta I(N-I)$  --->  $I(t)=\frac{N\*I\_0\*e^{\beta tN}}{N+I\_0\*(e^{\beta tN}-1)}$   con $I\_0$ numero degli individui infettati al tempo 0. Questa è la curva di crescita logistica:
 
 ![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-12 143421.png|350]]
 
@@ -212,5 +212,186 @@ ___
 	+ Una volta che un host è guarito (o rimosso):
 		+ Non possono più infettare
 		+ non possono più essere infettati e non sono più suscettibili (restano in R)
-+ SIS
-+ SIRS
+
+**Equazioni**
+$$\frac{dS}{dt}= -\beta IS$$
+
+$$\frac{dI}{dt}= \beta IS - \gamma I$$
+$$\frac{dR}{dt}= \gamma I$$
+>[!tip]
+>$\gamma$ definisce la probabilità di recovery di un infetto individuale in un lasso di tempo
+
+**Grafico del modello SIR**
+
+![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-14 103024.png|400]]
+
++ All'inizio tutti tranne 1 sono suscettibili, poi calano a favore degli infetti, che però dopo un po' cominciano a calare essendo sopraffatti dai recovered che non possono riammalarsi
++ Alla fine non ci saranno più infetti e quasi tutti saranno recovered ($< 100$%) e con pochissimi suscettibili (> 0%) pioché quando on ci sono più I non resta nessuno a contagiare i rimanenti S.
+>[!tip]
+>Un buon dato per capire quanto l'epidemia è stata importante è vedere il numero finale di recovered, ma anche se la curva degli infetti non è molto pronunciata vuol dire che è più difficile prendere la malattia piuttosto che guarire da essa.
+
+**Commenti**:
++ Gli S decrescono monotonicamente
++ Gli R crescono monotonicamente
++ Gli I crescono inizialmente, per poi decrescere man mano che gli individui guariscono e vanno a 0 per $t\rightarrow \infty$ 
+
+#### $R\_0$: Basic reproduction number
++ $R\_0=\beta/\gamma$
++ $R\_0$ è i numero medio di individui che I contagia prima di guarire/morire e $\beta$ e $\gamma$ misurano quanto i due "rubinetti" sono aperti (da S a I e da I a R)
++ $R\_0=\beta / \gamma$  = 1 marca la **soglia epidemica**, ovvero c'è epidemia se $R\_0 \geq 1$, ovvero si forma una componente gigante e l'epidemia esplode.
+
+>[!tip]
+>$R\_0 = \beta / \gamma \leq 1$ Non abbiamo epidemia in quanto gli I guariscono più in fretta di quanto gli S si ammalino.
+>Il numero di I parte basso e diminuisce.
+
+### Transizione epidemica
+
+>[!definition]
+>Transizione epidemica
+>>Transizione fra regime epidemia e regime non-epidemia alla soglia $\beta = \gamma$  --> $R\_0 = \beta/\gamma = 1$
+
+Transizione di fase brusca, improvvisa
+>[!tip]
+>Fenomeno analogo alla comparsa della giant component in G(n, p) per c >1
+
+$S=1-e^{-cS}$   =       $r(t) = 1-e^{-\beta/\gamma \*r(t)}$ 
+
+___
+
++ **SIS (susceptible/infected/susceptible)**
+	+ Gli infetti che guariscono diventano suscettibili nuovamente
+	+ Il modello SI è sostanzialmente una variazione dello SIS in cui il valore $\gamma$ è molto basso, vicino a 0
+
+**Equazioni**
+$$\frac{dS}{dt}= \gamma I - \beta IS$$
+$$\frac{dI}{dt}= \beta IS - \gamma I = I(\beta N -\gamma) - \beta I^2$$
++ $\beta$ passaggio da S a I
++ $\gamma$ passaggio da I a S
+
+
+**Grafico del modello SIS**
+
+![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-14 105718.png|400]]
+
++ Il numero di infetti si alza così come il numero di suscettibili si abbassa, per poi stazionarsi ad un valore (<100% e >0%)
+
+___
+#### Confronto curve degli infetti in SI-SIR-SIS
+
+![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-14 110046.png|400]]
+
+___
+
++ **SIRS (susceptible/infected/recovered/susceptible)**
+	+ Suscettibili si infettano, guariscono, sono immuni per un po' e poi tornano suscettibili
+
+**Equazioni**
+$$\frac{dS}{dt}= \lambda R - \beta IS$$
+$$\frac{dI}{dt}= \beta IS - \gamma I$$
+$$\frac{dR}{dt}= \gamma I - \lambda R$$
+
+**Grafico del modello SIRS**
+
+![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-14 110750.png|400]]
+
++ Grafico simile a SIR, ma i recovered non raggiungono mai la totalità, anzi dopo un po' tendono a diminuire e di conseguenza i suscettibili aumentano a loro volta, rendendo il grafico con una sorta di oscillazione dei valori all'aumentare del tempo, poiché l'epidemia è libera di continuare.
+
+___
+
+### Social contagion
+
+**Idea**: Se un individuo vede un comportamento in un altro individuo, lo imita (adotta lo stesso comportamento), proprio come le epidemie.
+
+Simile a guarire da una malattia può essere smettere di dire una barzelletta perché tutti dicono di saperla già.
++ Modello chiamato **ISR**
+Da SIR a ISR --> 
++ Susceptible --> Ignorant (I)
+	+ Individuo che non ha ancora ricevuto l'informazione (barzelletta)
++ Infected --> Spreder (S) (diffusore)
+	+ Individuo che ha ricevuto l'informazione e la diffonde
++ Recovered --> Stifler (R) (soffocatore)
+	+ Ha ricevuto l'informazione ma non la diffonde più (perché gli altri "la sanno già")
+
++ $\lambda$ tra I e S
++ $\alpha$ tra S e R
+
+Anche se in realtà **Contagio fisiologico $\neq$ Contagio sociale**:
++ **Contagio fisiologico**:
+	+ Contaminazione patogena
+	+ Processo passivo (vengo contagiato)
+	+ Basta un singolo I
+	+ Transizione da I a R spontanea
++ **Contagio sociale**:
+	+ Atto intenzionale
+	+ Processo attivo (cerco l'informazione)
+	+ Servono più di un individuo
+	+ Transizione da S a R in seguito a interazione S+R o S+S
+
+Diffusione dell'epidemia per i due modelli SIR e ISR:
++ SIR
+	+ I+S $\rightarrow^\beta$ 2I
+	+ I $\rightarrow^\gamma$ R
++ ISR
+	+ I+S $\rightarrow^\lambda$ 2S
+	+ S+R $\rightarrow^\alpha$ 2R
+	+ S+S $\rightarrow^\alpha$ R+S  oppure  S+S $\rightarrow^\alpha$ 2R
+
+**Equazioni**
++ Si adotta una approccio fully-mixed
+$$\frac{dI}{dt}= -\gamma I S$$
+$$\frac{dS}{dt}= \gamma I S - \alpha S [S+R]$$
+$$\frac{dR}{dt}= \alpha S [S + R]$$
+In un istante $t$:
+$$I + S + R = 1$$ 
+>[!tip]
+>+ Passaggio da I a R in SIR è spontaneo e dipende solo dal numero di I e dal tasso / parametro $\gamma$ 
+>+ Passaggio da S a R in ISR è non spontaneo e dipende sia dal numero di S e dal parametro $\alpha$ sia dal numero di R
+
+
+Per ISR:
++ A tempo $+\infty$ non ci sono più spreader: $s\_\infty = lim\_{t\rightarrow \infty}s(t) = 0$ 
++ Gli ignoranti saranno tanti di meno quanti di più saranno gli stifler: $i\_\infty=e^{-(1+\lambda/\alpha)\*r\_\infty}$ 
++ Gli stifler saranno tutti gli altri: $r\_\infty= 1-e^{-(1+\lambda/\alpha)r\_\infty}$
++ $r\_\infty$ è la misura della **diffusione** (frazione di stiflers: infettati e poi recovered): quanto si è diffusa la barzelletta (reliability)
+
+>[!tip]
+>Non è esattamente uguale alle epidemie, in quanto non esiste più la soglia epidemica, esiste sempre un'epidemia sociale qualsiasi siano i valori dei parametri.
+>La diffusione nel modello ISR raggiunge sempre la componente gigante, quindi si diffonde sempre in una frazione macroscopica della popolazione ($r\_\infty > 0$ sempre) 
+
+
+___
+
+
+>[!question] E le reti cosa centrano con le epidemie?
+
+Questi modelli per epidemie si basano sull'assunzione:
++ Fully mixed
++ Tutti sono in contatto con tutti, rete completa
+ Questo non è vero nelle reti reali
+ >[!example]
+ >Le piante non vanno in giro a contagiare altre piante lontane
+ >Nella realtà ci sono gruppi sociale che rendono più probabile incontrare una persona piuttosto che un'altra.
+
+#### Epidemie sulle reti
+
++ Necessita quindi un'assunzione più debole di prima: rete omogenea, non completa.
+	+ Tutti i nodi hanno grado simile
+	+ Ogni individuo viene a contatto con lo stesso numero di individui
++ Basic reproduction number $R\_0$ su rete omogenea (tutti i nodi hanno grado simile alla media):
+	+ A inizio epidemia sono quasi tutti S
+	+ Ogni I infetta un vicino S con probabilità $\beta$
+	+ Ad ogni istante $t$ ogni I può transitare in R con probabilità $\gamma$ 
+	+ Quindi:
+		+ $\bigtriangleup I\_{t+1} = \beta [k] I\_t$    
+		+ $\bigtriangleup R\_{t+1} = \gamma I\_t$ 
+		+ Per avere epidemia deve essere $\bigtriangleup I\_{t+1} > \bigtriangleup R\_{t+1}$ ossia $\beta[k]I\_t > \gamma I\_t$
+		+ Quindi $R\_0 = [k] \beta/\gamma$
+
+
+>[!question] Come diminuire $R\_0=[k] \beta/\gamma$?
+>+ Diminuire la contagiosità $\beta$ (mascherine, vaccino)
+>+ Aumentare la velocità di guarigione $\gamma$ (cure)
+>+ Diminuire il grado medio $[k]$ (lockdown, quarantene)
+
+___
+

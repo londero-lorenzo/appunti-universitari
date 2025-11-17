@@ -269,3 +269,78 @@ public Class Ordine{
 ![[materie/anno_2025-2026/ingegneria_del_software/assets/java_uno_a_molti.jpg]]
 ### Uno a molti generico
 ![[materie/anno_2025-2026/ingegneria_del_software/assets/java_uno_a_molti_generico.jpg]]
+
+# Costruzione del diagramma delle classi
+>[!definition]
+>System domain model
+>> Modella le entità del dominio del problema che saranno presenti nel sistema (**dati di interesse**)
+>> Possono contenere le responsabilità delle classi (**opzionale**)
+
+>[!definition]
+>System model
+>> Include anche le classi che saranno usate per costruire il sistema completo:
+>> - classi per l'interfaccia utente (menu)
+>> - classi associate a parti dell'architettura (client, server, file, database)
+>> - classi di utilità
+>> Contiene metodi e informazioni sulla navigabilità
+
+## Costruzione del System domain model
+1. Identificare un primo insieme di **classi candidate**
+2. Aggiungi **associazioni** ed **attributi** a queste classi
+3. Trova le **generalizzazioni**
+4. Trova le principali **responsabilità** di ogni classe
+5. Itera il processo finché il modello ottenuto è soddisfacente
+
+### 1. Identifica le classi
+>[!question] Quali sono le classi che fanno parte del dominio ?
+
+- Classi devono corrispondere a entità del dominio del problema
+- Applicare concetti generali di modellazione Object Oriented: una classe identifica un tipo di dato astratto
+#### Esempio buona classe
+- Nome che rispecchia l'intento
+- Astrazione che modella un elemento del dominio del problema
+- Insieme ridotto e ben definito di responsabilità
+![[materie/anno_2025-2026/ingegneria_del_software/assets/identifica_classi.jpg]]
+#### Analisi dei nomi
+- Tecnica per scoprire le classi del dominio
+	1. Analizza la **documentazione** di partenza
+	2. Elenca i nomi
+	3. Elimina nomi:
+		- ridondanti
+		- rappresentano o caratterizzano istanze e non classi
+		- sono vaghi, generici
+		- corrispondono a classi che non sono necessarie a livello considerato
+>[!example]
+>Il sistema consente a un utente di aprire un conto corrente, diventandone il titolare.
+>Il titolare può consultare il proprio saldo attuale.
+
+##### Sostantivi
+- **Classe**: indica un insieme di elementi distinti (*ContoCorrente*)
+- **Attributo:** indica una proprietà di un elemento di un insieme (*Saldo*)
+- **Ruolo:** indica il ruolo che un'istanza di una classe assume quando la si considera come parte di un legame con altri oggetti (*La Persona che ha aperto un ContoCorrente ne diventa il <U>titolare</U>*)
+
+### Identifica associazioni
+
+#### Errore comune
+- Considerare azioni come se fossero associazioni
+### Identifica generalizzazioni e interfacce
+- Due modi per trovare **generalizzazioni**
+	- Bottom-Up: raggruppare classi simili creando una nuova classe
+	- Top-Down: cercare prima le classi più generali e poi specializzare
+- Creare un'**interfaccia** invece di una superclasse:
+	- le classi sono molto diverse fra loro, tranne che per poche operazioni in comune
+	- diverse implementazioni della stessa classe
+
+### Trova le principali responsabilità di ogni classe
+>[!definition]
+>Responsabilità
+>>Corrisponde ad una funzionalità richiesta al sistema software.
+
+La responsabilità di ogni requisito funzionale deve essere attribuita ad **una delle classi**:
+- se una classe ha troppe responsabilità: dividerla in più classi
+- se una non ha responsabilità: probabile sia inutile
+- quando non può essere attribuita a nessuna delle classi esistenti: dovrebbe essere creata una nuova classe
+#### Come stabilire le responsabilità dei requisiti funzionali?
+- Svolgere l'analisi dei casi d'uso
+- Carcare verbi e nomi che descrivono azioni nella descrizione del sistema
+

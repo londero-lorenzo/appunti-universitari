@@ -258,4 +258,54 @@ ___
 
 ___
 
+### Illusioni ottiche e aspettative dell'utente
+
+>[!example]
+>Esempi di illusioni ottiche:
+>+ Stanza di Ames (ai due opposti della stanza le persone sembrano propositate l'una verso l'altra)
+>+ Esempio di Ebbinghaus ( due cerchi uguali sono circondati uno da cerchi grandi e uno da cerchi piccoli e sembrano di grandezze diverse)
+
++ **Aspettativa**: in base a quello che di recente ho visto e dal contesto vedo determinate cose.
+	+ Il contesto crea in noi l'aspettativa
+>[!example]
+>+ Nell'immagine del calice con due facce se ho appena visto harry potter e il calice di fuoco probabilmente vedrò il calice.
+>+ Una parola anche se presenta degli errori se letta velocemente sembra senza errori proprio per l'aspettativa data dalla conoscenza di quella parola
+
+
+>[!tip]
+>Sempre prendendo ad esempio l'immagine del calice e due facce, il nostro cervello è impossibilitato a "vedere" le due immagini contemporaneamente, solo uno alla volta per la nostra capacità di distinguere il primo piano dallo sfondo.
+
+Il contesto pure è importante per l'aspettativa:
++ Secondo una ricerca, se lette veloci, le parole possono essere comprese avendo solo la prima e l'ultima lettera al posto giusto, in mezzo le lettere sono giuste ma in posizioni diverse. 
++ Il contesto aiuta inoltre a comprendere quale può essere la parola in base alle altre del testo.
+
+Altro fattore che contribuisce alle illusioni è l'aspettativa di una buona continuità, tipo quelle immagini con la testa che sembra appartenere ad un corpo, mentre in realtà appartiene ad un altro. La continuità può riguardare anche la continuità cromatica.
+
+___
+### Illusioni ottiche ed errori umani
+Illusioni ottiche che possono portare ad errori umani importanti
+
+>[!example]
+>Esempio di errore umano dovuto ad un illusione ottica di due piloti che rischiarono di far atterrare l'aereo in una pista inesistente.
+>Questo perché un hotel sembrava una pista in prospettiva, dovuta alla presenza delle lucine anti aerei in cima e alle luci quasi tutte accese delle camere vetrate lungo tutto il palazzo. Ciò provocava una illusione ottica.
+
++ Importante il concetto di **Situation awareness**
+
+___
+
+### Estetica ed emozioni
+
+Componente strettamente soggettiva, che consta dell'influenza emotiva dell'aspetto visivo dell'interfaccia.
++ Percezione di usabilità viene associata alla percezione di bellezza
++ Tolleranza maggiore dell'errore se un oggetto è bello
++ Tale bellezza dipende molto dal contesto culturale in cui viene inserito, essendo un aspetto soggettivo
++ Ciò che è considerato bello invoglia l'uso
+
+>[!example]
+>Ad esempio uno sfondo del cellulare era dinamico e presentava un prato che all'inizio era vuoto e si popolava sempre di più di piante, fiori e farfalle in base al livello di attività fisica che si svolge e per quanto tempo la si svolge, invogliando quindi l'utente e continuare gli obiettivi delle attività.
+
+>[!question] Come comunicare che il sito è giù per manutenzione?
+>Se lascio errore 404 di default è molto frustrante per gli utenti.
+>+ Se invece vengono messe delle grafiche carine e magari anche simpatiche che scherzano sul fatto che il sito è in manutenzione l'utente lo considera già più passabile.
+
 

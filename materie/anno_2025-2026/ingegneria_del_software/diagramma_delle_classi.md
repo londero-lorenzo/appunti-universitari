@@ -319,10 +319,66 @@ public Class Ordine{
 - **Attributo:** indica una proprietà di un elemento di un insieme (*Saldo*)
 - **Ruolo:** indica il ruolo che un'istanza di una classe assume quando la si considera come parte di un legame con altri oggetti (*La Persona che ha aperto un ContoCorrente ne diventa il <U>titolare</U>*)
 
-### Identifica associazioni
+##### Esempio Analisi dei nomi
+- Il **sistema** consente agli **utenti** di cercare **libri** per **titolo**, **autore** e **genere**.
+- Gli **utenti** possono prendere in prestito e restituire **libri**.
+- Gli **amministratori** del sistema possono aggiungere, modificare e rimuovere libri dal **catalogo**.
+- Il **sistema** traccia lo stato di disponibilità di ciascun **libro**.
+- Gli **utenti** possono iscriversi al **sistema**, creare un **profilo** e accedere alla **lista** dei **libri** in prestito.
+**Elenco nomi:**
+- Sistema: identifica l'intero sistema e non classi interne ad esso
+- Utente
+- Libro
+- Titolo: attributo
+- Autore: attributo
+- Genere: attributo
+- Catalogo
+- Amministratore
+- Profilo
+- Cronologia
+- Lista dei libri in prestito: attributo del profilo utente
 
+>[!warning]
+>Profilo e utente sono ridondanti quindi facciamo un'unica classe ProfiloUtente
+ 
+- Gli amministratori del sistema possono aggiungere, modificare e rimuovere libri dal **catalogo**.
+- Gli utenti possono iscriversi al sistema, creare un **profilo** e accedere alla **lista** dei **libri** in prestito.
+>[!warning] Errore nel considerare il sistema e tutti gli utenti come se fossero classi.
+
+- Attenzione a classi nel domain model che rappresentano tipi di utente o altri attori
+- Includere tali classi solo se occorre manipolare o salvare loro informazioni (ProfiloUtente) altrimenti sono esterni al sistema (Amministratore)
+
+### 2. Identifica Attributi
+>[!abstract] Il sistema consente agli utenti di cercare libri per **titolo**, **autore** e **genere**.
+
+- cercare le informazioni che devono essere conservate per ciascuna classe
+- è possibile che nomi che sono stati scartati come classi al passo 1 possano essere considerati attributi
+	- nel nostro esempio, titolo, autore e genere sono attributi di libro di tipo stringa
+- una classe **non dovrebbe** avere troppi attributi
+- stare attenti quando un attributo contiene molteplici valori
+- delicato trovare equilibrio tra classi e attributi delle classi
+### 2. Identifica associazioni
+>[!definition]
+>Associazioni
+>>Espressioni verbali che coinvolgono più classi indicano possibili relazioni tra esse.
+
+#### Associazione esiste se una classe:
+- possiede o controlla
+- è collegata a, oppure si riferisce a 
+- è parte di, oppure ha come parti
+- è membro di, oppure ha come membri
+#### qualche altra classe del modello
+
+#### Cercare nell'ordine:
+1. **Gen-Spec:** espressioni del tipo "**è un**"
+2. **Contenimento:** espressioni del tipo "**è fatto di**", "**comprende**"
+3. **Associazione:** ogni altra espressione
+#### Quando identifichi un'associazione:
+- **Specificare le molteplicità** da entrambi i lati
+- Assegnare un **nome chiaro** all'associazione e/o **definire i ruoli** delle entità che partecipano all'associazione
 #### Errore comune
 - Considerare azioni come se fossero associazioni
+
 ### Identifica generalizzazioni e interfacce
 - Due modi per trovare **generalizzazioni**
 	- Bottom-Up: raggruppare classi simili creando una nuova classe

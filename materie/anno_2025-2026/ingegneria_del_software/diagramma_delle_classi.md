@@ -420,3 +420,94 @@ La responsabilità di ogni requisito funzionale deve essere attribuita ad **una 
 >[!warning]
 >La responsabilità di **cercare** istanze di una classe che fanno parte di una collection, **non** può essere attribuita alla classe stessa, ma alla classe collection.
 
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=UK3i0Jnv|100%]]
+#### Esempio Compagnia Aerea con RESPONSABILITÀ
+
+##### Chi ha la responsabilità di CREARE un nuovo REGULARFLIGHT?
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea_responsabilita.jpg]]
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea_responsabilita_2.jpg]]
+
+##### Chi ha la responsabilità di CERCARE un REGULARFLIGHT?
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea_responsabilita_3.jpg]]
+
+##### Chi ha la responsabilità di MODIFICARE gli attributi di un REGULARFLIGHT?
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea_responsabilita_4.jpg]]
+##### Chi ha la responsabilità di CREARE uno SPECIFICFLIGHT?
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea_responsabilita_5.jpg]]
+##### Chi ha la responsabilità di PRENOTARE un passeggero su un volo specifico (creare un BOOKING) ?
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea_responsabilita_6.jpg]]
+### Class Responsibility Collaboration CRC Cards
+1. Per ogni classe identificata, porre il nome della classe su una scheda
+2. Man mano che vengono individuati attributi e responsabilità, elencarli sulle Card
+3. Sistemare le card su una lavagna per creare il Class diagram
+4. Disegnare le linee corrispondenti ad associazioni e generalizzazioni
+
+>[!tip]
+>Servono per non realizzare classi con troppi attributi e metodi.
+>Se la card è piena allora probabilmente si deve dividere la classe in due o più classi semplici.
+
+### Identifica le operazioni
+- necessarie a realizzare le responsabilità di ciascuna classe
+- responsabilità realizzata attraverso molteplici operazioni
+- operazioni che implementano una responsabilità sono **public**
+- altri metodi che collaborano a realizzare una responsabilità devono essere dichiarati **private**
+## Esempio di processo di astrazione del System Domain Model
+
+### Azienda alimentare
+- Un’azienda produttrice di prodotti alimentari, vuole organizzare un sistema informativo aziendale. Tutti gli utenti dell’applicazione devono essere in grado di cercare prodotti per nome nel catalogo. Inoltre i dipendenti devono essere in grado di accedere ad informazioni relative alle loro mansioni.
+- I prodotti sono organizzati in linee di produzione che accomunano prodotti dello stesso tipo: ad esempio, due linee possono essere pasta e sughi. I prodotti possono essere confezionati in diversi stabilimenti.
+- I dipendenti si suddividono in diverse categorie: i manager, che sono responsabili di una o più linee di produzione (ogni linea é però gestita esattamente da tre manager, per assicurare una gestione equa), i supervisori della produzione che sono responsabili di tutti i prodotti di una specifica linea in uno specifico stabilimento, e gli operai che lavorano su uno specifico prodotto in un determinato stabilimento.
+- L’applicazione deve prevedere un sistema di controllo accessi che consenta ai manager di accedere alle informazioni relative alle linee di produzione di cui sono responsabili, e che consenta a tutti di accedere alle informazioni sui prodotti.
+### Ricerca classi
+
+>[!abstract] Un’azienda produttrice di **prodotti** alimentari, vuole organizzare un sistema informativo aziendale. Tutti gli utenti dell’applicazione devono essere in grado di cercare **prodotti** per nome nel **catalogo**. Inoltre i **dipendenti** devono essere in grado di accedere ad informazioni relative alle loro mansioni.
+#### Classi identificate
+- Prodotto
+- Catalogo (contiene prodotti)
+- Dipendenti (poiché il sistema deve salvare le informazioni relative alle mansioni)
+
+>[!abstract] I **prodotti** sono organizzati in **linee di produzione** che accomunano **prodotti** dello stesso tipo: ad esempio, due linee possono essere pasta e sughi. I **prodotti** possono essere confezionati in diversi **stabilimenti**.
+#### Classi identificate
+- Linee di produzione
+- Stabilimento
+
+>[!abstract] I **dipendenti** si suddividono in diverse categorie: i **manager**, che sono responsabili di una o più **linee di produzione** (ogni **linea** é però gestita esattamente da tre **manager**, per assicurare una gestione equa), i **supervisori** della produzione che sono responsabili di tutti i **prodotti** di una specifica **linea** in uno specifico **stabilimento**, e gli **operai** che lavorano su uno specifico **prodotto** in un determinato **stabilimento**.
+#### Classi identificate
+- Manager
+- Operaio
+- Supervisore
+>[!abstract] L’applicazione deve prevedere un sistema di controllo accessi che consenta ai **manager** di accedere alle informazioni relative alle linee di produzione di cui sono responsabili, e che consenta a tutti di accedere alle informazioni sui **prodotti**.
+- Responsabile **non** è una classe ma un **ruolo** del manager rispetto ai dipendenti
+- Il sistema di controllo degli accessi è un termine usato in maniera impropria, si riferisce ad una funzionalità
+### Ricerca associazioni
+>[!abstract] Un’azienda produttrice di **prodotti** alimentari, vuole organizzare un sistema informativo aziendale. Tutti gli utenti dell’applicazione devono essere in grado di cercare **prodotti** per nome nel **catalogo**. Inoltre i **dipendenti** devono essere in grado di accedere ad informazioni relative alle loro mansioni.
+- Il catalogo è una composizione di molteplici prodotti (aggregazione). Sarebbe meglio se ce ne fosse almeno uno altrimenti il sistema non avrebbe molto senso
+- Per ora non rileviamo associazioni tra dipendenti e prodotti/catalogo
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=gftLkkrv|100%]]
+>[!abstract] I **prodotti** sono organizzati in **linee di produzione** che accomunano **prodotti** dello stesso tipo: ad esempio, due linee possono essere pasta e sughi. I **prodotti** possono essere confezionati in diversi **stabilimenti**.
+- Ciascun prodotto è organizzato in una linea di produzione, la linea di produzione organizza più prodotti dello stesso tipo
+- Ciascun prodotto può essere confezionato in uno o più stabilimenti. Ciascuno stabilimento produce molteplici prodotti
+- Non emerge ancora la relazione tra linee di produzione e stabilimenti
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=SkVrrE8m|100%]]
+>[!abstract] I **dipendenti** si suddividono in diverse categorie: i **manager**, che sono responsabili di una o più **linee di produzione** (ogni **linea** é però gestita esattamente da tre **manager**, per assicurare una gestione equa), i **supervisori** della produzione che sono responsabili di tutti i **prodotti** di una specifica **linea** in uno specifico **stabilimento**, e gli **operai** che lavorano su uno specifico **prodotto** in un determinato **stabilimento**.
+- il Manager è una sottoclasse di dipendente
+- i Manager assumono il ruolo di **responsabili** della linea di produzione
+- ciascun manager è responsabile di 1..* linee di produzione
+- ciascuna linea di produzione ha un numero esatto (3) di manager responsabili
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=PZtNm1UD]]
+- il Supervisore è una sottoclasse di dipendente
+- A una linea di produzione è associato un supervisore per uno specifico stabilimento: supervisore è una **classe associativa**
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=uMxVLs08|100%]]
+- Operaio è una sottoclasse di dipendente
+- A uno stabilimento è **associato** un team di operai per una specifica classe di prodotto: operaio è una **classe associativa**
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=5Z6bTmxk]]
+### Assegnazione responsabilità
+Un’azienda produttrice di prodotti alimentari, vuole organizzare un sistema informativo aziendale. Tutti gli utenti dell’applicazione devono essere in grado di ==cercare prodotti per nome nel catalogo==. Inoltre i dipendenti devono essere in grado di ==accedere ad informazioni relative alle loro mansioni.==
+- La ricerca dei prodotti è responsabilità del **catalogo** perché vede tutti i prodotti
+- la classe Dipendente è responsabile di accedere e visualizzare la mansione poiché tale responsabilità è ereditata da tutte le sue sottoclassi
+
+L’applicazione deve prevedere un sistema di controllo accessi che consenta ai **manager** di ==accedere alle informazioni relative alle linee di produzione== di cui sono responsabili, e che consenta a tutti di ==accedere alle informazioni sui **prodotti**.==
+- I manager possono accedere alle informazioni delle linee di cui sono responsabili, le linee non consentono a tutti di accedere alle proprie informazioni. Responsabilità dei manager
+- I prodotti permettono a tutti di visualizzare le proprie info.
+	- Prodotti hanno la responsabilità di esporre i propri dati
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_sdm_azienda_alimentare.jpg]]

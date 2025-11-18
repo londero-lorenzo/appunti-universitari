@@ -378,25 +378,45 @@ public Class Ordine{
 - Assegnare un **nome chiaro** all'associazione e/o **definire i ruoli** delle entità che partecipano all'associazione
 #### Errore comune
 - Considerare azioni come se fossero associazioni
-
-### Identifica generalizzazioni e interfacce
+![[materie/anno_2025-2026/ingegneria_del_software/assets/errore_comune_associazioni.jpg]]
+### 3. Identifica generalizzazioni e interfacce
 - Due modi per trovare **generalizzazioni**
-	- Bottom-Up: raggruppare classi simili creando una nuova classe
-	- Top-Down: cercare prima le classi più generali e poi specializzare
+	- Bottom-Up: **raggruppare classi simili** creando una nuova super-classe
+	- Top-Down: cercare prima le **classi più generali** e poi specializzare
 - Creare un'**interfaccia** invece di una superclasse:
 	- le classi sono molto diverse fra loro, tranne che per poche operazioni in comune
 	- diverse implementazioni della stessa classe
-
-### Trova le principali responsabilità di ogni classe
+#### Esempio: Compagnia aerea
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea.jpg]]
+#### Esempio: Compagnia aerea con generalizzazione
+![[materie/anno_2025-2026/ingegneria_del_software/assets/esempio_compagnia_aerea_generalizzazione.jpg]]
+### 4. Trova le principali responsabilità di ogni classe
 >[!definition]
 >Responsabilità
 >>Corrisponde ad una funzionalità richiesta al sistema software.
 
 La responsabilità di ogni requisito funzionale deve essere attribuita ad **una delle classi**:
-- se una classe ha troppe responsabilità: dividerla in più classi
-- se una non ha responsabilità: probabile sia inutile
-- quando non può essere attribuita a nessuna delle classi esistenti: dovrebbe essere creata una nuova classe
+- se una classe ha troppe responsabilità: **dividerla in più classi**
+- se una non ha responsabilità: **probabile sia inutile**
+- quando non può essere attribuita a nessuna delle classi esistenti: dovrebbe essere creata una **nuova classe**
 #### Come stabilire le responsabilità dei requisiti funzionali?
 - Svolgere l'analisi dei casi d'uso
 - Carcare verbi e nomi che descrivono azioni nella descrizione del sistema
+#### Categorie di responsabilità generiche in un class diagram:
+- accedere e modificare valori degli attributi
+- creare e inizializzare nuove istanze
+- prelevare da o memorizzare dati in una memoria persistente
+- distruggere istanze
+- aggiungere e cancellare istanze di associazioni
+- copiare, convertire, trasformare, trasmettere o fornire dati in output
+- calcolare risultati numerici
+- navigare e cercare dati di particolari istanze
+#### Esempio creazione istanze
+>[!warning] 
+>La responsabilità di creare istanze in una classe non può essere attribuita alla classe stessa, ma ad una classe collegata ad essa
+
+![[materie/anno_2025-2026/ingegneria_del_software/ingegneria_del_software.excalidraw.md#^frame=MZxs5Haf|100%]]
+#### Esempio di ricerca delle istanze
+>[!warning]
+>La responsabilità di **cercare** istanze di una classe che fanno parte di una collection, **non** può essere attribuita alla classe stessa, ma alla classe collection.
 

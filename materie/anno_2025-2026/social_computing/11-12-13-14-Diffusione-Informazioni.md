@@ -395,3 +395,222 @@ Questi modelli per epidemie si basano sull'assunzione:
 
 ___
 
+### Reti eterogenee
+Nel mondo reale le reti sono eterogenee (Power law, Hub)
+
+**Intuizione**: 
++ Gli hub si contagiano facilmente
++ E contagiano molti altri nodi
+**Intervention**:
++ Vaccinazioni mirate
++ Paradosso degli amici
+
+>[!example]
+>Epidemia della mucca pazza.
+>Si è distribuita molto grazie ai legami deboli, ad esempio tramite le persone come turisti che andavano a vedere le mucche perché il virus si diffondeva anche attraverso il terreno.
+>In queto caso è critico restare sotto la soglia epidemica ()
+
+>[!definition] 
+>**Paradosso degli amici**:
+>>Chiedere ad un nodo a caso di scegliere altri individui secondo loro più fragili e di vaccinarli.
+
+>[!tip]
+>Coefficiente di clustering alto per il modello ISR vuole dire incontrare spesso gente che "sa già la barzelletta".
+
+![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-19 150144.png|350]]
+
+Piccolo mondo si verifica tra 10^-1 e 10^-2 di probabilità nel grafico.
+**Spiegazione:**
++ Per $p$ bassi:
+	+ Rete molto clusterizzata, alto C, molti triangoli
+	+ Spreaders diffondono sempre agli stessi
+	+ Quindi passano in fretta fra gli stiflers, poca diffusione
++ Per $p$ alti:
+	+ Rete con shortcut
+	+ Spreaders diffondono anche in parti lontane
+	+ Quindi il rumor si diffonde
++ Ovviamente di più per $[k]$ alti
+$$\begin{cases} S+R \rightarrow^\alpha 2R \\ S+S \rightarrow^\alpha R+S \end{cases}$$
+
+Su **reti eterogenee**?
+Gli hub dovrebbero essere degli spreader efficientissimi perché infatti gli hub diffondono le malattie ed è facile che un rumor raggiunga uno hub e la diffusione diviene più alta.
+>[!tip]
+>Però dati sperimentali mostrano che $r\_\infty$ è più alto su reti omogenee che su reti eterogenee
+
+>[!question] Perché questo?
+
+Non è vero che l'informazione si diffonde meno su reti eterogenee
++ Per le malattie gli hub aiutano la diffusione
++ Per i rumor no
++ Perché?
+	+ è facile che un rumor raggiunga uno hub, e a quel punto la diffusione è molto alta
+	+ Ma se hub diventano spreader, allora ci saranno subito molte interazioni spreader-spreader, che porteranno a stifler, e poi molte interazioni spreader-stifler, idem
+Gli hub passano da spreader a stifler prima di contagiare molti nodi:
+A quel punto gli hub-stifler frammentano la rete --> isolano i nodi --> i nodi isolati restano ignorant.
+
+è quindi possibile modellare la diffusione di rumors con modelli analoghi a quelli per le epidemie. Ha senso quindi parlare di contagio sociale, **contagio sociale $\neq$ contagio fisiologico**:
++ Processo attivo vs. processo passivo
++ Atto intenzionale vs. contaminazione patogena
++ Decido io di adottare una moda vs. non decido io di ammalarmi
++ transizione da S a R in seguito a interazione S+R o S+S vs. transizione spontanea sa I a R
+
+#### Riassunto sulle epidemie
+
+Modelli: SI, SIR, SIS, SIRS
+	Soglia epidemica $R\_0$
+Contagio sociale IST
+	No soglia epidemica
+
+Reti
++ Epidemie
+	+ Rete omogenea (G(n, p)): $R\_0=[k] \beta/\gamma$ 
+	+ Rete eterogenea: hub, vaccinazione, paradosso degli amici
++ Contagio sociale
+	+ Rete WSSW
+	+ Rete eterogenea: ruolo "strani degli hub"
+
+**Modelli sensati ma non perfetti   --> necessità di studiarne altri.**
+
+___
+
+### Modello di Morris (Direct benefit)
+
++ Basato su benefici diretti (che cosa ci guadagno)
+
+>[!tip]
+>Modelli basati su:
+>+ Informazioni (faccio X perché vedo gli altri)
+>+ Benefici diretti (faccio X perché mi conviene rispetto a non farlo)
+
+>[!example]
+>Uso Whatsapp al posto di Telegram perché tutti usano whatsapp e quindi **mi conviene** usarre quello per poter comunicare.
+
+Idea:
++ Quindi una decisione arriva ad un nodo ed il nodo stesso decide se adottarla o meno. Solitamente se i nodi vicini l'hanno adottata la adotta anche lui.
+>[!tip]
+>Per un nodo, il beneficio di adottare un comportamento cresce al crescere del numero di vicini che lo adottano
+
+#### Teoria dei giochi
++ Ogni nodo sceglie fra 2 possibili comportamenti A e B
++ Se due nodi sono collegati da un arco sono incentivati ad adottare comportamenti uguali
+	+ Se v e w adottano entrambi A --> payoff a>0
+	+ Se v e w adottano entrambi B --> payoff b>0
+	+ Se v adotta A e w adotta B --> payoff 0
+
+Matrice dei payoff presente per ogni arco.
+
+Il payoff totale di un nodo v sarà la somma di tutti i payoff in base alle scelte svolte per qualsiasi arco. Lo scopo di tale nodo è massimizzare tale payoff.
+
+>[!question] Se alcuni vicini adottano A e altri adottano B, quale mi conviene adottare?
+>Dipende da:
+>+ payoff a
+>+ payoff b
+>+ numero (o %) vicini che scelgono A
+>+ numero (o %) vicini che scelgono B
+
++ $p$ = % vicini che adottano A
++ $1-p$ = % vicini che adottano B
++ $d$ = numero di vicini
++ Regola di decisione:
+	+ $v$ adotta A solo se: $p \geq \frac{b}{a+b}$
+
+>[!definition]
+>Regola
+>> Se almeno una frazione q  ($q = \frac{b}{a+b}$) dei miei vicini adotta A, allora lo faccio anche io (dove q dipende dai payoff).
+
+##### Equilibri
++ tutti adottano A
++ tutti adottano B
+
+>[!question] Come si passa da un equilibrio all'altro?
+
+>[!example]
+>tutti stanno adottando B ma alcuni nodi per motivi extra-payoff adottano A (altri vantaggi magari) e possono poi convincere altri B a cambiare e poi altri ancora a cascata. Alla fine possono farlo per tutta la rete.
+
++ Il processo è **monotono**: dopo la scelta di cambiare il nodo non torna indietro
++ Il processo si ferma quando:
+	+ o tutti passano ad A
+	+ o nessuno più vuole passare ad A
+
+>[!question] Quando l'equilibrio non viene ribaltato completamente cosa succede e perché?
+>Si passa da B ad A se almeno 2/5 dei vicini scelgono A. Se questo non accade il cambiamento da B ad A si ferma.
+>Ad esempio se sono presenti dei sottografi completi difficilmente verranno convinti avendo solo un collegamento con il corpo della rete.
+
++ Si può svolgere un'intervention per far ripartire lo switch del comportamento cercando di far adottare quel comportamento ad un nodo "strategico", che permetterebbe di far ripartire lo switch di tutta la rete.
++ **Cascata di adozioni di A**: molti nodi stanno passando ad A
++ **Cascata completa**: tutti i nodi sono passati ad A
+
+Differenze con l'ICM (Independent Cascade Model):
++ ICM è stocastico
++ Questo invece è deterministico
++ l'Intervention è di natura diversa nei due modelli
+
+#### Intervention
+Strategie per far passare ad A:
++ Migliorare il payoff di A
++ Convincere alcuni nodi chiave per far ripartire la reazione a catena (tramite regali, omaggi,...)
+
+#### Cluster di densità $p$
+Se ogni nodo che vi appartiene ha almeno una frazione $p$ dei suoi vicini nel cluster
++ "comunità coesa"
+
+>[!tip]
+>I cluster fermano le cascate. Anzi una cascata si ferma **solo se** c'è un cluster.
+
+#### Teorema di Morris
++ Soglia q per adottare A
++ (1) Se il resto della rete contiene un cluster di densità > 1-q, allora non ci sarà una cascata completa
+	+ **Dimostrazione**: 
+		+ Sia $v$ il primo nodo nel cluster che adotta A al tempo $t$
+		+ Allora a $t-1$: 
+			+ c'è almeno una frazione $q$ di vicini di $v$ adottanti A
+			+ nessuno nel cluster adotta A
+			+ $v$ aveva almeno una frazione $q$ di vicini fuori dal cluster
+		+ Il cluster di densità > 1-q --> >1-q vicini di $v$ devono essere nel cluster --> è impossibile averne q fuori --> assurdo. --> niente $v$ --> no complete cascade.
++ (2) Se non c'è una cascata completa, allora c'è un cluster di densità > 1-q
+	+ **Dimostrazione**:
+		+ Massa cumplica, varda sue slaid.
+
+
+#### Ancora Intervention
+Quindi per far ripartire una cascade bloccata posso:
++ Aggiungere archi fra cluster diversi (rinforzo i legami deboli)
++ Togliere archi all'interno di un cluster (indebolisco la densità dei cluster bloccanti)
+Per bloccare una cascade:
++ Togliere archi fra cluster diversi (indebolisco i legami deboli)
++ Aggiungere archi all'interno dei cluster (rinforzo i cluster bloccanti)
+
+>[!tip]
+>Cluster e cascade sono due facce dalle stessa medaglia.
+>+ Cluster bloccano le cascade
+>+ Se una cascade si blocca ---> c'è un cluster
+>+ I cluster però non bloccano le malattie o il contagio sociale
+
+#### Awareness, adoption, weak ties
++ Weak ties: legami deboli
+	+ Conoscenze non intime (es. utili se devo trovare lavoro)
++ Utili per diffusione informazioni (o malattie)
+	+ **Awareness**, semplice consapevolezza
++ Molto meno utili per diffusione mode, innovazioni
+	+ **Adoption**, adozione di un comportamento
++ **Awareness $\neq$ Adoption** 
+>[!example]
+>È facile raccontare una barzelletta ad uno sconosciuto. È difficile convincerlo a fare la rivoluzione.
+
+#### Diffusioni
++ Movimenti sociali
+	+ Diffusione lenta e locale
+	+ Adoption
+	+ soglia alta (mi costa fare la rivoluzione)
+	+ NON sfruttano weak ties
++ Barzellette, meme
+	+ Diffusione rapida e planetaria
+	+ Awareness
+	+ soglia bassa (mi costa poco condividere un video)
+	+ sfruttano weak ties
+
+#### Riassunto modello di Morris
++ Basato su Benefici Diretti
++ Diverso dai modelli di contagio sociale e malattie
++ Un nodo **decide** di adottare un comportamento perché **gli conviene**, non perché pensa che sia giusto o per imitare
++ Cascade complete, legame con cluster

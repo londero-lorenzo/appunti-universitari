@@ -6,8 +6,28 @@ created: 2025-11-18
 ---
 # Memoria
 
-(scrivere memoria sensoriale)
+3 tipi di memoria:
++ Memoria sensoriale 
+	+ analogia con dei piccoli buffer che collezionano dati
++ Memoria di lavoro 
+	+ "a breve termine", ma non è sempre detto che sia breve, dipende dalla task
+	+ analogia con la RAM
++ Memoria a lungo termine
+	+ analogia con l'hard disk
 
+>[!tip]
+>+ Per portare qualcosa dalla memoria sensoriale alla memoria di lavoro serve un processo di **attenzione**.
+>+ Per portare qualcosa dalla memoria di lavoro alla memoria a lungo termine serve un processo di **ripetizione**.
+
+### Memoria sensoriale
+
+Si comporta come una coda: la prima informazione che entra è quella che viene elaborata o la prima che viene cancellata se il "buffer" è pieno.
+
+>[!tip]
+>I dati sono raccolti in continuo, anche in maniera incosciente.
+>Solo prestando attenzione a qualcosa si portano i dati raccolti per ultimi alla memoria di lavoro per processarli.
+
+___
 
 ### Memoria di lavoro
 
@@ -18,8 +38,8 @@ Componenti:
 + sistema attentivo (esecutivo centrale)
 
 Informazione trattenuta tramite:
-+ **reiterazione**
-+ **raggruppamento**
++ **reiterazione**: Ripetere l'informazione per tenerla in memoria
++ **raggruppamento**: raggruppare l'informazione per tenerla in memoria
 
 >[!example]
 >+ Numero di telefono viene solitamente diviso in 4 chunk: due triple e due doppie. Tali suddivisioni semplificano la memorizzazione.
@@ -49,14 +69,17 @@ ___
 
 ### Memoria a lungo termine
 
-Definita da un insieme delle conoscenze
+Definita da un **insieme delle conoscenze**.
 
-(scrivere le prime due)
-
-Trasferimento
-+ Reiterazione (scrivere)
-+ Organizzazione (come la tecnica del palazzo mentale per mappare gli ambienti con delle informazioni)
-+ Esposizione ripetuta (sono esposto perché ci accade, non per volere nostro)
+Diversi tipi di memoria:
++ **Dichiarativa**
+	+ Episodica: Mi ricordo episodi avvenuti nella mia storia o nella storia di altri
+	+ Semantica: Mi ricordo il significato di cose
++ **Procedurale**: Mi ricordo i diversi passi per fare le cose
++ **Trasferimento**
+	+ Reiterazione (ripasso più volte lo stesso concetto)
+	+ Organizzazione (come la tecnica del palazzo mentale per mappare gli ambienti con delle informazioni)
+	+ Esposizione ripetuta (sono esposto perché ci accade, non per volere nostro)
 
 Legame tra emozioni e memoria: Se ho un carico emotivo su qualcosa è più semplice ricordarmela.
 
@@ -107,5 +130,38 @@ Vantaggi delle tecnologie:
 **Stime dimensionali**:
 + Registrazione di tutto il testo letto da una persona nella vita: 12 Gb
 + Registrazione di tutto ciò che è arrivato alle orecchie di una persona nella vita: 40Tb
-+ Registrazione di tutto ciò che è arrivato agli occhi e alle orecchie di una persona nella vita : 120Tb
++ Registrazione di tutto ciò che è arrivato agli occhi e alle orecchie di una persona nella vita: 120Tb
+
+___
+
+(vedere prima ora di lezione fino a slide 24)
+
+# Pensiero
+
+
+#### Elaborazione dell'informazione
+Tassonomia degli errori:
+
++  **Sviste** (slip): So la procedura giusta da fare ma commetto un errore dovuto a distrazioni. Casi in cui magari sono sovraccaricato di task può capitare di sbagliare l'azione.
+	+ Modello corretto
+>[!example]
+>+ Sbaglio il tasto verde per rispondere alla chiamata e schiaccio quello rosso, essendo comunque bottoni simili, sebbene con colori diversi.
+>+ Mentre stampo mi accorgo che non ho messo un'impostazione diversa dal solito, ad esempio stampa fronte-retro e stampa in bianco e nero, perché magari queste impostazioni sono nelle proprietà nascoste o avanzate
+>	+ Per evitare ciò servirebbe una pagina di riepilogo prima della stampa per permettere all'utente di ricontrollare se ha fatto quello che voleva.
+
++ **Lapsus** (lapse, fallimenti della memoria): Saltare un passaggio della procedura (svista è errore nella procedura)
+	+ Modello corretto
+>[!example]
+>+ Mentre stampo mi accorgo che non ho messo un'impostazione diversa dal solito, ad esempio stampa fronte-retro e stampa in bianco e nero, perché magari queste impostazioni sono nelle proprietà nascoste o avanzate
+>	+ Per evitare ciò servirebbe una pagina di riepilogo prima della stampa per permettere all'utente di ricontrollare se ha fatto quello che voleva.
+
++ **Sbagli** (Mistake): Applico il modello sbagliato perché non so come si fa
+	+ Modello sbagliato
+>[!example]
+>
++ **Violazioni** (Violations): So cosa devo fare ma decido deliberatamente di non applicare il modello corretto
+	+ Modello sbagliato
+>[!example]
+>Se un operatore tipo operaio dopo un po' si rompe il cazzo oppure gli danno delle scadenze sui pezzi che deve fare, può decidere si modificare la procedura di fattura dei pezzi (magari diminuendo la distanza di sicurezza per velocizzare il lavoro) a suo favore.
+>+ Per evitare che ciò accada potrei mettere il bottone che ho da schiacciare sia in una posizione tale che l'operaio non necessiti di muoversi (e di mettersi in pericolo) per schiacciare il bottone; oppure anche porre una specie di paratia tra l'operaio e il macchinario.
 

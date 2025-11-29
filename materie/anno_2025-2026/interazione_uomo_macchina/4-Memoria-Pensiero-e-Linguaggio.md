@@ -133,14 +133,51 @@ Vantaggi delle tecnologie:
 + Registrazione di tutto ciò che è arrivato agli occhi e alle orecchie di una persona nella vita: 120Tb
 
 ___
+### Modelli mentali
 
-(vedere prima ora di lezione fino a slide 24)
+Acquisiti sperimentando o osservando altri fare giusto o sbagliato.
+Tali modelli permettono di non sapere ciò che c'è dietro alla pressione di un determinato pulsante o all'inserimento dei soldi in una macchinetta, perché interessa solo che tale successione di azioni da noi svolte portino allo scopo che vogliamo, ovvero ad esempio avere un caffè.
+
+>[!tip]
+>Modelli mentali vengono applicati anche ai stereotipi o pregiudizi verso gli altri che derivo dall'esperienza. (se un gruppo di neri mi picchia starò lontano dal prossimo nero che incontro).
+
+### Metafora
+
+>[!definition]
+>Metafora
+>>Utilizzo un modello in un altro ambito, incluso quello informatico.
+>>Possiamo usare una singola metafora o comporre più metafore anche prese da modelli non correlati.
+
+>[!example]
+>+ Il modello mentale del fornello a gas (gas più alto, cottura più veloce), può ad esempio venire associato (a causa dello stesso scopo ovvero fornire calore) al termostato, che quindi porta le persone a mettere magari il termostato a 24 gradi per portare la temperatura della casa a 20 gradi più velocemente, anche se ciò non è vero.
+>+ Se viene messo l'icona del cestino per rimuovere il floppy disk, gli utenti non lo facevano, avendo imparato che il cestino era per eliminare i dati, mentre loro volevano rimuovere il disco, non buttarlo via
+>+ Scambiare l'uso del microfono vero con quello integrato nel telefono, e quindi portando il microfono tra l'orecchio e la bocca (proprio come un telefono) per parlare, non sapendo di doverlo tenere davanti alla bocca.
+>+ Scambiare la cordicella dell'allarme per lo sciacquone del cesso.
+
+
+___
 
 # Pensiero
 
-
 #### Elaborazione dell'informazione
-Tassonomia degli errori:
+
+**Tassonomia dei compiti**:
++ Basato sulle abilità (andare in bici)
+	+ Memoria di lavoro bassa (complessità bassa)
+	+ Memoria a lungo termine **procedurale** (una volta imparata è easy ricordarsi)
++ Basato selle regole (andare in auto)
+	+ Memoria di lavoro media (complessità media)
+	+ Memoria a lungo termine **procedurale**
++ Basato sulle conoscenze (dimostrare un teorema)
+	+ Memoria di lavoro alta (complessità complessa)
+	+ Memoria a lungo termine **dichiarativa** (difficile ricordarsi dopo del tempo)
+
+>[!tip]
+>Errori per le attività di memoria procedurale sono definiti **Errori automatici**
+>Errori per le attività di memoria dichiarativa sono definiti **Errori concettuali**.
+
+
+**Tassonomia degli errori:**
 
 +  **Sviste** (slip): So la procedura giusta da fare ma commetto un errore dovuto a distrazioni. Casi in cui magari sono sovraccaricato di task può capitare di sbagliare l'azione.
 	+ Modello corretto
@@ -165,3 +202,76 @@ Tassonomia degli errori:
 >Se un operatore tipo operaio dopo un po' si rompe il cazzo oppure gli danno delle scadenze sui pezzi che deve fare, può decidere si modificare la procedura di fattura dei pezzi (magari diminuendo la distanza di sicurezza per velocizzare il lavoro) a suo favore.
 >+ Per evitare che ciò accada potrei mettere il bottone che ho da schiacciare sia in una posizione tale che l'operaio non necessiti di muoversi (e di mettersi in pericolo) per schiacciare il bottone; oppure anche porre una specie di paratia tra l'operaio e il macchinario.
 
+#### Apprendimento
+Due accezioni:
++ Apprendere il funzionamento del sistema tramite:
+	+ Usabilità (facilità di apprendimento)
+	+ Manuali di istruzioni (spesso ignorati)
+	+ Apprendimento mediano dall'azione (prove ed errori, funzione annulla)
++ Apprendere attraverso un sistema
+	+ Contenitore vs. contenuto
+	+ Principi di apprendimento multimediale
+
+___
+
+# Linguaggio
+
+Varie modalità di comunicazione:
++ Scrittura
++ Parlato
+Le diverse modalità hanno carico cognitivo **diverso**:
++ Più veloci a leggere che ad ascoltare
++ Leggere è più impegnativo
++ Scritto è più persistente (si può skippare le parti che so già, so dove ritrovare le informazioni, ecc...)
+>[!example]
+>+ Molte persone ascoltano magari un audiolibro o un podcast di notizie piuttosto che leggere le notizie o leggere i libri, perché magari ascoltano con più leggerezza senza molto carico cognitivo, piuttosto che leggere che occupa molto carico cognitivo.
+>+ Informazioni numeriche e di misure nell'aviazione vengono date a voce dal sistema magari mentre il pilota sta atterrando, questo perché il pilota può capire l'informazione vocale senza perdere molta capacità cognitiva da quello che sta facendo, ovvero cercare di non schiantarsi a terra con l'aereo.
+
+##### Problema del **common ground**
+Problemi di traduzione nella comunicazione verbale (esempio: "just" inteso in un modo o nell'altro). 
+Capita magari quando le parole sono tradotte giuste nel loro significato letterale, ma sbagliato nella traduzione all'interno del contesto del discorso.
+
+### Interfacce vocali
+
+#### Agenti conversazionali
+ELIZA primo agente conversazionale, utilizzava IA della vecchia generazione (praticamente un insieme di if-else, ovvero "sistema a regole")
+
+>[!tip]
+>Si notò che la gente si interfaccia con gli agenti sia come se fossero delle persone vere (ad esempio anche col GPS ci si incazza) e magari avendo anche dei pregiudizi di genere in base all'embodiment del sistema conversazionale.
+>Si decise quindi di bloccare tramite dei filtri determinate frasi non appropriate verso gli agenti conversazionali.
+
+Alcuni agenti conversazionali sono fin troppo invadenti, chiedendo o proponendo qualcosa in base alle azioni dell'utente (tipo Clippy per Windows), e la gente rischia di innervosirsi.
+
+Problema anche sulla credibilità dei contenuti generativi:
++ Siccome infatti gli utenti personificano gli agenti conversazionali, saranno inclini a credere a quello che dicono, magari anche su loro stessi.
+
+___
+
+# Sistema motorio
+
+#### Legge di Fitts
+
+$$T = a + b\* log\_2(D/S+1)$$
++ a e b sono costanti ricavate sperimentalmente
++ T è il tempo di movimento
++ D è la distanza
++ S è la superficie
+
+Legge che nasce in ambito militare e calcola il tempo necessario per sparare a qualcosa in base alla distanza e la superficie.
+In ambito informatico viene usato per capire la velocità di utilizzo di un software, ovvero quanto un utente ci mette a fare un'azione in base al layout del software.
+
+>[!tip]
+>La legge di Fitts serve quando ho un puntatore che se cliccato apre un menu e dal tempo zero devo capire quale tasto cliccare per fare una determinata azione.
+
+
+___
+
+## Modello del processo umano
+
+![[materie/anno_2025-2026/interazione_uomo_macchina/assets/Immagine 2025-11-29 161055.png]]
+
+Composto da:
++ Sistema percettivo (5 sensi)
++ Sistema cognitivo (Memoria, Pensiero, Linguaggio)
++ Sistema motorio (Legge di Fitts)
+Che abbiamo visto tutti e tre

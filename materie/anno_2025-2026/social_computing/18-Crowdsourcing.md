@@ -118,3 +118,22 @@ Solitamente sono richieste che richiedono meno di un minuto e pagano circa 1-3 c
 >+ Decentralizzazione
 >+ Aggregazione
 
+
+____
+
+>[!warning]
+>**Take home message:** In certe condizioni le folle sembrano essere utili per svolgere compiti di buon qualità.
+
+### Critiche
+
++ **Critica principale al crowdsourcing**: Qualità messa in dubbio. Attività amatoriale vs. attività di esperti del settore, portano qualità bassa i principianti. Posizione estrema ma con un fondo di verità. Difficile da capire come è veramente.
+
+>[!example]
+>Vedendo gli errori che ci sono su wikipedia (fatta da amatori) e sull'enciclopedia britannica (fatta da esperti) si vede come più o meno il numero di errore è lo stesso. Esempio di come gli amatori abbiano fatto comunque un buon lavoro.
+
++  **Altro problema**:
+Molti compiti da qui a 5 anni fa vengono subappaltati alle AI, sia da parte degli esperti che da parte degli amatori.
+>[!tip]
+>Molti dicono che le Ai abbiano ucciso il crowdsourcing, anche se per il momento ad esempio i soldi messi in palio su amazon mechanical turk sono circa li stessi di anni fa. è comunque un fenomeno da tenere in conto.
+
++ **Ulteriore critica**: Etica del lavoro. Il worker non può essere un lavoro che rende indipendente una persona, la paga a task è minima (1-2 centesimi di solito). Rischio di cadere nello sfruttamento dei worker.

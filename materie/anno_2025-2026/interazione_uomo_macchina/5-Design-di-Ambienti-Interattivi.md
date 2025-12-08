@@ -44,10 +44,13 @@ Utenti usati proprio come designers, in modo che le persone che utilizzeranno la
 >[!example]
 >Per un'edizione delle olimpiadi vennero chiamati degli atleti a gestire anche l'organizzazione dei maxi-schermi e cose così.
 
-### Processo di design di un sistema interattivo
-Simile al modello a cascata di ingegneria del software. Dagli obiettivi si passa all'analisi, poi al progetto (in caso con la creazione di un prototipo e vedendo ciò che non va si può tornare indietro all'analisi) e poi allo sviluppo e distribuzione.
+___
+## Processo di design di un sistema interattivo
 
-##### Obiettivi
+Simile al modello a cascata di ingegneria del software. Dagli obiettivi si passa all'analisi, poi al progetto (in caso con la creazione di un prototipo e vedendo ciò che non va si può tornare indietro all'analisi) e poi allo sviluppo e distribuzione.
+![[materie/anno_2025-2026/interazione_uomo_macchina/assets/Screenshot 2025-12-08 113107.png]]
+
+### Obiettivi
 Per averli chiari c'è bisogno di parlare con lo stakeholder (portatore di interesse per la cosa che stiamo facendo) in modo da comprenderli.
 ###### Stakeholder
 + **Primari**: Forniscono direttamente input e ricevono direttamente output
@@ -82,5 +85,126 @@ Gli stakeholder (come gli assistenti di volo) possono appartenere a categorie di
 >+ Chi vuole sedersi e gustarsi il caffè
 >+ Chi vuole sempre andare di fretta e prendere il caffè al bancone e scappare
 >Tra gli obiettivi quindi ci deve essere il posto rilasso per un cliente e il bancone per l'altro
+
+#### Tecniche:
++ **Comunicare il design**
+	+ Tramite materiali che evocano metafore e idee
++ **Personas e scenari**
+	+ storyboard descrittivi di utenti tipo che descrivono l'uso in un contesto come una storia
++ **Mock-up**
+	+ Concretizzazioni del sistema futuro usando materiali veloci da assemblare (stampa 3D o carta o materiali di recupero)
++ **Prototipo**
+	+ Rappresentazione concreta ma parziale di un prodotto sistema applicazione per sperimentare e discuterne gli aspetti
+
+___
+### Analisi
+
+>[!tip]
+>La parte di **Analisi** è formata da:
+>+ Personas
+>+ Scenari
+>+ Task analysis
+#### Personas e scenari
++ Possibile creare i personaggi proprio credibili, con delle statuine fatte appositamente con i vari accessori e caratteristiche
++ Possibile fare anche degli storyboard veri e propri come quelli per i film, con scenari e vignette. Anche utilizzare l'AI per creare le vignette è una soluzione plausibile 
+
+>[!example]
+>Giovanni è uno studente fuorisede che non fa il pendolare quindi è in un appartamento. Dopo lezione alle 13.30 vuole rientrare a casa e trovare il piatto caldo per il pranzo. 
+>+ Quindi mette il piatto in microonde e imposterà il timer alle 13.20.
+>+ Poi imposterà durata per 10 minuti.
+>+ Imposterà la potenza del microonde.
+>+ Se Giovanni è un piscialletto e non vuole calcolare il tempo di partenza posso poter impostare l'orario di fine (13.30) e la durata (10 minuti).
+>+ Allo stesso modo si può quindi impostare:
+>	+ Fine - Durata
+>	+ Inizio - Durata
+>	+ Inizio - Fine
+#### Task analysis
+
+>[!definition]
+>Task
+>>Attività da svolgere per raggiungere un obiettivo.
+>>Utile a stabilire quali sono i compiti più rilevanti per l'applicazione.
+
++ Può essere utile coinvolgere l'utente finale e osservare come svolge le attività.
+
+___
+### Progetto
+
++ Flusso del sistema
+	+ immagini che fanno vedere cosa succede  e dove rimanda se si clicca un determinato bottone ad esempio
++ Mock-up
+>[!example]
+>Ad esempio se si vuole mettere uno schermino con funzioni touch su un coltellino svizzero, senza realizzarlo veramente si può mettere una placchetta su un coltellino svizzero normale e magari uno stuzzicadenti per vedere se è pratico o altrimenti se cambiare approccio.
+
+>[!tip]
+>Esempi di strumenti utilizzabili per il mock-up:
+>+ Adobe Xd
+>+ Figma
+>+ Sketch
+>+ ...e altri
+
+>[!Problem]
+>Non tutti gli utenti target hanno la capacità di immaginare la soluzione finale. Questo può essere un problema per capire l'usabilità del progetto.
+>In questi casi è necessario usufruire dei software per magari creare il modello preciso in 3D in modo da far vedere all'utente una versione virtuale del modello finale, senza quindi usare una creazione fisica alla buona.
+
+___
+
+### Prototipo
+
+#### Principi
+Euristiche di Nielsen e Molich:
+ + 10 regole/principi da seguire che nel caso medio vanno bene, quindi per la maggior parte delle progettazioni di un sistema.
+	1. Dialogo semplice e naturale
+	2. Parla il linguaggio utente
+	3. Minimizza il carico mentale utente
+	4. È coerente e standard
+	5. Fornisce feedback e visibilità dello stato del sistema
+	6. Fornisce uscite chiaramente indicate
+	7. Efficienza e flessibilità d'uso
+	8. Buoni messaggi d'errore
+		+ Ad esempio se compare l'errore con il codice errore non serve a niente e non aiuta l'utente a capire il problema
+	9. Previene gli errori
+	10. Fornisce aiuto e documentazione
+		+ Ad esempio le caselline che spiegano cosa fanno i bottoni che compaiono quado il mouse è sopra al bottone.
+		  Inutili se ad esempio la placchetta per il bottone "Back" ripete semplicemente il nome del bottone, "Back".
+
+#### Guidelines
+Istruzioni da analizzare per vedere se l'applicazione è conforme rispetto ad un modello.
+>[!example]
+>Microsoft che per i suoi software ha delle linee guida che spingono i programmatori dei diversi strumenti Microsoft a svolgere ad esempio sempre lo stesso tipo di menu con le stesse opzioni, in modo da fornire continuità tra i diversi software.
+
+##### Standard per le guidelines
+###### ISO 9241: 
++ Riguarda requisiti ergonomici per il lavoro d'ufficio con terminali a display visivo. 
++ Definizione di usabilità secondo ISO 9241
+>[!definition]
+>Usabilità
+>>Efficacia, efficienza, soddisfazione con cui gli utenti specificati raggiungono obiettivi specificati in particolari ambienti.
+>>
+>>Efficacia = accuratezza e completezza
+>>Efficienza = le risorse spese in relazione con l'accuratezza e completezza degli obiettivi raggiunti.
+>>Soddisfazione = comfort e accettabilità del sistema di lavoro per i suoi utenti.
+
+
+___
+### Sviluppo e distribuzione
+#### Help
+
+##### Esigenze di help utente. Motivi per cui può servire un help
++ **Esplorazione** (cosa posso fare con questo sistema?)
++ **Definizione/descrizione** (Che cos'è/a cosa serve questo?)
++ **Svolgimento compiti** (Come faccio questo?)
++ **Diagnostica** (come è accaduto questo? --> errore + link verso pagina risolutiva, oppure meccanismo di undoing (Ctl-Z))
++ **Identificazione di stato** (dove sono?)
+
+>[!example]
+>Governo americano aveva problema nei servizi digitali per i cittadini. 
+>Crearono un playbook con 13 key plays, con annesse checklist per vedere se si sta producendo correttamente il servizio per il governo americano, di cui le prime 4 sono:
+>+ Capisci cosa la gente necessita
+>+ Considera l'esperienza completa dall'inizio alla fine
+>+ Rendere semplice ed intuitivo
+>+ Costruire il servizio utilizzando il metodo agile (*agiail*) e iterativo
+
+
 
 

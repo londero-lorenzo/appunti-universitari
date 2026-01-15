@@ -9,8 +9,37 @@ tags:
   - social-computing
 created: 2025-12-22
 ---
-(tutta la parte su Crowd_Frame)
+# Crowd_Frame
 
+Amazon Mechanical Turk presenta tre fasi per il design delle task:
++ Project definition
++ Task interface design
++ Customization and publication
+Per sviluppare le interfacce del task bisogna comunque avere delle competenze informatiche non indifferenti, bisogna saper scrivere in HTML (di cui AMT fornisce dei superset per organizzare il body del task), CSS, Javascript.
+Anche la customizzazione del task e la pubblicazione richiede competenze informatiche 
+
+Idea di soluzione per queste difficoltà:
++ Utilizzare una piattaforma di crowdsourcing solo per reclutare i workers, ma usare un software esterno per creare il task a cui i worker avranno accesso (Crowd_Frame)
++ I worker fanno la task e tornano alla piattaforma per ricevere il pagamento
+
+### Crowd_Frame
+
+Crowd_Frame quindi permette di automatizzare il processo di backend della creazione di un task: permette di definire il task e, tramite script automatici, crea l'infrastruttura necessaria su AWS e pubblica il task su MTurk.
+Permette di ricoprire punti dello sviluppo del task quali:
++ Configurazione (parametri di configurazione del task)
++ Sviluppo del task (interfaccia che vedrà l'utente)
++ Deploy (lancio su AWS per creare il bucket e una tabella DynamoDB per salvare i dati)
++ Pubblicazione (comunica con le API di MTurk per rendere il task visibile ai worker)
++ Raccolta dati (dati salvati su AWS)
+
+Questo tramite lanci di script Python per i quali serve una conoscenza minima rispetto allo sviluppo standard del task su Amazon Mechanical Turk.
+#### Limitazioni: 
++ Implementazione di allocazioni automatiche di elementi in HITs
++ Una interfaccia per monitorare internamente lo status della task
++ Crowd_Frame è comunque un tool di ricerca, non un prodotto
++ Le skill da developer sono comunque richieste, benché molte meno
+
+___
 # Accordo
 
 Anche dopo avere pagato il worker e a lavoro finito, posso scegliere di dar un peso diverso ad un dato worker rispetto agli altri.

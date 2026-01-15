@@ -133,5 +133,37 @@ Utilizzando nuovamente la moda con queste categorie
 >Ad esempio una scala a 100 valori può essere probabilmente semplificata in una scala a 10 valori.
 >Più le scali sono grandi e più si avvicinano a una scala a intervalli, ma più la scala è grande e più i risultati appaiono vicini magari alle misurazioni degli esperti.
 
+___
+
+### Funzioni di aggregazione
+
++ Moda, a maggioranza, Majority Voting
++ Mediana
++ Media aritmetica, geometrica, armonica, pesata
+
+>[!tip]
+>Non è sempre semplice scegliere la funzione giusta.
+
+#### Media aritmetica e geometrica
+>[!example]
+>Misurazione di gradimento di una fotografia in numeri compresi tra 0 e 1.
+>Suppongo di avere due casi:
+>+ Miglioro da 0.1 a 0.2 in questionari successivi
+>+ Miglioro da 0.8 a 0.9 in questionari successivi
+>Si potrebbero fare diversi ragionamenti come che il miglioramento è uguale oppure che il primo miglioramento in termini percentuali è del 100%, oppure meglio il secondo perché mi avvicino maggiormente alla perfezione.
+>
+
+
+Altro problema è quello degli outlier:
+Gli outlier tendono a sfasare il dato reale della media, se ad esempio 9 persone mettono un valore simile a 1 e una persona sola mette 100, la media aritmetica porta un valore che non è molto rappresentativo di quello che dicono effettivamente i worker.
+Con la mediana questo errore non succede.
+
+#### Media armonica
+
+>[!definition]
+>Media armonica
+>>Reciproco della media aritmetica dei reciproci.
+>>Ha la proprietà di essere vicino al minimo.
+
 
 

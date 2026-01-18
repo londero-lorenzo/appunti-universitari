@@ -103,7 +103,7 @@ ___
 >[!question] Cosa vuol dire?
 >Se prendo un nodo a caso su una rete e conto quanti amici ha otterrò un certo valore, ma se prendo un nodo a  caso e seguo un link e conto quanti amici ha tenderà ad averne di più del nodo iniziale.
 
-![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-08 115959 1.png|350]]
+![[materie/anno_2025-2026/social_computing/assets/Screenshot 2026-01-18 113031.png|350]]
 
 + La linea tratteggiata è quello che ci aspetteremmo se non ci fosse il paradosso degli amici: i miei amici avrebbero esattamente gli amici che ho io
 + In realtà gli amici dei miei amici sono mediamente un numer più grande dei miei

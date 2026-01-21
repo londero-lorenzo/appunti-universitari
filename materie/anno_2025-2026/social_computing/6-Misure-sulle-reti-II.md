@@ -54,8 +54,8 @@ ___
 
 ___
 
-+ **Geodesic**: Percorso più corto tra due nodi (la distanza è il numero di archi)
-+ **Diameter** della rete: Il più lungo geodesic della rete (distanza maggiore tra due nodi)
++ **Geodesic**: Percorso più corto tra due nodi (la distanza è il numero di archi) (geodesic = cammino più breve)
++ **Diameter** della rete: Il più lungo geodesic della rete (distanza minima maggiore tra due nodi della rete)
 + **Grado** di un nodo: Numero di archi indegree e outdegree
 + **Degree distribution**: Per ogni grado, il numero di nodi che hanno quel grado
 + **Density**: Proporzione di archi: Numero di archi / numero massimo di archi
@@ -76,7 +76,7 @@ ___
 
 >[!example]
 >In un esperimento si è voluta misurare le relazioni tra la centralità e i valori di hubness e authority degli algoritmi PageRank e HITS, ponendo per l'occasione uguali i due valori hubness = authority.
->Si è potuto evincere come un nodo presentasse i valori più alti qualunue fosse l'algoritmo utilizzato e il tipo di centralità (grado, vicinanza, betweenness) utilizzato, risultati resi ancora più evidenti una volta normalizzati i valori ricavati, come si può notare dall'immagine sotto con il nodo 'Mike' che è il più centrale.
+>Si è potuto evincere come un nodo presentasse i valori più alti qualunque fosse l'algoritmo utilizzato e il tipo di centralità (grado, vicinanza, betweenness) utilizzato, risultati resi ancora più evidenti una volta normalizzati i valori ricavati, come si può notare dall'immagine sotto con il nodo 'Mike' che è il più centrale.
 
 ![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-10-17 214008.png|550]]
 
@@ -94,8 +94,7 @@ Algebricamente: $aRb \land bRc \rightarrow aRc$
 
 All'aumento della transitività ci sono grafi più densi e si è più vicini ad un grafo completo.
 
->[!question]
->Possiamo stimare quanto un grafo sia vicino ad essere completo misurandone la transitività?
+>[!question] Possiamo stimare quanto un grafo sia vicino ad essere completo misurandone la transitività?
 >
 >Non del tutto, grafo completo e alta transitività sono disuguali: aggiungendo archi a caso in un grafo già denso non aumento molto la transitività.
 
@@ -110,7 +109,7 @@ All'aumento della transitività ci sono grafi più densi e si è più vicini ad 
 		2. **Formula:** C = Numero di triangoli $\*$ 6 / Cammini di lunghezza 2
 		   **Spiegazione**: Conto i triangoli e moltiplico per 6 (siccome ogni triangolo ha 6 cammini chiusi di lunghezza 2 (quindi con il terzo arco che chiude come prima))
 		3. **Formula**: Numero di triangoli $\*$ 3 / Numero di triple di nodi connessi
-		   **Spiegazione**: ogni tringolo ha tre triple differenti. Di tutte le triple di nodi connesse, prendo quelle chiuse, ossia il numero di triangoli $\*$ 3.
+		   **Spiegazione**: ogni triangolo ha tre triple differenti. Di tutte le triple di nodi connesse, prendo quelle chiuse, ossia il numero di triangoli $\*$ 3.
 
 
 ### Reciprocità

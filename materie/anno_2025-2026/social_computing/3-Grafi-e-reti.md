@@ -99,9 +99,9 @@ ___
 >Densità
 >>Quanti archi ci sono rispetto a tutti gli archi possibili
 
-Grafi diretti:
- $$D=\frac{2|E|}{|V|(|V|-1)}$$
 Grafi indiretti:
+ $$D=\frac{2|E|}{|V|(|V|-1)}$$
+Grafi diretti:
 $$D=\frac{|E|}{|V|(|V|-1)}$$
 
 ___
@@ -164,5 +164,5 @@ Rete può essere:
 >- A e B commentano un post di C
 
 >[!tip]
->Non bisogna scambiare le reale rete sociale con il modello utilizzato per rappresentarla.
+>Non bisogna scambiare la reale rete sociale con il modello utilizzato per rappresentarla.
 >"Confondere il modello con la realtà è come andare al ristorante e mangiare il menù" diceva un frocio

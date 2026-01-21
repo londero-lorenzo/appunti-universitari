@@ -65,7 +65,7 @@ $$C\_d^{sum}(v\_i) = \frac{d\_i}{\sum\_jd\_j}= \frac{d\_i}{2|E|} = \frac{d\_i}{2
 >Le diverse formule di normalizzazione non possono essere usate tutte insieme ma tutti i dati devono avere lo stesso tipo di normalizzazione.
 
 ### Centralità di betweenness:
-Tipicamente voglio andare dal nodo al nodo b in cammini più brevi, la beetweenness calcola quanto un nodo si trova in questi cammini brevi, ovvero quanto un nodo è importante nel connettere altri nodi tramite cammini (guardando solo i **cammini minimi**).
+Tipicamente voglio andare dal nodo a al nodo b in cammini più brevi, la beetweenness calcola quanto un nodo si trova in questi cammini brevi, ovvero quanto un nodo è importante nel connettere altri nodi tramite cammini (guardando solo i **cammini minimi**).
 
 ##### Formula:
 $$C\_b(v\_i)= \sum\_{s\neq t\neq v\_i}\frac{\sigma\_{st}(v\_i)}{\sigma\_{st}}$$
@@ -185,8 +185,8 @@ $$r(v) = c\*\sum\_{u\in I(v)}(\frac{r(u)}{|O(u)|})$$
 ### Formalizzazione
 
 #### Vettori e matrici
-I diversi pagerank dei nodi possono essere raccolti in un vettore $r$, computato iterativamente e tutto insieme inizialmente il vettore avrà determinati valori che andranno poi a cambiare iterativamente i valori dovuto ad una funzione f, finché applicando f ad una versione di r (ri) ricaverò lo stesso vettore ri --> $f\_{r\_i} = f\_{r\_{i+1}}$ . (talvolta anche se i due vettori non sono proprio uguali se la differenza è minore di una certa soglia posso fermarmi)
-Il passaggio da $r\_0$ ai suoi seguiti viene fatto cosruendo una matrice P tale che $r\_{i+1} = r\_i\*P$, da ripetere quindi finché non è raggiunta la condizione terminale (raggiungere la **convergenza**): $r{i+1} = r\_i$ oppure $|r{i+1} - r\_i|< \epsilon$
+I diversi pagerank dei nodi possono essere raccolti in un vettore $r$, computato iterativamente e tutto insieme. Inizialmente il vettore avrà determinati valori che andranno poi a cambiare iterativamente, cosa dovuta ad una funzione f, finché applicando f ad una versione di r (ri) ricaverò lo stesso vettore ri --> $f\_{r\_i} = f\_{r\_{i+1}}$ . (talvolta anche se i due vettori non sono proprio uguali se la differenza è minore di una certa soglia posso fermarmi)
+Il passaggio da $r\_0$ ai suoi seguiti viene fatto costruendo una matrice P tale che $r\_{i+1} = r\_i\*P$, da ripetere quindi finché non è raggiunta la condizione terminale (raggiungere la **convergenza**): $r{i+1} = r\_i$ oppure $|r{i+1} - r\_i|< \epsilon$
 
 La funzione f è una funzione lineare e moltiplica il vettore per una matrice (prodotto scalare).
 
@@ -209,6 +209,7 @@ Si può calcolare una certa probabilità che l'utente si trovi su una determinat
 >Markov chain
 >>Lo strumento formale per rappresentare random walks. 
 >>Matrice che presenta le probabilità di esistenza di tutti gli archi dei nodi.
+>>Ovvero ogni cella i,j rappresenta la probabilità di passar dallo stato i allo stato j, ovvero la probabilità di passare dal nodo i al nodo j attraverso l'in-arco che va da i a j.
 
 >[!tip]
 >Per ogni riga la somma della riga deve essere 1 (l'insieme delle probabilità degli archi di un nodo deve essere uguale a 1).
@@ -219,12 +220,15 @@ Si può calcolare una certa probabilità che l'utente si trovi su una determinat
 
 ![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-10-15 115649.png|300]]
 
-Possiamo rappresentare la posizione corrente in uno stato $i$ (essere in un nodo $i$) attraverso un vettore $x$ dove ogni valore si riferisce ad uno nodo ed ogni valore è uguale a 0 tranne un valore $i$ che sarà la posizione corrente e sarà uguale a 1.
+Possiamo rappresentare la posizione corrente in uno stato $i$ (essere in un nodo $i$) attraverso un vettore $x$ dove ogni valore si riferisce ad un nodo ed ogni valore è uguale a 0 tranne un valore $i$ che sarà la posizione corrente e sarà uguale a 1.
 La corrispondente riga $i$ della matrice di transizione P, indicherà tutte le probabilità di procedere verso tutti gli stati possibili partendo da $i$.
+
+La camminata corrisponde a: $x\_{i+1}=x\_i\*P$ 
 
 >[!example]
 >Nell'esempio sotto il limite all'infinito sarà (1/4, 3/4) e lo sappiamo perché la moltiplicazione vettore con matrice fatto due volte porta allo stesso risultato, con:
 >- $x\_0 = (1, 0)$, oppure $x\_0 = (0, 1)$, oppure $x\_0 = (1/2, 1/2)$
+>Indipendentemente da quale $x\_0$ utilizzare inizialmente, la moltiplicazione tra $x\_0$ per la matrice di di transizione P fatta due volte porterà allo stesso risultato svolto due volte, ovvero $x\_1=x\_2=(1/4, 3/4)$, quindi la probabilità diventa stazionaria e stabile.
 
 ![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-10-15 121206.png|450]]
 
@@ -289,10 +293,10 @@ Algoritmo con lo scopo di separare tutte le pagine in due set:
 Il valore hubness del nodo x viene ottenuto dai valori di authority di ogni nodo linkato da x (in uscita).
 Il valore authority del nodo x viene ottenuto prendendo i valori di hubbness di ogni nodo linkato a x (in entrata).
 
-L'algoritmo lavora su un Base set formsto da:
+L'algoritmo lavora su un Base set formato da:
 + Un iniziale Root Set formato da un insieme di pagine ricavato dal motore di ricerca che analizza la query dell'utente e restituisce un ventaglio di pagine rilevanti per quella query
 + A questo Root Set vengono aggiunti gli insieme di indegree ($I(v)$) e outdegree ($O(v)$) e l'insieme delle pagine forma il Base Set
-L'hubbness ($h(v)$) e l'authority ($a(v)$) sono ricavati da questo Base Set.
+L'hubness ($h(v)$) e l'authority ($a(v)$) sono ricavati da questo Base Set.
 
 ##### Formula:
 $\forall x \in BS$ compute $h(x)$ and $a(x)$:

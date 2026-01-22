@@ -31,7 +31,7 @@ Mezzo principale delle fake news sono i social.
 + **Intervention**: processo di interferire col processo di diffusione delle informazioni in atto (ad esempio se voglio che un'informazione venga maggiormente diffusa, o bloccare la diffusione di un'informazione)
 
 #### Modelli per la diffusione delle informazioni
-+ Herd behaviour (comportamento del gragge)
++ Herd behaviour (comportamento del gregge)
 + Information cascade
 + Epidemics (e social contagion)
 + Modello dei benefici diretti (Morris)
@@ -66,7 +66,7 @@ Idea easy: "Si tende ad imitare quello che fanno gli altri"
 #### Herding Intervention
 Intervention nel modello di herding. L'herding può essere interventato ad esempio rilasciando informazioni private che non erano accessibili prima (ad esempio facendo vedere la pallina che si è estratto nell'esempio)
 >[!tip]
->La prima persona che fa notare l'errore che il gruppo sta commettendo, l'herd behavior viene interrotto.
+>La prima persona che fa notare l'errore che il gruppo sta commettendo, interrompe l'herd behavior.
 
 
 #### **Riassunto Herd behavior**
@@ -145,9 +145,9 @@ Possiamo usare un algoritmo greedy:
 + Il set S risultante attiva almeno (1-1/$e$)=63% del numero di nodi che ogni set S di grandezza k può attivare.
 
 #### Intervention cascade
-+ **Limit(increase)** numero di out-links (disconnettere nodi porta a non attivarne altri)
-+ **Limit(increase)** numero di in-links (ridurre la possibilità di essere attivato da altri)
-+ **Decrease(increase)** la probabilità di attivazione $p\_{vw}$ (ridurre la possibilità di attivare altri)
++ **Limitare (o increase)** numero di out-links (disconnettere nodi porta a non attivarne altri)
++ **Limitare (o increase)** numero di in-links (ridurre la possibilità di essere attivato da altri)
++ **Decrease (o increase)** la probabilità di attivazione $p\_{vw}$ (ridurre la possibilità di attivare altri)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 ### Metodi di analisi delle epidemics:
 + Metodo **Fully-mixed**
-	+ analizza solo i gradi a cui ciascun host viene infettato e guarito, evita di considerare le informazioni della rete
+	+ analizza solo i gradi (i momenti) in cui ciascun host viene infettato e guarito, evita di considerare le informazioni della rete
 + Usando **Contact Network**
 	+ Un grafo dove i nodi rappresentano gli host e gli archi rappresentano le interazioni tra questi host
 >[!example]
@@ -226,7 +226,7 @@ $$\frac{dR}{dt}= \gamma I$$
 ![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-14 103024.png|400]]
 
 + All'inizio tutti tranne 1 sono suscettibili, poi calano a favore degli infetti, che però dopo un po' cominciano a calare essendo sopraffatti dai recovered che non possono riammalarsi
-+ Alla fine non ci saranno più infetti e quasi tutti saranno recovered ($< 100$%) e con pochissimi suscettibili (> 0%) pioché quando on ci sono più I non resta nessuno a contagiare i rimanenti S.
++ Alla fine non ci saranno più infetti e quasi tutti saranno recovered ($< 100$%) e con pochissimi suscettibili (> 0%) pioché quando non ci sono più I non resta nessuno a contagiare i rimanenti S.
 >[!tip]
 >Un buon dato per capire quanto l'epidemia è stata importante è vedere il numero finale di recovered, ma anche se la curva degli infetti non è molto pronunciata vuol dire che è più difficile prendere la malattia piuttosto che guarire da essa.
 
@@ -237,8 +237,8 @@ $$\frac{dR}{dt}= \gamma I$$
 
 #### $R\_0$: Basic reproduction number
 + $R\_0=\beta/\gamma$
-+ $R\_0$ è i numero medio di individui che I contagia prima di guarire/morire e $\beta$ e $\gamma$ misurano quanto i due "rubinetti" sono aperti (da S a I e da I a R)
-+ $R\_0=\beta / \gamma$  = 1 marca la **soglia epidemica**, ovvero c'è epidemia se $R\_0 \geq 1$, ovvero si forma una componente gigante e l'epidemia esplode.
++ $R\_0$ è il numero medio di individui che I contagia prima di guarire/morire e $\beta$ e $\gamma$ misurano quanto i due "rubinetti" sono aperti (da S a I e da I a R)
++ $R\_0=\beta / \gamma$  = 1 marca la **soglia epidemica**, ovvero c'è epidemia se $R\_0 \geq 1$ ovvero si forma una componente gigante e l'epidemia esplode.
 
 >[!tip]
 >$R\_0 = \beta / \gamma \leq 1$ Non abbiamo epidemia in quanto gli I guariscono più in fretta di quanto gli S si ammalino.
@@ -284,6 +284,7 @@ ___
 
 + **SIRS (susceptible/infected/recovered/susceptible)**
 	+ Suscettibili si infettano, guariscono, sono immuni per un po' e poi tornano suscettibili
+	+ $\lambda$ la probabilità di passare da recovered a susceptible
 
 **Equazioni**
 $$\frac{dS}{dt}= \lambda R - \beta IS$$
@@ -362,7 +363,7 @@ Per ISR:
 ___
 
 
->[!question] E le reti cosa centrano con le epidemie?
+>[!question] E le reti cosa c'entrano con le epidemie?
 
 Questi modelli per epidemie si basano sull'assunzione:
 + Fully mixed
@@ -448,7 +449,7 @@ Non è vero che l'informazione si diffonde meno su reti eterogenee
 Gli hub passano da spreader a stifler prima di contagiare molti nodi:
 A quel punto gli hub-stifler frammentano la rete --> isolano i nodi --> i nodi isolati restano ignorant.
 
-è quindi possibile modellare la diffusione di rumors con modelli analoghi a quelli per le epidemie. Ha senso quindi parlare di contagio sociale, **contagio sociale $\neq$ contagio fisiologico**:
+è quindi possibile modellare la diffusione di rumors con modelli analoghi a quelli per le epidemie, ma ha senso separare **contagio sociale $\neq$ contagio fisiologico**:
 + Processo attivo vs. processo passivo
 + Atto intenzionale vs. contaminazione patogena
 + Decido io di adottare una moda vs. non decido io di ammalarmi
@@ -483,7 +484,7 @@ ___
 >+ Benefici diretti (faccio X perché mi conviene rispetto a non farlo)
 
 >[!example]
->Uso Whatsapp al posto di Telegram perché tutti usano whatsapp e quindi **mi conviene** usarre quello per poter comunicare.
+>Uso Whatsapp al posto di Telegram perché tutti usano whatsapp e quindi **mi conviene** usare quello per poter comunicare.
 
 Idea:
 + Quindi una decisione arriva ad un nodo ed il nodo stesso decide se adottarla o meno. Solitamente se i nodi vicini l'hanno adottata la adotta anche lui.

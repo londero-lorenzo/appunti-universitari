@@ -127,13 +127,14 @@ $$R = \frac{\sum\_{i, j, i<j}A\_{i,j}A\_{j,i}}{|E|/2} = \frac{2}{|E|} \* \frac12
 + Al denominatore divido per il numero massimo possibile di coppie reciproche dati gli archi in E, ovvero la metà.
 + $A^2$ è per l'appunto la moltiplicazione della matrice di adiacenza $A$ per se stessa. Infatti sarà uguale a 1 se esiste sia l'arco da i a j che l'arco da j a i, e sarà  uguale a 0 altrimenti
 + Il $\frac12$ prima di Tr() è perché ogni coppia reciproca viene contata due volte e prendendo la metà viene invece contata una sola volta.
++ Tr($A^2$) è la somma dei valori sulla diagonale da sinistra a destra della matrice.
 
 >[!example]
 >Nell'immagine sotto sono presenti tre nodi e la matrice di adiacenza della rete è la seguente: 
 >$$A=\begin{bmatrix} 0 & 1 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}$$
 >- Svolgimento: 
 >
-> $$R = \frac1mTr(A^2) = \frac14 Tr(\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 1 & 0 & 0 \end{bmatrix})$$
+> $$R = \frac1mTr(A^2) = \frac14 Tr(\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 1 & 0 & 0 \end{bmatrix}) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2}$$
 > - Spiegazione:
 >   Ogni cella della matrice $A^2$ è composta dalla somma della moltiplicazione tra la riga $i$ e la colonna $j$ e gli archi reciproci producono valori positivi lungo la diagonale di $A^2$. Ogni 1 presente indica un cammino di lunghezza 2 da i a j e sulla diagonale tale cammino torna a $i$ stesso (esempio A $\rightarrow$ B $\rightarrow$ A), mentre gli altri valori 1 non sulla diagonale indicano percorsi di lunghezza due ma che non riportano al nodo da cui sono partiti.
 
@@ -170,7 +171,7 @@ ___
 
 ### Distribuzioni 'reali'
 
-Soprattutto nelle degree distribution sui dati normali non sono praticamente mai uniformi, ma sono più grafici che presentano un picco, oppure una power law.
+Soprattutto nelle degree distribution sui dati normali le distribuzioni non sono praticamente mai uniformi, ma sono più grafici che presentano un picco, oppure una power law.
 
 >[!example]
 >Ad esempio per la distribuzione della ricchezza nel mondo ci sarà un picco di pochissimi individui (circa lo 0,1%) che possiede circa 3\4 della ricchezza mondiale.
@@ -194,7 +195,7 @@ Di norma una power law dovrebbe assomigliare graficamente ad una iperbole simmet
 >- La Frazione di utenti che hanno in-degree k è approssimativamente proporzionale a $1/k^2$
 
 >[!tip]
->Sostanzialmente in molte distribuzioni relai come quelle riferite ai social media sono presenti distribuzioni riconducibili ad una power law, che quindi presenta valori piccoli molto comuni e valori grandi estremamente rari ma mai impossibili.
+>Sostanzialmente in molte distribuzioni reali come quelle riferite ai social media sono presenti distribuzioni riconducibili ad una power law, che quindi presenta valori piccoli molto comuni e valori grandi estremamente rari ma mai impossibili.
 
 >[!warning]
 >Probabilità di valori alti è molto bassa ma mai 0, diversamente quindi dalle teoriche distribuzioni esponenziali come la Gaussiana
@@ -210,12 +211,12 @@ ___
 
 ### Distanza media, piccolo mondo
 
-Se io voglio trasmettere una rumor o una notizia a più gente possibile dovrò comunicare con determinati nodi, con più probabilità di trasmetterla a loro volta ad un maggior numero di utenti, con l'ipotesi che tutti gli utenti lo passano immediatamente a tutti i loro amici.
+Se io voglio trasmettere un rumor o una notizia a più gente possibile dovrò comunicare con determinati nodi, con più probabilità di trasmetterla a loro volta ad un maggior numero di utenti, con l'ipotesi che tutti gli utenti la passino immediatamente a tutti i loro amici.
 
 >[!question]
 >- Quanto passa prima che la notizia raggiunga quasi tutti i nodi della rete?
->- Tempo massimo? (corrisponde al diametro)
->- Tempo medio?
+>- Tempo massimo (distanza massima)? (corrisponde al diametro)
+>- Tempo medio (distanza media)?
 
 Milgram, psicologo sociale degli anni 60, a seguito di un esperimento svolto facendo consegnare a più persone una lettera ad altrettante persone potendola passare solo a loro conoscenti, ne derivò che i gradi di separazione tra due persone qualsiasi è in media di 6 persone: "Il mondo è piccolo".
 Successivamente nel 2003 fu svolto lo stesso esperimento via email e il risultato fu ancora circa 6 gradi di separazione.

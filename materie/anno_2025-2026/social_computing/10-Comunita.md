@@ -25,7 +25,7 @@ Le comunità possono essere:
 >>Tendenza delle persone ad associarsi e formare legami con persone simili a loro
 
 >[!example]
->+ Un conflitto in un club di karate ha separato in due gruppi le persone dl club che avevano più legami di amicizia con uno con l'altro
+>+ Un conflitto in un club di karate ha separato in due gruppi e le persone del club che avevano più legami di amicizia con uno con l'altro hanno scelto il relativo schieramento.
 >+ In una scuola di solito i bianchi sono amici di bianchi e i neri sono amici dei neri
 >+ I repubblicani hanno amici dello stesso pensiero politico e così anche i democratici
 
@@ -71,15 +71,15 @@ Primo grafico rappresenta la degree distribution per gli utenti, il secondo rapp
 + Archi: circa 69 miliardi, 190 amici a persona in media
 + La degree distribution non è proprio una power law, ma presenta un punto di flessione (sembrano due powerlaw fuse al punto di flessione). Si vede inoltre il limite imposto da Facebook stesso di 5000 amici. 
 + Complementary cumulative distribution funtion (CCDF).
-  La CCDF al grado k misura la frazione di utenti che hanno grado k o maggiore in termini di degree distribution. Si vede bene come nella coda il rumore scompare.
-+ 
+  La CCDF al grado k misura la frazione di utenti che hanno grado k o minore in termini di degree distribution. Si vede bene come nella coda il rumore scompare.
+
 ___
 
 Il seguente grafico mostra la distribuzione delle **componenti connesse**:
 
 ![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-04 195734.png|350]]
 + Distribuzione delle componenti connesse rappresentata da una power law, in cui si vede che con l'aumentare della grandezza della componente si abbassa il numero di componenti, quindi ci sono poche componenti grandi e molte più piccole. Curiosa la presenza di una componente connessa estremamente grande (100 milioni), che rappresenta praticamente tutto il grafo ed è di fatto la **giant component** della rete di Facebook, il che fa capire che la rete è praticamente connessa o quasi.
-+ La dismensione media quando si parla di componenti connesse è un'informazione praticament irrilevante: in questo grafico vediamo che la dimensione media è circa del'ordine dei 100 nedi, ma non ci frega niente perché l'unica componente che ci interessa è l'outlier ovvero la giant component
++ La dimensione media quando si parla di componenti connesse è un'informazione praticamente irrilevante: in questo grafico vediamo che la dimensione media è circa dell'ordine dei 100 nodi, ma non ci frega niente perché l'unica componente che ci interessa è l'outlier ovvero la giant component
 
 ___
 
@@ -131,5 +131,5 @@ ___
 ### Lavoro 3: 
 2016
 
-+ Si rianalizzò la distanza media e attennero un valore di 3.5, calore leggermente inferiore al precedente.
++ Si rianalizzò la distanza media e attennero un valore di 3.5, valore leggermente inferiore al precedente.
 

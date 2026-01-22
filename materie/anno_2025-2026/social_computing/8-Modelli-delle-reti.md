@@ -83,7 +83,7 @@ Puntualizzazioni:
 + Diametro di G(n, m) è la media tra tutti i grafi G(n, m)
 + Grado medio sarà definito come: $2m/n$, in quanto ci sono 2 estremità per ogni arco diviso per la totalità dei nodi.
 + Non ci sono casi speciali (poco interessanti)
-+ Di solito le distribuzioni sono con un picco e non a coda lunga come quelle reali caso tipico è rappresentativo per tutte)
++ Di solito le distribuzioni sono con un picco e non a coda lunga come quelle reali. Il caso tipico è rappresentativo per tutte)
 
 ### G(n, p)
 
@@ -132,12 +132,12 @@ Pensando a due casi estremi:
 + p=0, nessun arco viene generato e il grafo è disconnesso e la componente più grande sarà grande 1.
 + p=1, tutti gli archi vengono generati e il grafo è completo e connesso e la componente più grande sarà grande n.
 Differenze tra i due casi:
-+ Qualitativamente nel primo è costante all'aumentare di n, nel secondo no, aumenta con n
++ Qualitativamente la dimensione della componente più grande nel primo è costante all'aumentare di n (rimane 1 anche se aumenta n), nel secondo no, aumenta con n (il numero aumenta più aumenta n)
 
 >[!definition]
 >Componente gigante (GC)
 >>Definizione più precisa di componente gigante:
->>Una GC è una componente connessa, la più grande della rete
+>>Una GC è una componente connessa, la più grande della rete.
 >>GC ha una grandezza che cresce in proporzione a $n$ (si fa infatti il $lim$ $n \rightarrow \infty$)
 
 Una rete ha una CG se ha una frazione finita di $n$ connessa (90%, 50%, ma anche ad esempio 10%, se tutte le altre componenti connettono un numero minore del 10% dei nodi. La GC deve rappresentare in pratica la frazione più grande).
@@ -167,7 +167,7 @@ Riassuntino efficace dei GC nei grafi casuali:
 
 ___
 #### Diametro
-Quando circa tutti i nodi sono raggiunti, il diametro sarà $l=\frac{ln(n)}{ln(c)}$ , quindi cresce con $n$ e cala al crescere di $c$. Nella rete reale se ad esempio tutti conoscono 100 persone il diametri è di 4,9; numero molto vicino a quello di milgram. 
+Quando circa tutti i nodi sono raggiunti, il diametro sarà $l=\frac{ln(n)}{ln(c)}$ , quindi cresce con $n$ e cala al crescere di $c$. Nella rete reale se ad esempio tutti conoscono 100 persone il diametro è di 4,9; numero molto vicino a quello di milgram. 
 Alla comparsa della componente gigante (c=1) si ha il picco del diametro, che forma una cuspide per poi riscendere con l'aumentare di c.
 
 ---
@@ -182,7 +182,7 @@ ___
 
 ## Small world (WSSW)
 
-Una delle proprietà che mancano alle reti casuali sono quelle con coefficiente di clustering $c$ basso, diversamente dalle reti regolari.
+Una delle proprietà che mancano alle reti casuali è avere un coefficiente di clustering $c$ alto, diversamente dalle reti regolari.
 
 L'idea è quindi di partire da delle reti regolari e da esse staccare un arco da un nodo e riattaccarlo in qualche altro nodo, con una probabilità $p$. Se $p=1$ la rete diventa casuale, quindi è interessante vedere come si comportano le reti con $0<p<1$.
 
@@ -209,7 +209,7 @@ L'idea è quindi di partire da delle reti regolari e da esse staccare un arco da
 >- Per p=1, C basso
 
 >[!tip]
->Sia L che C per $p$ basso sono vicini a 1 e per $p$ alto sono vicini a 0, tuttavia i valori intermedi formano due 'parabole' opposte.
+>Sia L che C per $p$ basso sono alti e per $p$ alto sono bassi, tuttavia i valori intermedi formano due 'parabole' opposte.
 
 ![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-02 193210.png|400]]
 
@@ -219,7 +219,7 @@ L'idea è quindi di partire da delle reti regolari e da esse staccare un arco da
 
 >[!tip]
 >Reti regolari e casuali non vanno bene a rappresentare le reti reali:
->Prendenso in esame tutte le persone ($O(10^9)$) e i vicini per ogni nodo (c=$O(10^3)$):
+>Prendendo in esame tutte le persone ($O(10^9)$) e i vicini per ogni nodo (c=$O(10^3)$):
 >+ Regolare: $L(0) = O(10^6)$ (irrealistico); ma con C ci saremmo.
 >+ Casuale: $L(1) = 9/3 = 3$ (andrebbe bene); ma C sarebbe quasi 0 che non va bene.
 
@@ -273,7 +273,7 @@ ___
 **Simulazioni**:
 ![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-04 191326.png]]
 + Nel primo grafico si può vedere come la distribuzione dei gradi non dipende dalla grandezza della rete, avendo una power law.
-  Invarianza rispetto ala scala, stazionario rispetto al tempo / dimensione.
+  Invarianza rispetto alla scala, stazionario rispetto al tempo / dimensione.
 + Il secondo grafico invece fa vedere come la distribuzione cambia all'aumentare della scala.
   Varia a seconda del numero di archi a ogni passaggio; non c'è power law e neanche stazionarietà.
 + Nel terzo grafico si vede la distribuzione di due nodi che sembrano costanti ma in realtà all'aumentate del tempo aumenta molto di più il primo nodo (verso sinistra) rispetto al secondo (verso destra) (ricchi diventano sempre più ricchi).

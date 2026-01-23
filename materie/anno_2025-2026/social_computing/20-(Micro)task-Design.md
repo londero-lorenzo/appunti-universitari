@@ -46,7 +46,7 @@ ___
 In base alla diversa scala si è voluto controllare la veridicità attraverso ogni worker di alcuni statement, alcuni veri e alcuni falsi. Ogni worker doveva quindi giudicare appunto attraverso la scala a 6 valori o quella a 100 valori.
 
 #### Pairwise comparison
-Consiste nei confronti a coppie, ma già per 6 statement per ogni worker vengono coppie nell'ordine delle $6^2$ con 15 combinazioni possibili, a cui aggiungerne 2 per il quality check. Quindi ogni worker valuta 17 coppie.
+Consiste nei confronti a coppie, ma già per 6 statement per ogni worker vengono coppie nell'ordine delle $6^2$ con 15 combinazioni possibili, a cui aggiungerne 2 per il quality check (coppia già mostrata ma invertita per capire l'attenzione del worker). Quindi ogni worker valuta 17 coppie.
 
 Ci sono tante possibilità e bisogna fare molte scelte, prendere tante decisioni:
 + Serve un metodo, una metodologia, un modo di lavorare, con prove, tentativi, ecc...
@@ -88,7 +88,7 @@ Progettare un task è molto simile all'approccio di ingegneria del software o pr
 4. Rilascio in laboratorio
 	1. Sandbox di mturk può essere utile, ma anche Crowd_Frame
 	2. Obiettivo: capire se sono presenti dei bug
-5. Test pilota
+5. Test pilota (far svolgere il compito sulla piattaforma con worker veri)
 6. In produzione (su mturk)
 	1. Essere preparati ad aver sbagliato un dettaglio apparentemente insignificante e a dover rifare tutto
 	2. Attenzione all'ora del giorno (e al giorno della settimana) in base alla nazionalità dei worker che voglio raggiungere

@@ -58,7 +58,7 @@ Affinchè una folla funzioni bene servono questi 4 principi:
 >>Esternalizzare un compito, che tradizionalmente viene eseguito da un impiegato o contraente, a un gruppo di persone indefinito e ampio in forma di una chiamata aperta (chiunque può partecipare).
 
 >[!example]
->Colgate aveva il problema di iniettare della polvere di fluoro dentro un tubetto di dentifricio, ha postato il compito su una piattaforma e un ingegnere a caso ha detto che bastava elettrizzare la polvere i modo da attrarli e si è guadagnato 25000 dollari nel chill easy per il poppin.
+>Colgate aveva il problema di iniettare della polvere di fluoro dentro un tubetto di dentifricio, ha postato il compito su una piattaforma e un ingegnere a caso ha detto che bastava elettrizzare la polvere in modo da attrarli e si è guadagnato 25000 dollari nel chill easy per il poppin.
 
 >[!tip]
 >Piattaforma di crowdsourcing: Amazon Mechanical Turk
@@ -108,7 +108,7 @@ ___
 Rappresenta una piattaforma in un "mercato per lavoro che richiede intelligenza umana".
 + **Requester**: individuo con lavoro da far svolgere
 + **Worker**: Persona che vuole fare il lavoro
-+ **HIT**: unità di lavoro da svolgere. Ad ogni HIT è associato un pagamento (pochi centesimi)
++ **HIT (Human Intelligence Task)**: unità di lavoro da svolgere. Ad ogni HIT è associato un pagamento (pochi centesimi)
 + **Batch**: insieme di HIT caricato da un Requester
 Solitamente sono richieste che richiedono meno di un minuto e pagano circa 1-3 centesimi a task
 >[!tip]
@@ -122,18 +122,18 @@ Solitamente sono richieste che richiedono meno di un minuto e pagano circa 1-3 c
 ____
 
 >[!warning]
->**Take home message:** In certe condizioni le folle sembrano essere utili per svolgere compiti di buon qualità.
+>**Take home message:** In certe condizioni le folle sembrano essere utili per svolgere compiti di buona qualità.
 
 ### Critiche
 
 + **Critica principale al crowdsourcing**: Qualità messa in dubbio. Attività amatoriale vs. attività di esperti del settore, portano qualità bassa i principianti. Posizione estrema ma con un fondo di verità. Difficile da capire come è veramente.
 
 >[!example]
->Vedendo gli errori che ci sono su wikipedia (fatta da amatori) e sull'enciclopedia britannica (fatta da esperti) si vede come più o meno il numero di errore è lo stesso. Esempio di come gli amatori abbiano fatto comunque un buon lavoro.
+>Vedendo gli errori che ci sono su wikipedia (fatta da amatori) e sull'enciclopedia britannica (fatta da esperti) si vede come più o meno il numero di errori è lo stesso. Esempio di come gli amatori abbiano fatto comunque un buon lavoro.
 
 +  **Altro problema**:
 Molti compiti da qui a 5 anni fa vengono subappaltati alle AI, sia da parte degli esperti che da parte degli amatori.
 >[!tip]
->Molti dicono che le Ai abbiano ucciso il crowdsourcing, anche se per il momento ad esempio i soldi messi in palio su amazon mechanical turk sono circa li stessi di anni fa. è comunque un fenomeno da tenere in conto.
+>Molti dicono che le AI abbiano ucciso il crowdsourcing, anche se per il momento ad esempio i soldi messi in palio su amazon mechanical turk sono circa li stessi di anni fa. è comunque un fenomeno da tenere in conto.
 
 + **Ulteriore critica**: Etica del lavoro. Il worker non può essere un lavoro che rende indipendente una persona, la paga a task è minima (1-2 centesimi di solito). Rischio di cadere nello sfruttamento dei worker.

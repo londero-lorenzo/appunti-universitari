@@ -15,7 +15,7 @@ created: 2025-12-15
 **Design del task**: scegliere la giusta modalità di presentazione (uso colori, paginazione, ecc...)
 + L'atteggiamento deve essere duplice: semplificare il task il più possibile, ma inserire anche dei controlli per tenere d'occhio i comportamenti dei worker
 
-Pe i controlli ci sono varie tecniche:
+Per i controlli ci sono varie tecniche:
 + Test di qualificazione 
 	+ prima del task il worker deve superare un test
 	+ Obiettivo: selezionare worker effettivamente motivati che cercano di superare il qualification test
@@ -27,7 +27,7 @@ Pe i controlli ci sono varie tecniche:
 	+ Blacklist di termini (per le bestemmie e cose così)
 	+ Controllo copia-incolla (risposte uguali in più sezioni diverse)
 	+ Controllo anti plagio
-+ Test nascosti
++ Test nascosti (gold questions)
 	+ All'interno del task mettere delle domande per misurare la qualità del worker (solitamente domande estremamente semplici impossibili da sbagliare)
 	+ Per i task di raccolta di opinioni è più complicata la faccenda. In questi casi si fanno magari due domande di cui si sa la risposta e vedere cosa risponde il worker (es. "più alto l'everest o il monte bianco?" e poi "più alto il monte bianco o l'everest?" e vedere se il worker risponde coerentemente a tutte e due)
 + Monitoraggio dei tempi
@@ -54,7 +54,7 @@ Le analisi più sofisticate che non posso inserire dentro a ciascun task ad esem
 + Analisi manuale dei testi o delle risposte
 
 >[!tip]
->L'attitudine del requester deve essere quella di massimizzare i dati buon da utilizzare, quindi non limitarsi a dividere binariamente in perfetto/sbagliato. Porre un "tipping point", una soglia oltre la quale la qualità è considerata "abbastanza".
+>L'attitudine del requester deve essere quella di massimizzare i dati buoni da utilizzare, quindi non limitarsi a dividere binariamente in perfetto/sbagliato. Porre un "tipping point", una soglia oltre la quale la qualità è considerata "abbastanza".
 
 ---
 
@@ -65,7 +65,7 @@ Le analisi più sofisticate che non posso inserire dentro a ciascun task ad esem
 
 **Qualità:**
 + Individuale: risposta del singolo worker
-+ Aggregata: risposte a un task
++ Aggregata: risposte ad un task
 	+ Ridondanza: più worker fanno lo stesso task
 
 >[!example]

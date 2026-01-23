@@ -7,7 +7,7 @@ created: 2026-01-15
 # Fake news
 
 >[!question] Si riesce ad individuare le notizie vere da quelle false, magari utilizzando il Crowdsourcing?
->Si tenta lo sviluppo di una macchina della verità, che riceve in input la notizia e rilascia il output la sua veridicità o falsità.
+>Si tenta lo sviluppo di una macchina della verità, che riceve in input la notizia e rilascia in output la sua veridicità o falsità.
 
 In realtà queste macchine della verità sono dei fact-checker expert, ovvero delle persone che manualmente controllano le notizie. Tuttavia ci sono molte più notizie che fact-checker, che non sono scalabili
 
@@ -30,7 +30,7 @@ Effettivamente potrebbe bastare un'efficacia inferiore al 100%
 + Anche Per i crowd workers non è detto che se c'è un maggior accordo allora le notizie sono più vere
 
 **Valutazione**:
-+ Benchmark (dare in pasto alla macchina una serie di notizie eticchettate come vere o false e vedere quante ne indovina)
++ Benchmark (dare in pasto alla macchina una serie di notizie etichettate come vere o false e vedere quante ne indovina)
 	+ Problemi:
 		+ **Data contamination**: Nelle AI spesso vengono date in allenamento delle notizie con relative risposte, quindi non sta facendo un vero ragionamento ma sta semplicemente incollando la risposta collegata a quella notizia
 
@@ -41,7 +41,7 @@ ___
 
 Sono stati presi vari statement già giudicati da esperti e vengono fatti giudicare ai worker
 
-+ Distribuzione box-plot con sull'asse delle x i valori reali attribuiti da esperti e sull'asse delle y valori ad intervalli da 1 a 6 che corrispondono ai valori di verità partendo da 1=falso e 6=vero.
++ Distribuzione box-plot con sull'asse delle x i valori reali attribuiti da esperti e sull'asse delle y valori ad intervalli da 1 a 6 che corrispondono ai valori di verità partendo da 1=falso a 6=vero.
 ![[materie/anno_2025-2026/social_computing/assets/Screenshot 2026-01-15 125635.png|450]]
   Si vede come in alcune notizie il crowd non abbia fatto proprio un bel lavoro, soprattutto su quelle ritenute false dagli esperti, essendoci dei casi in cui alcune notizie sono state valutate intorno al 5, nonostante fossero completamente false.
   L'accuracy del crowd si attesta in questo caso intorno al 70%, che è più o meno alla pari all'epoca dei sistemi automatici, quindi non conveniva utilizzare il crowd che dava la stessa accuratezza dei sistemi AI.

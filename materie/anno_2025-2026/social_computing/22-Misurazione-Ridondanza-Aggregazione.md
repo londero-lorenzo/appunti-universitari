@@ -119,7 +119,7 @@ Secondo la teoria della misurazione la scala utilizzata è nominale; scelta tra 
 A volte però è più complicato, per esempio possiamo dover utilizzare le **Categorie ordinali** (es. Pants on Fire, False, Half True, True,....).
 Utilizzando nuovamente la moda con queste categorie
 >[!example]
->Utilizzando nuovament la moda nell'esempio se ad esempio abbiamo 51 True e 49 Mostly True, sarà come avere 99 T e 1 MT.
+>Utilizzando nuovamenta la moda nell'esempio se ad esempio abbiamo 51 True e 49 Mostly True, sarà come avere 99 T e 1 MT.
 >+ Gli errori piccoli saranno uguali agli errori grandi (49 F e 51 T, sarà considerato True)
 >+ Si perdono informazioni
 
@@ -129,7 +129,7 @@ Utilizzando nuovamente la moda con queste categorie
 >Con questa soluzione ci sono comunque cose che possiamo dire con certezza ed altre che non possiamo dire.
 
 >[!tip]
->La scala può essere scelta in base all'impatto anche psicologiche le sue etichette si presume abbiano verso i worker, ma possono avere anche problemi di "ridondanza".
+>La scala può essere scelta in base all'impatto anche psicologico che le sue etichette si presume abbiano verso i worker, ma possono avere anche problemi di "ridondanza".
 >Ad esempio una scala a 100 valori può essere probabilmente semplificata in una scala a 10 valori.
 >Più le scali sono grandi e più si avvicinano a una scala a intervalli, ma più la scala è grande e più i risultati appaiono vicini magari alle misurazioni degli esperti.
 
@@ -165,5 +165,6 @@ Con la mediana questo errore non succede.
 >>Reciproco della media aritmetica dei reciproci.
 >>Ha la proprietà di essere vicino al minimo.
 
-
+Proprietà:
++ media armonica < media geometrica < media aritmetica
 

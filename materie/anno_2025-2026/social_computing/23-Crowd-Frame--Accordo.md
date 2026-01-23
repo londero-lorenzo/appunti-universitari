@@ -50,7 +50,7 @@ Due tipi di accordo:
 	+ Se sono in disaccordo, dati non affidabili
 + **Accordo individuale**  (slide 65)
 	+ Non guardo l'agreement generale di un worker ma considero ogni singolo worker e guardo quanto correla con l'aggregato degli altri worker (sullo stesso task): sostanzialmente se il worker è d'accordo con gli altri è un buon worker, se è in disaccordo con la maggioranza degli altri è un cattivo worker
-	+ Posso quindi in seguito decidere di escludere una percentuale dei worker in base ai più piccoli o i più grandi
+	+ Posso quindi in seguito decidere di escludere una percentuale dei worker in base alla percentuale più piccola o  più grande
 
 >[!question] Come misuro l'accordo (agreement)?
 >Ovvero: quanto i vari worker che lavorano sullo stesso task danno la stessa risposta?
@@ -105,7 +105,7 @@ $$k = \frac{p\_0-p\_e}{1-p\_e}$$
 ____
 
 ### Fleiss's kappa
-Sempre su scala nominale, ma estende ad $m$ workers e con $n$ categorie
+Sempre su scala nominale, ma estende ad $m$ workers e con $n$ categorie.
 Invece di guardare tutti i worker insieme, applico il pairwise agreement, quindi guardo le coppie di worker e guardo quale frazioni di coppie è in accordo di più
 >[!example]
 >Ho $m$ worker, le coppie di worker saranno $m(m-1)/2$
@@ -113,7 +113,7 @@ Invece di guardare tutti i worker insieme, applico il pairwise agreement, quindi
 >Esempio: ho 5 task e 4 worker, con tre categorie A, B, C
 >+ $4\*3/2=6$ coppie
 >+ Per ogni task guardo tutte le 6 coppie possibili e vedo la percentuale di coppie che ha risposto uguale (se ad esempio al primo task tutti hanno risposto A, il pairwise agreeement sarà 6/6)
->+ Infine si fa la somma di tutti i pairwise agreement (ad esempio $18/(6\*5)$) e si trova il kappa di Fleiss
+>+ Infine si fa la somma di tutti i pairwise agreement (ad esempio $6/6+1/6+3/6+5/6+3/6 = 18/(6\*5)$) e si trova il kappa di Fleiss
 
 #### Definizione generale
 $$k = \frac{\bar{P}-\bar{P\_e}}{1-\bar{P\_e}}$$

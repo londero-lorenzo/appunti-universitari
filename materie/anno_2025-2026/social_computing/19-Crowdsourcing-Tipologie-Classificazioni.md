@@ -7,7 +7,7 @@ created: 2025-12-05
 # Crowdsourcing
 
 ## Tipi di task
-**Categorizzazione**:
+**Categorizzazione per Demartini**:
 + Task complesse (costruire sito web)
 + Progetti semplici (design di un logo)
 + Macro task (scrivere una recensione di un ristorante)
@@ -15,11 +15,11 @@ created: 2025-12-05
 
 #### Tipi di task per Brabham
 + **Knowledge discovery and management**
-	+ scoprire e organizzate conoscenze già disponibili ma disorganizzate
+	+ scoprire e organizzare conoscenze già disponibili ma disorganizzate
 	+ tipo Wikipedia, ma con un'organizzazione che sponsorizza
 + **Broadcast search**
 	+ Trovare uno specialista che svolga un compito e trovi la soluzione
-	+ Tipo dispenda di Social Computing, uno che metta apposto le lezioni
+	+ Tipo dispensa delle slide di Social Computing, uno che metta apposto le lezioni
 + **Peer-vetted creative production**
 	+ Crowd produce e seleziona idee creative
 	+ Creazione di video ads ad esempio al super bowl, problemi la cui soluzione dipende da gusti e mercato
@@ -66,7 +66,7 @@ ___
 
 Motivazioni:
 + **Estrinseche**: Per convincere il worker a fare un compito considerato noioso, socialmente spiacevole, ecc..
-+ **Intrinseche**: Se l'attività consegue all'interesse stesso del worker. ricompensa intrinseca allo svolgimento tesso del compito (tipo assaggiare le caramelle e dire se sono buone)
++ **Intrinseche**: Se l'attività consegue all'interesse stesso del worker. ricompensa intrinseca allo svolgimento stesso del compito (tipo assaggiare le caramelle e dire se sono buone)
 
 >[!question] Ma X è crowdsourcing?
 >Risposta è "dipende".

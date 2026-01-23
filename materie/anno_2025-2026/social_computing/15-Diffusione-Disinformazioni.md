@@ -71,7 +71,7 @@ ___
 ![[materie/anno_2025-2026/social_computing/assets/Screenshot 2025-11-21 111453.png]]
 
 #### "Vaccini" per disinformazione
-+ Mostrare info falsa ma non pericolosa, solo leggermente falsa (mettere la candeggina spalmata sulla mano, al posto di iniettarsela per curarsi dal covid)
++ Mostrare info falsa ma non pericolosa, solo leggermente falsa (mettere la candeggina spalmata sulla mano, al posto di iniettarsela per curarsi dal covid) per aumentare resistenza a fake news future.
 + **Inoculation**:
 	+ Inoculare le persone contro specifici esempi di misinformazione
 	+ Concentrarsi sulle strategie di manipolazione che sono spesso usate per convincere le persone
@@ -89,7 +89,7 @@ Sono state classificate 126000 storie (rumors) twittate da circa 3 milioni di pe
 + Le emozioni ispirate dalle notizie false erano paura, disgusto, sorpresa
 + Le emozioni ispirate dalle notizie vere erano tristezza gioia e fiducia
 + Contrariamente  quanto si penserebbe i bot accelerano la diffusione di notizie vere e false allo stesso modo, questo perché loro semplicemente distribuiscono ciò che arriva a loro, sono gli utenti umani che favoriscono la diffusione di notizie false.
-+ Misure analizzate: Profondità, dimensione. ampiezza max, viralità strutturale
++ Misure analizzate: Profondità, dimensione, ampiezza max, viralità strutturale
 
 >[!question] Si diffondono di più le notizie vere o quelle false (secondo le 4 misure)?
 >+ Per tutte e quattro le misure si ripete la stessa cosa, ovvero che le notizie false hanno misure più ampie delle notizie vere.
@@ -106,13 +106,14 @@ Sono stati scaricati tutti i post dal 2010 al 2014 di Facebook, e tutte le user 
 Solitamente sia per le notizie scientifiche che per le notizie cospirazioniste c'è un picco nel corso di un paio d'ore della diffusione, per poi scemare in un pattern simile.
 ![[materie/anno_2025-2026/social_computing/assets/Immagine 2025-11-30 125943.png|400]]
 
-+ Avviene però una divisione delle due comunità (divento di una o dell'altra se metto like ad un post a all'altro): una scientifica e una cospirazionista, che non si parlano tra loro e condividono tra loro solo post del relativo argomento.
++ Avviene però una divisione delle due comunità (divento di una o dell'altra se metto like ad un post o all'altro): una scientifica e una cospirazionista, che non si parlano tra loro e condividono tra loro solo post del relativo argomento.
 + L'appartenenza ad una comunità è definita anche dal **valore di omogeneità** dei nodi rispetto agli altri: se l'omogeneità è circa 1, i due nodi analizzati appartengono alla stessa comunità.
++ **Echo chambers:** i contenuti tendono a circolare solo all'interno della rispettiva comunità, data l'omogeneità alta.
 
 ___
 
 #### Terzo studio
 Si basava sulla modalità di **debunking**, ovvero smontare le falsità a cui erano convinte le comunità cospirazioniste.
-L'uomo però possiede il **pregiudizio di conferma**, che costa nel credere solo a ciò che è simile alle cose che già da per vere.
+L'uomo però possiede il **pregiudizio di conferma**, che consta nel credere solo a ciò che è simile alle cose che già da per vere.
 
 Il debunking sembra quindi inutile.

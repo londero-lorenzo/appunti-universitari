@@ -14,7 +14,7 @@ created: 2026-01-09
 >[!definition]
 >Esperienza dell'utente (UX - User eXperience)
 >>Descrivere quello che prova una persona quando interagisce con un prototipo, prodotto finito, un sistema o servizio.
->>Percezioni e reazioni di un utente che derivano dall'uso (o dalla previsioned'uso) di un prodotto, sistema o servizio.
+>>Definizione per ISO 9241 --> Percezioni e reazioni di un utente che derivano dall'uso (o dalla previsione d'uso) di un prodotto, sistema o servizio.
 
 >[!example]
 >Ad esempio un orologio bizzarro non è sicuramente pensato per l'usabilità (immediata comprensione dell'ora) ma magari può invogliare una persona per un design accattivante, oppure per differenziarsi dagli altri orologi
@@ -27,8 +27,8 @@ created: 2026-01-09
 #### Tempi dell'esperienza
 + Già prima della vera esperienza c'è l'esperienza attraverso altri, web, pubblicità, che aiutano a decidere se ci piace o no.
 + **Acceptance** è il livello generale di accettazione di una tecnologia da parte dell'utente
-+ TAM (Technology Acceptance Model) utilizza la perceived usefulness e la perceived easy of use per determinare l'intenzione di un individuo di utilizzare un sistema:
-	+ **Utilità percepita**: quanto una persona crede che un prodotto posso migliorate la sua performance 
++ TAM (Technology Acceptance Model) utilizza la **perceived usefulness** e la **perceived easy of use** per determinare l'intenzione di un individuo di utilizzare un sistema:
+	+ **Utilità percepita**: quanto una persona crede che un prodotto possa migliorare la sua performance 
 	+ **Facilità d'uso**: quanto una persona ritiene un prodotto privo di difficoltà d'uso
 	+ Modello TAM:
 ![[materie/anno_2025-2026/interazione_uomo_macchina/assets/Screenshot 2026-02-09 161514.png|350]]
@@ -105,7 +105,7 @@ ___
 + Gioia
 + Disgusto
 
-#### Testo dello stato emozionale
+### Test dello stato emozionale
 Tramite il PANAS, con due sottoscale positiva/negativa.
 Le emozioni vengono mappate tramite un circomplesso (che è un grafico con due assi)che presenta come assi l'arousal (attivazione) e la valence (valenza positiva/negativa).
 >[!example]
@@ -119,7 +119,7 @@ Alcune emozioni sono legate a cambiamenti fisici nel corpo, e possono quindi ess
 + Pressione sanguigna
 + ECG (elettrocardiogramma)
 + EMG (elettromiografia = rileva le microespressioni facciali che identificano le emozioni)
-+ EEG
++ EEG (elettroencefalogramma)
 + Respirazione
 + Temperatura
 >[!tip]

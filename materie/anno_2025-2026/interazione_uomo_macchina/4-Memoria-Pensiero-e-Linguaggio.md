@@ -46,7 +46,7 @@ Informazione trattenuta tramite:
 >+ Nel caso invece di memorizzazione di chunk di lettere è più "facile" memorizzare una frase e successivamente dividere le lettere in chunk com'erano in origine, non essendo i singoli chunk meaningfull per noi al contrario della frase composta che ha un senso compiuto.
 
 >[!tip]
->La memoria di lavoro non ha una dimensione fissa ma ha dai 7 ai 2 chunk.
+>La memoria di lavoro non ha una dimensione fissa ma ha 7 più o meno 2 chunk.
 
 >[!definition]
 >Chunk
@@ -72,10 +72,11 @@ ___
 Definita da un **insieme delle conoscenze**.
 
 Diversi tipi di memoria:
-+ **Dichiarativa**
++ **Dichiarativa**: difficile ricordarsi dopo molto tempo
 	+ Episodica: Mi ricordo episodi avvenuti nella mia storia o nella storia di altri
 	+ Semantica: Mi ricordo il significato di cose
 + **Procedurale**: Mi ricordo i diversi passi per fare le cose
+	+ Una volta che lo imparo me lo ricordo per un bel po'
 + **Trasferimento**
 	+ Reiterazione (ripasso più volte lo stesso concetto)
 	+ Organizzazione (come la tecnica del palazzo mentale per mappare gli ambienti con delle informazioni)
@@ -84,7 +85,7 @@ Diversi tipi di memoria:
 Legame tra emozioni e memoria: Se ho un carico emotivo su qualcosa è più semplice ricordarmela.
 
 >[!tip]
->Le immagini sono più facili di trovare rispetto alle parole, dovuto a un problema di codifica mentale:
+>Le immagini sono più facili da ricordare rispetto alle parole, dovuto a un problema di codifica mentale:
 >+ Sistema verbale (logogeni), richiede elaborazione dell'onda sonora in lettera e poi memorizzare la frase.
 >+ Sistema visivo (immageni), "fotografia" di un'immagine visiva.
 
@@ -189,8 +190,7 @@ ___
 + **Lapsus** (lapse, fallimenti della memoria): Saltare un passaggio della procedura (svista è errore nella procedura)
 	+ Modello corretto
 >[!example]
->+ Mentre stampo mi accorgo che non ho messo un'impostazione diversa dal solito, ad esempio stampa fronte-retro e stampa in bianco e nero, perché magari queste impostazioni sono nelle proprietà nascoste o avanzate
->	+ Per evitare ciò servirebbe una pagina di riepilogo prima della stampa per permettere all'utente di ricontrollare se ha fatto quello che voleva.
+>+ Mentre stampo mi accorgo che mi sono dimenticato di mettere la stampa a colori, anche se fa parte della prassi imparata.
 
 + **Sbagli** (Mistake): Applico il modello sbagliato perché non so come si fa
 	+ Modello sbagliato
@@ -273,5 +273,8 @@ ___
 Composto da:
 + Sistema percettivo (5 sensi)
 + Sistema cognitivo (Memoria, Pensiero, Linguaggio)
+	+ Memoria = immagazzinare l'informazione
+	+ Pensiero = elaborare l'informazione
+	+ Linguaggio = comunicare l'informazione
 + Sistema motorio (Legge di Fitts)
 Che abbiamo visto tutti e tre

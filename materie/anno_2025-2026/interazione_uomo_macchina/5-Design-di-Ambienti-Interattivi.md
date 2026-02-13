@@ -18,7 +18,7 @@ Ma ce ne sono ulteriori, ad esempio:
 Ci possono essere ad esempio maniglie con buona o pessima affordance, ovvero design che rendono intuitivo o meno il metodo di utilizzo di un oggetto.
 
 >[!tip]
->Per i pessimi design con pessima affordance sono utili i **feedforward**, ovvero delle immagini che fanno vedere cosa succede se si usa un oggetto, quindi ad esempio immagine dell'acqua nello scarico se si tira lo scicquone.
+>Per i pessimi design con pessima affordance sono utili i **feedforward**, ovvero delle immagini che fanno vedere cosa succede se si usa un oggetto, quindi ad esempio immagine dell'acqua nello scarico se si tira lo sciacquone.
 
 >[!definition]
 >Design
@@ -35,7 +35,7 @@ Ci possono essere ad esempio maniglie con buona o pessima affordance, ovvero des
 >>Contribuisce allo sviluppo dei sistemi interattivi con un pensiero critico, creativo, provocatorio ed estetico
 #### User center design
 + Coinvolgimento degli utenti già dalle prime fasi di sviluppo.
-+ Iterazione i sviluppo e test
++ Iterazione di sviluppo e test
 + Multi-disciplinarità
 
 #### Design partecipato
@@ -86,15 +86,13 @@ Gli stakeholder (come gli assistenti di volo) possono appartenere a categorie di
 >+ Chi vuole sempre andare di fretta e prendere il caffè al bancone e scappare
 >Tra gli obiettivi quindi ci deve essere il posto rilasso per un cliente e il bancone per l'altro
 
-#### Tecniche:
-+ **Comunicare il design**
-	+ Tramite materiali che evocano metafore e idee
+#### Tecniche per comunicare il design
 + **Personas e scenari**
 	+ storyboard descrittivi di utenti tipo che descrivono l'uso in un contesto come una storia
 + **Mock-up**
 	+ Concretizzazioni del sistema futuro usando materiali veloci da assemblare (stampa 3D o carta o materiali di recupero)
 + **Prototipo**
-	+ Rappresentazione concreta ma parziale di un prodotto sistema applicazione per sperimentare e discuterne gli aspetti
+	+ Rappresentazione concreta ma parziale di un prodotto/sistema/applicazione per sperimentare e discuterne gli aspetti
 
 ___
 ### Analisi
@@ -105,8 +103,10 @@ ___
 >+ Scenari
 >+ Task analysis
 #### Personas e scenari
+##### Personas:
 + Possibile creare i personaggi proprio credibili, con delle statuine fatte appositamente con i vari accessori e caratteristiche
-+ Possibile fare anche degli storyboard veri e propri come quelli per i film, con scenari e vignette. Anche utilizzare l'AI per creare le vignette è una soluzione plausibile 
+##### Scenari:
++ Possibile fare anche degli scenari sotto forma di storyboard veri e propri come quelli per i film, con scenari e vignette. Anche utilizzare l'AI per creare le vignette è una soluzione plausibile 
 
 >[!example]
 >Giovanni è uno studente fuorisede che non fa il pendolare quindi è in un appartamento. Dopo lezione alle 13.30 vuole rientrare a casa e trovare il piatto caldo per il pranzo. 
@@ -126,6 +126,12 @@ ___
 >>Utile a stabilire quali sono i compiti più rilevanti per l'applicazione.
 
 + Può essere utile coinvolgere l'utente finale e osservare come svolge le attività.
++ Capire le task più importanti tramite interviste, workshop, questionari, osservazione degli utenti nel contesto usuale.
++ Risultato: identificazione dei task più importanti con le informazioni necessarie per svolgerli, relativi problemi e preferenze dell'utente.
+
+>[!tip]
+>Concur Task Trees Environment (CTTE) è una piattaforma per editare e analizzare le task utili a supportare un certo design di applicazioni interattive, partendo dalle attività umane come supporto.
+>Funziona attraverso la creazione di alberi con le diverse task come nodi.
 
 ___
 ### Progetto
@@ -175,7 +181,7 @@ Istruzioni da analizzare per vedere se l'applicazione è conforme rispetto ad un
 
 ##### Standard per le guidelines
 ###### ISO 9241: 
-+ Riguarda requisiti ergonomici per il lavoro d'ufficio con terminali a display visivo. 
++ Riguarda requisiti ergonomici per il lavoro d'ufficio con terminali a display visivo.  Focalizzato sui compiti di elaborazione dati testuali in ufficio.
 + Definizione di usabilità secondo ISO 9241
 >[!definition]
 >Usabilità
@@ -185,6 +191,8 @@ Istruzioni da analizzare per vedere se l'applicazione è conforme rispetto ad un
 >>Efficienza = le risorse spese in relazione con l'accuratezza e completezza degli obiettivi raggiunti.
 >>Soddisfazione = comfort e accettabilità del sistema di lavoro per i suoi utenti.
 
+>[!example]
+>La struttura dei menu deve riflettere le aspettative dell'utente e facilitare l'abilità dell'utente di trovare e selezionare le opzioni di menu rilevanti per il compito che deve svolgere.
 
 ___
 ### Sviluppo e distribuzione
@@ -192,19 +200,20 @@ ___
 
 ##### Esigenze di help utente. Motivi per cui può servire un help
 + **Esplorazione** (cosa posso fare con questo sistema?)
+	+ Tutorial
 + **Definizione/descrizione** (Che cos'è/a cosa serve questo?)
+	+ Tooltip, help integrato
 + **Svolgimento compiti** (Come faccio questo?)
+	+ Help integrato
 + **Diagnostica** (come è accaduto questo? --> errore + link verso pagina risolutiva, oppure meccanismo di undoing (Ctl-Z))
 + **Identificazione di stato** (dove sono?)
+	+ Storia dei comandi
 
 >[!example]
 >Governo americano aveva problema nei servizi digitali per i cittadini. 
->Crearono un playbook con 13 key plays, con annesse checklist per vedere se si sta producendo correttamente il servizio per il governo americano, di cui le prime 4 sono:
+>Crearono un playbook con 13 key plays, con annesse checklist per vedere se si sta producendo correttamente il servizio per il governo americano, di cui le prime 4, che si occupano di HCI, sono:
 >+ Capisci cosa la gente necessita
 >+ Considera l'esperienza completa dall'inizio alla fine
 >+ Rendere semplice ed intuitivo
 >+ Costruire il servizio utilizzando il metodo agile (*agiail*) e iterativo
-
-
-
 

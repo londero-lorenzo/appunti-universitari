@@ -13,6 +13,9 @@ created: 2026-02-11
 
 + Altro problema è l'abitudine all'azione dell'automazione, perdendo la capacità di svolgere il lavoro nel caso l'automazione non funzionasse più.
 
+>[!example]
+>Guidare la macchina nel caso il pilota automatico fallisse.
+
 ---
 ### Non sostenibilità individuale
 + data smog (troppi dati)
@@ -20,7 +23,7 @@ created: 2026-02-11
 + Basarsi troppo sulle euristiche (compro un purificatore perché dicono che è il numero 1 ma chi me lo assicura? nessuno)
 	+ confirmation bias: tendenza a rimanere sulla prima scelta che abbiamo fatto. Se la prima volta che ho visto il telefono ho pensato che fosse figo sarà difficile farmi cambiare idea.
 + Sovraccarico operativo
-	+ multitasking parallelo/sequenziale: fare continuamento switch di contesto delle robe da fare può portare a un sovraccarico mentale.
+	+ multitasking parallelo/sequenziale: fare continuamente switch di contesto delle robe da fare può portare a un sovraccarico mentale.
 + Le dipendenze tecnologiche: uso patologico di internet (30 ore a scrollare tik tok)
 
 ----
@@ -31,5 +34,5 @@ created: 2026-02-11
 + Il digital divide
 	+ divisione dovuta magari al costo delle tecnologie ma anche alla divisione di competenze culturali, ad esempio per utilizzare un QR code non tutti sono capaci
 + Processi produttivi non sostenibili
-	+ ovvero che non posso passare il mio windows ad un'altra persona avendo io la licenza di un certo tipo
+	+ ovvero che ad esempio non posso passare il mio windows ad un'altra persona avendo io la licenza di un certo tipo
 	+ movimenti open source o open content come risposta alla non sostenibilità

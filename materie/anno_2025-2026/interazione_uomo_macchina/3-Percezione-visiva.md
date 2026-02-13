@@ -30,7 +30,7 @@ ___
 + **Coni** (7 milioni) con cui guardo da davanti
 + **Bastoncelli** (120 milioni) presenti anche nella visione periferica
 
-Quando l'immagine arriva al cervello l'occhio dentro è connesso alla parte sinistra e viceversa. 
+Quando l'immagine arriva al cervello l'occhio destro è connesso alla parte sinistra e viceversa. 
 Dove si innesta il nervo ottico c'è un buco nella retina (come se mancasse un led in uno schermo) e il cervello fa automaticamente una riempitura del buco vedendo i dati dei fotorecettori vicini (tipo AI che riempie i buchi in base ai led vicini).
 
 >[!tip]
@@ -78,7 +78,7 @@ Queste limitazioni si ripercuotono anche nel modo in cui vengono svolte le inter
 >In una lavatrice una luce adibita all'alimentazione se verde è convenzionalmente accesa e pronta all'uso, mentre un'altra spia anch'essa verde si accende quando manca il sale, e ciò non mantiene una coerenza con l'altra spia, avendo lo stesso colore ma che vuole dire due cose opposte ('tutto apposto' il primo/'problema' il secondo).
 
 #### Aspetti della scelta di colori:
-+ Troppi colori diversi utilizzati confondono e non veicolano messaggi come dovrebbero
++ Troppi colori diversi utilizzati confondono e non veicolano messaggi come dovrebbero (color pollution).
 + Scelta di più colori che può essere palette di colori analoghi e palette di colori complementari. Tale scelta dipende dall'obiettivo. 
 + Problema dell'accostamento di colori. L'essere umano non percepisce il colore con il valore assoluto, ma in modo relativo, in base al contesto cromatico in cui è posto. Colori troppo simili per raffigurazioni diverse possono essere difficili da distinguere. 
 + Cromostereopsi: certe scritte in certi colori sembrano più in profondità di altre scritte (blu sembra più in profondità rispetto al rosso). Ciò può anche dare fastidio agli occhi nelle griglie ad esempio, questo perché il cristallino cerca di mettere a fuoco i diversi colori e così facendo affatica i muscoli utilizzati

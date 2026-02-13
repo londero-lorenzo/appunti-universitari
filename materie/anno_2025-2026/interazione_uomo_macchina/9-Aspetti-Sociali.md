@@ -9,7 +9,7 @@ created: 2026-01-09
 Comunicare, interagire, lavorare utilizzando il supporto della tecnologia.
 
 #### Tipo di attività
-In Groupware (cohoperative work, ci sono come minimo due persone).
+In **Groupware** (cohoperative work, ci sono come minimo due persone).
 Ci possono essere in più uno o più "artefatti del lavoro", strumento fisico che può essere usato da più persone nel gruppo.
 ![[materie/anno_2025-2026/interazione_uomo_macchina/assets/Screenshot 2026-02-10 183734.png|350]]
 + **Comunicazione mediata dal computer** (e-mail, forum, chat, videoconferenza)
@@ -50,7 +50,7 @@ ___
 	+ esempio continua: Multinazionale ispirandosi alla convivialità delle macchinette in azienda ha creato uno schermo che collega le varie macchinette con quelle dell'altra sede, e la presenza in questo caso è continuo, h24
 	+ esempio discontinuo: stream di teams
 + **Terreno comune simmetrico o asimmetrico** (legato ai permessi):
-	+ esempio simmetrico: gruppo di una classe in cui sono i componenti hanno i permessi di leggere i messaggi
+	+ esempio simmetrico: gruppo di una classe in cui solo i componenti hanno i permessi di leggere i messaggi
 	+ esempio asimmetrico: Tutti hanno capacità di scrivere e leggere allo stesso modo
 + **Interazione persistente o volatile**:
 	+ esempio persistente: un messaggio tipo una mail
@@ -67,10 +67,10 @@ ___
 + Presenza di una massa critica di utenti (estremamente molti utenti utilizzano quel mezzo quindi anch'io)
 + Influenza sociale (gli influencer, ma anche i "trascinatori" in ogni gruppo di persone che riescono a imporre un po' di più le proprie idee)
 
-##### Introduzione di una nuova tecnologia CSCW
+##### L'accettazione dell'introduzione di una nuova tecnologia CSCW (Computer Supported Cooperative Work) dipende da:
 + Contesto sociale: potenziali problemi che riguardano le dinamiche di gruppo preesistenti, magari per la modalità di comunicazione precedente. Il nuovo mezzo rischia di essere troppo vincolante rispetto all'abitudine precedente. Legato alla flessibilità.
 + Contesto politico: es. per risolvere un problema tecnico in un'azienda tutti chiedevano al tecnico che aveva quindi un certo potere. Poi con l'utilizzo di certi nuovi sistemi il tecnico non serve più e il potere viene quindi spostato.
-+ Infrastruttura: Potrei avere bisogno o meno di determinati strumenti se utilizzo un sistema al posto di un altro. Ad esempio per un sistema potrei essere costretto a usare (e quindi comprare) un casco. Se il sistema è accessibile anche tramite altri sistemi si aumenta l'appeal.
++ Infrastruttura: Potrei avere bisogno o meno di determinati strumenti se utilizzo un sistema al posto di un altro. Ad esempio per un sistema potrei essere costretto a usare (e quindi comprare) un visore. Se il sistema è accessibile anche tramite altri sistemi si aumenta l'appeal.
 
 ___
 
@@ -103,7 +103,7 @@ Lo spazio personale ha una buona componente nella comunicazione, avvicinandosi o
 Anche lo sguardo è importante, mi fa collezionare degli indizi su come la pensi sulla conversazione.
 
 Nella comunicazione mediata dai computer possono sorgere dei problemi legati all'ambiguità dello stato d'animo delle persone e della forza delle frasi anche, che dal vivo possono apparire più risolute oppure più lievi.
-Limiti anche dovuti al passaggio di turno, ovvero al fatto che non c'è l'interazione diretta ma è passiva: prima di intervenire su una questione devo aspettare che l'altro scriva tutto il suo messaggio.
+Limiti anche dovuti al **passaggio di turno**, ovvero al fatto che non c'è l'interazione diretta ma è passiva: prima di intervenire su una questione devo aspettare che l'altro scriva tutto il suo messaggio.
 
 Anche aspetti non verbali in supporto alla voce, ad esempio alzare la mano per parlare.
 
@@ -137,7 +137,7 @@ ___
 
 La percezione di sè stessi sui social dipende da:
 + Self-generated (ciò che pubblico io)
-+ system-generated (rete di amicizie ad esempio )
++ system-generated (rete di amicizie ad esempio)
 + friends-generated (commenti degli amici)
 
 

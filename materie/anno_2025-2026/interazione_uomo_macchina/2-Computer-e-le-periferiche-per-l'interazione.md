@@ -65,7 +65,17 @@ Anche in questo caso le funzionalità devono essere basate sugli utenti che la u
 Importante quindi garantire una addestramento dato da applicazioni di machine learning su vocabolari abbastanza ampi in base al tipo di clienti a cui si vuole fornire il servizio.
 
 ___
+#### Sistemi di scansione ottica
++ codici a barre
++ QR code: matrice composta da moduli neri su sfondo bianco
 
+#### Scansione radio RFID:
++ Possono memorizzare una grossa quantità di dati
++ Intercettabili ad una certa distanza tramite appositi lettori di radiofrequenze
++ non serve che siano visibili
++ Esempio RDIF: nei badge aziendali e sistemi antitaccheggio nei negozi
+
+___
 #### Acquisizione di immagini
 + Immagini vettoriali: composte da elementi matematici come linee e poligoni.
 + Immagini bitmap: classiche con griglia  cui associare ad ogni pixel un colore

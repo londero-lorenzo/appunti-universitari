@@ -106,13 +106,14 @@ ___
 + Disgusto
 
 ### Test dello stato emozionale
-Tramite il PANAS, con due sottoscale positiva/negativa.
-Le emozioni vengono mappate tramite un circomplesso (che è un grafico con due assi)che presenta come assi l'arousal (attivazione) e la valence (valenza positiva/negativa).
++ Tramite il PANAS, con due sottoscale positiva/negativa.
+
++ Le emozioni vengono mappate tramite un circomplesso (che è un grafico con due assi)che presenta come assi l'arousal (attivazione) e la valence (valenza positiva/negativa).
 >[!example]
 >Valenza molto alta e arousal medio = soddisfatto
 >Valenza positiva ma bassa e arousal molto alto = eccitato
 
-Altro test: SAM (presenta una scala di 9 valori con una figura per ogni valore che rappresenta un'emozione in diverse intensità)
++ Altro test: SAM (presenta una scala di 9 valori con una figura per ogni valore che rappresenta un'emozione in diverse intensità)
 
 ### Misura delle emozioni di tipo fisiologico
 Alcune emozioni sono legate a cambiamenti fisici nel corpo, e possono quindi essere misurate tramite:

@@ -19,7 +19,7 @@ L'usabilità è un concetto a molte dimensioni, e ciascuna dipende dalla tipolog
 + Ridurre bisogno di supporto   /   Aumentare l'accettazione del supporto tecnico
 + Aumentare vendite
 
-### Problemi di usabilità
+### Processo di ricerca di problemi di usabilità
 Si differiscono in diversi livelli:
 + **Esecuzione**
 + **Valutazione**
@@ -33,7 +33,7 @@ ___
 ### Mapping
 
 >[!example]
->+ Nel congegno con forno e fornelli messi insieme bisogna indovinare la manopola da girare per accendere un fornello. in base all layout delle manopole posso capire che le due manopole da sole sono per il forno e le altre 4 per i fornelli. Il gas giusto sarà indicato dal disegnino sopra alle manopole.
+>+ Nel congegno con forno e fornelli messi insieme bisogna indovinare la manopola da girare per accendere un fornello. in base al layout delle manopole posso capire che le due manopole da sole sono per il forno e le altre 4 per i fornelli. Il gas giusto sarà indicato dal disegnino sopra alle manopole.
 >+ Mettere le manopole in griglia tipo quadrato invece che in linea retta avrebbe aiutato il riconoscimento della manopola ma avrebbe privato spazio al forno probabilmente.
 >+ Si poteva fare anche un mapping cromatico con un colore diverso per ogni fornello.
 >+ Variare la grandezza dei pomelli in base alla grandezza dei fuochi
@@ -66,7 +66,7 @@ ___
 + **Modelli**: Prevedere caratteristiche del sistema (es. efficienza) senza coinvolgere ulteriori utenti
 	+ **KLM** (keystroke-level model) **GOMS** (Goals, Operators, Methods, Selection rules)
 		+ Operatori sono intesi come azioni elementari necessarie per raggiungere gli obiettivi utente, intesi come risultati che si vogliono ottenere
-		+ I metodi che raggruppano gli operatori necessari per raggiungere gli obiettivi
+		+ I metodi raggruppano gli operatori necessari per raggiungere gli obiettivi
 		+ Regole di selezione indicano quando è più opportuno seguire un modello o un altro
 		+ Modello usato per **predire il tempo per raggiungere l'obiettivo**
 		+ KLM è una tabella usata per determinare i tempi delle singole task, utilizzata successivamente per definire la durata degli operatori.
@@ -184,11 +184,11 @@ ___
 Una misura di quanto un risultato sia dovuto al caso è il valore $p$, ricavato facendo un test statistico sui risultati.
 Quindi se il valore $p$ è vicino allo 0 l'analisi è effettivamente corretta e non derivante dal caso, se è vicino a 1 probabilmente è dovuta al caso.
 >[!tip]
->Tipicamente si accetta una statistica con $p=0.5
+>Tipicamente si accetta una statistica con $p=0.5$
 
 ##### Effect size
 Per ogni tipo di design può cambiare il misuratore di effect size. 
-Questa misura dice "quanto è grande l'effetto".
+Questa misura dice "quanto è grande l'effetto", ovvero la differenza di performance tra i diversi utenti.
 Ad esempio per il **cohen's d** (una formula che calcola l'effect size):
 + l'effect size è small sotto lo 0,2: c'è piccola differenza che non si vede ad occhio nudo
 + è medium attorno al 0,5: c'è differenza che si vede ad occhio nudo
@@ -206,7 +206,7 @@ Approcci:
 + Questionari (self-report)
 	+ Vari tipi di questionari:
 		+ **Categoriali** (scelta singola o multipla)
-		+ **A scala di risposta** (es. scala di Likert con un tot di valori, con gli estremi della scala vanno da "fortemente in disaccordo" a ""fortemente d'accordo")(System Usability Scale-SUS)
+		+ **A scala di risposta** (es. scala di Likert con un tot di valori, con gli estremi della scala vanno da "fortemente in disaccordo" a ""fortemente d'accordo")(System Usability Scale-SUS / QUIS Questionnaire)
 		+ **Ranking** (es. mettere in ordine di piacevolezza diverse esperienze)
 		+ **Risposte aperte** (es. cosa hai trovato di difficile utilizzando il software?; non posso farci analisi statistica ma per capire le motivazioni dell'utente)
 		

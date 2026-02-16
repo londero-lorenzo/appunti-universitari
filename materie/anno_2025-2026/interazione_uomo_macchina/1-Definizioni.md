@@ -40,6 +40,7 @@ ___
 
 ### Problemi di usabilità
 
+Pompe a infusione:
 + Indicazione non chiara del livello di batteria o di stato in carica
 + Icone non intuitive per simboli come "start" e "stop" che hanno già icone universalmente note
 + Interfacce touch che non danno una conferma sonora o visiva della rilevazione del tocco

@@ -8,7 +8,7 @@ created: 2026-01-09
 
 >[!definition]
 >Accessibilità
->>Capacità di un sito web di essere acceduto efficacemente da utenti diversi con strumenti diversi.
+>>Capacità di un sito web di essere acceduto efficacemente da utenti diversi in contesti diversi con strumenti diversi.
 >>L'erogazione dei servizi deve essere senza discriminazioni, anche da parte di coloro che a causa di disabilità necessitano di tecnologie assistive o configurazioni particolari.
 >
 >Insieme delle definizioni di W3C, Legge stanca e lo standard ISO 9241.

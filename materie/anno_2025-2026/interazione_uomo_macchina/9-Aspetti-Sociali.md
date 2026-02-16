@@ -14,7 +14,7 @@ Ci possono essere in più uno o più "artefatti del lavoro", strumento fisico ch
 ![[materie/anno_2025-2026/interazione_uomo_macchina/assets/Screenshot 2026-02-10 183734.png|350]]
 + **Comunicazione mediata dal computer** (e-mail, forum, chat, videoconferenza)
 + **Sistemi di supporto alle riunioni ed alle decisioni** (meeting room, virtual meeting, whiteboard)
-+ **Applicazioni e strumenti condivisi** (sahred calendar, wiki, co-authoring system tipo word condiviso o google document condiviso)
++ **Applicazioni e strumenti condivisi** (shared calendar, wiki, co-authoring system tipo word condiviso o google document condiviso)
 
 ##### Esempi applicazioni e strumenti condivisi:
 

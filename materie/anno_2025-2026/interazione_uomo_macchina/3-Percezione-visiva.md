@@ -27,8 +27,8 @@ ___
 + Pupilla
 + Cristallino (lens)
 + **Retina** (equivalente biologico della lente della telecamera): leggo ciò che c'è all'esterno. Non è tutta uguale, in tutta la retina ci sono dei **fotorecettori** di due tipi: 
-+ **Coni** (7 milioni) con cui guardo da davanti
-+ **Bastoncelli** (120 milioni) presenti anche nella visione periferica
+	+ **Coni** (7 milioni) con cui guardo da davanti
+	+ **Bastoncelli** (120 milioni) presenti anche nella visione periferica
 
 Quando l'immagine arriva al cervello l'occhio destro è connesso alla parte sinistra e viceversa. 
 Dove si innesta il nervo ottico c'è un buco nella retina (come se mancasse un led in uno schermo) e il cervello fa automaticamente una riempitura del buco vedendo i dati dei fotorecettori vicini (tipo AI che riempie i buchi in base ai led vicini).
@@ -59,7 +59,7 @@ Troppi banner lampeggianti nelle pagine web può portare a fastidio perché atti
 Con l'**eye tracking** posso distinguere le zone dello schermo in cui l'utente sta guardando e posso fare in modo che in quella zona di visione centrale ho una risoluzione maggiore e invece nella visione periferica ho una risoluzione più basilare. Questo a solo scopo di **migliorare le prestazioni** e guadagnare dal punto di vista di refresh.
 
 #### Percezione del colore
-Ci sono diversi sistemi di distinzione del colore come RGB e HSV.
+Ci sono diversi sistemi di distinzione del colore come RGB e HSV (hue, saturation, value).
 
 Da soggetto a soggetto cambia come una persona percepisce il colore.
 Teorie del colore:
@@ -81,7 +81,7 @@ Queste limitazioni si ripercuotono anche nel modo in cui vengono svolte le inter
 + Troppi colori diversi utilizzati confondono e non veicolano messaggi come dovrebbero (color pollution).
 + Scelta di più colori che può essere palette di colori analoghi e palette di colori complementari. Tale scelta dipende dall'obiettivo. 
 + Problema dell'accostamento di colori. L'essere umano non percepisce il colore con il valore assoluto, ma in modo relativo, in base al contesto cromatico in cui è posto. Colori troppo simili per raffigurazioni diverse possono essere difficili da distinguere. 
-+ Cromostereopsi: certe scritte in certi colori sembrano più in profondità di altre scritte (blu sembra più in profondità rispetto al rosso). Ciò può anche dare fastidio agli occhi nelle griglie ad esempio, questo perché il cristallino cerca di mettere a fuoco i diversi colori e così facendo affatica i muscoli utilizzati
++ Cromostereopsi: certe scritte in certi colori sembrano più in profondità di altre scritte (blu sembra più in profondità rispetto al rosso). Ciò può anche dare fastidio agli occhi nelle griglie ad esempio, questo perché il cristallino cerca di mettere a fuoco i diversi colori e così facendo affatica i muscoli utilizzati (si forma con i colori complementari)
 + La capacità di distinguere il contrasto dei colori si attenua con l'aumentare degli anni, in quanto si perde la sensibilità alla luminosità nel corso del tempo. Inoltre ad esempio il colore bianco con l'aumentare dell'età tenderà sempre di più al giallo.
 
 >[!example] Esempio di interfaccia cromaticamente problematica
@@ -211,11 +211,11 @@ ___
 Metodi per mitigare dei problemi di presentazione del layout:
 + **Barre di scorrimento** verticali e orizzontali
 + **Zoom**-in e zoom-out
-+ **Focus+Context**: Se si ha solo il focus s un situazione è bene avere elementi che ne visualizzano il contesto generale, per ridurre anche i tempi di apprendimento di quello che vedo
++ **Focus+Context**: Se si ha solo il focus su una situazione è bene avere elementi che ne visualizzano il contesto generale, per ridurre anche i tempi di apprendimento di quello che vedo
 >[!tip]
 >Sostanzialmente si tratta di uno zoom in una determinata parte dell'oggetto che sto osservando che ne rappresenterà il contesto.
 
-+ **Overview+Detail**: In schede separate o l'overview della situazione (mappa di Udine) e in un altro riquadro ho lo streetview del punto che sto asservando nella mappa.
++ **Overview+Detail**: In schede separate ho l'overview della situazione (mappa di Udine) e in un altro riquadro ho lo streetview del punto che sto osservando nella mappa.
 + **Contextual cues**: Vedo solo il dettaglio ma offro all'utente degli indizi, come delle frecce che indicano verso la posizione in cui devo andare, anche se il luogo specifico non è nella mappa. Si può anche giocare sulle dimensioni delle frecce per capire quanto sono vicino ad un determinato posto. (anche in alcuni videogiochi fanno così).
 
 ___
@@ -243,14 +243,14 @@ ___
 
 #### Profondità binoculari
 + Disparità binoculare (differenza di circa 6 cm nella prospettiva con cui ogni occhio vede un'immagine rispetto all'altro)
-+ Convergenza (convergenza degli occhi pe sforzarsi di tenere entrambi gli occhi a fuoco sull'oggetto che si avvicina; quando vedo cose lontane gli occhi sono praticamente paralleli, più è vicino l'oggetto e più gli occhi convergeranno)
++ Convergenza (convergenza degli occhi per sforzarsi di tenere entrambi gli occhi a fuoco sull'oggetto che si avvicina; quando vedo cose lontane gli occhi sono praticamente paralleli, più è vicino l'oggetto e più gli occhi convergeranno)
 
 >[!example]
 >Esempio di utilizzo di illusione ottica della profondità. Utilizzo di ombre finte sulle strisce pedonali per far rallentare le macchine che pensano ci sia un ostacolo.
 
 #### Aspetti da valutare per la scelta di 2D o 3D
 
-+ Per i grafici esplicativi bisogna valutare bene tra l'utilizzo di grafica 2D e 3D, in quanto per esempio nei grafici a barre non si capisce un cazzo se è in 3D, o anche i grafici a torta, perché la percezione delle dimensione diventano relative e devo svolgere un'elaborazione mentale per capire cosa mi sta dicendo i grafico.
++ Per i grafici esplicativi bisogna valutare bene tra l'utilizzo di grafica 2D e 3D, in quanto per esempio nei grafici a barre non si capisce un cazzo se è in 3D, o anche i grafici a torta, perché la percezione delle dimensione diventano relative e devo svolgere un'elaborazione mentale per capire cosa mi sta dicendo il grafico.
 + Per i grafici che utilizzano tutti e tre gli assi (ad esempio i grafici a barre che però vengono svolte in diversi luoghi di una mappa utilizzano sia x e y per la posizione delle barre sulla mappa e z per l'altezza delle barre) se si andasse ad eliminare un'asse si perderebbe informazione e avrei occlusione e perderei anche l'orientamento dei punti cardinali (nel caso della mappa) e due luoghi apparirebbero vicini nonostante siano molto lontani tra loro.
 
 >[!tip]

@@ -67,6 +67,7 @@ Importante quindi garantire una addestramento dato da applicazioni di machine le
 ___
 
 #### Acquisizione di immagini
++ Immagini vettoriali: composte da elementi matematici come linee e poligoni.
 + Immagini bitmap: classiche con griglia  cui associare ad ogni pixel un colore
 + Immagini tridimensionali: 
 	+ Tecnica di fotogrammetria: diverse foto dello stesso paesaggio in diverse posizioni per poi crearne una versione 3D. (Ad esempio ci sono anche scanner 3D per scannerizzare una stanza).
@@ -139,7 +140,7 @@ ___
 + **Data suit**: la versione per tutto il corpo dei data glove, che presentano dei sensori in tutto che ne tracciano i minimi movimenti (possono costare tranquillamente 80000 euro)
 + **Tute motion capture**: Alternativa alle data suit, sono delle tute che presentano dei pallini che contrastano con la tuta stessa e che rappresentano dei punti del corpo che vengono poi mappati in un esoscheletro (mocap).
 + **Kinect**: progetto Microsoft per la rilevazione di movimenti di tutto il corpo (basilari e non precisi) con il solo utilizzo di una telecamera che inquadra tutto il corpo dellìutilizzatore
-+ **Sistemi di tracciamento oculare**
++ **Sistemi di tracciamento oculare** per selezionare i caratteri sullo schermo per gli handicappati.
 + **Expression tracking**
 
 ___
@@ -182,9 +183,9 @@ ___
 
 #### Periferiche per la rilevazione di parametri biometrici e fisiologici
 
-+ Acquisizione della frequenza cardiaca e resiratoria
++ Acquisizione della frequenza cardiaca e respiratoria
 + Elettrocardiogramma (ECG)
-+ Analisi dell'ossogenazione sanguigna e pulsazione
++ Analisi dell'ossigenazione sanguigna e pulsazione
 + Conduttanza dermica (che sale di colpo dopo una forte emozione, come la sorpresa, per poi calare piano piano nel tempo)
 + Elettroencefalografia (EEG)
 
@@ -226,7 +227,7 @@ Percepibili tramite i canali sensoriali quali vista, udito, gusto, olfatto.
 >La scelta di un schermo LCD può ricadere ad esempio se lo schermo non è un componente principale o che non deve svolgere funzioni complicate come la visualizzazione di immagini, ad esempio se è lo schermino di una lavatrice.
 
 >[!concetto di pixel]
->Se la grigli adi pixel è più fitta, sarà maggiore l'approssimazione visiva verso il reale
+>Se la griglia di pixel è più fitta, sarà maggiore l'approssimazione visiva verso il reale
 
 
 + **E-Ink**: Una specie di tablet che al posto dei pixel ha delle palline che in base alla loro rotazione rappresentano un colore (solitamente nero e bianco, ma anche a colori). Solitamente utilizzato per la lettura, essendo la schermata quasi sempre statica
@@ -235,12 +236,14 @@ Percepibili tramite i canali sensoriali quali vista, udito, gusto, olfatto.
 + **Display per immagini 3D**
 	+ Head Mounted Displays: Prototipi del passato che hanno portato ai moderni visori a realtà aumentata
 	+ Visori: oggigiorno i visori (nati originariamente per scopi 'seri' quali militari, ecc...) sono diventati di uso domestico, mobile e ludico.
++ Display stereoscopici:
+	+ Utilizzo di specchi per simulare il 3D
+	+ Visione stereoscopica possibile anche con gli occhiali **anaglifi**, sostanzialmente quelli dei cinema 3D che hanno una lente rossa e una blu e vengono proiettate due immagini una filtrata di rosso e una di blu in modo che ogni occhio veda solo un'immagine. Questo crea profondità dell'immagine.
+	+ Anche i **shutter glasses**, occhiali elettronici che alternano rapidamente l'oscuramento delle lenti. Ogni occhio vede solo la sua immagine e il cervello integra le due immagini con un effetto 3D.
 
-
-(scrivere anaglifi, shutter glasses, display stereoscopici)
 
 #### Sistemi di Proiezione 3D
-##### Sistemi CAVE (Cave automatic virtual environment)
+##### Sistemi CAVE (Cave authomatic virtual environment)
 Proietta le immagini in una stanza cubica e da l'impressione di essere avvolti da sto mondo tridimensionale. Difficile farlo vedere a più persone contemporaneamente dovendo tenere presente la posizione di entrambi e dove guardano. 
 >[!tip] Curiosity
 >Nei primi anni dei device proiezionali il CAVE veniva considerato un sistema immersivo perché circondava completamente, mentre il visore era considerato semi-immersivo. Adesso invece le due definizioni si stanno praticamente scambiando.
@@ -285,7 +288,7 @@ ___
 ___
 ### Tatto
 
-#### Periferiche per la restituzione tattile
+#### Periferiche per la restituzione tattile (aptici)
 
 + **Controller** (dualshock ad esempio): già il secondo controller della PS1 si chiamava così perché presentava dei motorini che vibravano ai colpi, come quelli attuali, sebbene migliorati.
 + **Sense Glove**: tipo esoscheletro che blocca la presa quando ad esempio si afferra un oggetto virtuale, o tira indietro le dita attraverso dei fili collegati a dei motorini se appoggio la mano in qualcosa di virtuale, eventualmente anche con risposta diversa in base ai materiali dell'oggetto virtuale. (Non sono comunque così incredibili. Non sembra effettivamente reale).

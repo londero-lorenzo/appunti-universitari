@@ -76,11 +76,13 @@ Diversi tipi di memoria:
 	+ Episodica: Mi ricordo episodi avvenuti nella mia storia o nella storia di altri
 	+ Semantica: Mi ricordo il significato di cose
 + **Procedurale**: Mi ricordo i diversi passi per fare le cose
-	+ Una volta che lo imparo me lo ricordo per un bel po'
-+ **Trasferimento**
-	+ Reiterazione (ripasso più volte lo stesso concetto)
-	+ Organizzazione (come la tecnica del palazzo mentale per mappare gli ambienti con delle informazioni)
-	+ Esposizione ripetuta (sono esposto perché ci accade, non per volere nostro)
+	+ Una volta che lo imparo me lo ricordo per un bel po' (è easy da riportare in mente)
+
+
+**Trasferimento**
++ Reiterazione (ripasso più volte lo stesso concetto)
++ Organizzazione (come la tecnica del palazzo mentale per mappare gli ambienti con delle informazioni)
++ Esposizione ripetuta (sono esposto perché ci accade, non per volere nostro)
 
 Legame tra emozioni e memoria: Se ho un carico emotivo su qualcosa è più semplice ricordarmela.
 
@@ -166,7 +168,7 @@ ___
 + Basato sulle abilità (andare in bici)
 	+ Memoria di lavoro bassa (complessità bassa)
 	+ Memoria a lungo termine **procedurale** (una volta imparata è easy ricordarsi)
-+ Basato selle regole (andare in auto)
++ Basato sulle regole (andare in auto)
 	+ Memoria di lavoro media (complessità media)
 	+ Memoria a lungo termine **procedurale**
 + Basato sulle conoscenze (dimostrare un teorema)
@@ -195,11 +197,11 @@ ___
 + **Sbagli** (Mistake): Applico il modello sbagliato perché non so come si fa
 	+ Modello sbagliato
 >[!example]
->
+>Mettere il termostato a 30 gradi pensando arrivi più velocemente a 20 gradi, quando non è vero.
 + **Violazioni** (Violations): So cosa devo fare ma decido deliberatamente di non applicare il modello corretto
 	+ Modello sbagliato
 >[!example]
->Se un operatore tipo operaio dopo un po' si rompe il cazzo oppure gli danno delle scadenze sui pezzi che deve fare, può decidere si modificare la procedura di fattura dei pezzi (magari diminuendo la distanza di sicurezza per velocizzare il lavoro) a suo favore.
+>Se un operatore tipo operaio dopo un po' si rompe il cazzo oppure gli danno delle scadenze sui pezzi che deve fare, può decidere di modificare la procedura di fattura dei pezzi (magari diminuendo la distanza di sicurezza per velocizzare il lavoro) a suo favore.
 >+ Per evitare che ciò accada potrei mettere il bottone che ho da schiacciare sia in una posizione tale che l'operaio non necessiti di muoversi (e di mettersi in pericolo) per schiacciare il bottone; oppure anche porre una specie di paratia tra l'operaio e il macchinario.
 
 #### Apprendimento
@@ -207,7 +209,7 @@ Due accezioni:
 + Apprendere il funzionamento del sistema tramite:
 	+ Usabilità (facilità di apprendimento)
 	+ Manuali di istruzioni (spesso ignorati)
-	+ Apprendimento mediano dall'azione (prove ed errori, funzione annulla)
+	+ Apprendimento mediato dall'azione (prove ed errori, funzione annulla)
 + Apprendere attraverso un sistema
 	+ Contenitore vs. contenuto
 	+ Principi di apprendimento multimediale
@@ -262,6 +264,9 @@ In ambito informatico viene usato per capire la velocità di utilizzo di un soft
 
 >[!tip]
 >La legge di Fitts serve quando ho un puntatore che se cliccato apre un menu e dal tempo zero devo capire quale tasto cliccare per fare una determinata azione.
+
+>[!example]
+>Per la legge di Fitts il menù (ad esempio nei videogiochi) più efficace è il menù a torta.
 
 
 ___

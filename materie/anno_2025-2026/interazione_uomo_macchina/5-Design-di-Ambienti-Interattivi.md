@@ -69,7 +69,6 @@ Per averli chiari c'è bisogno di parlare con lo stakeholder (portatore di inter
 >+ Nonostante questo l'ospedale ha un ruolo chiave quindi rappresenta un key stakeholder, perché va tutto in base al budget ad esempio che ha l'ospedale.
 
 >[!example]
->(Finire di scrivere)
 >Esempio di sistema di training VR per assistenti di volo.
 >+ Compagnia aerea è terziaria
 >+ Costruttore dell'aereo è secondario (perchè è lui che decide effettivamente come fare l'aereo)
@@ -104,8 +103,10 @@ ___
 >+ Task analysis
 #### Personas e scenari
 ##### Personas:
++ Le personas sono profili fittizi ma realistici che rappresentano tipologie di utenti target.
 + Possibile creare i personaggi proprio credibili, con delle statuine fatte appositamente con i vari accessori e caratteristiche
 ##### Scenari:
++ Gli scenari sono narrazioni che descrivono come una persona utilizza il sistema in una situazione concreta.
 + Possibile fare anche degli scenari sotto forma di storyboard veri e propri come quelli per i film, con scenari e vignette. Anche utilizzare l'AI per creare le vignette è una soluzione plausibile 
 
 >[!example]
@@ -136,8 +137,9 @@ ___
 ___
 ### Progetto
 
+##### Esposizione del progetto:
 + Flusso del sistema
-	+ immagini che fanno vedere cosa succede  e dove rimanda se si clicca un determinato bottone ad esempio
+	+ immagini che fanno vedere cosa succede e dove rimanda se si clicca un determinato bottone ad esempio
 + Mock-up
 >[!example]
 >Ad esempio se si vuole mettere uno schermino con funzioni touch su un coltellino svizzero, senza realizzarlo veramente si può mettere una placchetta su un coltellino svizzero normale e magari uno stuzzicadenti per vedere se è pratico o altrimenti se cambiare approccio.
@@ -171,7 +173,7 @@ Euristiche di Nielsen e Molich:
 		+ Ad esempio se compare l'errore con il codice errore non serve a niente e non aiuta l'utente a capire il problema
 	9. Previene gli errori
 	10. Fornisce aiuto e documentazione
-		+ Ad esempio le caselline che spiegano cosa fanno i bottoni che compaiono quado il mouse è sopra al bottone.
+		+ Ad esempio le caselline che spiegano cosa fanno i bottoni che compaiono quando il mouse è sopra al bottone.
 		  Inutili se ad esempio la placchetta per il bottone "Back" ripete semplicemente il nome del bottone, "Back".
 
 #### Guidelines
@@ -185,7 +187,7 @@ Istruzioni da analizzare per vedere se l'applicazione è conforme rispetto ad un
 + Definizione di usabilità secondo ISO 9241
 >[!definition]
 >Usabilità
->>Efficacia, efficienza, soddisfazione con cui gli utenti specificati raggiungono obiettivi specificati in particolari ambienti.
+>>Misura con cui un prodotto può essere usato sa utenti specifici per raggiungere obiettivi specifici con efficacia, efficienza, soddisfazione in un certo contesto d'uso.
 >>
 >>Efficacia = accuratezza e completezza
 >>Efficienza = le risorse spese in relazione con l'accuratezza e completezza degli obiettivi raggiunti.
@@ -205,7 +207,7 @@ ___
 	+ Tooltip, help integrato
 + **Svolgimento compiti** (Come faccio questo?)
 	+ Help integrato
-+ **Diagnostica** (come è accaduto questo? --> errore + link verso pagina risolutiva, oppure meccanismo di undoing (Ctl-Z))
++ **Diagnostica** (come è accaduto questo?) --> errore + link verso pagina risolutiva, oppure meccanismo di undoing (Ctl-Z))
 + **Identificazione di stato** (dove sono?)
 	+ Storia dei comandi
 

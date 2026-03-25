@@ -322,3 +322,31 @@ GOOD = {E1, E2}
 - guardo su quali progetti lavora davvero ogni candidato
 - se trovo un progetto del candidato che non è nell’elenco di Rossi, ho una prova che il candidato non va bene
 - elimino tutti quelli che hanno almeno una prova contro
+
+# Funzioni di aggregazione
+- SUM, AVERAGE, MAXIMUM, MINIMUM
+- COUNT: usata per contare tuple o valori 
+
+## Utilizzo
+$F_{\langle \textrm{function list}\rangle}$(EMPLOYEE)
+
+- $F_{\textrm{COUNT SSN, AVERAGE Salary}}$(EMPLOYEE): ritorna il numero di impiegati con il loro salario medio
+## Raggruppamento con aggregazione
+Esempio: per ogni dipartimento prendere il DNO, COUNT SSN e AVERAGE Salary
+
+$_{\langle\textrm{grouping attributes}\rangle}F_{\langle\textrm{function list}\rangle}$: $_{\langle\textrm{DNO}\rangle}F_{\langle\textrm{COUNT SSN, AVERAGE Salary}\rangle}$(EMPLOYEE)
+
+## OUTER JOIN
+- Le slide spiegano che con **natural join** ed **equijoin** le tuple che non trovano corrispondenza vengono **eliminate**. Questo può causare perdita di informazione. 
+- Per evitarlo si usano gli **outer join**, che conservano anche le tuple senza match, riempiendo con **NULL** gli attributi mancanti.
+
+### LeftOuter JOIN
+Il **left outer join** conserva **tutte le tuple della relazione sinistra** RRR. Se una tupla di R non trova corrispondenza in S, compare comunque nel risultato, e gli attributi di S vengono riempiti con **NULL**.
+
+### RightOuter JOIN
+Il **right outer join** è simmetrico: conserva **tutte le tuple della relazione destra** S. Se manca una corrispondenza con R, gli attributi di RRR vengono messi a **NULL**.
+
+### Full outer join
+Il **full outer join** conserva **tutte le tuple di entrambe le relazioni**. Quando non c’è corrispondenza, riempie con NULL la parte mancante.
+
+

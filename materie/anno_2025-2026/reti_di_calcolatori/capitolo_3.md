@@ -700,3 +700,313 @@ if (nessuna entry combacia)
 - Subnet sono decise internamente da un amministratore di rete
 	- non sono visibili dal resto dell'Internet
 	- di solito assegnate per separazioni logiche (diversi uffici, dipartimenti, ecc...) o separazioni fisiche (diverse reti)
+
+# Protocolli IP Ausiliari
+
+## ICMP (Internet Control Message Protocol)
+- è un insieme di **messaggi d'errore** invitati all'**host sorgente** 
+- quando un router o un host non è in grado di elaborare con successo un datagramma IP:
+	- segnalare che un host di destinazione è irraggiungibile (a causa di guasto/interruzione)
+	- un processo di ricostruzione di un datagramma non è andato a buon fine
+	- il campo TTL ha raggiunto il valore 0
+	- è fallita la verifica del checksum dell'intestazione del pacchetto IP
+- quando c'è un router migliore per la destinazione
+	- dal router all'host sorgente (ICMP-Redirect)
+
+- **ECHO e ECHO REPLY**: per controllare se una destinazione è raggiungibile e attiva
+- **TIMESTAMP** e **TIMESTAMP REPLY**: funzionano come ECHO ma registrano l'ora di arrivo del messaggio e dell'invio della risposta per misurare le **prestazioni della rete**
+- Mask Discovery e Router Discovery sono implementati dal DHCP ora
+
+### ICMP-REDIRECT
+- Router R1 riceve un datagramma per una destinazione ma ne esiste una migliore
+- datagramma è consegnato ma la sorgente è notificata riguardo alla rotta migliore
+- l'host aggiorna la tabella di route
+
+## Address Translation Protocol ARP
+- mappa gli indirizzi IP in un indirizzo dello strato di collegamento (es. indirizo Ethernet a 48 bit)
+- si incapsula il datagramma all'interno di un frame con tale indirizzo dello strato di collegamento
+- lo si invia alla destinazione finale o a un router intermediario
+### Metodi per tradurre gli indirizzi
+1. Codificare l'indirizzo fisico nella parte di indirizzo IP riservato all'indirizzo di host
+>[!example]
+>Un host con indirizzo fisico 00100001 01001001 che ha valore 33 nel byte superiore e 81 in quello inferiore potrebbe avere indirizzo IP 128.96.33.81
+
+>[!warning] Soluzione limitata perché:
+>- lunghezza indirizzi fisici max 16 bit
+>- di soli 8 bit nelle reti classi C
+>- non funziona con gli indirizzi Ethernet da 48 bit
+
+2. Soluzione più generale: gli host gestiscono una tabella di coppie di indirizzi
+>[!tip] Approccio migliore:
+>far apprendere dinamicamente i contenuti della tabella a ciascun host tramite la rete stessa (attraverso il protocollo ARP)
+
+Se un host vuole inviare un datagramma sulla stessa rete:
+- cerca una corrispondenza nella cache,
+- se non la trova
+- si deve invocare il protocollo di risoluzione degli indirizzi ARP inviando una richiesta ARP tramite un messaggio broadcast
+- ogni host controlla la richiesta e verifica se l'IP è il suo e in caso invia il proprio indirizzo dello strato di linea 
+>[!warning] Se sono già presenti le informazioni nella tabella vengono semplicemente refreshate (reimpostato il temporizzatore)
+
+>[!question] Quale indirizzo IP si deve tradurre ?
+>- Per una consegna diretta: quello del destinatario
+>- Per una indiretta: il prossimo IP hop
+>- il datagramma IP è contenuto in un frame il cui indirizzo MAC potrebbe non essere quello del destinatario
+>- l'indirizzo MAC cambia ad ogni link che il pacchetto attraversa mentre l'IP rimane **invariato**
+
+### Formato del pacchetto ARP
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/arp_packet_format.jpg]]
+- campo **HardwareType**: specifica il tipo di rete fisica (es. Ethernet)
+- campo **ProtocolType**: specifica il protocollo dello strato superiore (es. IP)
+- **HLen**: lunghezza indirizzo dello strato di linea
+- **PLen**: lunghezza dell'indirizzo del protocollo di livello superiore
+- **Operation**: specifica se si tratta di una richiesta o di una risposta
+- gli indirizzi hardware e di protocollo della sorgente e destinazione
+
+- Pacchetti ARP non usano IP
+- sono direttamente incapsulati nei frame dello strato di linea
+
+### Proxy ARP
+- proxy ARP è un host che rappresenta altri host (**spesso intere reti**)
+- risponde con il suo MAC alla richiesta ARP per gli host "**nascosti**"
+- instrada i frame che riceve alla destinazione giusta, come uno switch (cambiando indirizzo MAC)
+
+## Configurazione degli host
+
+- Gli indirizzi Ethernet sono configurati nell'adattatore di rete e sono **unici** al mondo
+- gli indirizzi IP devono essere unici in una internetwork e riflettere la struttura della rete stessa
+- è richiesto un processo di configurazione automatica degli indirizzi in una rete
+### DHCP Dynamic Host Configuration Protocol
+
+- un server DHCP fornisce agli host le informazioni di configurazione
+>[!warning] Deve esserci almeno un server DHCP per ogni dominio amministrativo
+- ha una funzione di banca dati centralizzata per le informazioni di configurazione degli host
+	- staticamente (basata sugli indirizzi MAC)
+	- dinamicamente (tempo limitato)
+### Contattare server DHCP
+- host appena accesso o appena connesso invia messaggio di scoperta a tutti i nodi all'indirizzo broadcast 255.255.255.255 
+- uno dei nodi sarà il DHCP server per la rete che risponderà
+- il client chiederà conferma al server 
+- se confermato il DHCP client setterà l'indirizzo IP locale all'host
+#### Agente di collegamento
+In ogni rete ne esiste almeno uno configurato con l'indirizzo IP del server DHCP:
+- un agente di collegamento riceve un messaggio di scoperta
+- lo inoltra in modo **unicast** al server e attende risposta
+- la inoltra al client
+
+# Indirizzi IP privati e NAT
+
+## Idea
+- Creare un range di IP privati che sono separati dal resto della rete
+	- usare gli IP privati per il routing interno
+	- usare un router speciale per fare da bridge tra LAN e WAN
+- Proprietà degli indirizzi privati:
+	- non sono globalmente unici
+	- di solito presi da range IP che non sono instradabili
+- Tipici range di IP privati:
+	- 10.0.0.0/8, that is, 10.0.0.1 – 10.255.255.255
+	- 172.16.0.0/12, that is, 172.16.0.1 – 172.31.255.255
+	- 192.168.0.0/16, that is, 192.168.0.1 – 192.168.255.255
+
+## NAT con Port Mapping
+- NAT permette agli host su reti private di comunicare con Internet
+- un router che rimpiazza gli indirizzi IP interni con uno esterno
+	- potrebbe anche rimpiazzare le porte TCP/UDP (**Port Mapping**)
+- l'intestazione di ogni pacchetto IP è modificata dal NAT
+- il router deve mantenere **una tabella** del flusso attivo:
+	- pacchetti in uscita inizializza una entry della tabella
+	- pacchetti in entrata sono riscritti in base alla tabella
+
+### Applicazioni del NAT
+- permette di condividere un indirizzo IP pubblico tra più indirizzi privati
+- permette la migrazione tra ISPs
+	- anche se l'IP pubblico cambia, non ha bisogno di riconfigurare la macchina sulla LAN
+	- solo l'IP pubblico del router cambia
+- Caricamento bilanciato
+	- inoltra il traffico da un singolo IP pubblico a molti host privati
+### Firewall naturale
+Si dice che il **NAT è un “firewall naturale”** perché, **di fatto**, rende i dispositivi della rete privata **non raggiungibili direttamente dall’esterno**.
+
+Un host esterno **non può aprire liberamente una connessione verso un PC interno, a meno che** ci sia **port forwarding**
+
+### Come abilitare connetività tra NATs ?
+#### STUN Session Traversal Utilities for NAT
+- il client contatta un server STUN su Internet, e il server gli risponde dicendo: “da fuori ti vedo con questo IP e questa porta”
+- **STUN non fa port forwarding** e **non apre porte da solo**
+- facilita connessioni peer-to-peer
+
+- Utile quando 
+	- un peer è dietro un NAT simmetrico, l'altro è pubblico o con port forwarding
+	- entrambi i peer sono dietro a NAT parziale
+- Non è utile quando entrambi i peer sono completamente dietro un NAT completo:
+	- conoscere i rispettivi indirizzi pubblici non è abbastanza per stabilire una connessione perché le tabelle NAT sono vuote
+
+#### TURN Traversal Using Relays around NAT
+Serve quando due host **non riescono a comunicare direttamente** a causa di NAT o firewall: in quel caso il traffico non passa più direttamente da peer a peer, ma viene fatto passare attraverso un **server relay** pubblico.
+
+- il client contatta un server TURN su Internet
+- il server TURN gli assegna un indirizzo/porta di relay
+- il peer remoto invia i pacchetti a quell’indirizzo del server TURN
+- il server TURN riceve tutto e lo inoltra al client, e viceversa
+
+Perciò TURN è **più robusto di STUN**, perché funziona anche in situazioni in cui la connessione diretta non è possibile. Però ha un costo: **tutto il traffico passa dal server**, quindi aumenta consumo di banda sul server, costo operativo e in genere anche latenza rispetto a una connessione peer-to-peer diretta.
+
+### Problemi legati al NAT
+- Problemi di **prestazioni** e **scalabilità**
+- Occorre mantenere uno **stato per ogni flusso**
+- Modificare **indirizzi IP** e **numeri di porta** significa che il NAT deve **ricalcolare i checksum IP e TCP**
+- Traffico aggiuntivo dovuto a **STUN** e **TURN**
+- Rompe l’**astrazione a livelli** della rete
+- Rompe la **connettività end-to-end** di Internet
+- Gli indirizzi **192.168._._** sono **privati**
+- Non possono essere **instradati su Internet**
+- Il problema peggiora quando **entrambi gli host sono dietro NAT**, oppure in presenza di **NAT annidati**
+- Nel complesso, il NAT è un **“male necessario”**
+- Quasi tutte le reti create negli ultimi 20 anni sono dietro **uno o più NAT**
+- Non sarebbe necessario se avessimo abbastanza **indirizzi IP pubblici**
+- La **separazione della rete** può essere ottenuta usando i **firewall**
+
+# ROUTING
+
+- Il flusso dei dati è controllato dagli switch e router tramite questi elementi:
+	- Piano di inoltro dei dati: algoritmi per l'inoltro dei pacchetti
+	- Piano di controllo: algoritmi di instradamento (routing)
+## Forwarding vs Routing Algorithms
+- Forwarding (inoltro):
+	- prendere un pacchetto
+	- esaminare il suo indirizzo di destinazione
+	- consultare una tabella
+	- inviare il pacchetto verso la destinazione indicata nella tabella
+	- deve essere **semplice** e **veloce**
+	- possibilmente implementato nell'hardware
+- Routing (instradamento):
+	- costruzione delle tabelle di inoltro
+	- tabelle di instradamento precursori delle tabelle di inoltro
+	- runna come processo in background
+	- può essere complesso
+## Tabelle di inoltro vs tabelle di instradamento
+- Tabella di inoltro:
+	- usata quando un pacchetto deve essere inoltrato
+	- deve contenere abbastanza informazioni per compiere la funzione di inoltro
+	- Esempio di una riga della tabella:
+		- corrispondenza tra numero di rete e interfaccia d'uscita
+		- indirizzo Ethernet della destinazione successiva
+- Tabella di instradamento:
+	- costruita da algoritmi di instradamento prima di costruire quella di inoltro
+	- Esempio:
+		- corrispondenza tra numeri di rete e destinazioni successive
+		- può contenere anche info di come sono state acquisite tali corrispondenze
+
+>[!question] Perché le strutture si tengono separate ?
+>- La tabella di inoltro deve ottimizzare la ricerca di un numero di rete
+>- la tabella di instradamento deve essere ottimizzata per calcolare le modifiche nella topologia della rete
+
+>[!question] Quando costruiamo qualcosa per internet è una soluzione scalabile ?
+>- Per gli algoritmi e protocolli descritti in questo capitolo la risposta è **NO**;
+>- Sono progettati per reti di piccole dimensioni
+
+## Rete come grafo
+- Nodi = host, switch, router o reti;
+- rami = linee di collegamento nella rete
+- costi dei rami = velocità, latenza, costi, tasso di perdita...
+
+>[!tip] Problema principale dell'instradamento è quello di trovare il percorso a costo minore fra due nodi qualsiasi, dove il costo di un percorso è uguale alla somma dei costi di tutti i rami che compongono il percorso.
+### Algoritmi di instradamento
+- Difficile avere un unico algoritmo per tutto Internet
+	- problemi di scalabilità
+	- differenti domini amministrativi potrebbero scegliere politiche di instradamento diverse
+- Meglio separare in due livelli
+	- dentro **Sistemi autonomi**:
+		- ogni admin è responsabile degli algoritmi di instradamento
+		- reti non troppo grandi = algoritmi più semplici (*intra-domain, interior protocols*)
+	- tra **Sistemi autonomi**:
+		- problemi di **raggiungibilità** invece dell'efficienza
+		- algoritmi più complessi (*inter-domain, exterior protocols*)
+
+### Metodo Statico (Non va bene)
+- Per una rete semplice calcoliamo tutti i cammini più brevi e li carichiamo in una memoria non volatile in ogni nodo
+	- non gestisce i guasti di un nodo o di una linea
+	- non considera l'inserimento di nuovi nodi o nuovi collegamenti
+	- implica che i costi associati a ciascun ramo non possono cambiare, anche se parrebbe sensato assegnare temporaneamente un costo elevato ad una linea di collegamento che sia particolarmente carica di traffico
+
+### Metodo dinamico distribuito (soluzione)
+- Vettori di distanza
+	- Usati negli *interior protocols* come RIP
+- Link State
+	- Usati negli *interior protocols* come OSPF e IS-IS
+- Path vector
+	- usati negli *exterior protocols* come BGP
+
+#### Vettori di distanza
+- ogni nodo costruisce un **vettore** contente le distanze (costi) relative a tutti gli altri nodi
+- distribuisce il vettore ai suoi più immediati vicini
+>[!example] Esempio dove il costo di ciascun collegamento è assunto uguale ad 1
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/vettori_di_distanza.jpg|100%]]
+
+- distanza iniziale è memorizzata in ogni nodo
+- A ritiene che B sia raggiungibile con un salto
+- mentre D è irraggiungibile
+- la tabella di instradamento memorizzata in A tiene conto di questo insieme e contiene anche il nome del nodo successivo usato da A per raggiungere uno dei nodi raggiungibili
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/tabella_A.jpg]]
+
+- poi ogni nodo invia agli altri, direttamente connessi a lui, un messaggio con l'elenco delle distanze
+- in questo modo ogni nodo aggiorna la propria tabella con i costi e con i next hop necessari per raggiungere tutti i nodi
+- Tabella finale del nodo A
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/tabella_A_finale.jpg]]
+- tabella finale delle distanze (global view)
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/tabella_distanze_globale.jpg]]
+
+1. ogni T secondi ogni router invia il suo vettore ai suoi vicini
+2. quando un router riceve il vettore da un router vicino, aggiorna la sua tabella basandosi sulle nuove info: per ogni entrata
+	- se si ha un percorso migliore di quello che si ha già viene rimpiazzata la entry
+	- se il percorso migliore è ancora tra i router vicini il costo viene aggiornato
+- Costo $O(|N|*|L)|$ N=nodi e L = cammini
+
+- V = vettore ricevuto dal vicino R
+- T = tabella di instradamento locale
+- cost(R) = costo del link che passa per R
+- Algoritmo di aggiornamento quando riceviamo un vettore V da R:
+```c
+	  for each entry (D,c,N) in T:
+		  c' = V(D) + cost(R)
+		  if R = N then
+			  replace (D,c,N) in T with (D,c', N)
+		 else if c' < c then
+			 replace (D,c,N) in T with (D,c',R) 
+```
+
+##### Caso di guasto
+- F si accorge che la linea verso G non funzia
+- F imposta ad infinito la propria distanza verso G
+- trasmette l'informazione ad A
+- Dato che A sa di poter raggiungere G con un percorso di 2 salti che passa per F imposta anche lui ad infinito la distanza verso G
+- A riceve aggiornamenti costanti da C
+- A viene a sapere che C può raggiungere G con un percorso di 2 salti
+- quindi A calcola di raggiungere G in 3 salti che è meglio di infinito
+- aggiorna la propria tabella
+- A segnala il cambiamento ad F
+- F apprende che può raggiungere G in 4 salti 
+- sistema torna stabile
+##### Problema del conteggio verso infinito
+Circostanze poco diverse potrebbero impedire alla rete di stabilizzarsi:
+- supponiamo si guasti la linea tra A e E
+- nel ciclo successivo di aggiornamenti A segnala distanza infinita da E
+- B e C segnalano di trovarsi a distanza 2 da E
+- può succedere che:
+	- B dopo aver saputo da C che si può raggiungere E in 2 salti deduce di poter raggiungere E in 3 salti e lo segnala ad A
+	- A deduce di poter raggiungere E in 4 salti e lo segnala a C
+	- C deduce allora di poter raggiungere E in 5 salti
+	- cosi via
+- ciclo si ferma quando distanze raggiungono un numero talmente elevato da considerarsi infinito
+- le tabelle non si stabilizzano
+###### Soluzioni
+1. Usare un numero **relativamente piccolo** per rappresentare l'infinito
+	- esempio: numero massimo di salti non deve essere maggiore di 16
+2. **Split horizon**: migliora il tempo necessario alla stabilizzazione dell'instradamento
+	- quando un router invia un nodo invia un aggiornamento ai vicini
+	- non invia i percorsi che ha appreso da quel determinato nodo
+	- se B ha nella tabella (E, 2, A) sa di averlo preso dal nodo A quindi non gli invia il percorso (E, 2)
+3. **Split horizon with poison reverse:**
+	- nel caso di prima B invia anche il percorso ad A ma con informazioni così negative da impedire che A usi B per arrivare ad E
+	- Problema di queste due tecniche è che funzionano solo per eliminare cicli di instradamento tra due soli nodi
+

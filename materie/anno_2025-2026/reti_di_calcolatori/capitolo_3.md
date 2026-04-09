@@ -1010,3 +1010,7 @@ Circostanze poco diverse potrebbero impedire alla rete di stabilizzarsi:
 	- nel caso di prima B invia anche il percorso ad A ma con informazioni così negative da impedire che A usi B per arrivare ad E
 	- Problema di queste due tecniche è che funzionano solo per eliminare cicli di instradamento tra due soli nodi
 
+## Routing Information Protocol (RIP)
+- Esempio canonico di protocollo di instradamento basato sull'algoritmo a vettore di distanza descritto prima
+- Nelle internetwork l'obiettivo del router è quello di apprendere come inoltrare i pacchetti a varie reti
+	- router comunicano il costo per raggiungere altre reti

@@ -1,8 +1,8 @@
 ---
 title: "Sql"
 aliases: ["Sql"]
-tags: [università, "materie", "anno-2025-2026", "basi-di-dati", "sQL"]
-created: 2026-03-24
+tags: [università, "materie", "anno-2025-2026", "basi-di-dati", "sql"]
+created: 2026-03-31
 ---
 1. Risultati di proiezioni sono **multistes** più che set (di default i duplicati non sono rimossi)
 2. **Valori** vs relazioni (risultato di una funziona aggregata può, in un certo contesto, essere trattata come un valore e non come una relazione)
@@ -783,3 +783,38 @@ SELECT *
 FROM EMPLOYEE
 WHERE SALARY IS NULL
 ```
+
+# Linguaggio
+
+## Tipi di dato
+### Stringhe
+`character(n)` oppure `char(n)`
+- stringhe di esattamente n caratteri
+- stringhe più corte sono aggiunti spazi di coda
+`varchar(n)`
+
+### Booleani
+- tre valori: vero, falso e indeterminato
+- valore indeterminato = **null**
+- 't', 'f'
+- true, false
+- 'yes', 'no'
+- 'y', 'n'
+- '1', '0'
+
+### Numerici
+- smallint: 2byte
+- int: 4 byte
+- real
+- double precision
+#### A precisione arbitraria
+- numeric(prec, scala)
+- decimal(prec, scala)
+
+### Temporali
+- timestamp(prec)
+- date
+- interval(prec)
+	- intervalli di tempo relativi
+	- prec: indica il numero di cifre frazionarie dopo i secondi
+

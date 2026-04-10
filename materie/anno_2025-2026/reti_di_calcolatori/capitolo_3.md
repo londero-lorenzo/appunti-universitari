@@ -960,7 +960,7 @@ Perciò TURN è **più robusto di STUN**, perché funziona anche in situazioni i
 2. quando un router riceve il vettore da un router vicino, aggiorna la sua tabella basandosi sulle nuove info: per ogni entrata
 	- se si ha un percorso migliore di quello che si ha già viene rimpiazzata la entry
 	- se il percorso migliore è ancora tra i router vicini il costo viene aggiornato
-- Costo $O(|N|*|L)|$ N=nodi e L = cammini
+- Costo $O(|N|\*|L)|$ N=nodi e L = cammini
 
 - V = vettore ricevuto dal vicino R
 - T = tabella di instradamento locale
@@ -1010,7 +1010,90 @@ Circostanze poco diverse potrebbero impedire alla rete di stabilizzarsi:
 	- nel caso di prima B invia anche il percorso ad A ma con informazioni così negative da impedire che A usi B per arrivare ad E
 	- Problema di queste due tecniche è che funzionano solo per eliminare cicli di instradamento tra due soli nodi
 
-## Routing Information Protocol (RIP)
-- Esempio canonico di protocollo di instradamento basato sull'algoritmo a vettore di distanza descritto prima
+## Protocolli intradominio
+### Routing Information Protocol (RIP)
+- Esempio di protocollo di instradamento basato sull'algoritmo a vettore di distanza descritto prima
 - Nelle internetwork l'obiettivo del router è quello di apprendere come inoltrare i pacchetti a varie reti
 	- router comunicano il costo per raggiungere altre reti
+- funziona a livello applicazione
+- usa UDP porta 520
+- è un'implementazione dell'instradamento a vettore di distanza
+- router inviano i loro aggiornamenti ogni 30 secondi
+- destinazioni finali sono indirizzi di rete
+- nodi sono router direttamente connessi alle reti
+- **next hop** è l'indirizzo di un router o **null** se la destinazione è la stessa rete
+- ogni hop conta 1
+- valore limite per l'infinito è 16 
+### Stato delle linee
+- Ogni nodo è in grado di conoscere lo stato delle linee che lo collegano ai suoi vicini
+- ogni nodo costruisce un vista completa della rete
+	- diversi nodi possono avere viste diverse
+- ogni nodo verifica lo stato delle sue connessioni dirette e informa gli altri di ogni cambiamento
+- quando un nodo ha la vista completa della rete può cercare il **cammino minimo** per ogni nodo (usando Dijkstra)
+#### Link State Packet (LSP)
+- id del nodo che ha creato il pacchetto
+- costo del collegamento ad ogni vicino diretto
+- numero di sequenza
+- tempo di vita del pacchetto (TTL)
+
+- Pacchetti sono propagati da **inondazione affidabile**
+	- memorizza i pacchetti LSP più recenti da ogni nodo
+	- inoltra i pacchetti a tutti i nodi tranne a quello che invia
+	- genera un nuovo LSP periodicamente; incrementa numero sequenza
+	- inizializza SEQNO a 0 quando riavvia
+	- decrementa il TTL per ogni pacchetto LSP; scarta quando TTL = 0
+
+Esempio:
+- LSP arriva al nodo X
+- X manda LSP ad A e C
+- A e C mandano LSP a B ma non a X
+- inondazione è completata
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/inondazione_affidabile.jpg]]
+
+### Shortest Path Routing
+- Ogni router costruisce la sua tabella di instradamento direttamente dai LSP che ha collezionato usando l'algoritmo di **ricerca in avanti**
+- ogni router mantiene due liste: **Tentativi e Confermati**
+- ognuna di queste liste contiene un set formato da Destinazione, Costo, NextHop
+
+1. Inizializza la lista **Confirmed** con una voce che rappresenta se stesso; questa voce ha costo 0.
+2. Per il nodo appena aggiunto alla lista **Confirmed** nel passo precedente, chiamalo nodo **Next**.  
+    Successivamente, seleziona il suo **LSP**.
+3. Per ogni vicino (**Neighbor**) di **Next**, calcola il costo (**Cost**) per raggiungere questo vicino come somma:
+    
+    - del costo da me a **Next**
+    - e del costo da **Next** al **Neighbor**
+    
+    • Se **Neighbor** non è presente né nella lista **Confirmed** né nella lista **Tentative**, allora aggiungi (**Neighbor, Cost, Nexthop**) alla lista **Tentative**, dove **Nexthop** è la direzione da seguire per raggiungere **Next**.
+    
+    • Se **Neighbor** è già nella lista **Tentative**, e il nuovo **Cost** è minore del costo attualmente associato a quel **Neighbor**, allora  
+    sostituisci la voce corrente con (**Neighbor, Cost, Nexthop**), dove **Nexthop** è la direzione da seguire per raggiungere **Next**.
+    
+4. Se la lista **Tentative** è vuota, termina.  
+    Altrimenti, seleziona dalla lista **Tentative** la voce con il costo più basso, spostala nella lista **Confirmed**, e ritorna al passo 2.
+
+### Open Shortest Path First (OSPF)
+• Implementato sui sistemi *nix tramite **gated(8)**  
+• Funziona direttamente sopra IP (non usa UDP), con **autenticazione** per evitare attacchi di reindirizzamento: un host potrebbe infatti deviare il traffico diffondendo informazioni false
+• Adotta l’approccio **Link State**
+• Il sistema autonomo (AS) è suddiviso in:
+- **aree**
+- e una **backbone (dorsale)**
+• Ogni area è collegata:
+- alla backbone
+- oppure ad altre aree  
+    tramite un **router di confine (border router)**
+• L’amministratore può definire il **costo dei link** in vari modi
+- velocità
+- costo
+- carico
+- latenza
+- affidabilità
+- ecc.
+• OSPF permette agli **LSP (Link State Packet)** di trasportare diversi tipi di costo, anche per gli stessi link
+• Un router può mantenere **più tabelle di routing** (e di conseguenza più tabelle di forwarding), una per ogni tipo di servizio desiderato: può quindi effettuare scelte di inoltro diverse a seconda del servizio
+• La scelta di quale tabella utilizzare viene fatta in base a:
+- **TOS/DSCP** (raramente usato)
+- **QoS**, priorità (se supportato)
+- **flow label e priorità in IPv6**
+- **rilevamento automatico del tipo di traffico** (traffic shaping)

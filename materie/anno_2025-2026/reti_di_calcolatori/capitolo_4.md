@@ -208,4 +208,105 @@ Ogni AS ha almeno un nodo che avrà la funzione di **annunciatore BGP**: effettu
 	- in IPv4: Internet Group Management Protocol IGMP
 	- in IPv6: Multicast Listener Discovery MLD
 - il router ha la responsabilità di far funzionare correttamente il multicast con riguardo per gli host
+## Servizio Multicast
+- una volta che un host è entrato in un gruppo
+	- riceve tutti i messaggi mandati a quel gruppo
+	- può mandare qualsiasi messaggio a quel gruppo
+- scopi dei messaggi possono essere definiti scegliendo adeguatamente il TTL
+- problemi di sicurezza (segretezza, integrità, autenticazione, accesso controllato) non sono gestiti a questo livello (possono essere gestiti a livello applicazione)
+## Instradamento Multicast
+- le tabelle di instradamento unicast dei router indicano, per ogni IP, quale collegamento usare per inoltrare il pacchetto
+- per il supporto di multicast, un router deve avere **tabelle di instradamento multicast** che indicano, basate su indirizzi multicast, quale collegamento usare per inoltrare il pacchetto
+	- specificano un set di alberi, uno per ogni gruppo: **multicast distribution trees**
+- **Instradamento multicast** è il processo per il quale sono determinati i multicast distribution trees
+- protocolli di instradamento: DVMRP, RPB, PIM
+- due famiglie: alberi **source-based** e **group-shared**
 
+### Instradamento multicast source-based
+- ogni router ha bisogno di avere un cammino breve per ogni gruppo
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/source-based_multicast.jpg]]
+
+### Instradamento multicast group-shared
+- solo un router (**core o rendezvous** router) ha un cammino più breve per ogni gruppo, ed è coinvolto nel multicasting.
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/group-shared_multicast.jpg]]
+
+## Multicast a vettore di distanza
+- estende i protocolli a vettore di distanza dell'instradamento unicast
+- "Inondare e sfoltire": inondare la rete con traffico multicast e intanto sfoltire i rami non interessati nel traffico
+### Reverse Path Flooding
+- dalla tabella unicast ogni router sa già il next hop, ovvero il percorso più breve verso una sorgente S
+- quando riceve un pacchetto multicast 
+	- un router guarda all'indirizzo della sorgente S
+	- poi lo inoltra su tutti i link in uscita
+	- se e solo se il pacchetto arriva dal next hop attraverso S
+- **in questo modo non ci sono loop**
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/dvmrp.jpg]]
+>[!warning] Reti con più di un router possono avere pacchetti broadcast duplicati.
+
+- elimina pacchetti duplicati aggiustando il router genitore (relativo ad S) per ogni LAN e permettendo solo ai genitori di inoltrare i pacchetti
+- router genitore sono quelli che hanno il percorso più breve verso S: nell'esempio R2 è genitore per Net3
+- interrompere i collegamenti scegliendo il router con l'IP più piccolo
+- questa strategia chiamata **Reverse Path Broadcast** garantisce che ogni LAN riceva esattamente una copia di ogni pacchetto attraverso un **source-based shortest path tree**
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/dvmrp_2.jpg]]
+### Pruning part
+- Sfoltire le reti che non hanno host interessati nel gruppo G. In due step
+- **Step 1**: determinare se LAN è una foglia dell'albero con nessun membro in G
+	- una LAN è una foglia se i suoi genitori sono gli unici router nella LAN
+	- host sulla LAN che vogliono partecipare in G devon notificare il router usando IGMP (periodicamente sono rimossi dopo un timeout)
+	- sebbene il router sa se una LAN non ha membri di G
+- **Step 2**: propagare l'informazione "qui non ci sono membri di G" verso la radice dell'albero di percorso minimo
+	- il router aggiunge alle coppie <Destination, Cost> che invia ai propri vicini l'insieme dei gruppi per i quali la rete foglia è interessata a ricevere pacchetti multicast
+		- questa info può essere propagata da un router all'altro cosi ogni router sa quali pacchetti multicast inoltrare
+	- quindi ogni vicino sa se devono considerare questo router nel **reverse path flooding/broadcast** guardando ai gruppi a cui è interessato
+	- includendo sempre la lista dei gruppi interessati nei vettori delle distanze potrebbe essere oneroso e inutile (esempio: nel caso che una LAN è interessata in molti gruppi ma nessun host sta trasmettendo su quei gruppi)
+	- invece, il router aggiunge ai vettori le liste dei gruppi a cui **non** è interessato, e solo quando l'indirizzo multicast diventa attivo
+- quindi quando una trasmissione multicast inizia sul gruppo G
+	- all'inizio innonda tutta la rete, tramite RPF/RPB costruendo un albero di distribuzione che copre tutta la rete
+	- poi l'albero viene sfoltito: i router non interessati a G iniziano mandando notifiche a ritroso usando IGMP, e il router inizierà accettando il traffico dai suoi vicini
+- DVMRP lavora bene su **scale piccole**, meno bene su scale grandi, questo per via di questo continuo flooding and pruning
+
+## Multicast routing PIM
+- Protocolo Independent Multicast: indipendente dalla costruzione della topologia della rete
+- **PIM-DM** (dense mode): usato quando, rispetto ai router, **molti host sono sorgenti dei dati**.
+- **PIM-SM** (sparse mode): usato quando multicast coinvolge pochi nodi nella rete rispetto al numero di router
+### PIM-DM
+- simile a DVMRP ma indipendente da il sottostante protocollo di instradamento unicast
+- **Source-based trees**: ogni nodo (router) mantiene la sua copia dell'albero multicast di distribuzione
+- lavora bene quando il gruppo non è troppo grande, e non  ci sono troppi router da attraversare 
+### PIM-SM
+- scalabile su gruppi grandi, sparsi su Internet
+- per ogni gruppo, si costruisce un **group-shared tree** e in ogni AS è selezionato un router *rendez-vous*
+- i router (come conseguenza di una richiesta IGMP da un local host) può entrare nell'albero mandando una richiesta join (unicast) al loro *rendez-vous*
+- come attraversa il router, la richiesta join al gruppo G crea un albero di distribuzione multicast, con radice nel *rendez-vous* point del gruppo G
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/shared_tree.jpg]]
+- ogni router analizza il messaggio e aggiunge alla sua tabella la regola per inoltrare verso il basso il traffico dal gruppo G lungo l'interfaccia da cui il messaggio join è arrivato
+- se il router non stava partecipando già nell'albero (figura a), allora inoltra la richiesta di join attraverso l'RP, e contrassegna l'interfaccia corrispondente come l'unica da cui proviene il traffico; altrimenti non fa niente (figura b)
+- una volta che lo shared tree è formato
+1. l'host manda pacchetti al gruppo G sulla sua LAN
+2. è ricevuto dal Router Designato (R1), tra tutti gli altri local host
+3. il router designato lo inoltra tramite **tunneling** verso l’**RP**, **incapsulandolo in un normale pacchetto IP unicast**
+4. RP riceve il pacchetto, lo apre e lo inoltra verso il basso allo shared tree (a R2, poi R4 e R5)
+
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/sparse_mode_shared_tree.jpg]]
+- possiamo assumere che i router tra Designato e RP non partecipino all'albero (potrebbero non implementare proprio multicast ); solo il Designato ha bisogno di sapere qual è l'RP
+
+## Multicast Backbone (MBONE)
+- solo una piccola parte di router implementa l'instradamento multicast
+	- amministratori non sono inclini ad ammettere il traffico multicast a causa del suo costo nei router
+- di solito questi router non sono contigui, sono connessi con regioni che non sono predisposte al multicast
+	- nella foto: R1, R2, R3, R4 sono router multicast, ma tutti gli altri no
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/mbone.jpg]]
+
+### Soluzione temporanea
+- Creare alcuni **tunnel unicast** tra i multicast router, attraversando i router non-multicast
+- tunnel sono collegamenti logici e agiscono come dorsale per il multicast chiamato **MBONE = Multicast backbone**
+- pacchetti multicast sono incapsulati dentro all'interno di pacchetti IP unicast e possono muoversi tra i router non-multicast
+- i protocolli multicast possono runnare sul MBONE
+![[materie/anno_2025-2026/reti_di_calcolatori/assets/mbone_2.jpg]]
+
+- MBONE (e il multicast in generale) non sono molto diffusi:
+	- gestione del traffico, traffico nei providers
+	- maggiore carico sui router
+- MBONE è obsoleto verrà rimpiazzato da IPv6 con PIMv6
+- ancora oggi è adottato da organizzazioni singole (a livello di LAN e AS)

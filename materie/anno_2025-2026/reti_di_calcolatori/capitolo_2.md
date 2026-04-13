@@ -104,7 +104,7 @@ Simboli sono quello che viene effettivamente trasmesso sul canale:
 La limitazione nella quantità di simboli che percorrono un canale al secondo è definita dal teorema di Nyquist-Shannon:
 >[!definition]
 >Teorema Nyquist-Shannon
->>In un canale con larghezza di banda B [Hz] possiamo trsmettere un massimo di simboli pari al doppio della banda $2\*B$.
+>>In un canale con larghezza di banda B [Hz] possiamo trsmettere un massimo di simboli pari al doppio della banda $2\cdot B$.
 >>
 
 >[!tip]
@@ -112,10 +112,10 @@ La limitazione nella quantità di simboli che percorrono un canale al secondo è
 
 Se ho un segnale $x(t)$ non modulato la larghezza di banda è 0 e che utilizza un altro segnale modulante $x\_m(t)$:
 
-$x(t)=x\_{m}(t)\*\sin(2\pi f\_{0} t)$
+$x(t)=x\_{m}(t)\cdot\sin(2\pi f\_{0} t)$
 $f\_0$ = frequenza iniziale utilizzata come frequenza iniziale (grazie al cazzo dirai)
 $x\_{m}(t)=\sin(2\pi f\_{m} t)$
-$x(t)= \sin(2\pi f\_{0} t)\*\sin(2\pi f\_{0} t)=-\frac{1}{2}(\cos(2\pi f\_{m}t+2\pi f\_{0}t)-\cos(2\pi f\_{m}t-2\pi f\_{0}t))$
+$x(t)= \sin(2\pi f\_{0} t)\cdot\sin(2\pi f\_{0} t)=-\frac{1}{2}(\cos(2\pi f\_{m}t+2\pi f\_{0}t)-\cos(2\pi f\_{m}t-2\pi f\_{0}t))$
 
 Si avrà quindi un segnale $x(t)$, che cambia in base ai bit tra due frequenze che però non corrispondono a quella fondamentale $f\_0$.
 

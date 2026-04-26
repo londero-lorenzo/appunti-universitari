@@ -81,7 +81,7 @@ Queste limitazioni si ripercuotono anche nel modo in cui vengono svolte le inter
 + Troppi colori diversi utilizzati confondono e non veicolano messaggi come dovrebbero (color pollution).
 + Scelta di più colori che può essere palette di colori analoghi e palette di colori complementari. Tale scelta dipende dall'obiettivo. 
 + Problema dell'accostamento di colori. L'essere umano non percepisce il colore con il valore assoluto, ma in modo relativo, in base al contesto cromatico in cui è posto. Colori troppo simili per raffigurazioni diverse possono essere difficili da distinguere. 
-+ Cromostereopsi: certe scritte in certi colori sembrano più in profondità di altre scritte (blu sembra più in profondità rispetto al rosso). Ciò può anche dare fastidio agli occhi nelle griglie ad esempio, questo perché il cristallino cerca di mettere a fuoco i diversi colori e così facendo affatica i muscoli utilizzati (si forma con i colori complementari)
++ Cromostereopsi: certe scritte in certi colori sembrano più in profondità di altre scritte (blu sembra più in profondità rispetto al rosso). Ciò può anche dare fastidio agli occhi nelle griglie ad esempio, questo perché il cristallino cerca di mettere a fuoco i diversi colori e così facendo affatica i muscoli utilizzati (si forma con i colori a lunghezza d'onda molto diversa)
 + La capacità di distinguere il contrasto dei colori si attenua con l'aumentare degli anni, in quanto si perde la sensibilità alla luminosità nel corso del tempo. Inoltre ad esempio il colore bianco con l'aumentare dell'età tenderà sempre di più al giallo.
 
 >[!example] Esempio di interfaccia cromaticamente problematica

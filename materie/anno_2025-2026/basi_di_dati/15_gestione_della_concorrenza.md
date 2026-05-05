@@ -1,7 +1,7 @@
 ---
-title: "Gestione della Concorrenza"
-aliases: ["Gestione della Concorrenza"]
-tags: [università, "materie", "anno-2025-2026", "basi-di-dati", "gestione-della-concorrenza"]
+title: "15 Gestione della Concorrenza"
+aliases: ["15 Gestione della Concorrenza"]
+tags: [università, "materie", "anno-2025-2026", "basi-di-dati", "15-gestione-della-concorrenza"]
 created: 2026-05-05
 ---
 # Controllo della concorrenza

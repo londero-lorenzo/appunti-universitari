@@ -1,3 +1,9 @@
+---
+title: "Guida Trigger Sql"
+aliases: ["Guida Trigger Sql"]
+tags: [università, "materie", "anno-2025-2026", "basi-di-dati", "GuidaEsame", "guida-trigger-sql"]
+created: 2026-05-25
+---
 # Guida definitiva ai trigger SQL per l’esame
 
 ## 1. Idea generale

@@ -8,6 +8,24 @@ created: 2026-06-09
 
 Questa guida raggruppa le principali tipologie di esercizi d’esame per argomento, indicando **quando usare una formula/metodo** e **come procedere nella risoluzione**.
 
+Dopo l'analisi di 33 esami tra il 2016 e il 2025 che racchiudono circa 560 esercizi, ecco le cardinalità degli argomenti che escono maggiormente negli esercizi:
++ **Trasporto (TCP/UDP) — ~135 domande** è l'argomento più frequente in assoluto. Le domande sui buffer TCP e la congestion control compaiono praticamente in ogni esame (almeno 2-3 domande a sessione). Il Fair Queuing e RED sono quasi sempre presenti.
+  (**APPARTIENE AL PUNTO 4**)
+
++ **Sicurezza e crittografia — ~130 domande** è quasi alla pari. Ogni esame ha tipicamente 3-4 domande di sicurezza: un'analisi di un protocollo di autenticazione (il classico schema "A→B, B→C"), domande su AES/modalità di cifratura, certificati X.509, e la triade CIA. I protocolli da analizzare (con nonce, challenge-response, Diffie-Hellman) sono uno dei pattern più ricorrenti in assoluto.
+  (**APPARTIENE AL PUNTO 5**)
+
++ **Livello di rete (IP) — ~110 domande**: subnetting/CIDR e tabelle di inoltro sono quasi invariabilmente presenti. Il distance vector (RIP) compare più spesso del link state.
+  (**APPARTIENE AL PUNTO 3**)
+
++ **Livello datalink — ~105 domande**: CRC con calcolo polinomiale, Ethernet con backoff esponenziale, e 802.11 WiFi (RTS/CTS) compaiono in quasi tutti gli esami.
+  (**APPARTIENE AL PUNTO 2**)
+
++ **Livello fisico — ~87 domande**: Shannon-Hartley (calcolo SNR/capacità) è la domanda più ricorrente dell'intero esame insieme ai buffer TCP.
+  (**APPARTIENE AL PUNTO 1**)
+
+BGP (border gateway protocol) e routing interdominio {**CAPITOLO 4**}, commutazione e QoS (Quality of Service) {**CAPITOLO 6**}, modelli a strati e stack {**CAPITOLO 1**} sono presenti negli esami ma in numeri molto ridotti (20-25 esercizi nella totalità degli esami)
+
 ---
 
 ## 1. Livello fisico e teoria dell’informazione
